@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# 教材の元データ（scripts/fetch-raw.mjs で取得）
+scripts/raw/

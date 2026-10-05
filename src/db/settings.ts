@@ -20,6 +20,9 @@ export function defaultSettings(now = Date.now()): Settings {
     restDays: [],
     lastBackupAt: 0,
     createdAt: now,
+    diagnosedAt: 0,
+    reviewCap: 150,
+    contentVersion: 0,
   }
 }
 

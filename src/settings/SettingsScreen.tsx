@@ -4,6 +4,7 @@ import { updateSettings } from '../db/settings'
 import { backupFileName, exportAll, importAll, parseBackup, type BackupFile } from '../db/backup'
 import { BLOCK_LABELS } from '../today/menu'
 import { speak, speechSupported, useEnglishVoices } from '../speech/voices'
+import { Credits } from './Credits'
 
 function Seg<T extends string | number>({ value, options, onChange }: {
   value: T
@@ -23,7 +24,7 @@ function Seg<T extends string | number>({ value, options, onChange }: {
 
 const hours = (from: number, to: number) => Array.from({ length: to - from + 1 }, (_, i) => from + i)
 
-export function SettingsScreen({ settings }: { settings: Settings }) {
+export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings; onDiagnostic: () => void }) {
   const set = (patch: Partial<Settings>) => updateSettings(patch)
   const voices = useEnglishVoices()
 
@@ -49,6 +50,12 @@ export function SettingsScreen({ settings }: { settings: Settings }) {
           <input type="range" min={85} max={95} step={1} value={Math.round(settings.retention * 100)}
             onChange={(e) => set({ retention: Number(e.target.value) / 100 })} />
           <small className="muted">高くすると復習の回数が増え、低くすると減ります（初期値90%）。</small>
+        </label>
+        <label className="field">
+          <span>1日の復習の上限：{settings.reviewCap}枚</span>
+          <input type="range" min={50} max={400} step={10} value={settings.reviewCap}
+            onChange={(e) => set({ reviewCap: Number(e.target.value) })} />
+          <small className="muted">長く休んだ後も、期日の古いカードから少しずつ戻します。</small>
         </label>
         <label className="field">
           <span>きっかけの一文（if-thenプラン）</span>
@@ -138,7 +145,18 @@ export function SettingsScreen({ settings }: { settings: Settings }) {
         </div>
       </section>
 
+      <section className="card stack">
+        <h2>診断テスト</h2>
+        <p className="muted">
+          {settings.diagnosedAt > 0
+            ? `${new Date(settings.diagnosedAt).toLocaleDateString('ja-JP')} に受けました。受け直すと、知っている語の登録が追加されます。`
+            : 'まだ受けていません。'}
+        </p>
+        <button className="btn secondary block" onClick={onDiagnostic}>診断テストを受ける</button>
+      </section>
+
       <BackupSection />
+      <Credits />
     </div>
   )
 }

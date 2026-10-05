@@ -139,3 +139,45 @@ button { cursor: pointer; }
 .icon-btn { width: 40px; height: 40px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface); }
 ol.steps { padding-left: 1.4em; }
 ol.steps li { margin-bottom: 4px; }
+
+/* ---- フェーズ2：練習画面 ---- */
+.menu-item.as-button { width: 100%; text-align: left; color: inherit; font: inherit; }
+.menu-item.as-button:disabled { opacity: 0.6; cursor: default; }
+.menu-item.as-button:not(:disabled):active { transform: scale(0.99); }
+.badge { display: inline-block; margin-left: 6px; min-width: 22px; padding: 0 7px; border-radius: 99px; background: var(--danger); color: #fff; font-size: 0.75rem; text-align: center; }
+.tag.done { background: var(--success-light); color: var(--success); }
+.link-btn { background: none; border: none; color: var(--primary); text-decoration: underline; padding: 8px; }
+
+.flashcard { text-align: center; padding: 20px 16px; }
+.flashcard .prompt { margin-bottom: 12px; }
+.headword { font-size: 2rem; font-weight: 800; letter-spacing: 0.01em; word-break: break-word; }
+.front-sentence { font-size: 1.25rem; line-height: 1.7; }
+mark { background: var(--warning-light); color: inherit; font-weight: 800; padding: 0 2px; border-radius: 3px; }
+.speak-big { min-width: 140px; }
+
+.answer { margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--border); text-align: left; }
+.answer.standalone { margin-top: 0; padding-top: 0; border-top: none; }
+.answer > .row { margin-bottom: 8px; }
+.gloss { font-size: 1.15rem; font-weight: 700; text-align: center; margin: 4px 0 12px; }
+.definition { font-size: 1.05rem; text-align: center; margin: 4px 0 8px; }
+.examples { list-style: none; }
+.example { padding: 10px 0; border-top: 1px solid var(--border); }
+.example .en { font-size: 1.02rem; }
+.example .source { font-size: 0.7rem; color: var(--text2); }
+
+.grade-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 4px; }
+.grade { border: none; border-radius: var(--radius-sm); padding: 10px 2px; min-height: 64px; color: #fff; display: flex; flex-direction: column; align-items: center; gap: 2px; position: relative; }
+.grade .label { font-weight: 700; font-size: 0.9rem; }
+.grade .interval { font-size: 0.72rem; opacity: 0.9; }
+.grade .key { position: absolute; top: 3px; right: 6px; font-size: 0.6rem; opacity: 0.6; }
+@media (hover: none) { .grade .key { display: none; } }
+.grade.g1 { background: var(--danger); }
+.grade.g2 { background: var(--warning); }
+.grade.g3 { background: var(--success); }
+.grade.g4 { background: var(--p2); }
+
+table.bands { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+table.bands td { padding: 4px 4px; }
+ul.credits { list-style: none; }
+ul.credits li { padding: 8px 0; border-top: 1px solid var(--border); word-break: break-all; }
+ul.credits .tag { margin-left: 6px; }
