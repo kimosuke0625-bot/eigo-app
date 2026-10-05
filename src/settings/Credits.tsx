@@ -16,6 +16,27 @@ const SOURCES: { name: string; use: string; license: string; url: string; note?:
     note: 'Tatoeba の投稿者のみなさん',
   },
   {
+    name: 'Simple English Wikipedia',
+    use: '多読・多聴の素材11本（記事の冒頭を抜粋。各素材に元の版へのリンクあり）',
+    license: 'CC BY-SA 4.0',
+    url: 'https://simple.wikipedia.org/',
+    note: 'Simple English Wikipedia の執筆者のみなさん',
+  },
+  {
+    name: 'The Aesop for Children（1919年）',
+    use: '多読・多聴の素材としてイソップ寓話7話',
+    license: 'パブリックドメイン',
+    url: 'https://www.gutenberg.org/ebooks/19994',
+    note: '訳者名なし（Rand McNally 刊）。Project Gutenberg 版の本文のみを使用',
+  },
+  {
+    name: '段階別の読み物12本と内容確認の質問',
+    use: '日常・仕事の場面の読み物と、全素材の内容確認の質問',
+    license: 'CC BY-SA 4.0',
+    url: 'https://github.com/kimosuke0625-bot/eigo-app',
+    note: 'このアプリ用に作成',
+  },
+  {
     name: '雑学365個',
     use: '図鑑の雑学。前回アプリの雑学を点検・修正し、英語版（やさしい版・標準版）を作成。1つずつに出典（主に英語版ウィキペディア）を付けた',
     license: '本文はこのアプリで作成',

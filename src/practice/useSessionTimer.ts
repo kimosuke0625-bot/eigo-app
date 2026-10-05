@@ -5,9 +5,10 @@ import { dayKey } from '../today/menu'
 /**
  * 練習画面を開いている時間を sessions に記録する。
  * 画面が隠れている間は数えない。iPhone で途中でアプリが閉じられても失われないよう10秒ごとに保存する。
+ * ref には使った素材の id などを入れる。
  * maxPerDay を渡すと、同じ種類の練習の1日の合計がその秒数を超えた分は数えない（雑学を読む時間など）。
  */
-export function useSessionTimer(kind: string, pillar: Pillar, maxPerDay?: number) {
+export function useSessionTimer(kind: string, pillar: Pillar, maxPerDay?: number, ref?: string) {
   const result = useRef<Record<string, number>>({})
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export function useSessionTimer(kind: string, pillar: Pillar, maxPerDay?: number
     let stopped = false
     let allowed = Infinity
     const day = dayKey()
-    const created = db.sessions.add({ at: last, day, kind, pillar, seconds: 0 }).then(async (k) => {
+    const created = db.sessions.add({ at: last, day, kind, pillar, seconds: 0, ref }).then(async (k) => {
       id = k
       if (maxPerDay !== undefined) {
         const before = (await db.sessions.where('day').equals(day).filter((x) => x.kind === kind && x.id !== k).toArray())
@@ -50,7 +51,7 @@ export function useSessionTimer(kind: string, pillar: Pillar, maxPerDay?: number
         if (id !== undefined && seconds < 5) await db.sessions.delete(id)
       })
     }
-  }, [kind, pillar, maxPerDay])
+  }, [kind, pillar, maxPerDay, ref])
 
   return result
 }

@@ -5,10 +5,13 @@ import { db, type Settings, type ThemeMode } from './db/schema'
 import { TodayScreen } from './today/TodayScreen'
 import { SettingsScreen } from './settings/SettingsScreen'
 import { Onboarding } from './settings/Onboarding'
-import { Placeholder } from './ui/Placeholder'
 import { PHASE_COLORS } from './ui/theme'
 import { loadNgsl } from './content/ngsl'
 import { PracticeHub } from './practice/PracticeHub'
+import { InputScreen } from './practice/InputScreen'
+import { DictationScreen } from './practice/DictationScreen'
+import { SpeedReadScreen } from './practice/SpeedReadScreen'
+import { MaterialsScreen } from './content/MaterialsScreen'
 import { ReviewScreen } from './practice/ReviewScreen'
 import { NewCardsScreen } from './practice/NewCardsScreen'
 import { DiagnosticScreen } from './assessment/DiagnosticScreen'
@@ -21,7 +24,7 @@ import { checkPhase } from './progress/autoPhase'
 
 export type Tab = 'today' | 'practice' | 'progress' | 'materials' | 'collection' | 'settings'
 
-type Overlay = { practice: PracticeKind } | { diagnostic: true } | null
+type Overlay = { practice: PracticeKind; materialId?: string } | { diagnostic: true } | null
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: 'today', label: '今日', icon: '☀️' },
@@ -85,7 +88,7 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
   const rewards = useDailyRewards(settings, overlay === null)
 
   const close = () => { setOverlay(null); setClock(Date.now()) }
-  const start = (k: PracticeKind) => setOverlay({ practice: k })
+  const start = (k: PracticeKind, materialId?: string) => setOverlay({ practice: k, materialId })
 
   let body
   if (overlay && 'diagnostic' in overlay) {
@@ -94,6 +97,13 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
     body = <ReviewScreen key="review" settings={settings} onExit={close} onAddCards={() => start('addCards')} />
   } else if (overlay?.practice === 'addCards') {
     body = <NewCardsScreen key="add" settings={settings} onExit={close} onReview={() => start('review')} />
+  } else if (overlay?.practice === 'input') {
+    body = <InputScreen key={overlay.materialId ?? 'input'} settings={settings} materialId={overlay.materialId} onExit={close}
+      onDictation={(id) => start('dictation', id)} />
+  } else if (overlay?.practice === 'dictation') {
+    body = <DictationScreen key={overlay.materialId ?? 'dict'} settings={settings} materialId={overlay.materialId} onExit={close} />
+  } else if (overlay?.practice === 'fluency') {
+    body = <SpeedReadScreen key={overlay.materialId ?? 'speed'} settings={settings} materialId={overlay.materialId} onExit={close} />
   } else if (tab === 'today') {
     body = <TodayScreen settings={settings} dueCount={dueCount} onSettings={() => setTab('settings')}
       onStart={start} onDiagnostic={() => setOverlay({ diagnostic: true })} />
@@ -102,8 +112,7 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
   } else if (tab === 'progress') {
     body = <ProgressScreen settings={settings} />
   } else if (tab === 'materials') {
-    body = <Placeholder title="素材" devPhase={4}
-      text="内蔵素材の一覧と、文章を貼り付けて取り込む機能をフェーズ4で追加します。" />
+    body = <MaterialsScreen onRead={(id) => start('input', id)} onSpeed={(id) => start('fluency', id)} />
   } else if (tab === 'collection') {
     body = <CollectionScreen settings={settings} />
   } else {

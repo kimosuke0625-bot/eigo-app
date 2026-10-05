@@ -260,3 +260,34 @@ ul.credits .tag { margin-left: 6px; }
 .review-list li p { margin-top: 4px; font-size: 0.88rem; }
 .review-list li.excluded { opacity: 0.45; }
 .review-list .source { font-size: 0.75rem; }
+
+/* ---- フェーズ4：聞く・読む ---- */
+.fit-easy { background: var(--p2-light); color: var(--p2); }
+.fit-just { background: var(--success-light); color: var(--success); font-weight: 700; }
+.fit-stretch { background: var(--warning-light); color: var(--warning); }
+.fit-hard { background: var(--surface2); color: var(--danger); }
+.material-text { font-size: 1.08rem; line-height: 1.9; position: relative; }
+.material-text .sentence { border-radius: 4px; transition: background 0.2s; }
+.material-text .sentence.now { background: var(--warning-light); }
+.material-text .w { background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; border-radius: 3px; }
+.material-text .w:hover, .material-text .w:focus-visible { background: var(--primary-light); outline: none; }
+.word-popup { position: sticky; bottom: calc(76px + env(safe-area-inset-bottom)); margin-top: 12px; background: var(--surface); border: 1px solid var(--primary); border-radius: var(--radius); padding: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.18); font-size: 0.95rem; line-height: 1.6; z-index: 5; }
+.word-popup p { margin-top: 4px; }
+.moral { margin-top: 12px; font-style: italic; color: var(--text2); }
+.question .options { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+.option { text-align: left; padding: 10px 12px; min-height: 44px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface); }
+.option.right { border-color: var(--success); background: var(--success-light); font-weight: 700; }
+.option.wrong { border-color: var(--danger); background: var(--surface2); }
+.option:disabled { cursor: default; color: var(--text); }
+.dictation-input, .paste-area { width: 100%; padding: 10px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface); font-size: 1.05rem; line-height: 1.6; resize: vertical; }
+.diff { font-size: 1.1rem; line-height: 1.6; display: flex; flex-wrap: wrap; gap: 6px 4px; }
+.diff span { padding: 1px 4px; border-radius: 3px; }
+.d-ok { color: var(--success); font-weight: 700; }
+.d-missing { color: #fff; background: var(--danger); }
+.d-extra { color: var(--text2); text-decoration: line-through; }
+p .d-missing, p .d-ok, p .d-extra { padding: 0 3px; border-radius: 3px; }
+.speed-text { font-size: 1.08rem; line-height: 1.9; }
+.speed-text p + p { margin-top: 10px; }
+.sticky-bottom { position: sticky; bottom: calc(76px + env(safe-area-inset-bottom)); box-shadow: var(--shadow); }
+.source-line { font-size: 0.72rem; margin-top: 4px; word-break: break-all; }
+.material-text .para-break { display: block; height: 12px; }

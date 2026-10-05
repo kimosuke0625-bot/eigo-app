@@ -23,6 +23,15 @@ export function PracticeHub({ onStart, dueCount }: { onStart: (k: PracticeKind) 
           </button>
         )
       })}
+      <h3 className="block-title">追加の練習（1日のメニューの外）</h3>
+      <button className="menu-item as-button" onClick={() => onStart('dictation')}>
+        <div className="body">
+          <div className="name">ディクテーション</div>
+          <div className="muted">覚えたカードの例文を聞いて書き取る。自動で採点し、違う所を色で示す</div>
+          <div style={{ marginTop: 4 }}><span className="tag">{PILLAR_LABELS.language}</span></div>
+        </div>
+        <span className="min">▶</span>
+      </button>
     </div>
   )
 }

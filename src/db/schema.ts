@@ -78,6 +78,7 @@ export interface KnownWord {
   at: number
 }
 
+/** 利用者が貼り付けて取り込んだ素材（内蔵素材は public/data/materials.json） */
 export interface Material {
   id: string
   title: string
@@ -87,6 +88,7 @@ export interface Material {
   knownRatio?: number
   source: string
   license: string
+  createdAt?: number
 }
 
 export interface Session {
@@ -98,6 +100,8 @@ export interface Session {
   pillar: Pillar
   seconds: number
   result?: Record<string, number>
+  /** 使った素材の id など */
+  ref?: string
 }
 
 export interface Recording {

@@ -8,6 +8,7 @@ export type PracticeKind =
   | 'fluency'
   | 'output'
   | 'addCards'
+  | 'dictation'
 
 export interface MenuItem {
   kind: PracticeKind
@@ -44,7 +45,7 @@ export const BASE_MENU: MenuItem[] = [
   { kind: 'pronunciation', block: 'morning', label: '発音・聞き分けドリル', detail: '似た音のペアを聞き分ける', pillar: 'language', baseMinutes: 5, availableFrom: 5 },
   { kind: 'input', block: 'noon', label: '多聴・多読', detail: '内容確認の質問2問つき', pillar: 'input', baseMinutes: 15, availableFrom: 4 },
   { kind: 'shadowing', block: 'night', label: 'シャドーイング', detail: '昼に聞いた素材を使う', pillar: 'fluency', baseMinutes: 10, availableFrom: 5 },
-  { kind: 'fluency', block: 'night', label: '4/3/2スピーチ・速読', detail: '知っている英語を速く使う', pillar: 'fluency', baseMinutes: 5, availableFrom: 5 },
+  { kind: 'fluency', block: 'night', label: '4/3/2スピーチ・速読', detail: '知っている英語を速く使う（いまは速読）', pillar: 'fluency', baseMinutes: 5, availableFrom: 4 },
   { kind: 'output', block: 'night', label: '音声日記・短い作文', detail: '今日覚えた語を3つ以上使う', pillar: 'output', baseMinutes: 10, availableFrom: 6 },
   { kind: 'addCards', block: 'night', label: '新しいカードの追加と振り返り', detail: '夜に追加したカードは翌朝に確認', pillar: 'language', baseMinutes: 5, availableFrom: 2 },
 ]
