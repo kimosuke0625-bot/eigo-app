@@ -3,6 +3,9 @@ import type { Settings } from '../db/schema'
 import { useMaterials, useReadLog, KIND_LABELS, type Mat } from '../content/materials'
 import { FitBadge, QuestionsPanel, ratioOf, useKnowledge } from './ReadingParts'
 import { useSessionTimer } from './useSessionTimer'
+import { Steps } from '../ui/Steps'
+
+const SPEED_STEPS = ['準備', '読む（時間を計る）', '答える']
 
 /** これより速い記録は、本文を読まずに押した可能性が高いので残さない */
 const MAX_WPM = 500
@@ -32,6 +35,7 @@ export function SpeedReadScreen({ settings, materialId, onExit }: { settings: Se
 
   return (
     <div>
+      <Steps steps={[]} current={0} guide="まず素材を1つ選びましょう。やさしい（知っている語が多い）順に並んでいます。" />
       <section className="card">
         <h2>速読</h2>
         <p className="muted">知っている語がほぼすべての、やさしい素材を使います。いつもより少し速く、戻り読みをせずに読みましょう。</p>
@@ -65,18 +69,22 @@ function SpeedRead({ material, settings, onExit }: { material: Mat; settings: Se
 
   if (!startedAt) {
     return (
+      <div>
+      <Steps steps={SPEED_STEPS} current={0} guide="準備ができたら「読み始める」。本文が出たら、戻り読みせずにいつもより少し速く読みましょう。" />
       <section className="card stack" style={{ textAlign: 'center' }}>
         <h2>{material.title}</h2>
         <p>{material.wordCount}語。「読み始める」を押すと本文が出て、時間を計ります。</p>
         <button className="btn block" onClick={() => setStartedAt(Date.now())}>▶ 読み始める</button>
         <button className="btn secondary block" onClick={onExit}>やめる</button>
       </section>
+      </div>
     )
   }
 
   if (wpm === null) {
     return (
       <div>
+        <Steps steps={SPEED_STEPS} current={1} guide="時間を計っています。読み終えたら下のボタンを押しましょう。" />
         <section className="card">
           <h2>{material.title}</h2>
           <div className="speed-text">
@@ -95,6 +103,8 @@ function SpeedRead({ material, settings, onExit }: { material: Mat; settings: Se
   }
 
   return (
+    <div>
+    <Steps steps={SPEED_STEPS} current={done ? 3 : 2} guide={done ? 'おつかれさまでした。' : '内容を理解できていたか、問いに答えて確かめましょう。'} />
     <section className="card stack">
       <h2>1分あたり {wpm} 語</h2>
       {wpm > MAX_WPM && (
@@ -111,5 +121,6 @@ function SpeedRead({ material, settings, onExit }: { material: Mat; settings: Se
       )}
       {done && <button className="btn block" onClick={onExit}>今日の画面に戻る</button>}
     </section>
+    </div>
   )
 }

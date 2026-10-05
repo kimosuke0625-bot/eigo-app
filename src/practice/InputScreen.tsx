@@ -7,6 +7,7 @@ import { speakSentences } from '../speech/reader'
 import { speechSupported } from '../speech/voices'
 import { FitBadge, MaterialText, QuestionsPanel, ratioOf, useKnowledge } from './ReadingParts'
 import { useSessionTimer } from './useSessionTimer'
+import { Steps } from '../ui/Steps'
 
 const RATES = [0.8, 1, 1.2]
 
@@ -40,6 +41,7 @@ export function InputScreen({ settings, materialId, onExit, onDictation }: {
 
   return (
     <div>
+      <Steps steps={[]} current={0} guide="まず素材を1つ選びましょう。上にあるものほど今のあなたにちょうどよい難しさです。" />
       <section className="card">
         <h2>多聴・多読</h2>
         <p className="muted">知っている語が95〜98%の素材がおすすめです。まず音声だけで聞き、わからなければ文字を見ましょう。</p>
@@ -65,6 +67,21 @@ export function InputScreen({ settings, materialId, onExit, onDictation }: {
   )
 }
 
+type Stage = 'preview' | 'listen' | 'read' | 'answer' | 'done'
+
+const STAGE_LABELS: Record<Exclude<Stage, 'done'>, string> = {
+  preview: '問いを見る',
+  listen: '聞く',
+  read: '読む',
+  answer: '答える',
+}
+
+/**
+ * 多聴・多読の1回分。段階を順に進める。
+ * 問いを先に見る設定なら：1 問いを見る → 2 聞く → 3 読む → 4 答える
+ * 後で見る設定なら：1 聞く → 2 読む → 3 答える
+ * 読み上げが使えない端末では「聞く」を飛ばす。
+ */
 function InputSession({ material, settings, index, ratio, onExit, onBack, onDictation }: {
   material: Mat
   settings: Settings
@@ -86,13 +103,19 @@ function InputSession({ material, settings, index, ratio, onExit, onBack, onDict
     return { sentences: list, breaks: starts }
   }, [material.body])
   const tts = speechSupported()
-  const [mode, setMode] = useState<'listen' | 'read'>(tts ? 'listen' : 'read')
-  const [showText, setShowText] = useState(!tts)
+  const stages = useMemo(() => {
+    const s: Exclude<Stage, 'done'>[] = []
+    if (settings.questionsFirst && material.questions) s.push('preview')
+    if (tts) s.push('listen')
+    s.push('read', 'answer')
+    return s
+  }, [settings.questionsFirst, material.questions, tts])
+  const [stage, setStage] = useState<Stage>(stages[0])
   const [rate, setRate] = useState(settings.phase <= 1 ? 0.8 : 1)
   const [current, setCurrent] = useState(-1)
   const [playing, setPlaying] = useState(false)
-  const [step, setStep] = useState<'content' | 'check' | 'done'>('content')
-  const [selfRating, setSelfRating] = useState<number | null>(null)
+  const [heard, setHeard] = useState(false)
+  const [showQuestions, setShowQuestions] = useState(false)
   const stop = useRef<() => void>(() => {})
 
   useEffect(() => () => stop.current(), [])
@@ -103,10 +126,37 @@ function InputSession({ material, settings, index, ratio, onExit, onBack, onDict
     stop.current = speakSentences({
       sentences, from, rate, voiceURI: settings.voiceURI,
       onIndex: setCurrent,
-      onEnd: () => { setPlaying(false); setCurrent(-1) },
+      onEnd: () => { setPlaying(false); setCurrent(-1); setHeard(true) },
     })
   }
   const pause = () => { stop.current(); setPlaying(false) }
+  const next = () => {
+    pause()
+    const i = stages.indexOf(stage as Exclude<Stage, 'done'>)
+    setStage(stages[i + 1] ?? 'done')
+    window.scrollTo({ top: 0 })
+  }
+
+  const stepIndex = stage === 'done' ? stages.length : stages.indexOf(stage)
+  const questionsFirst = stages.includes('preview')
+  const guide: Record<Stage, string> = {
+    preview: '聞く前に：この2つの答えを探しながら聞いてください',
+    listen: questionsFirst
+      ? '文字を見ずに、音声だけで聞きましょう。さっきの問いの答えを探しながら。'
+      : '文字を見ずに、音声だけで聞きましょう。だいたいの内容がつかめればOK。',
+    read: '今度は文字を読んで、聞き取れなかった所を確かめましょう。わからない語はタップ。',
+    answer: material.questions ? '問いに答えましょう。' : 'どのくらい理解できたかを選びましょう。',
+    done: 'おつかれさまでした。続けてディクテーションもできます。',
+  }
+
+  const questionsPeek = material.questions && (
+    <div>
+      <button className="link-btn" onClick={() => setShowQuestions(!showQuestions)}>
+        {showQuestions ? '問いを隠す' : '問いをもう一度見る'}
+      </button>
+      {showQuestions && material.questions.map((q, i) => <p key={i} className="preview-q"><strong>Q{i + 1}.</strong> {q.q}</p>)}
+    </div>
+  )
 
   return (
     <div>
@@ -114,77 +164,96 @@ function InputSession({ material, settings, index, ratio, onExit, onBack, onDict
         <button className="link-btn" onClick={() => { pause(); onBack() }}>← 素材を選び直す</button>
         <FitBadge ratio={ratio} />
       </div>
+      <Steps steps={stages.map((s) => STAGE_LABELS[s])} current={stepIndex} guide={guide[stage]} />
+
       <section className="card stack">
         <h2>{material.title}</h2>
-        {step === 'content' && (
+
+        {stage === 'preview' && material.questions && (
           <>
-            <div className="seg">
-              <button aria-pressed={mode === 'listen'} disabled={!tts} onClick={() => { setMode('listen'); setShowText(false) }}>🎧 聞く</button>
-              <button aria-pressed={mode === 'read'} onClick={() => { setMode('read'); setShowText(true); pause() }}>📖 読む</button>
-            </div>
-            {mode === 'listen' && (
-              <div className="stack">
-                <div className="row">
-                  {playing
-                    ? <button className="btn" style={{ flex: 1 }} onClick={pause}>⏸ 一時停止</button>
-                    : <button className="btn" style={{ flex: 1 }} onClick={() => play()}>▶ {current > 0 ? '続きから' : '再生'}</button>}
-                  <button className="btn secondary" onClick={() => play(0)}>⏮ 最初から</button>
-                </div>
-                <div className="seg" aria-label="速さ">
-                  {RATES.map((r) => (
-                    <button key={r} aria-pressed={rate === r} onClick={() => { setRate(r); if (playing) { pause() } }}>{r}倍</button>
-                  ))}
-                </div>
-                <p className="muted">{current >= 0 ? `${current + 1} / ${sentences.length} 文目` : `${sentences.length}文・${material.wordCount}語`}</p>
-                <button className="link-btn" onClick={() => setShowText(!showText)}>{showText ? '文字を隠す' : '文字を見る'}</button>
+            {material.questions.map((q, i) => (
+              <div key={i} className="preview-q">
+                <p><strong>Q{i + 1}.</strong> {q.q}</p>
+                <p className="muted">選択肢：{q.options.join(' ／ ')}</p>
               </div>
-            )}
-            {showText && (
-              <>
-                <p className="muted">語をタップすると意味が出ます。{mode === 'listen' && '文をダブルタップするとそこから再生します。'}</p>
-                <MaterialText sentences={sentences} breaks={breaks} current={current} index={index} settings={settings}
-                  onSentence={mode === 'listen' ? (i) => play(i) : undefined} />
-                {material.moral && <p className="moral">Moral: {material.moral}</p>}
-              </>
-            )}
-            <button className="btn block" onClick={() => { pause(); setStep('check') }}>内容を確認する →</button>
+            ))}
+            <p className="muted">ここではまだ答えません。最後の「答える」で選びます。</p>
+            <button className="btn block" onClick={next}>問いを覚えた → {STAGE_LABELS[stages[1]]}</button>
           </>
         )}
 
-        {step === 'check' && (
+        {stage === 'listen' && (
+          <>
+            <div className="row">
+              {playing
+                ? <button className="btn" style={{ flex: 1 }} onClick={pause}>⏸ 一時停止</button>
+                : <button className="btn" style={{ flex: 1 }} onClick={() => play()}>▶ {current > 0 ? '続きから' : heard ? 'もう一度聞く' : '再生'}</button>}
+              <button className="btn secondary" onClick={() => play(0)}>⏮ 最初から</button>
+            </div>
+            <div className="seg" aria-label="速さ">
+              {RATES.map((r) => (
+                <button key={r} aria-pressed={rate === r} onClick={() => { setRate(r); if (playing) pause() }}>{r}倍</button>
+              ))}
+            </div>
+            <p className="muted">{current >= 0 ? `${current + 1} / ${sentences.length} 文目` : `${sentences.length}文・${material.wordCount}語`}</p>
+            {questionsPeek}
+            <button className={`btn block ${heard ? '' : 'secondary'}`} onClick={next}>
+              {heard ? '聞き終えた → 読む' : '聞かずに読む →'}
+            </button>
+          </>
+        )}
+
+        {stage === 'read' && (
+          <>
+            {tts && (
+              <div className="row">
+                <button className="btn secondary" onClick={() => (playing ? pause() : play())}>{playing ? '⏸ 止める' : '🔊 読みながら聞く'}</button>
+                <span className="muted">文をダブルタップするとそこから再生</span>
+              </div>
+            )}
+            <MaterialText sentences={sentences} breaks={breaks} current={current} index={index} settings={settings}
+              onSentence={tts ? (i) => play(i) : undefined} />
+            {material.moral && <p className="moral">Moral: {material.moral}</p>}
+            {questionsPeek}
+            <button className="btn block" onClick={next}>読み終えた → 答える</button>
+          </>
+        )}
+
+        {stage === 'answer' && (
           material.questions ? (
             <QuestionsPanel questions={material.questions} onDone={(score) => {
               result.current.comprehension = score
-              setStep('done')
+              setTimeout(() => setStage('done'), 1200)
             }} />
           ) : (
             <div className="stack">
-              <p>取り込んだ素材には質問がありません。どのくらい理解できましたか？</p>
+              <p>取り込んだ素材には問いがありません。どのくらい理解できましたか？</p>
               <div className="seg">
-                {['ほぼ全部', '大体', '半分くらい', 'ほとんど'].map((label, i) => (
-                  <button key={label} aria-pressed={selfRating === i} onClick={() => {
-                    setSelfRating(i)
+                {['ほぼ全部', '大体', '半分くらい', 'ほとんど分からない'].map((label, i) => (
+                  <button key={label} onClick={() => {
                     // 自己評価は内容確認の正答率とは別に記録する（グラフには含めない）
                     result.current.selfUnderstanding = 1 - i / 3
-                    setStep('done')
+                    setStage('done')
                   }}>{label}</button>
                 ))}
               </div>
-              <p className="muted">「ほとんど」は「ほとんどわからない」。Claude に要約を確認してもらう機能は開発フェーズ6で追加します。</p>
             </div>
           )
         )}
 
-        {step === 'done' && (
+        {stage === 'done' && (
           <div className="stack">
+            {material.questions && (
+              <p className="banner ok">内容確認：{Math.round((result.current.comprehension ?? 0) * material.questions.length)} / {material.questions.length} 問 正解</p>
+            )}
             <p className="muted">出典：{material.source}{material.sourceUrl && <> （<a href={material.sourceUrl} target="_blank" rel="noreferrer">元の文章</a>・{material.license}）</>}</p>
             <button className="btn block" onClick={onDictation}>✍️ この素材でディクテーション（3文）</button>
-            <button className="btn secondary block" onClick={() => { setStep('content'); setShowText(true); setMode('read') }}>もう一度読む</button>
+            <button className="btn secondary block" onClick={() => setStage('read')}>もう一度読む</button>
             <button className="btn secondary block" onClick={onExit}>今日の画面に戻る</button>
           </div>
         )}
       </section>
-      {step !== 'done' && <button className="btn secondary block" onClick={() => { pause(); onExit() }}>ここでやめる</button>}
+      {stage !== 'done' && <button className="btn secondary block" onClick={() => { pause(); onExit() }}>ここでやめる</button>}
     </div>
   )
 }

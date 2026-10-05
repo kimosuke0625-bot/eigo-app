@@ -66,6 +66,18 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
       </section>
 
       <section className="card">
+        <h2>多聴・多読</h2>
+        <div className="field">
+          <span>内容確認の問い</span>
+          <Seg value={settings.questionsFirst ? 'first' : 'after'} onChange={(v) => set({ questionsFirst: v === 'first' })}
+            options={[{ value: 'first', label: '先に見る' }, { value: 'after', label: '後で見る' }]} />
+          <small className="muted">
+            先に見る：問いを見てから、答えを探しながら聞く（初期値）。後で見る：何も知らずに聞いてから問いに答える。
+          </small>
+        </div>
+      </section>
+
+      <section className="card">
         <h2>ブロックの順番</h2>
         <ul className="order-list">
           {settings.blockOrder.map((b: BlockId, i) => (

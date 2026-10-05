@@ -1,3 +1,4 @@
+import { Steps } from '../ui/Steps'
 import { useEffect, useState } from 'react'
 import type { Item, Settings } from '../db/schema'
 import { introduce, markKnown, newCardsRemaining, nextNewItems } from '../srs/store'
@@ -63,12 +64,11 @@ export function NewCardsScreen({ settings, onExit, onReview }: {
         <span className="muted">{index + 1} / {items.length}</span>
         <span className="tag">NGSL {item.ngslRank}位</span>
       </div>
+      <Steps steps={['聞く', '声に出す', '覚える']} current={-1}
+        guide={'新しい語を1つずつ覚えます。🔊で聞き、例文を1回声に出して読んでから「覚える」を押しましょう。'} />
       <section className="card flashcard">
         <AnswerFace item={item} phase={settings.phase} voiceURI={settings.voiceURI}
           showJa={showJa} onToggleJa={() => setShowJa(true)} />
-        <p className="muted" style={{ marginTop: 12 }}>
-          🔊で聞いて、例文を一度声に出して読んでから「覚える」を押しましょう。
-        </p>
       </section>
       <div className="row">
         <button className="btn secondary" style={{ flex: 1 }} onClick={() => void known()}>もう知っている</button>

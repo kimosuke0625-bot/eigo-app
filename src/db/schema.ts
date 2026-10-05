@@ -197,6 +197,8 @@ export interface Settings {
   lastTrophyDay: string
   /** 自動で上がった Phase のお知らせ（0 = なし） */
   phaseNotice: number
+  /** 多聴・多読で、内容確認の問いを聞く前に見る（true）か、後で見る（false） */
+  questionsFirst: boolean
 }
 
 export class EigoDB extends Dexie {

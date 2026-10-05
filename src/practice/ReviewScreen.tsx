@@ -1,3 +1,4 @@
+import { Steps } from '../ui/Steps'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { db, type Card, type Item, type Settings } from '../db/schema'
 import { GRADES, GRADE_LABELS, formatInterval, previewIntervals, type Grade } from '../srs/fsrs'
@@ -119,8 +120,9 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
         <span className="tag">{mode === 'word' ? '単語' : mode === 'chunk' ? '例文' : '聞き取り'}</span>
       </div>
 
+      <Steps steps={['思い出して声に出す', '答えを見て評価する']} current={revealed ? 1 : 0}
+        guide={revealed ? '思い出せたかどうかを、正直に4つから選びましょう。' : MODE_PROMPT[mode]} />
       <section className="card flashcard" onClick={reveal}>
-        <p className="muted prompt">{MODE_PROMPT[mode]}</p>
         {mode === 'word' && (
           <div className="row" style={{ justifyContent: 'center' }}>
             <span className="headword">{item.english}</span>

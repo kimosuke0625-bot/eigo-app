@@ -26,6 +26,7 @@ export function defaultSettings(now = Date.now()): Settings {
     likedCategories: [],
     lastTrophyDay: '',
     phaseNotice: 0,
+    questionsFirst: true,
   }
 }
 

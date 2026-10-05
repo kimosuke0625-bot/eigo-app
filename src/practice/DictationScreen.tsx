@@ -1,3 +1,4 @@
+import { Steps } from '../ui/Steps'
 import { useEffect, useRef, useState } from 'react'
 import { db, type Settings } from '../db/schema'
 import { applyEdit } from '../content/edits'
@@ -113,8 +114,9 @@ function Dictation({ settings, material, onExit }: { settings: Settings; materia
         <span className="muted">{index + 1} / {items.length}</span>
         <span className="tag">{item.source}</span>
       </div>
+      <Steps steps={['聞く', '書く', '答え合わせ']} current={checked ? 2 : plays > 0 ? 1 : 0}
+        guide={checked ? '赤い語が聞き取れなかった所です。正解をもう一度聞いて確かめましょう。' : plays > 0 ? '聞こえた英文を下に書きましょう。何度聞き直してもOK。' : 'まず🔊で英文を聞きましょう。'} />
       <section className="card stack">
-        <h2>聞こえた英文を書きましょう</h2>
         <div className="row">
           <button className="btn" style={{ flex: 1 }} onClick={() => listen(1)}>🔊 {plays ? 'もう一度' : '聞く'}</button>
           <button className="btn secondary" onClick={() => listen(0.7)}>🐢 ゆっくり</button>
