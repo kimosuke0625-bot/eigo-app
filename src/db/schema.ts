@@ -61,6 +61,16 @@ export interface Review {
   mode: string
 }
 
+/** 利用者による語の修正（日本語訳の書き直し、意訳として外した例文） */
+export interface ItemEdit {
+  itemId: string
+  /** 書き直した日本語訳（なければ元の訳） */
+  ja?: string
+  /** 外した例文のキー（content/edits.ts の exampleKey） */
+  hiddenExamples: string[]
+  at: number
+}
+
 /** 知っている語（診断テストや「もう知っている」で登録） */
 export interface KnownWord {
   itemId: string
@@ -177,6 +187,7 @@ export class EigoDB extends Dexie {
   rewards!: EntityTable<Reward, 'id'>
   settings!: EntityTable<Settings, 'key'>
   knownWords!: EntityTable<KnownWord, 'itemId'>
+  edits!: EntityTable<ItemEdit, 'itemId'>
 
   constructor(name = 'eigo') {
     super(name)
@@ -198,12 +209,16 @@ export class EigoDB extends Dexie {
       reviews: '++id, cardId, at',
       knownWords: 'itemId, source',
     })
+    // フェーズ2の追加：日本語訳の書き直しと例文の差し替え
+    this.version(3).stores({
+      edits: 'itemId',
+    })
   }
 }
 
 /** 書き出しの対象。items は教材データから作り直せるので含めない */
 export const TABLE_NAMES = [
-  'cards', 'reviews', 'knownWords', 'materials', 'sessions',
+  'cards', 'reviews', 'knownWords', 'edits', 'materials', 'sessions',
   'recordings', 'assessments', 'facts', 'rewards', 'settings',
 ] as const
 

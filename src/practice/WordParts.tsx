@@ -1,6 +1,7 @@
-import { Fragment, type ReactNode } from 'react'
+import { Fragment, useState, type ReactNode } from 'react'
 import type { Example, Item } from '../db/schema'
 import { speak } from '../speech/voices'
+import { hideExample, restoreExamples, saveGloss, useEdited } from '../content/edits'
 
 export function SpeakButton({ text, voiceURI, rate = 1, label = '読み上げ', big = false }: {
   text: string
@@ -30,7 +31,14 @@ export function examplesForPhase(item: Item, phase: number): Example[] {
   return item.examples.slice(0, phase === 1 ? 1 : 3)
 }
 
-function ExampleLine({ ex, item, voiceURI, showJa }: { ex: Example; item: Item; voiceURI: string; showJa: boolean }) {
+function ExampleLine({ ex, item, voiceURI, showJa, canReplace }: {
+  ex: Example
+  item: Item
+  voiceURI: string
+  showJa: boolean
+  canReplace: boolean
+}) {
+  const [confirm, setConfirm] = useState(false)
   return (
     <li className="example">
       <div className="row" style={{ flexWrap: 'nowrap', alignItems: 'flex-start' }}>
@@ -40,20 +48,73 @@ function ExampleLine({ ex, item, voiceURI, showJa }: { ex: Example; item: Item; 
         </div>
         <SpeakButton text={ex.en} voiceURI={voiceURI} label="例文を読み上げ" />
       </div>
-      {ex.enId && (
-        <a className="source" href={`https://tatoeba.org/ja/sentences/show/${ex.enId}`} target="_blank" rel="noreferrer">
-          Tatoeba #{ex.enId}
-        </a>
+      <div className="row example-meta">
+        {ex.enId ? (
+          <a className="source" href={`https://tatoeba.org/ja/sentences/show/${ex.enId}`} target="_blank" rel="noreferrer">
+            Tatoeba #{ex.enId}
+          </a>
+        ) : <span className="source">このアプリで作成</span>}
+        {showJa && !confirm && (
+          <button className="mini-btn" onClick={(e) => { e.stopPropagation(); setConfirm(true) }}>意訳を報告</button>
+        )}
+      </div>
+      {confirm && (
+        <div className="banner warn" onClick={(e) => e.stopPropagation()}>
+          {canReplace
+            ? 'この例文を外して、控えの例文に差し替えますか？'
+            : '控えの例文がもうありません。この例文を外しますか？'}
+          <div className="row" style={{ marginTop: 6 }}>
+            <button className="btn danger" onClick={() => void hideExample(item.id, ex)}>外す</button>
+            <button className="btn secondary" onClick={() => setConfirm(false)}>やめる</button>
+          </div>
+        </div>
       )}
     </li>
+  )
+}
+
+/** 日本語訳。その場で書き直せる（端末に保存し、書き出しにも含まれる） */
+function Gloss({ item, original }: { item: Item; original: string | undefined }) {
+  const [editing, setEditing] = useState(false)
+  const [text, setText] = useState(item.japanese ?? '')
+  const edited = item.japanese !== original
+  if (editing) {
+    return (
+      <div className="gloss-edit" onClick={(e) => e.stopPropagation()}>
+        <input type="text" value={text} autoFocus onChange={(e) => setText(e.target.value)}
+          onKeyDown={(e) => {
+            e.stopPropagation()
+            if (e.key === 'Enter') void saveGloss(item.id, text).then(() => setEditing(false))
+          }} />
+        <div className="row" style={{ marginTop: 6 }}>
+          <button className="btn" onClick={() => void saveGloss(item.id, text).then(() => setEditing(false))}>保存</button>
+          <button className="btn secondary" onClick={() => setEditing(false)}>やめる</button>
+          {edited && (
+            <button className="btn secondary" onClick={() => void saveGloss(item.id, '').then(() => setEditing(false))}>
+              元の訳に戻す
+            </button>
+          )}
+        </div>
+        {edited && <p className="muted">元の訳：{original}</p>}
+      </div>
+    )
+  }
+  return (
+    <p className="gloss">
+      {item.japanese}
+      {edited && <span className="tag" style={{ marginLeft: 6 }}>修正済み</span>}
+      <button className="mini-btn" aria-label="日本語訳を書き直す"
+        onClick={(e) => { e.stopPropagation(); setText(item.japanese ?? ''); setEditing(true) }}>✏️ 訳を直す</button>
+    </p>
   )
 }
 
 /**
  * 答えの面。Phase に合わせて形を変える。
  * 1: 日本語訳＋例文1つ / 2: 日本語訳＋例文3つまで / 3: やさしい英語の定義＋例文（訳はタップで表示） / 4: 英英のみ
+ * 利用者が直した訳や外した例文を反映して表示する。
  */
-export function AnswerFace({ item, phase, voiceURI, showJa, onToggleJa, hideHeadword = false }: {
+export function AnswerFace({ item: original, phase, voiceURI, showJa, onToggleJa, hideHeadword = false }: {
   item: Item
   phase: number
   voiceURI: string
@@ -62,7 +123,11 @@ export function AnswerFace({ item, phase, voiceURI, showJa, onToggleJa, hideHead
   /** 表の面にすでに見出し語が出ているときは繰り返さない */
   hideHeadword?: boolean
 }) {
+  const item = useEdited(original)
   const english = phase >= 3 && item.definition
+  const shown = examplesForPhase(item, phase)
+  const canReplace = item.examples.length > shown.length
+  const hiddenCount = original.examples.length - item.examples.length
   return (
     <div className={hideHeadword ? 'answer' : 'answer standalone'}>
       {!hideHeadword && (
@@ -76,18 +141,24 @@ export function AnswerFace({ item, phase, voiceURI, showJa, onToggleJa, hideHead
           <p className="definition">{item.definition}</p>
           {phase === 3 && (
             showJa
-              ? <p className="gloss">{item.japanese}</p>
-              : <button className="link-btn" onClick={onToggleJa}>日本語訳を見る</button>
+              ? <Gloss item={item} original={original.japanese} />
+              : <button className="link-btn" onClick={(e) => { e.stopPropagation(); onToggleJa() }}>日本語訳を見る</button>
           )}
         </>
       ) : (
-        <p className="gloss">{item.japanese}</p>
+        <Gloss item={item} original={original.japanese} />
       )}
       <ul className="examples">
-        {examplesForPhase(item, phase).map((ex, i) => (
-          <ExampleLine key={i} ex={ex} item={item} voiceURI={voiceURI} showJa={phase <= 2 || (phase === 3 && showJa)} />
+        {shown.map((ex) => (
+          <ExampleLine key={ex.enId ?? ex.en} ex={ex} item={item} voiceURI={voiceURI}
+            showJa={phase <= 2 || (phase === 3 && showJa)} canReplace={canReplace} />
         ))}
       </ul>
+      {hiddenCount > 0 && (
+        <button className="mini-btn" onClick={(e) => { e.stopPropagation(); void restoreExamples(item.id) }}>
+          外した例文（{hiddenCount}）を元に戻す
+        </button>
+      )}
     </div>
   )
 }

@@ -6,8 +6,10 @@ import { recordReview, todaysQueue } from '../srs/store'
 import { speak, speechSupported } from '../speech/voices'
 import { AnswerFace, Highlight, SpeakButton } from './WordParts'
 import { useSessionTimer } from './useSessionTimer'
+import { applyEdit } from '../content/edits'
 
-type Current = { card: Card; item: Item; mode: PresentMode; shownAt: number }
+// item は利用者の修正を反映した語（表の面に使う）、raw は元の語（答えの面が修正を反映して表示する）
+type Current = { card: Card; item: Item; raw: Item; mode: PresentMode; shownAt: number }
 
 const MODE_PROMPT: Record<PresentMode, string> = {
   word: 'この語の意味を声に出して言ってみましょう',
@@ -38,10 +40,11 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
   const present = useCallback(async (q: Card[]) => {
     const card = nextCard(q, Date.now())
     if (!card) { setCurrent(null); return }
-    const item = await db.items.get(card.itemId)
+    const raw = await db.items.get(card.itemId)
+    const item = raw && applyEdit(raw, await db.edits.get(card.itemId))
     if (!item) { setQueue(q.filter((c) => c.id !== card.id)); return }
     const mode = chooseMode(card, { tts, hasExample: item.examples.length > 0 })
-    setCurrent({ card, item, mode, shownAt: Date.now() })
+    setCurrent({ card, item, raw: raw!, mode, shownAt: Date.now() })
     setRevealedAt(0)
     setShowJa(false)
     if (mode === 'listen') speak(item.examples[0]?.en ?? item.english, settings.voiceURI)
@@ -95,7 +98,7 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
     )
   }
 
-  const { card, item, mode } = current
+  const { card, item, raw, mode } = current
   const intervals = revealed ? previewIntervals(card.fsrs, revealedAt, settings.retention) : null
   const remaining = queue.filter((c) => c.due <= current.shownAt).length
 
@@ -125,7 +128,7 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
         )}
 
         {revealed ? (
-          <AnswerFace item={item} phase={settings.phase} voiceURI={settings.voiceURI}
+          <AnswerFace item={raw} phase={settings.phase} voiceURI={settings.voiceURI}
             showJa={showJa} onToggleJa={() => setShowJa(true)} hideHeadword={mode === 'word'} />
         ) : (
           <button className="btn block" style={{ marginTop: 16 }} onClick={(e) => { e.stopPropagation(); reveal() }}>

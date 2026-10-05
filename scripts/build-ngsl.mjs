@@ -102,6 +102,21 @@ const tokenRank = (t) => (/^\d+$/.test(t) || NAMES.has(t) ? 0 : t === 'i' ? 1 : 
 const toHalfWidth = (t) => t.replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0))
 const digits = (t) => (toHalfWidth(t).match(/\d+/g) ?? []).sort().join(',')
 
+// 直訳から離れた訳（ことわざ調の「六十の手習い。」など）を見分ける目安：
+// 英語1語あたりの訳の文字数。直訳ならおよそ2〜3.5文字になり、ことわざ調の意訳は極端に短くなる
+const LITERAL_RATIO = 2.6
+const jaRatio = (ja, tokens) => ja.replace(/[、。！？!?「」『』（）()\s]/g, '').length / tokens.length
+const PROVERB = /ことわざ|諺|格言|急がば|石の上|猿も|三文|百聞|千里|井の中|手習い|鬼に|花より|案ずるより|雨降って|覆水|郷に入って/
+function loosePenalty(ja, tokens) {
+  const r = jaRatio(ja, tokens)
+  let p = 0
+  if (r < 1.2) p += 1200
+  else if (r < 1.6) p += 500
+  if (r > 5.5) p += 300
+  if (PROVERB.test(ja)) p += 1500
+  return p
+}
+
 // 候補文を集める：対訳がある、4〜12語でNGSL外の語を含まない（strict）。
 // 例文が足りない語のために、16語までで NGSL 外の語1つまでの文（lenient）も残す
 const candidates = new Map() // 語形 → 文の配列
@@ -114,12 +129,16 @@ await readTsv('eng_sentences_detailed.tsv', ([id, , text, owner]) => {
   const unknown = ranks.filter((r) => r === Infinity).length
   if (unknown > 1) return
   const strict = unknown === 0 && tokens.length <= 12
+  // 訳が複数あるときは、英語の長さに見合った（直訳に近い）訳を選ぶ
   const jaId = ja
     .map((j) => [j, jpn.get(j)])
     .filter(([, t]) => t && digits(t) === digits(text))
-    .sort((a, b) => a[1].length - b[1].length)[0]
+    .sort((a, b) => Math.abs(jaRatio(a[1], tokens) - LITERAL_RATIO) - Math.abs(jaRatio(b[1], tokens) - LITERAL_RATIO))[0]
   if (!jaId) return
-  const sentence = { id: Number(id), en: text, ja: jaId[1], jaId: Number(jaId[0]), tokens, ranks, native: owner === 'CK', strict }
+  const sentence = {
+    id: Number(id), en: text, ja: jaId[1], jaId: Number(jaId[0]), tokens, ranks, native: owner === 'CK', strict,
+    loose: loosePenalty(jaId[1], tokens),
+  }
   for (const t of new Set(tokens)) {
     if (!candidates.has(t)) candidates.set(t, [])
     candidates.get(t).push(sentence)
@@ -134,6 +153,9 @@ for (const line of readFileSync(here('./own-examples.tsv'), 'utf8').trim().split
   ownExamples.get(lemma).push({ en, ja })
 }
 
+// 1語につき表示用3文と、利用者が「意訳」と報告したときの差し替え用の控え3文
+const SHOWN = 3
+const SPARE = 3
 const used = new Map()
 const words = ranked.map(({ lemma, rank }) => {
   const forms = AMBIGUOUS_FORMS[lemma] ?? formsByLemma.get(lemma) ?? [lemma.toLowerCase()]
@@ -152,6 +174,7 @@ const words = ranked.map(({ lemma, rank }) => {
       (hardest <= limit ? 0 : 1000 + Math.min(hardest, 3000)) +
       Math.abs(s.tokens.length - 7) * 20 +
       (s.native ? 0 : 60) +
+      s.loose +
       (used.get(s.id) ?? 0) * 400
     return { s, score }
   })
@@ -163,8 +186,9 @@ const words = ranked.map(({ lemma, rank }) => {
     if (seenEn.has(key)) continue
     seenEn.add(key)
     picked.push(s)
-    used.set(s.id, (used.get(s.id) ?? 0) + 1)
-    if (picked.length === 3) break
+    // 表示する3文だけを「使用済み」に数え、控えの文は他の語でも使えるようにする
+    if (picked.length <= SHOWN) used.set(s.id, (used.get(s.id) ?? 0) + 1)
+    if (picked.length === SHOWN + SPARE) break
   }
   return {
     id: `ngsl:${lemma}`,
@@ -185,7 +209,7 @@ const missing = {
   noExample: words.filter((w) => !w.ex.length).map((w) => w.lemma),
 }
 mkdirSync(here('../public/data/'), { recursive: true })
-writeFileSync(here('../public/data/ngsl.json'), JSON.stringify({ version: 1, words }))
+writeFileSync(here('../public/data/ngsl.json'), JSON.stringify({ version: 2, words }))
 console.log(`語数 ${words.length}、日本語訳なし ${missing.ja.length}、英英定義なし ${missing.def}、例文なし ${missing.noExample.length}`)
 console.log('例文なし:', missing.noExample.join(' '))
 console.log('例文1つ以下:', words.filter((w) => w.ex.length < 2).length)
