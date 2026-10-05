@@ -106,9 +106,26 @@ export interface Session {
 
 export interface Recording {
   id?: number
+  /** 録音したときの練習の記録（sessions）の id。わからなければ 0 */
   sessionId: number
   audio: Blob
+  /** Whisper で文字にした結果 */
   transcript?: string
+  at: number
+  /** shadowing（シャドーイング）・speech（4/3/2スピーチ）・pronunciation（発音） */
+  kind: string
+  /** 素材の id や話題など */
+  ref: string
+  /** 手本の英文（シャドーイング・発音） */
+  text?: string
+  /** 自己評価（0〜1） */
+  self?: number
+  /** 手本との一致率（0〜1、認識できたときだけ） */
+  match?: number
+  /** 録音の長さ（秒） */
+  seconds?: number
+  /** 4/3/2スピーチの回（1〜3） */
+  round?: number
 }
 
 export interface Assessment {
@@ -199,6 +216,8 @@ export interface Settings {
   phaseNotice: number
   /** 多聴・多読で、内容確認の問いを聞く前に見る（true）か、後で見る（false） */
   questionsFirst: boolean
+  /** 音声認識（Whisper）を使う。モデルの取得に同意したら true */
+  asrEnabled: boolean
 }
 
 export class EigoDB extends Dexie {
@@ -244,6 +263,10 @@ export class EigoDB extends Dexie {
     this.version(4).stores({
       snapshots: 'day',
       facts: 'id, category, acquiredAt, acquiredDay',
+    })
+    // フェーズ5：録音を種類・素材ごとに引けるようにする
+    this.version(5).stores({
+      recordings: '++id, sessionId, kind, ref, at',
     })
   }
 }

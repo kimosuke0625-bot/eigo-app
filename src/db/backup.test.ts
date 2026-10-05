@@ -8,7 +8,7 @@ describe('書き出しと読み込み', () => {
     const a = new EigoDB('a')
     await updateSettings({ cue: 'テスト', targetMinutes: 45 }, a)
     await a.sessions.add({ at: 1, day: '2026-10-06', kind: 'review', pillar: 'language', seconds: 300 })
-    await a.recordings.add({ sessionId: 1, audio: new Blob([new Uint8Array([1, 2, 3, 250])], { type: 'audio/webm' }) })
+    await a.recordings.add({ sessionId: 1, at: 1, kind: 'shadowing', ref: 'g01', audio: new Blob([new Uint8Array([1, 2, 3, 250])], { type: 'audio/webm' }) })
 
     const text = JSON.stringify(await exportAll(a))
 

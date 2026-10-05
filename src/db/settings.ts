@@ -27,6 +27,7 @@ export function defaultSettings(now = Date.now()): Settings {
     lastTrophyDay: '',
     phaseNotice: 0,
     questionsFirst: true,
+    asrEnabled: false,
   }
 }
 
