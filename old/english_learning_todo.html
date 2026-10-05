@@ -1,0 +1,1982 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>英語マスター365</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="英語365">
+<meta name="theme-color" content="#6366f1">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236366f1'/><text y='.9em' font-size='75' x='12'>🇺🇸</text></svg>">
+<style>
+:root {
+  --bg: #f0f4ff;
+  --surface: #ffffff;
+  --surface2: #f8faff;
+  --border: #e2e8f0;
+  --text: #1e293b;
+  --text2: #64748b;
+  --primary: #6366f1;
+  --primary-light: #eef2ff;
+  --success: #22c55e;
+  --success-light: #f0fdf4;
+  --warning: #f59e0b;
+  --warning-light: #fffbeb;
+  --danger: #ef4444;
+  --p1: #22c55e; --p1-light: #f0fdf4;
+  --p2: #3b82f6; --p2-light: #eff6ff;
+  --p3: #a855f7; --p3-light: #faf5ff;
+  --p4: #f97316; --p4-light: #fff7ed;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface2: #162032;
+  --border: #334155;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --primary: #818cf8;
+  --primary-light: #1e1b4b;
+  --success: #4ade80;
+  --success-light: #052e16;
+  --warning: #fbbf24;
+  --warning-light: #1c1006;
+  --p1-light: #052e16; --p2-light: #172554;
+  --p3-light: #2e1065; --p4-light: #1c1106;
+  --shadow: 0 2px 8px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; transition: background 0.3s, color 0.3s; }
+
+/* Header */
+.header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 20px; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow); }
+.header-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.header-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); flex: 1; min-width: 200px; }
+.header-stats { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.stat-badge { background: var(--primary-light); color: var(--primary); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+.streak-badge { background: linear-gradient(135deg,#ff6b35,#f7c59f); color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
+.theme-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; cursor: pointer; font-size: 1rem; color: var(--text); transition: all 0.2s; }
+.theme-btn:hover { background: var(--primary-light); }
+
+/* Main Layout */
+.container { max-width: 960px; margin: 0 auto; padding: 20px 16px; }
+
+/* Start Setup */
+.setup-card { background: var(--surface); border-radius: var(--radius); padding: 32px; text-align: center; box-shadow: var(--shadow-lg); max-width: 480px; margin: 60px auto; }
+.setup-card h2 { font-size: 1.6rem; margin-bottom: 8px; color: var(--primary); }
+.setup-card p { color: var(--text2); margin-bottom: 24px; }
+.setup-card input { width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: var(--radius-sm); font-size: 1rem; background: var(--bg); color: var(--text); margin-bottom: 16px; }
+.setup-card input:focus { outline: none; border-color: var(--primary); }
+.btn-primary { background: var(--primary); color: white; border: none; padding: 12px 28px; border-radius: var(--radius-sm); font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; width: 100%; }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.4); }
+
+/* Progress Overview */
+.progress-overview { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.progress-card { background: var(--surface); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+.progress-card .label { font-size: 0.75rem; color: var(--text2); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+.progress-card .value { font-size: 1.6rem; font-weight: 800; color: var(--text); }
+.progress-card .sub { font-size: 0.8rem; color: var(--text2); margin-top: 2px; }
+.progress-bar-wrap { background: var(--border); border-radius: 99px; height: 6px; margin-top: 8px; overflow: hidden; }
+.progress-bar { height: 100%; border-radius: 99px; transition: width 0.6s ease; }
+
+/* Today's Card */
+.today-card { background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 20px; color: white; box-shadow: var(--shadow-lg); }
+.today-card .day-label { font-size: 0.85rem; opacity: 0.85; font-weight: 600; }
+.today-card .day-title { font-size: 1.3rem; font-weight: 800; margin: 4px 0 8px; }
+.today-card .day-theme { font-size: 0.9rem; opacity: 0.9; }
+.today-progress { margin-top: 12px; }
+.today-progress .prog-text { font-size: 0.8rem; opacity: 0.9; margin-bottom: 4px; }
+.today-progress .bar { background: rgba(255,255,255,0.3); border-radius: 99px; height: 8px; }
+.today-progress .bar-fill { background: white; height: 100%; border-radius: 99px; transition: width 0.4s; }
+
+/* Phase Tabs */
+.phase-tabs { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px; }
+.phase-tab { padding: 8px 16px; border-radius: 99px; border: 2px solid var(--border); background: var(--surface); color: var(--text2); font-weight: 600; font-size: 0.85rem; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+.phase-tab.active { color: white; border-color: transparent; }
+.phase-tab[data-phase="0"].active { background: var(--primary); }
+.phase-tab[data-phase="1"].active { background: var(--p1); }
+.phase-tab[data-phase="2"].active { background: var(--p2); }
+.phase-tab[data-phase="3"].active { background: var(--p3); }
+.phase-tab[data-phase="4"].active { background: var(--p4); }
+
+/* Week Section */
+.week-section { background: var(--surface); border-radius: var(--radius); margin-bottom: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.week-header { padding: 14px 18px; cursor: pointer; display: flex; align-items: center; gap: 12px; user-select: none; transition: background 0.2s; }
+.week-header:hover { background: var(--surface2); }
+.week-badge { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem; color: white; flex-shrink: 0; }
+.week-info { flex: 1; }
+.week-title { font-weight: 700; font-size: 0.95rem; }
+.week-sub { font-size: 0.78rem; color: var(--text2); margin-top: 2px; }
+.week-progress { text-align: right; }
+.week-pct { font-size: 0.85rem; font-weight: 700; }
+.week-chevron { font-size: 0.8rem; color: var(--text2); transition: transform 0.3s; }
+.week-section.open .week-chevron { transform: rotate(180deg); }
+.week-days { display: none; border-top: 1px solid var(--border); }
+.week-section.open .week-days { display: block; }
+
+/* Day */
+.day-section { border-bottom: 1px solid var(--border); }
+.day-section:last-child { border-bottom: none; }
+.day-header { padding: 12px 18px 12px 56px; cursor: pointer; display: flex; align-items: center; gap: 10px; background: var(--surface2); transition: background 0.2s; }
+.day-header:hover { background: var(--bg); }
+.day-num { font-size: 0.75rem; font-weight: 700; color: var(--text2); min-width: 42px; }
+.day-name { font-weight: 600; font-size: 0.9rem; flex: 1; }
+.day-done-badge { font-size: 0.75rem; padding: 2px 8px; border-radius: 99px; font-weight: 600; }
+.day-done-badge.complete { background: var(--success-light); color: var(--success); }
+.day-done-badge.partial { background: var(--warning-light); color: var(--warning); }
+.day-done-badge.todo { background: var(--border); color: var(--text2); }
+.day-tasks { display: none; padding: 8px 18px 14px 56px; }
+.day-section.open .day-tasks { display: block; }
+
+/* Task Item */
+.task-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; border-radius: var(--radius-sm); margin-bottom: 4px; cursor: pointer; transition: background 0.15s; border: 1px solid transparent; }
+.task-item:hover { background: var(--surface2); border-color: var(--border); }
+.task-item.done { opacity: 0.6; }
+.task-checkbox { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 5px; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; background: var(--surface); }
+.task-item.done .task-checkbox { background: var(--success); border-color: var(--success); }
+.task-checkbox::after { content: ''; width: 10px; height: 7px; border-left: 2px solid white; border-bottom: 2px solid white; transform: rotate(-45deg) scale(0); transition: transform 0.15s; position: relative; top: -1px; }
+.task-item.done .task-checkbox::after { transform: rotate(-45deg) scale(1); }
+.task-content { flex: 1; min-width: 0; }
+.task-header { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; flex-wrap: wrap; }
+.task-icon { font-size: 1rem; }
+.task-type-badge { font-size: 0.7rem; padding: 1px 7px; border-radius: 99px; font-weight: 600; white-space: nowrap; }
+.task-time { font-size: 0.72rem; color: var(--text2); }
+.task-text { font-size: 0.88rem; color: var(--text); line-height: 1.4; }
+.task-item.done .task-text { text-decoration: line-through; color: var(--text2); }
+
+/* Type colors */
+.type-Quizlet { background: #fef3c7; color: #92400e; }
+.type-発音 { background: #fee2e2; color: #991b1b; }
+.type-シャドーイング { background: #dbeafe; color: #1e40af; }
+.type-リスニング { background: #d1fae5; color: #065f46; }
+.type-スピーキング { background: #ede9fe; color: #5b21b6; }
+.type-文法 { background: #fce7f3; color: #9d174d; }
+.type-表現 { background: #e0f2fe; color: #075985; }
+.type-記録 { background: #f0fdf4; color: #166534; }
+.type-ディクテーション { background: #fff7ed; color: #9a3412; }
+.type-多読 { background: #f5f3ff; color: #6d28d9; }
+.type-鑑賞 { background: #fdf4ff; color: #7e22ce; }
+.type-準備 { background: #f1f5f9; color: #475569; }
+.type-計画 { background: #ecfeff; color: #164e63; }
+[data-theme="dark"] .type-Quizlet { background: #292013; color: #fbbf24; }
+[data-theme="dark"] .type-発音 { background: #1f1010; color: #f87171; }
+[data-theme="dark"] .type-シャドーイング { background: #0f1e3a; color: #93c5fd; }
+[data-theme="dark"] .type-リスニング { background: #052019; color: #6ee7b7; }
+[data-theme="dark"] .type-スピーキング { background: #1a1030; color: #c4b5fd; }
+[data-theme="dark"] .type-文法 { background: #200c1a; color: #f9a8d4; }
+[data-theme="dark"] .type-表現 { background: #0a1f2e; color: #7dd3fc; }
+[data-theme="dark"] .type-記録 { background: #0a1f10; color: #86efac; }
+[data-theme="dark"] .type-ディクテーション { background: #1f0e06; color: #fb923c; }
+[data-theme="dark"] .type-多読 { background: #150d2e; color: #a78bfa; }
+[data-theme="dark"] .type-鑑賞 { background: #1c0d26; color: #d8b4fe; }
+[data-theme="dark"] .type-準備 { background: #141c24; color: #94a3b8; }
+[data-theme="dark"] .type-計画 { background: #061520; color: #67e8f9; }
+.type-復習 { background: #d1fae5; color: #065f46; }
+[data-theme="dark"] .type-復習 { background: #052e16; color: #6ee7b7; }
+
+/* Task Detail */
+.task-detail-btn { display: inline-flex; align-items: center; gap: 4px; background: none; border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; font-size: 0.7rem; color: var(--text2); cursor: pointer; margin-top: 6px; transition: all 0.15s; }
+.task-detail-btn:hover, .task-detail-btn.open { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
+.task-detail-panel { display: none; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; margin-top: 8px; animation: detailFade 0.15s ease; }
+.task-detail-panel.open { display: block; }
+@keyframes detailFade { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.detail-section { margin-bottom: 10px; }
+.detail-section:last-child { margin-bottom: 0; }
+.detail-label { font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.detail-text { font-size: 0.83rem; color: var(--text); line-height: 1.6; }
+.detail-methods { list-style: none; padding: 0; margin: 4px 0 0; }
+.detail-methods li { font-size: 0.82rem; color: var(--text); line-height: 1.6; padding-left: 14px; position: relative; }
+.detail-methods li::before { content: "▸"; position: absolute; left: 0; color: var(--primary); font-size: 0.7rem; top: 3px; }
+.detail-tip { font-size: 0.81rem; background: var(--primary-light); color: var(--primary); padding: 6px 10px; border-radius: 6px; border-left: 3px solid var(--primary); line-height: 1.5; margin-top: 4px; }
+
+/* Confetti */
+.confetti-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
+.confetti-piece { position: absolute; width: 8px; height: 8px; border-radius: 2px; animation: confetti-fall 1.5s ease-in forwards; }
+@keyframes confetti-fall { 0% { transform: translateY(-20px) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+
+/* Complete flash */
+@keyframes checkFlash { 0%,100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+.task-item.just-done .task-checkbox { animation: checkFlash 0.3s ease; }
+
+/* Filter bar */
+.filter-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.filter-btn { padding: 5px 12px; border-radius: 99px; border: 1px solid var(--border); background: var(--surface); color: var(--text2); font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+/* Reset btn */
+.reset-btn { background: transparent; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 6px 12px; color: var(--text2); font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
+.reset-btn:hover { background: var(--danger); color: white; border-color: var(--danger); }
+
+/* Today marker */
+.today-marker { background: linear-gradient(135deg,var(--primary),#8b5cf6); color: white; font-size: 0.7rem; font-weight: 700; padding: 1px 6px; border-radius: 99px; }
+
+/* Phase info banner */
+.phase-banner { border-radius: var(--radius); padding: 16px 20px; margin-bottom: 16px; border-left: 4px solid; }
+.phase-banner h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.phase-banner p { font-size: 0.85rem; opacity: 0.9; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .day-header { padding-left: 36px; }
+  .day-tasks { padding-left: 36px; }
+  .progress-overview { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Scroll to today btn */
+.scroll-today-btn { position: fixed; bottom: 24px; right: 24px; background: var(--primary); color: white; border: none; border-radius: 99px; padding: 12px 20px; font-size: 0.88rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.4); z-index: 50; transition: all 0.2s; }
+.scroll-today-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(99,102,241,0.5); }
+
+/* ===== TIMER ===== */
+.task-timer { display:flex; align-items:center; gap:6px; margin-top:8px; padding-top:6px; border-top:1px dashed var(--border); }
+.timer-btn { background:var(--primary-light); color:var(--primary); border:1.5px solid var(--primary); border-radius:7px; padding:3px 11px; font-size:0.8rem; cursor:pointer; transition:all 0.18s; font-weight:700; line-height:1.6; }
+.timer-btn:hover { background:var(--primary); color:white; }
+.timer-btn.running { background:var(--danger); color:white; border-color:var(--danger); }
+.timer-display { font-size:0.88rem; font-weight:800; font-variant-numeric:tabular-nums; color:var(--text2); min-width:46px; text-align:center; letter-spacing:0.04em; transition:color 0.3s; }
+.timer-display.running { color:var(--primary); }
+.timer-display.urgent { color:var(--danger) !important; animation:pulse-t 0.6s ease-in-out infinite; }
+.timer-display.finished { color:var(--success) !important; }
+.timer-reset { background:none; border:1px solid var(--border); border-radius:7px; padding:3px 9px; font-size:0.8rem; cursor:pointer; color:var(--text2); transition:all 0.18s; line-height:1.6; }
+.timer-reset:hover { background:var(--surface2); color:var(--text); }
+.task-item.done .task-timer { opacity:0.4; pointer-events:none; }
+@keyframes pulse-t { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+/* ===== FACT MODAL ===== */
+.fact-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.52); z-index:600; display:flex; align-items:flex-end; justify-content:center; animation:fOverlayIn 0.22s ease; }
+.fact-overlay.closing { animation:fOverlayOut 0.22s ease forwards; }
+.fact-card { background:var(--surface); border-radius:22px 22px 0 0; padding:26px 22px 38px; max-width:500px; width:100%; box-shadow:0 -10px 40px rgba(0,0,0,0.25); animation:fCardUp 0.42s cubic-bezier(0.34,1.56,0.64,1); position:relative; overflow:hidden; }
+.fact-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--primary),#8b5cf6,#3b82f6); }
+.fact-tag { font-size:0.72rem; font-weight:800; color:var(--primary); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px; display:flex; align-items:center; gap:6px; }
+.fact-emoji-big { font-size:3rem; display:block; margin-bottom:10px; animation:fEmojiPop 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.12s both; }
+.fact-body { font-size:0.95rem; color:var(--text); line-height:1.7; margin-bottom:20px; font-weight:500; }
+.fact-count { font-size:0.75rem; color:var(--text2); margin-bottom:14px; }
+.fact-close { width:100%; background:linear-gradient(135deg,var(--primary),#8b5cf6); color:white; border:none; border-radius:12px; padding:13px; font-size:0.95rem; font-weight:800; cursor:pointer; transition:all 0.2s; letter-spacing:0.02em; }
+.fact-close:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(99,102,241,0.5); }
+.fact-progress-bar { height:3px; background:var(--border); border-radius:99px; margin-top:14px; overflow:hidden; }
+.fact-progress-fill { height:100%; background:linear-gradient(90deg,var(--primary),#8b5cf6); border-radius:99px; width:100%; transition:width 0.12s linear; }
+.fact-sparkle { position:absolute; pointer-events:none; font-size:1.2rem; animation:fSparkle 1.2s ease-out forwards; }
+@keyframes fOverlayIn  { from{opacity:0} to{opacity:1} }
+@keyframes fOverlayOut { from{opacity:1} to{opacity:0} }
+@keyframes fCardUp  { from{transform:translateY(110%)} to{transform:translateY(0)} }
+@keyframes fEmojiPop { from{transform:scale(0.2) rotate(-20deg);opacity:0} to{transform:scale(1) rotate(0);opacity:1} }
+@keyframes fSparkle { 0%{opacity:1;transform:translate(0,0) scale(1)} 100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(0.3)} }
+
+
+/* ===== DAILY COMPLETE MODAL ===== */
+.daily-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:700; display:flex; align-items:center; justify-content:center; animation:fOverlayIn 0.3s ease; padding:16px; }
+.daily-overlay.closing { animation:fOverlayOut 0.25s ease forwards; }
+.daily-card { background:var(--surface); border-radius:22px; padding:32px 24px 28px; max-width:460px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.35); animation:fCardCenter 0.5s cubic-bezier(0.34,1.56,0.64,1); position:relative; overflow:hidden; text-align:center; }
+.daily-card::before { content:''; position:absolute; top:0; left:0; right:0; height:5px; background:linear-gradient(90deg,#22c55e,#6366f1,#f59e0b,#ef4444,#22c55e); background-size:200%; animation:shimmer 2s linear infinite; }
+.daily-trophy { font-size:3.5rem; display:block; animation:fEmojiPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.1s both; margin-bottom:8px; }
+.daily-title { font-size:1.3rem; font-weight:900; color:var(--text); margin-bottom:6px; }
+.daily-sub { font-size:0.82rem; color:var(--text2); margin-bottom:20px; font-weight:600; }
+.daily-quote-emoji { font-size:2rem; display:block; margin-bottom:10px; }
+.daily-quote-text { font-size:1rem; color:var(--text); line-height:1.7; font-weight:500; font-style:italic; margin-bottom:8px; }
+.daily-quote-author { font-size:0.82rem; color:var(--primary); font-weight:700; margin-bottom:22px; }
+.daily-close-btn { width:100%; background:linear-gradient(135deg,#22c55e,#16a34a); color:white; border:none; border-radius:12px; padding:13px; font-size:0.95rem; font-weight:800; cursor:pointer; transition:all 0.2s; letter-spacing:0.02em; }
+.daily-close-btn:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(34,197,94,0.5); }
+.daily-stars { position:absolute; pointer-events:none; inset:0; overflow:hidden; }
+.daily-star { position:absolute; font-size:1.4rem; animation:starFly 1.8s ease-out forwards; }
+@keyframes fCardCenter { from{transform:scale(0.5) rotate(-5deg);opacity:0} to{transform:scale(1) rotate(0deg);opacity:1} }
+@keyframes shimmer { 0%{background-position:0%} 100%{background-position:200%} }
+@keyframes starFly { 0%{opacity:1;transform:translate(0,0) rotate(0deg) scale(1)} 100%{opacity:0;transform:translate(var(--sx),var(--sy)) rotate(var(--sr)) scale(0.2)} }
+/* ===== TOAST ===== */
+.toast-msg { position:fixed; bottom:88px; left:50%; transform:translateX(-50%); background:#1e293b; color:white; padding:10px 22px; border-radius:99px; font-size:0.84rem; font-weight:700; z-index:400; white-space:nowrap; box-shadow:0 4px 16px rgba(0,0,0,0.35); animation:fCardUp 0.3s ease; }
+
+/* ===== MOBILE / iPhone ===== */
+@media (max-width: 600px) {
+  .header-inner { gap: 8px; }
+  .header-title { font-size: 1rem; min-width: 0; }
+  .header-stats { gap: 6px; }
+  .stat-badge, .streak-badge { font-size: 0.72rem; padding: 3px 8px; }
+  .theme-btn, .reset-btn { padding: 5px 8px; font-size: 0.85rem; }
+  .container { padding: 12px 10px; }
+  .phase-tabs { gap: 6px; }
+  .phase-tab { padding: 7px 12px; font-size: 0.78rem; }
+  .filter-bar { gap: 6px; }
+  .filter-btn { padding: 5px 10px; font-size: 0.75rem; }
+  .task-item { padding: 8px 10px; }
+  .task-checkbox { width: 24px; height: 24px; flex-shrink: 0; }
+  .task-text { font-size: 0.85rem; }
+  .timer-btn, .timer-reset { min-width: 32px; min-height: 32px; }
+  .scroll-today-btn { bottom: 16px; right: 16px; padding: 10px 16px; font-size: 0.82rem; }
+  .week-header { padding: 12px 14px; }
+  .day-header { padding: 10px 14px 10px 46px; }
+  .day-tasks { padding: 6px 14px 12px 46px; }
+  .progress-overview { grid-template-columns: 1fr 1fr; }
+  .today-card { padding: 16px 18px; }
+  .today-card .day-title { font-size: 1.1rem; }
+  .fact-card { padding: 24px 16px 20px; }
+  .fact-body { font-size: 0.9rem; }
+  .setup-card { margin: 30px auto; padding: 24px 18px; }
+  /* Safe area (iPhone notch/home indicator) */
+  .header { padding-top: calc(12px + env(safe-area-inset-top)); }
+  .scroll-today-btn { bottom: calc(16px + env(safe-area-inset-bottom)); }
+}
+</style>
+</head>
+<body>
+
+<div id="setup-screen" style="display:none;">
+  <div class="setup-card">
+    <div style="font-size:3rem;margin-bottom:12px;">🎯</div>
+    <h2>英語学習スタート！</h2>
+    <p>学習開始日を設定すると、今日が何日目かを自動計算します。</p>
+    <input type="date" id="start-date-input">
+    <button class="btn-primary" onclick="setStartDate()">プログラムを開始する 🚀</button>
+  </div>
+</div>
+
+<div id="main-app" style="display:none;">
+  <div class="header">
+    <div class="header-inner">
+      <div class="header-title">🇺🇸 1年間英語マスタープログラム</div>
+      <div class="header-stats">
+        <span class="streak-badge" id="streak-badge">🔥 0日連続</span>
+        <span class="stat-badge" id="day-badge">Day 1</span>
+        <span class="stat-badge" id="total-badge">0% 達成</span>
+        <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+        <button class="reset-btn" onclick="confirmReset()">リセット</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Today -->
+    <div class="today-card" id="today-card">
+      <div class="day-label" id="today-label">今日 · Day 1</div>
+      <div class="day-title" id="today-title">スタートアップ：自分の現在地を知る</div>
+      <div class="day-theme" id="today-theme">Phase 1 · Week 1</div>
+      <div class="today-progress">
+        <div class="prog-text" id="today-prog-text">0 / 5 タスク完了</div>
+        <div class="bar"><div class="bar-fill" id="today-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="progress-overview">
+      <div class="progress-card">
+        <div class="label">全体進捗</div>
+        <div class="value" id="stat-overall">0%</div>
+        <div class="sub" id="stat-overall-sub">0 / 0 タスク</div>
+        <div class="progress-bar-wrap"><div class="progress-bar" id="bar-overall" style="width:0%;background:var(--primary)"></div></div>
+      </div>
+      <div class="progress-card">
+        <div class="label">今週の進捗</div>
+        <div class="value" id="stat-week">0%</div>
+        <div class="sub" id="stat-week-sub">今週のタスク</div>
+        <div class="progress-bar-wrap"><div class="progress-bar" id="bar-week" style="width:0%;background:var(--success)"></div></div>
+      </div>
+      <div class="progress-card">
+        <div class="label">経過日数</div>
+        <div class="value" id="stat-days">1</div>
+        <div class="sub">/ 365 日</div>
+        <div class="progress-bar-wrap"><div class="progress-bar" id="bar-days" style="width:0%;background:var(--warning)"></div></div>
+      </div>
+      <div class="progress-card">
+        <div class="label">連続学習</div>
+        <div class="value" id="stat-streak">🔥 0</div>
+        <div class="sub">日連続達成中</div>
+      </div>
+    </div>
+
+    <!-- Phase Tabs -->
+    <div class="phase-tabs">
+      <button class="phase-tab active" data-phase="0" onclick="showPhase(0)">📅 今日のタスク</button>
+      <button class="phase-tab" data-phase="1" onclick="showPhase(1)">🌱 Phase 1 基礎（1-90日）</button>
+      <button class="phase-tab" data-phase="2" onclick="showPhase(2)">📖 Phase 2 インプット（91-180日）</button>
+      <button class="phase-tab" data-phase="3" onclick="showPhase(3)">🗣️ Phase 3 アウトプット（181-270日）</button>
+      <button class="phase-tab" data-phase="4" onclick="showPhase(4)">🏆 Phase 4 定着（271-365日）</button>
+    </div>
+
+    <!-- Filter -->
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" onclick="setFilter('all', this)">すべて</button>
+      <button class="filter-btn" onclick="setFilter('Quizlet', this)">🃏 Quizlet</button>
+      <button class="filter-btn" onclick="setFilter('シャドーイング', this)">🎭 シャドーイング</button>
+      <button class="filter-btn" onclick="setFilter('リスニング', this)">👂 リスニング</button>
+      <button class="filter-btn" onclick="setFilter('スピーキング', this)">🎤 スピーキング</button>
+      <button class="filter-btn" onclick="setFilter('発音', this)">🗣️ 発音</button>
+      <button class="filter-btn" onclick="setFilter('記録', this)">📝 記録</button>
+      <button class="filter-btn" onclick="setFilter('復習', this)">🔄 復習</button>
+    </div>
+
+    <div id="content-area"></div>
+  </div>
+</div>
+
+<button class="scroll-today-btn" onclick="scrollToToday()">📍 今日へ</button>
+<div class="confetti-container" id="confetti-container"></div>
+
+<script>
+// ===================== DATA =====================
+const PROGRAM = generateProgram();
+
+function generateProgram() {
+  const phases = [];
+
+  // ===== PHASE 1: 基礎構築期 Day 1-90 =====
+  const p1weeks = [
+    { week:1, theme:"英語の音と基礎語彙に慣れる", days:[
+      { day:1, theme:"スタートアップ：現在地を知る", tasks:[
+        {id:"d1t1",time:"10分",type:"準備",icon:"📋",content:"現在の英語力チェック：スマホに5文で自己紹介を録音してみる（できなくてOK）"},
+        {id:"d1t2",time:"20分",type:"Quizlet",icon:"🃏",content:"Quizletアプリをインストール・無料登録（quizlet.com）。検索で「English Vocabulary Elementary」または「Top 2000 English Words」を探してスタディセットを保存、または自分で単語カードを作成する"},
+        {id:"d1t3",time:"15分",type:"発音",icon:"🗣️",content:"YouTube「Rachel's English - Sounds of American English」を視聴。英語の音素体系を概観"},
+        {id:"d1t4",time:"15分",type:"シャドーイング",icon:"🎭",content:"ESLPod Episode 1を聴きながらスクリプトを目で追う（シャドーイングの初挑戦）"},
+        {id:"d1t5",time:"5分",type:"記録",icon:"📝",content:"学習日記1日目：「今の英語力・1年後の目標・今日感じたこと」を書く"}
+      ]},
+      { day:2, theme:"母音の世界へ", tasks:[
+        {id:"d2t1",time:"15分",type:"Quizlet",icon:"🃏",content:"Quizletスタディセット：新規15語を学習（音声を必ず再生してから意味を確認する）"},
+        {id:"d2t2",time:"20分",type:"発音",icon:"🗣️",content:"英語の主要母音 /æ/（cat）・/ʌ/（cup）・/ɑː/（car）の発音練習。YouGlishで実例確認"},
+        {id:"d2t3",time:"20分",type:"シャドーイング",icon:"🎭",content:"ESLPod Ep.1をシャドーイング（テキスト見ながら）。3回繰り返す"},
+        {id:"d2t4",time:"10分",type:"リスニング",icon:"👂",content:"BBC 6 Minute English を1本聴く（内容がわからなくてもOK）"},
+        {id:"d2t5",time:"5分",type:"記録",icon:"📝",content:"今日覚えた単語ベスト3を例文と一緒に書く"}
+      ]},
+      { day:3, theme:"子音：L/Rの壁に挑む", tasks:[
+        {id:"d3t1",time:"15分",type:"Quizlet",icon:"🃏",content:"Quizlet：昨日の復習 + 新規15語（正答率が低いカードを重点的に）"},
+        {id:"d3t2",time:"20分",type:"発音",icon:"🗣️",content:"/l/と/r/の違いを集中練習。「light/right」「law/raw」「lead/read」最小対語ペアを20回ずつ"},
+        {id:"d3t3",time:"20分",type:"シャドーイング",icon:"🎭",content:"ESLPod Ep.2をシャドーイング（音声のみで挑戦→テキスト確認→再挑戦）"},
+        {id:"d3t4",time:"10分",type:"文法",icon:"📖",content:"現在形vs現在進行形の違いを確認（I eat / I'm eating の使い分け）"},
+        {id:"d3t5",time:"5分",type:"記録",icon:"📝",content:"独り言チャレンジ：朝起きてからの行動を5文で英語実況してみる"}
+      ]},
+      { day:4, theme:"日常表現の習得開始", tasks:[
+        {id:"d4t1",time:"15分",type:"Quizlet",icon:"🃏",content:"Quizlet：復習 + 新規15語"},
+        {id:"d4t2",time:"20分",type:"発音",icon:"🗣️",content:"/v/と/b/の違い（「very/berry」）・/θ/（th音、「think/sink」）を練習"},
+        {id:"d4t3",time:"20分",type:"シャドーイング",icon:"🎭",content:"ESLPod Ep.3をシャドーイング。特に文全体のイントネーションを意識"},
+        {id:"d4t4",time:"10分",type:"表現",icon:"💬",content:"挨拶・自己紹介フレーズ20個を声に出して暗記（Hello/Nice to meet you/How are you?等）"},
+        {id:"d4t5",time:"5分",type:"記録",icon:"📝",content:"今日発見した「英語の面白い音の違い」を日記に書く"}
+      ]},
+      { day:5, theme:"週次リスニングチャレンジ①", tasks:[
+        {id:"d5t1",time:"15分",type:"Quizlet",icon:"🃏",content:"今週の全新規語（約75語）を高速復習。正答率を確認"},
+        {id:"d5t2",time:"25分",type:"リスニング",icon:"👂",content:"ESLPod Ep.1〜3をテキストなしで聴く。理解度を10点満点で自己評価"},
+        {id:"d5t3",time:"15分",type:"シャドーイング",icon:"🎭",content:"今週で一番好きだったエピソードを完全シャドーイング（感情込めて）"},
+        {id:"d5t4",time:"10分",type:"スピーキング",icon:"🎤",content:"今週学んだ表現を使って自己紹介を3回録音→聴き返して確認"},
+        {id:"d5t5",time:"5分",type:"記録",icon:"📝",content:"Week 1振り返り日記：できたこと・難しかったこと・来週の目標"}
+      ]},
+      { day:6, theme:"ゆっくりインプットデー", tasks:[
+        {id:"d6t1",time:"15分",type:"Quizlet",icon:"🃏",content:"Quizlet復習のみ（今日は新規カードなし。復習に集中）"},
+        {id:"d6t2",time:"30分",type:"リスニング",icon:"👂",content:"Peppa Pig（YouTube英語版）を5エピソード。内容が分かるかどうか確認しながら楽しむ"},
+        {id:"d6t3",time:"20分",type:"発音",icon:"🗣️",content:"音声変化「連結（Linking）」を学ぶ：「an apple」→「ənæpl」、「pick it up」→「pickitup」"},
+        {id:"d6t4",time:"5分",type:"記録",icon:"📝",content:"英語で3文チャレンジ日記（今日の天気・食事・気分）"}
+      ]},
+      { day:7, theme:"第1週まとめ・振り返り", tasks:[
+        {id:"d7t1",time:"10分",type:"Quizlet",icon:"🃏",content:"Week 1の全語彙（約75語）を一気に復習"},
+        {id:"d7t2",time:"20分",type:"スピーキング",icon:"🎤",content:"Day 1の自己紹介録音を聴き直し→新しく録音→1週間の上達を比較"},
+        {id:"d7t3",time:"20分",type:"鑑賞",icon:"🎬",content:"好きな映画・ドラマを英語字幕で30分視聴（楽しむことが目的）"},
+        {id:"d7t4",time:"10分",type:"計画",icon:"📅",content:"来週の学習計画を立てる。毎日の学習時間・使うアプリを具体的に書く"}
+      ]}
+    ]},
+    { week:2, theme:"語彙と基本文型の強化", days:[
+      { day:8, theme:"基本5文型マスター", tasks:[
+        {id:"d8t1",time:"15分",type:"Quizlet",icon:"🃏",content:"Quizlet：新規15語 + 復習"},
+        {id:"d8t2",time:"20分",type:"文法",icon:"📖",content:"英語の基本5文型（SV/SVC/SVO/SVOO/SVOC）を例文とともに理解・音読"},
+        {id:"d8t3",time:"20分",type:"シャドーイング",icon:"🎭",content:"ESLPod Ep.4をシャドーイング"},
+        {id:"d8t4",time:"10分",type:"スピーキング",icon:"🎤",content:"各文型1つずつ例文を自分で作って3回声に出す（合計15文）"},
+        {id:"d8t5",time:"5分",type:"記録",icon:"📝",content:"今日の発見を日記に"}
+      ]},
+      { day:9, theme:"時制の基礎：過去・現在・未来", tasks:[
+        {id:"d9t1",time:"15分",type:"Quizlet",icon:"🃏",content:"Quizlet：新規15語 + 復習"},
+        {id:"d9t2",time:"20分",type:"文法",icon:"📖",content:"現在形・過去形（規則・不規則）・未来形（will/be going to）の使い分けを習得"},
+        {id:"d9t3",time:"20分",type:"シャドーイング",icon:"🎭",content:"ESLPod Ep.5をシャドーイング"},
+        {id:"d9t4",time:"10分",type:"スピーキング",icon:"🎤",content:"昨日・今日・明日の出来事を英語で話す（各5文。録音する）"},
+        {id:"d9t5",time:"5分",type:"記録",icon:"📝",content:"英語日記：過去形を使って昨日の出来事を書く"}
+      ]},
+      { day:10, theme:"疑問文・否定文をマスター", tasks:[
+        {id:"d10t1",time:"15分",type:"Quizlet",icon:"🃏",content:"Quizlet：新規15語 + 復習"},
+        {id:"d10t2",time:"20分",type:"文法",icon:"📖",content:"Do/Does/Didを使った疑問文と否定文。WH疑問詞（Who/What/Where/When/Why/How）"},
+        {id:"d10t3",time:"20分",type:"シャドーイング",icon:"🎭",content:"ESLPod Ep.6をシャドーイング"},
+        {id:"d10t4",time:"10分",type:"スピーキング",icon:"🎤",content:"架空の友人へのインタビューを独り言でやる（Q&A形式で10往復）"},
+        {id:"d10t5",time:"5分",type:"記録",icon:"📝",content:"日記（疑問文で自分に問いかけるスタイルで）"}
+      ]},
+      { day:11, theme:"前置詞の感覚をつかむ", tasks:[
+        {id:"d11t1",time:"15分",type:"Quizlet",icon:"🃏",content:"Quizlet：新規15語 + 復習"},
+        {id:"d11t2",time:"20分",type:"文法",icon:"📖",content:"in/on/at/for/since/during の感覚的な違いをイメージで理解（日本語訳ではなく感覚で）"},
+        {id:"d11t3",time:"20分",type:"シャドーイング",icon:"🎭",content:"ESLPod Ep.7をシャドーイング"},
+        {id:"d11t4",time:"10分",type:"表現",icon:"💬",content:"場所・時間を表す表現20個を音読（at school/in the morning/on Mondayなど）"},
+        {id:"d11t5",time:"5分",type:"記録",icon:"📝",content:"日記：前置詞を使って今日の行動を詳しく書く"}
+      ]},
+      { day:12, theme:"助動詞の世界", tasks:[
+        {id:"d12t1",time:"15分",type:"Quizlet",icon:"🃏",content:"Quizlet：新規15語 + 復習"},
+        {id:"d12t2",time:"20分",type:"文法",icon:"📖",content:"can/could/will/would/should/may/might の使い分けと感覚的理解"},
+        {id:"d12t3",time:"20分",type:"シャドーイング",icon:"🎭",content:"ESLPod Ep.8をシャドーイング"},
+        {id:"d12t4",time:"10分",type:"スピーキング",icon:"🎤",content:"「できること・したいこと・すべきこと」を英語で10文ずつ言う"},
+        {id:"d12t5",time:"5分",type:"記録",icon:"📝",content:"今週の頻出単語ベスト5を選んで例文を書く"}
+      ]},
+      { day:13, theme:"週次チェック②", tasks:[
+        {id:"d13t1",time:"15分",type:"Quizlet",icon:"🃏",content:"Week 2の全単語を高速復習。正答率80%以上を目指す"},
+        {id:"d13t2",time:"25分",type:"リスニング",icon:"👂",content:"今週のESLPod全エピソードをテキストなしで聴いて理解度チェック"},
+        {id:"d13t3",time:"15分",type:"ディクテーション",icon:"✏️",content:"ESLPod 1エピソードを書き取り（ディクテーション）→答え合わせ"},
+        {id:"d13t4",time:"10分",type:"スピーキング",icon:"🎤",content:"今週学んだ文法フレームを使った3分間自由スピーキング"},
+        {id:"d13t5",time:"5分",type:"記録",icon:"📝",content:"Week 2の振り返り日記"}
+      ]},
+      { day:14, theme:"楽しいインプット・充電日", tasks:[
+        {id:"d14t1",time:"10分",type:"Quizlet",icon:"🃏",content:"2週間分の全語彙（約150語）を一気にレビュー"},
+        {id:"d14t2",time:"30分",type:"鑑賞",icon:"🎬",content:"好きな英語YouTubeチャンネルを英語字幕で視聴（30分、楽しむだけ）"},
+        {id:"d14t3",time:"15分",type:"スピーキング",icon:"🎤",content:"2週間の成長確認：Day 1と同じ自己紹介を録音→比較"},
+        {id:"d14t4",time:"5分",type:"計画",icon:"📅",content:"Month 1の目標設定：1ヶ月後に何ができるようになりたいか書く"}
+      ]}
+    ]},
+    { week:3, theme:"現在完了形・受動態の基礎", days: generateWeekDays(3, 15, [
+      {theme:"現在完了形（have+過去分詞）の感覚", tasks:["Quizlet 15語","現在完了形を「経験・完了・継続」の3用法で習得","ESLPod Ep.9 シャドーイング","「今まで〜したことがある」を10文英語で言う","日記：have you ever...? 形式で自己Q&A"]},
+      {theme:"受動態の基礎（be+過去分詞）", tasks:["Quizlet 15語","受動態の基本構造と自然な使い場所を習得","ESLPod Ep.10 シャドーイング","ニュース見出し風に受動態を5文作る","日記：受動態を使って今日起きたことを書く"]},
+      {theme:"関係代名詞（who/which/that）入門", tasks:["Quizlet 15語","関係代名詞の基本用法を習得（制限用法）","ESLPod Ep.11 シャドーイング","「...という人/もの」を10文英語で言う","日記：関係代名詞を使った複合文を3つ書く"]},
+      {theme:"比較表現（more/most/er/est）", tasks:["Quizlet 15語","比較級・最上級・as...asの使い方","ESLPod Ep.12 シャドーイング","身の回りのもの・人を英語で比較する（10文）","日記：比較表現を使って好みを書く"]},
+      {theme:"会話の決まり文句・フィラー", tasks:["Quizlet 15語","会話を続けるフィラー表現（Well/You know/I mean/Actually等）","ESLPod会話例でフィラーを確認","独り言で自然にフィラーを入れて話す練習","日記：今週の難しかった表現ベスト3"]},
+      {theme:"Week 3 総まとめ", tasks:["全語彙復習","今週の文法ポイントを音読でアウトプット","お気に入りシーンのシャドーイング","3分間スピーキング（今週学んだ文法を全部使う）","週次振り返り日記"]},
+      {theme:"充電・映画英語鑑賞", tasks:["Quizlet復習のみ","Easy な映画/アニメを英語字幕で視聴（45分）","好きなセリフを3つ書き出してシャドーイング","来週の学習計画立案"]}
+    ])},
+    { week:4, theme:"Month 1まとめ・発音テスト", days: generateWeekDays(4, 22, [
+      {theme:"Month 1 語彙総復習", tasks:["Quizlet：1ヶ月分（約300語）を集中復習","苦手語彙を別リストにして重点学習","単語クイズ：日→英で答えられるか確認","スペルテスト実施（上位50語）","単語学習の方法を見直す"]},
+      {theme:"英語の音声変化まとめ", tasks:["Quizlet 15語","連結・脱落・弱化・同化の4パターンを総復習","日常会話音声で音声変化を探してリスト化","ネイティブ音声を真似て音声変化ごと発音","音声変化チートシートを手書きでまとめる"]},
+      {theme:"Month 1 スピーキング確認テスト", tasks:["Quizlet復習","自己紹介・好きなこと・日常ルーティンを英語で3分間話す（録音）","Day 1の録音と比較して成長を確認","弱点分野をリストアップ","モチベーション確認：目標を声に出して言う"]},
+      {theme:"文法：仮定法現在（If I...）", tasks:["Quizlet 15語","If節の基本（現在・未来の条件文）を習得","「もし〜なら、〜する」を10文作る","ESLPod 条件文が多いエピソードをシャドーイング","日記：If I could speak English...で始まる文を5つ"]},
+      {theme:"Month 1 リスニング確認", tasks:["Quizlet 15語","Month 1で使ったESLPod全エピソードをテキストなしで聴く（理解度スコア）","1ヶ月前と比べてどれだけ聴き取れるようになったか","難しかった箇所を集中リスニング","Month 1の達成を自分で称える🎉"]},
+      {theme:"Week 4 振り返り", tasks:["全語彙Month 1を最終チェック","ディクテーション（1分の音声）","録音スピーキング（3分間）","Month 1達成事項をリストアップ","Month 2の目標を設定"]},
+      {theme:"Month 1 お祝い鑑賞デー", tasks:["Quizlet復習（休日モード）","好きな英語コンテンツを60分楽しむ","Week 4・Month 1の総合振り返り","Month 2学習計画の最終確認"]}
+    ])},
+    { week:5, theme:"発音精度をUP：子音クラスター", days: generateWeekDays(5, 29, [
+      {theme:"英語の子音クラスター（str/spr/bl/cl）", tasks:["Quizlet 15語","子音の連続（str/spr/bl/cl/gr/tr）の発音練習","street/spring/black/clean/green/tree を10回ずつ","ESLPod新エピソードシャドーイング","日記：子音クラスターを含む単語10個を使った文"]},
+      {theme:"弱形（Weak Forms）の習得", tasks:["Quizlet 15語","機能語の弱形（the/a/and/or/of/for/to/can）を習得","「I'm going to go to the store」→自然な発音","弱形チートシートを作る","日常会話での弱形を意識したシャドーイング"]},
+      {theme:"語強勢（Word Stress）パターン", tasks:["Quizlet 15語","多音節語の強勢パターン（2音節名詞・動詞の違い等）","REcord（名詞）vs reCORD（動詞）など10ペアを練習","強勢を間違えやすい単語50語のリスト化","強勢意識したシャドーイング"]},
+      {theme:"文強勢（Sentence Stress）", tasks:["Quizlet 15語","内容語（名詞・動詞・形容詞）vs機能語のストレスパターン","同じ文で強調を変えて意味が変わる練習","ニュースアナウンサーの読み方を真似る","文強勢意識したシャドーイング"]},
+      {theme:"イントネーション：上昇調・下降調", tasks:["Quizlet 15語","疑問文・平叙文・命令文のイントネーション","Yes/No質問（上昇↗）vsWH質問（下降↘）","感情を込めたイントネーション練習","日記：今週の発音上達を実感したエピソード"]},
+      {theme:"Week 5 総まとめ", tasks:["語彙復習","今週の発音ポイントを総まとめ","シャドーイング精度チェック（自己録音→比較）","発音テスト：苦手音素を重点チェック","週次振り返り"]},
+      {theme:"リスニング強化デー", tasks:["Quizlet復習","BBC 6 Minute English を3本連続で聴く","聴けなかった表現をリストアップ","Language Reactorでドラマ視聴30分","充電日記"]}
+    ])},
+    { week:6, theme:"語彙拡張：頻出1500語へ", days: generateWeekDays(6, 36, [
+      {theme:"名詞語彙の強化（日常生活）", tasks:["Quizlet 20語（新規）+ 復習","日常生活の名詞100語をテーマ別（食事・家・仕事・趣味）に整理","場面別語彙シートを作る","シャドーイング（日常会話テーマ）","日記：今日使った「もの」を英語で書き出す"]},
+      {theme:"動詞語彙の強化（行動・状態）", tasks:["Quizlet 20語 + 復習","最頻出動詞50語（make/take/get/go/come/give/keep/let/put等）の用法確認","各動詞を3つの文脈で使う（計150文）","動詞中心のシャドーイング","日記：今日の行動を動詞リッチな英語で"]},
+      {theme:"コロケーション学習①", tasks:["Quizlet 20語 + 復習","動詞+名詞コロケーション（make a decision/take a break/do homework）","コロケーション辞典で頻出50ペアをリスト化","コロケーションを使った文を20作る","シャドーイング（コロケーション意識して）"]},
+      {theme:"形容詞・副詞の豊かな表現", tasks:["Quizlet 20語 + 復習","感情・性質を表す形容詞100語（amazing/terrible/exhausted等）","反対語ペアで覚える（happy↔sad, fast↔slow）","形容詞をフル活用した描写練習","日記：今日の気分・周りの人を形容詞で表現"]},
+      {theme:"定型表現・チャンクの習得①", tasks:["Quizlet 20語 + 復習","高頻度口語チャンク50個（By the way/That's a good point/What do you think?等）","チャンクを使った会話スクリプトを作る","チャンク中心のシャドーイング","日記：今日使えそうなチャンクを5個書く"]},
+      {theme:"Week 6 語彙テスト", tasks:["6週間分の語彙（約600語）を集中チェック","苦手語彙を絞り込んでリスト化","語彙を使ったパラグラフ作成（英語日記）","録音スピーキング（今週の語彙を使って）","週次振り返り"]},
+      {theme:"充電：好きな英語コンテンツ", tasks:["Quizlet復習（復習のみ）","好きなジャンルのYouTube英語動画を60分視聴","来週の目標設定","休日を楽しむ（英語に触れるだけでOK）"]}
+    ])},
+    { week:7, theme:"リスニング力を集中強化", days: generateWeekDays(7, 43, [
+      {theme:"ディクテーション実践①", tasks:["Quizlet 20語","ディクテーション：ESLPod 2分間の書き取り→答え合わせ→分析","聞き取れなかった音のパターンを記録","その音の集中練習","日記：ディクテーションで発見した弱点"]},
+      {theme:"ポッドキャストリスニング強化", tasks:["Quizlet 20語","Voice of America Learning English を30分聴く","知らない語彙を10語リストアップしてQuizletに追加","シャドーイング（VOA素材）","リスニングメモを英語でとる練習"]},
+      {theme:"映画・ドラマ英語：Friends入門", tasks:["Quizlet 20語","Friends Season 1 Ep.1をLanguage Reactorで視聴（英語字幕）","使えそうなフレーズ5個を書き出す","お気に入りセリフをシャドーイング","日記：Friendsで使われていた口語表現"]},
+      {theme:"リスニング：スラング・口語表現", tasks:["Quizlet 20語","英語スラング・口語表現50個（gonna/wanna/kinda/sorta/dunno等）","スラングを使った会話例文を作る","口語的なシャドーイング（Friends等）","日記：スラングを使った短い会話文"]},
+      {theme:"リスニング精度チェック", tasks:["Quizlet 20語","1ヶ月前のESLPodを再聴：理解度向上を確認","Friendsを字幕なしで5分視聴","理解度スコア自己評価","弱点分野の分析と対策立案"]},
+      {theme:"Week 7 振り返り・ディクテーション②", tasks:["語彙復習","ディクテーション：Friendsの1シーン（1分）","録音スピーキング（Friendsの表現を使って）","リスニング力の成長を確認","週次振り返り日記"]},
+      {theme:"充電日：英語コンテンツ鑑賞", tasks:["Quizlet復習","Friendsを2エピソード字幕で楽しむ（休日モード）","お気に入りセリフ集を手書きでまとめる","来週の目標立案"]}
+    ])},
+    { week:8, theme:"スピーキング準備・独り言英語", days: generateWeekDays(8, 50, [
+      {theme:"独り言英語 Stage 1：行動実況", tasks:["Quizlet 20語","独り言英語メソッド開始：起床から就寝まで自分の行動を英語で実況","「I'm brushing my teeth. Now I'm making coffee...」形式","録音して確認（1日5分の実況を録音）","日記：独り言英語で使えた表現・詰まった表現リスト"]},
+      {theme:"自己紹介スピーチ完成版", tasks:["Quizlet 20語","自己紹介スピーチ（3分）を原稿作成","原稿を声に出して読む（5回）","暗記して原稿なしで3分話す（録音）","日記：スピーチで気づいた弱点"]},
+      {theme:"AIとの英会話練習①", tasks:["Quizlet 20語","ChatGPTまたはClaudeに英語で話しかける（テキスト）","「Hello! Can we have a conversation in English? Please correct my mistakes.」で開始","10往復の会話を実施","会話のフィードバックをもらい弱点を記録"]},
+      {theme:"電話・オンライン会話の準備", tasks:["Quizlet 20語","電話・ビデオ会話の定型表現を習得（Can I speak to.../ Could you repeat that?等）","HelloTalkアプリでアカウント作成","テキストメッセージで英語話者に自己紹介を送ってみる","日記：初めて英語でメッセージした感想"]},
+      {theme:"独り言英語 Stage 2：過去の実況", tasks:["Quizlet 20語","今日あった出来事を英語で5分間語る（独り言・録音）","昨日・先週の出来事も過去形で語る","録音を聴き返して改善点を見つける","日記：英語で語れた・語れなかった話題リスト"]},
+      {theme:"Week 8 スピーキングテスト", tasks:["語彙復習","自己紹介（3分）を暗記スピーチ→録音","即興スピーキング：「好きな食べ物について3分」","Week 8前後の録音を比較して成長確認","週次振り返り日記"]},
+      {theme:"Month 2まとめ・充電", tasks:["Quizlet復習","Month 2の達成事項リストアップ","好きな英語コンテンツ60分鑑賞","Month 3の目標設定（スピーキング重点）","来月への意気込みを英語で書く"]}
+    ])},
+    { week:9, theme:"文法完成：仮定法・完了形", days: generateWeekDays(9, 57, [
+      {theme:"仮定法過去（If I were/had）", tasks:["Quizlet 20語","仮定法過去の構造と感覚（現実と異なる仮定）","If I were rich, I would...を20文作る","シャドーイング（仮定法が多い素材）","日記：If I could change one thing...で始まる文"]},
+      {theme:"現在完了形の深化", tasks:["Quizlet 20語","現在完了形と過去形の使い分けの微妙なニュアンス","have been vs went のコンテキスト別使い分け","会話での現在完了形自然使用練習","日記：Have you ever...? 形式で10の質問と答え"]},
+      {theme:"不定詞と動名詞", tasks:["Quizlet 20語","to不定詞 vs -ing形の使い分け（want to/enjoy -ing等）","よく使う動詞の不定詞・動名詞パターンを整理","シャドーイング（to不定詞・動名詞が多い素材）","日記：好きなこと・したいことを不定詞・動名詞で書く"]},
+      {theme:"接続詞・節の接続", tasks:["Quizlet 20語","従属接続詞（because/although/while/when/if/unless等）の使い方","複文・重文を自然に使う練習","接続詞を使って話を長く続けるトレーニング","日記：接続詞を多用した複雑な文で書く"]},
+      {theme:"文法総まとめ：弱点補強", tasks:["Quizlet 20語","これまでの文法項目で苦手なものを1つ選んで集中練習","文法項目別の自己評価（1〜10点）","弱点文法を使ったシャドーイング素材を選ぶ","日記：文法の弱点克服宣言"]},
+      {theme:"Week 9 文法テスト", tasks:["語彙復習","文法総チェック：各項目1問ずつ（計10問）","文法正確さを意識したスピーキング録音","ネイティブの音声と自分の発話を比較","週次振り返り日記"]},
+      {theme:"充電・ドラマ鑑賞", tasks:["Quizlet復習","Friendsを3エピソード視聴（字幕付き）","好きなシーンのセリフをシャドーイング","来週への学習計画"]}
+    ])},
+    { week:10, theme:"定型表現・チャンク500選", days: generateWeekDays(10, 64, [
+      {theme:"買い物・外食の英語", tasks:["Quizlet 20語","レストラン・ショッピング場面の定型表現50個を習得","ロールプレイ：レストランで注文する（独り言）","シャドーイング（レストランシーン）","日記：今日もし英語でレストランに行ったら何を言うか"]},
+      {theme:"旅行・ホテルの英語", tasks:["Quizlet 20語","空港・ホテル・観光の定型表現50個","ロールプレイ：チェックイン・両替・道案内","シャドーイング（旅行系ESLPod）","日記：英語圏に旅行したら行きたい場所ベスト3"]},
+      {theme:"職場・仕事の英語基礎", tasks:["Quizlet 20語","ビジネス英語基礎：挨拶・会議・メールの定型表現50個","オフィスシーンのロールプレイ","シャドーイング（職場会話）","日記：英語が必要な仕事シーンを想像して書く"]},
+      {theme:"感情・意見表現の強化", tasks:["Quizlet 20語","感情表現50個（excited/frustrated/impressed/concerned等）","意見表現（I think/In my opinion/As far as I know等）","感情豊かなシャドーイング練習","日記：最近の出来事への感情を英語で豊かに表現"]},
+      {theme:"電話・オンライン会話実践②", tasks:["Quizlet 20語","HelloTalkでネイティブにボイスメッセージを送る（1分間の自己紹介）","返信が来たら聴き取って返す","初めての「生の英語コミュニケーション」体験","日記：初リアル英語コミュニケーションの感想"]},
+      {theme:"Week 10 表現テスト", tasks:["語彙復習","場面別ロールプレイ：レストラン・ホテル・職場","録音スピーキング（特定の場面を想定）","Week 10の達成を確認","週次振り返り日記"]},
+      {theme:"充電・映画鑑賞", tasks:["Quizlet復習","映画（英語字幕）を90分楽しむ","好きな表現を10個書き出す","来週の目標設定"]}
+    ])},
+    { week:11, theme:"Phase 1 最終強化①", days: generateWeekDays(11, 71, [
+      {theme:"総合リスニングテスト①", tasks:["Quizlet 20語","3ヶ月前のレベルの素材と現在の素材で理解度比較","Friendsを字幕なしで10分視聴（理解度スコア）","聞き取れなかった箇所の集中リスニング","日記：3ヶ月のリスニング成長記録"]},
+      {theme:"総合スピーキングテスト①", tasks:["Quizlet 20語","即興スピーキング5トピック（各2分）：仕事/趣味/夢/思い出/最近の出来事","全録音して聴き返す","流暢さ・正確さ・語彙を自己評価（各10点）","弱点のまとめと次フェーズへの課題設定"]},
+      {theme:"語彙3ヶ月総まとめ", tasks:["Quizlet：3ヶ月分全語彙（約1000語）をランダム復習","正答率90%以下の語彙を重点練習","コロケーション・チャンクと組み合わせて使う","語彙テスト（書き取り・意味・例文）","日記：語彙学習の振り返り"]},
+      {theme:"シャドーイング精度最終確認", tasks:["Quizlet 20語","Day 1〜90で使ったシャドーイング素材を3つ選んで再シャドーイング","3ヶ月前との発音変化を確認（録音比較）","発音スコアを10点満点で自己評価","日記：発音で一番成長した点"]},
+      {theme:"Phase 2の準備：計画立案", tasks:["Quizlet 20語","Phase 2（インプット集中期）の目標と方法を確認","Italki/DMM英会話等のオンライン英会話を申し込む準備","Language Reactorのインストール・設定","日記：Phase 2への意気込みを英語で書く"]},
+      {theme:"Week 11 振り返り", tasks:["語彙復習","Phase 1の3ヶ月総まとめスピーキング（5分間）","3ヶ月前・今の録音を比較","Phase 1 達成事項の完全リスト化","Week 11振り返り日記"]},
+      {theme:"充電・映画鑑賞", tasks:["Quizlet復習","好きな映画を英語字幕で楽しむ","Phase 1を完走した自分を褒める🎉","来週の目標設定"]}
+    ])},
+    { week:12, theme:"Phase 1 最終強化②", days: generateWeekDays(12, 78, [
+      {theme:"弱点文法の最終修正", tasks:["Quizlet 20語","Phase 1で特に苦手だった文法項目を2つ選んで集中練習","弱点文法を使ったシャドーイング","弱点を使った英語日記","克服度を自己評価"]},
+      {theme:"発音・音声変化 総仕上げ", tasks:["Quizlet 20語","英語の4大音声変化（連結・脱落・弱化・同化）の最終チェック","ネイティブ音声と自分の発音をスペクトルで比較（YouGlish活用）","最も難しかった音の集中練習","日記：発音で改善できたこと・まだ難しいこと"]},
+      {theme:"全技能統合スピーキング", tasks:["Quizlet 20語","「英語学習を始めて3ヶ月の自分の変化」を英語で5分間話す（録音）","語彙・文法・発音・流暢さを統合的に評価","録音をもとに次フェーズの目標設定","日記：英語学習で気づいた「英語の面白さ」"]},
+      {theme:"多読入門：Graded Readers Level 1", tasks:["Quizlet 20語","Oxford Bookworms Level 1（または相当）を1冊読む（電子書籍可）","わからない単語を10個Quizletに追加","読んだ内容を英語でサマリー（3文）","日記：読んだ本の感想（英語で）"]},
+      {theme:"最終準備：Phase 2 完全計画", tasks:["Quizlet 20語","Phase 2の週別計画を完成させる","オンライン英会話の初回予約を入れる","Friendsのウォッチリストを作成","日記：Phase 2で実現したいことTop 3"]},
+      {theme:"Week 12 振り返り", tasks:["語彙復習","Phase 1最終スピーキングテスト（7分間）","全録音の総まとめ比較","Phase 1の達成確認リスト","週次振り返り日記"]},
+      {theme:"Phase 1 完走お祝いデー🎉", tasks:["Quizlet復習","3ヶ月の成長をすべてのメモから振り返る","英語でお祝いメッセージを自分に書く","好きな英語映画をフル鑑賞","Phase 2スタートへの準備完了確認"]}
+    ])},
+    { week:13, theme:"Phase 1 完成・Phase 2 準備", days: generateWeekDays(13, 85, [
+      {theme:"Phase 1 最終語彙テスト", tasks:["Quizletスタディセット 全語彙の最終チェック（目標：認識率95%以上）","苦手語彙の最終スパート","語彙を使った長文スピーキング（5分）","語彙学習の方法をPhase 2向けにアップデート","日記：語彙学習で一番効果的だった方法"]},
+      {theme:"Phase 1 総合評価", tasks:["自己評価テスト（リスニング・スピーキング・語彙・文法・発音）","各技能の点数（10点満点）を記録","CEFRレベルの自己評価チェックリスト","弱点と強みを明確化","Phase 2の重点学習分野を決定"]},
+      {theme:"オンライン英会話 初回レッスン", tasks:["Quizlet 20語","Italki / DMM英会話等で初回レッスン（25分）","自己紹介・趣味・日常について話す","講師からのフィードバックを記録","日記：初オンライン英会話の感想（正直に）"]},
+      {theme:"Language Reactor セットアップ", tasks:["Quizlet 20語","Language Reactorでドラマ視聴（30分）","新機能（単語クリック翻訳・CSV書き出し）を使いこなす","視聴中に知らない語を5語以上Quizletに手動追加する","日記：Language Reactorの使い勝手レビュー"]},
+      {theme:"Phase 2 重点素材選定", tasks:["Quizlet 20語","Phase 2で使うドラマ・ポッドキャスト・YouTubeチャンネルを決める","レベル確認（i+1基準：理解率80〜95%）","素材リストをまとめる","日記：Phase 2で楽しみにしていること"]},
+      {theme:"Phase 1 最終振り返り", tasks:["90日間の学習日記を読み返す","語彙・発音・文法・会話力の変化を総まとめ","成長グラフを手書きで作成","3ヶ月の自分へのメッセージを英語で書く","週次・Phase 1完走振り返り日記"]},
+      {theme:"Phase 1 完走🎊 Phase 2 キックオフ", tasks:["全語彙最終復習","自己紹介スピーチ最終版（5分）を録音・保存","Phase 2スタートの意気込みを英語で録音","大切な人に「英語学習3ヶ月目」を報告する","今日から Phase 2 開始！"]}
+    ])}
+  ];
+
+  // Phase 2-4: simplified week templates
+  const p2weeks = generatePhaseWeeks(2, 91, 180, [
+    {theme:"インプット質的向上週", tasks:["シャドーイング素材をFriendsなどドラマに変更","Language Reactorで英語字幕のみ週2日挑戦","ドラマから語彙収集：セリフの新単語をQuizletにカード化（文脈付きで登録）","Italki週3回に増加（25分×3）","独り言英語：朝の支度中10分を固定化"]},
+    {theme:"語彙戦略強化週（コロケーション）", tasks:["Quizletセットを「コロケーション」テーマで新規作成（make a decision等をカード化）","Oxford Collocations辞書を導入","Language Reactorのセリフをチャンク（塊）で拾う","「make/take/get/have/do」のコロケーション20個ずつ","使える語彙チェック：文で使えるか確認"]},
+    {theme:"スピーキング構造化週", tasks:["PREP法（Point→Reason→Example→Point）でスピーキング練習","Italki：1トピックで2〜3分話す練習（映画・休日・仕事）","録音日記：毎日2分間トーク（テーマ前日夜に決定）","フィラー語習得（Well.../Actually.../Let me think...）","Quizlet：感情・意見表現語彙追加"]},
+    {theme:"文法精度週②（関係詞・接続詞）", tasks:["関係代名詞（who/which/that）の自然な使い方","接続詞の整理（however/although/since/unless/whether）","Language Reactorで複文構造にNoticing（字幕で印）","Italki：意識的に関係詞を使う会話練習","Quizlet：接続詞・関係詞例文カード追加"]},
+    {theme:"リスニング精度週①（精聴）", tasks:["精聴練習：30秒の音声を5回聴いてディクテーション","シャドーイング精度測定（録音→書き起こし→原稿照合）","Language Reactorで「知らなかった語」を記録","Podcast要約：内容を英語で独り言","Italkiで今週聴いた内容を説明するタスク"]},
+    {theme:"感情インプット深化週", tasks:["好きなドラマの感情的シーン3つを選び集中学習","そのシーンのセリフを丸ごと暗唱（10〜15文）","暗唱セリフを感情込めてシャドーイング","Italki：そのシーンについて英語で感想を話す","英語日記：シーンで感じたことを書く"]},
+    {theme:"アウトプット量倍増週", tasks:["Italki週4回に増加（流暢さ優先・文法気にしない1週間）","独り言英語：外出時に心の中でも英語でナレーション","英語SNS（Twitter/X）でポスト週3回（3文以上）","シャドーイング：流暢さ型（速いテンポの素材）","「15分間途切れずに話せる」を目標に設定"]},
+    {theme:"語彙2000語完成週", tasks:["Vocabulary.comで語彙レベルテスト実施","弱い語彙カテゴリーを特定し集中追加","パッシブ語彙→アクティブ語彙転換練習（知っているだけの語を使う）","Quizlet：2000語のfinalチェック（苦手カード集中復習）","Language Reactorで2000語以外の未知語を優先キャプチャ"]},
+    {theme:"文化的リテラシー強化週", tasks:["アメリカ文化基礎（感謝祭・独立記念日・スーパーボウル等）","ドラマ視聴中のカルチャーギャップをメモ→Italkiで質問","英語のユーモア（ダジャレ・皮肉）の入門","多様なアクセント（オーストラリア・インド）への耳慣らし","自分が見ているドラマの文化的背景を3つ説明できるか確認"]},
+    {theme:"中間チェック・軌道修正週", tasks:["月次スピーキング録音（3分フリートーク）実施・比較","TOEIC Practice問題（Part3/4）50問実施","合っていないメソッドの見直しと代替手法の試行","Italki講師へのフィードバックリクエスト（弱点3点）","Phase 3アウトプット中心への移行計画を立てる"]},
+    {theme:"語彙応用・派生語週", tasks:["語根学習（pre/re/un/mis/dis等の接頭辞、-tion/-ment/-ness等の接尾辞）","既知語から派生語を推測する練習","Quizlet：派生語グループカードの追加","知らない語を語根から推測する習慣","シャドーイング継続（週4日）"]},
+    {theme:"ライティング入門週", tasks:["英語日記：3文→5文に増量（流暢さ優先）","Lang-8 / HiNativeで英文添削を受ける（週2投稿）","メールテンプレート学習（Thank you email / Request email）","Quizlet：ライティング頻出語句（thus/furthermore等）","Italki：ライティングで書いた内容を話す（架け橋練習）"]},
+    {theme:"Phase 2完成・移行準備週", tasks:["Phase 2 KPI最終確認（3000語・字幕50%理解・10分会話）","TOEIC Practice（Part3/4/7）で現在の推定スコア確認","学習ログ6ヶ月分の大振り返り（成功・失敗・改善点）","Phase 3のアウトプット重点メニュー設計","睡眠・生活習慣チェック（学習環境の見直し）"]}
+  ]);
+
+  const p3weeks = generatePhaseWeeks(3, 181, 270, [
+    {theme:"アウトプット最大化スタート週", tasks:["Italki週4回（25分×4）に増加","録音スピーキング：毎日3分（テーマ固定しない）","独り言英語：1日合計30分を目標","シャドーイング週4日（流暢さ型）","Language Reactorは維持用に20分/日のみ"]},
+    {theme:"未知トピック対応週", tasks:["Italkiで「準備なしのランダムトピック」会話に挑戦","時間稼ぎフレーズ習得（That's a good question.../I've never thought about it, but...）","曖昧な説明技術（It's kind of like... / It reminds me of...）","Quizlet：抽象語彙・思考動詞（consider/assume/tend to/refer to）","毎朝「今日の気になるニュース」を1分英語で話す"]},
+    {theme:"語彙4000語突破週", tasks:["Academic Word List(AWL)上位100語をQuizletに追加","ビジネス英語頻出表現TOP50の習得","Language Reactorでドキュメンタリー系コンテンツを追加","録音：AWL語彙を使ったスピーキング練習","「ビジネス・アカデミックっぽい」表現を意識的に使う"]},
+    {theme:"発音完成週", tasks:["英語のリズム習得（強勢リズム：内容語を強く、機能語を弱く）","イントネーション訓練（上昇調・下降調の使い分け）","シャドーイング：イントネーション・リズムに集中","Italki：発音フィードバック専用セッション","Phase 1 Week 6の録音と今日の録音を聴き比べる"]},
+    {theme:"ライティング強化週", tasks:["パラグラフライティング（Topic Sentence + Support + Conclusion）","100語程度のエッセイ週3本（好きな映画・最近の経験・意見）","Lang-8での添削フィードバックを精読","Quizlet：ライティング頻出語句（in addition / on the other hand等）","書いたエッセイをItalkiで音読・会話に展開"]},
+    {theme:"ディスカッション入門週", tasks:["賛否両論のトピックについて賛成・反対両方の意見を練習","反論フレーズ習得（I see your point, but... / Actually, I think...）","Italkiでディスカッション形式の会話（時事・社会問題）","シャドーイング：ニュース・インタビュー素材に変更","Podcast：ディベート形式番組のリスニング"]},
+    {theme:"スランプ突破週（中級の壁）", tasks:["「中級の壁」を認識する（停滞は正常なプロセスと理解）","完全に新しいタイプの素材に挑戦（苦手ジャンル）","学習方法を一部意図的に変更（新鮮さの回復）","動機の再確認（英語でやりたいことのリストを更新）","週に1日完全オフ日を設定（意図的な休養）"]},
+    {theme:"会話の流暢さ最大化週", tasks:["「5秒ルール」：Italkiで5秒以内に必ず何か発話するルール","流暢さ優先シャドーイング（速度を上げて追う）","独り言英語の時間を計測（合計30分/日）","好きな映画のセリフ50文を暗唱レベルへ","「英語脳チェック」：英語でぼんやり考えた瞬間を数える"]},
+    {theme:"ニュース英語入門週", tasks:["BBC News / CNN のやさしいニュース記事を週5本精読","ニュース頻出語彙Quizlet追加（政治・経済・社会基礎語彙）","The English We Speak（BBC Podcast）毎日1エピソード","ニュースの内容をItalkiで要約・意見述べる","シャドーイング：ニュースキャスターの音声"]},
+    {theme:"プレゼンテーション週", tasks:["3分間プレゼン作成（テーマ：自分の仕事・趣味・おすすめ）","プレゼン原稿を書いてから音読→暗唱へ","Italkiでプレゼン発表してフィードバック受取","スライドなし・メモなしで3分間話す練習","録音を聴いて改善点3つ抽出"]},
+    {theme:"リスニング精度週②（ネイティブ速度）", tasks:["Native speedのドラマ・映画を英語字幕で80%理解に挑戦","ディクテーション：90秒の音声を5回で書き取る","シャドーイング：130語/分以上の素材","イギリス英語・オーストラリア英語での聴き取り練習","字幕なし視聴：1エピソードの最初5分を字幕なしで試す"]},
+    {theme:"自己表現深化週", tasks:["「自分の人生・価値観・夢」をテーマにしたItalkiセッション","感情表現語彙の強化（frustrated/overwhelmed/thrilled/anxious等）","ユーモアの試み（冗談・比喩・皮肉を使ってみる）","録音日記：感情的な出来事を英語で語る（5分）","英語SNSでの自己表現（ポスト・コメント週5回）"]},
+    {theme:"Phase 3完成・移行準備週", tasks:["Phase 3 KPI最終確認（5000語・20分会話・録音B1自己評価）","TOEIC Practice模擬試験（600点相当の確認）","学習ログ9ヶ月分の振り返り","Phase 4「自律学習」への移行計画","英語を使って達成したいこと（具体的）の再設定"]}
+  ]);
+
+  const p4weeks = generatePhaseWeeks(4, 271, 365, [
+    {theme:"英語環境没入週", tasks:["スマートフォンの言語設定を英語に変更","SNS・ニュースフィードを英語アカウント中心に切り替え","買い物リスト・メモを英語で書く習慣","Reddit・Discord英語学習サーバーへの参加","Italki：LanguageExchangeパートナーを探す"]},
+    {theme:"実用英語①：旅行・観光", tasks:["空港・ホテル・レストラン・ショッピングの定型フレーズ集中習得","Italkiで旅行シーン演習（チェックイン・道案内等）","サバイバルフレーズ（Could you repeat that? / How do you spell that?）","Quizlet：旅行場面語彙追加","旅行英語動画でシャドーイング"]},
+    {theme:"実用英語②：仕事・ビジネス", tasks:["ビジネスメール（Inquiry/Follow-up/Decline等）の型習得","会議フレーズ（Could I add something? / To summarize...）","5分間ビジネスプレゼン作成・実演","Quizlet：ビジネス語彙300語追加","Italkiでビジネスシーンのロールプレイ"]},
+    {theme:"自動化加速週（高頻度表現）", tasks:["高頻度表現500文の復唱・音読（過去素材の総復習）","シャドーイング：完全暗唱を目指す素材3つを集中","「瞬発力テスト」：Italkiで即興コメント練習（30秒以内に反応）","独り言：考える→英語化の速度を測る","録音比較（Day 1の録音 vs 今日の録音）"]},
+    {theme:"深化インプット週（映画・文学）", tasks:["英語映画を英語字幕で鑑賞（1本/週）","英語小説・グレーデッドリーダーズ入門（B1レベル）","映画の感想を英語でSNS投稿 or Italkiで話す","Quizlet：映画・文学からの語彙追加","小説の印象的な一文をシャドーイング素材に使う"]},
+    {theme:"ライティング完成週（正確さへ）", tasks:["200語エッセイを週3本（文法チェックあり版）","AI（ChatGPT等）を使った英文添削の活用","書いた文をネイティブ表現と比較・改訂","英語日記を200語/日に増量","自分で書いた英文の不自然さを自分で見つける習慣"]},
+    {theme:"自己評価・弱点集中特定週", tasks:["TOEIC模擬試験（全パート）実施・弱点パート特定","スピーキング録音のB1基準チェックリスト採点","最も弱いスキルを1つ決めて残り6週間の集中プランを作成","Italki講師に最終フィードバック依頼","弱点改善アクションプランの完成"]},
+    {theme:"弱点集中修正週", tasks:["弱点に応じたカスタムメニュー（リスニング弱→ディクテーション倍増等）","Italki：弱点克服に特化したセッション設計","弱点ジャンルのQuizletカード集中追加","シャドーイング：弱点に対応した素材選定","週末：弱点の改善度を録音で確認"]},
+    {theme:"英語使用実践週（リアルワールド）", tasks:["外国人観光客への道案内を試みる","英語で書かれた商品レビュー・コメントを投稿する","オンラインゲーム・フォーラムで英語コミュニケーション","英語Podcastにコメントを送る","LanguageExchangeパートナーと初回セッション"]},
+    {theme:"統合総仕上げ週", tasks:["4技能統合タスク：ニュースを読む→聴く→要約を書く→Italkiで話す","シャドーイング：自分の「ベストシャドーイング録音」を作る","Quizlet：5000語の最終確認テスト","ライティング：「この1年の学習を振り返る」500語エッセイ","Italki：自由会話30分（テーマなし）"]},
+    {theme:"B1到達確認週", tasks:["TOEIC本番受験（または公式模擬試験）","Cambridge B1 Preliminary 練習問題実施","スピーキング録音（10分フリートーク）を自己B1基準で採点","1年前（Week 1）の録音と今日の録音を並べて聴き比べる","達成したCan-Doリストの棚卸し（何ができるようになったか）"]},
+    {theme:"継続システム設計週", tasks:["「B1以降の目標」設定（B2 / C1 / TOEIC 800 / 海外留学等）","Phase 5（Day 366〜）の学習計画骨格作成","維持・発展のためのミニマムメニュー設計（忙しい日も30分版）","英語を使い続けるコミュニティ・仕組みの確立","Italkiの継続頻度の確認（維持可能な頻度設定）"]},
+    {theme:"365日完走！🎊 祝福と次のステージへ", tasks:["最終スピーキング録音：「英語学習の1年間を振り返って」（10分）","Week 1の録音・ログとの完全比較","1年間の達成事項をすべて文字で記録（学習ログ総集編）","英語で「自分の成長レポート」を書く（500語）","次の目標を英語で宣言する（録音 or 投稿）🚀"]}
+  ]);
+
+  phases.push({id:1,name:"Phase 1：基礎構築期",days:"Day 1-90",color:"var(--p1)",weeks:p1weeks});
+  phases.push({id:2,name:"Phase 2：インプット集中期",days:"Day 91-180",color:"var(--p2)",weeks:p2weeks});
+  phases.push({id:3,name:"Phase 3：アウトプット開始期",days:"Day 181-270",color:"var(--p3)",weeks:p3weeks});
+  phases.push({id:4,name:"Phase 4：定着・精緻化期",days:"Day 271-365",color:"var(--p4)",weeks:p4weeks});
+
+  addReviewTasks(phases);
+  return phases;
+}
+
+function addReviewTasks(phases) {
+  var reviewByPhase = [
+    [
+      "Quizlet復習モード：今週の単語を高速スキャン（正解率90%を目指す）+ 今日のシャドーイング素材をもう1回通して声に出す",
+      "今日学んだ単語3つを使って短い文を口で言ってみる。難しければ前後の文脈を参考にする"
+    ],
+    [
+      "今週聴いたポッドキャスト・ドラマで印象に残ったフレーズを3つ声に出して復習 + Quizlet今週単語を復習モードで確認",
+      "シャドーイング素材を1分間だけ復習（今週使った素材を高速おさらい）+ ディクテーションで間違えた箇所を再確認"
+    ],
+    [
+      "今日の英会話で使えなかった表現を3つ書き出し、声に出して5回練習 + Quizlet今週の単語を復習",
+      "英語日記を見直して間違いやすい表現をノートにまとめる + 今週のイディオムを使った例文を口頭で作る"
+    ],
+    [
+      "今週の全学習を10分で高速振り返り。単語・表現・発音の弱点リストを更新 + ネイティブ速度の音声を1分間シャドーイング",
+      "苦手な発音・表現をピックアップして集中練習（10分）+ Quizlet今週単語をテストモードで確認（正解率95%目標）"
+    ]
+  ];
+  phases.forEach(function(phase, phaseIdx) {
+    var templates = reviewByPhase[phaseIdx] || reviewByPhase[0];
+    phase.weeks.forEach(function(week) {
+      week.days.forEach(function(day) {
+        var variant = day.day % 2;
+        day.tasks.push({
+          id: "review-d" + day.day,
+          time: "15分",
+          type: "復習",
+          icon: "🔄",
+          content: templates[variant]
+        });
+      });
+    });
+  });
+}
+
+function generateWeekDays(weekNum, startDay, dayTemplates) {
+  return dayTemplates.map((tmpl, i) => ({
+    day: startDay + i,
+    theme: tmpl.theme,
+    tasks: tmpl.tasks.map((t, j) => {
+      if (typeof t === 'string') {
+        const types = ["Quizlet","シャドーイング","リスニング","スピーキング","発音","文法","表現","記録"];
+        const icons = ["🃏","🎭","👂","🎤","🗣️","📖","💬","📝"];
+        let type = "学習", icon = "📚", time = "20分";
+        for (let k=0;k<types.length;k++) {
+          if (t.includes(types[k])) { type=types[k]; icon=icons[k]; break; }
+        }
+        const timeMatch = t.match(/(\d+)分/);
+        if (timeMatch) time = timeMatch[0];
+        return { id:`d${startDay+i}t${j+1}`, time, type, icon, content: t };
+      }
+      return t;
+    })
+  }));
+}
+
+function generatePhaseWeeks(phaseId, startDay, endDay, weekThemes) {
+  const weeks = [];
+  let dayNum = startDay;
+  const taskTemplates = {
+    2: [
+      ["Quizlet 20語 + 復習（Sentence Mining開始）","シャドーイング30分（ドラマ素材）","Language Reactorでドラマ視聴30分","オンライン英会話25分（週2〜3回）","リスニング精度チェック・ディクテーション"],
+      ["Quizlet 20語（センテンスマイニング）","シャドーイング（TED Talks素材）","ポッドキャスト30分（6 Min English等）","独り言英語 + 英語日記","進捗確認・週次振り返り"]
+    ],
+    3: [
+      ["Quizlet復習中心（新規10語）","シャドーイング20分","オンライン英会話25分（週3〜4回）","英語日記（150語）","スピーキング録音・自己評価"],
+      ["多読30分（Graded Readers L3〜4）","ポッドキャスト（中〜上級）","アウトプット強化（プレゼン・モノローグ）","AIとの英会話（テキスト・音声）","週次振り返り・目標見直し"]
+    ],
+    4: [
+      ["Quizlet復習（週3回）","ドラマ・映画（字幕なし挑戦）","オンライン英会話25分（週3〜4回）","英語SNS・コミュニティ参加","進捗確認・TOEIC模試等"],
+      ["多読・多聴（上級素材）","スピーキング：長時間フリートーク","専門分野英語強化","総合力チェック","週次振り返り"]
+    ]
+  };
+
+  weekThemes.forEach((weekDef, wi) => {
+    const weekTheme = typeof weekDef === 'string' ? weekDef : weekDef.theme;
+    const weekTasks = typeof weekDef === 'object' && weekDef.tasks ? weekDef.tasks : null;
+    const days = [];
+    const tpls = taskTemplates[phaseId];
+    const dayThemes = [
+      `Week スタート：${weekTheme}`,
+      `${weekTheme}：実践②`,
+      `${weekTheme}：深化③`,
+      `${weekTheme}：強化④`,
+      `${weekTheme}：チャレンジ⑤`,
+      `${weekTheme}：精度UP⑥`,
+      `週次振り返り・充電`
+    ];
+    for (let di=0; di<7; di++) {
+      if (dayNum > endDay) break;
+      let tasks;
+      if (weekTasks && di < weekTasks.length) {
+        // Use specific week tasks for the first N days
+        const taskContent = weekTasks[di % weekTasks.length];
+        tasks = [{id:`d${dayNum}t1`, time:"15分", type:"Quizlet", icon:"🃏", content:"Quizlet：今日の復習 + 新規語彙"},
+                 {id:`d${dayNum}t2`, time:"20分", type:getTypeFromText(taskContent), icon:getIconFromText(taskContent), content:taskContent}];
+        // Fill remaining with template
+        const tpl = tpls[di%2];
+        tpl.slice(1).forEach((t,j) => {
+          tasks.push({id:`d${dayNum}t${j+3}`, time:"20分", type:getTypeFromText(t), icon:getIconFromText(t), content:t});
+        });
+      } else {
+        const tpl = tpls[di%2];
+        tasks = tpl.map((t,j)=>({id:`d${dayNum}t${j+1}`, time:"20分", type:getTypeFromText(t), icon:getIconFromText(t), content:t}));
+      }
+      days.push({ day: dayNum, theme: dayThemes[di] || `${weekTheme}：Day ${di+1}`, tasks });
+      dayNum++;
+    }
+    weeks.push({ week: 13+wi+(phaseId-2)*13, theme: weekTheme, days });
+  });
+  return weeks;
+}
+
+function getTypeFromText(t) {
+  const types = ["Quizlet","シャドーイング","リスニング","スピーキング","発音","文法","多読","ディクテーション","記録","計画"];
+  for (const tp of types) if (t.includes(tp)) return tp;
+  return "学習";
+}
+function getIconFromText(t) {
+  if (t.includes("Quizlet")) return "🃏";
+  if (t.includes("シャドー")) return "🎭";
+  if (t.includes("リスニング") || t.includes("ポッドキャスト") || t.includes("多聴")) return "👂";
+  if (t.includes("スピーキング") || t.includes("会話") || t.includes("フリートーク")) return "🎤";
+  if (t.includes("発音")) return "🗣️";
+  if (t.includes("文法")) return "📖";
+  if (t.includes("多読") || t.includes("読書")) return "📚";
+  if (t.includes("ディクテーション")) return "✏️";
+  if (t.includes("日記") || t.includes("記録") || t.includes("振り返り")) return "📝";
+  if (t.includes("映画") || t.includes("ドラマ") || t.includes("鑑賞")) return "🎬";
+  return "📌";
+}
+
+// ===================== TIMER =====================
+const timers = {};
+
+function parseSeconds(timeStr) {
+  const m = (timeStr||'').match(/(\d+)/);
+  return m ? parseInt(m[1]) * 60 : 600;
+}
+
+function formatTime(s) {
+  const m = Math.floor(Math.abs(s) / 60);
+  const sec = Math.abs(s) % 60;
+  return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+}
+
+function toggleTimer(taskId, totalSecs) {
+  if (!timers[taskId]) timers[taskId] = { total:totalSecs, remaining:totalSecs, running:false, interval:null };
+  const t = timers[taskId];
+  if (t.running) {
+    clearInterval(t.interval); t.running = false;
+  } else {
+    if (t.remaining <= 0) t.remaining = t.total;
+    t.running = true;
+    t.interval = setInterval(() => {
+      t.remaining--;
+      updateTimerUI(taskId);
+      if (t.remaining <= 0) { clearInterval(t.interval); t.running = false; timerFinished(taskId); }
+    }, 1000);
+  }
+  updateTimerUI(taskId);
+}
+
+function resetTimer(taskId, totalSecs) {
+  if (timers[taskId]) clearInterval(timers[taskId].interval);
+  timers[taskId] = { total:totalSecs, remaining:totalSecs, running:false, interval:null };
+  const display = document.getElementById(`td-${taskId}`);
+  const btn     = document.getElementById(`tb-${taskId}`);
+  if (display) { display.textContent = formatTime(totalSecs); display.className = 'timer-display'; }
+  if (btn)     { btn.textContent = '▶'; btn.className = 'timer-btn'; }
+}
+
+function updateTimerUI(taskId) {
+  const t = timers[taskId]; if (!t) return;
+  const display = document.getElementById(`td-${taskId}`);
+  const btn     = document.getElementById(`tb-${taskId}`);
+  if (!display || !btn) return;
+  display.textContent = formatTime(t.remaining);
+  display.className = 'timer-display' + (t.remaining<=0 ? ' finished' : t.running && t.remaining<=30 ? ' urgent' : t.running ? ' running' : '');
+  btn.textContent = t.running ? '⏸' : '▶';
+  btn.className   = 'timer-btn' + (t.running ? ' running' : '');
+}
+
+function timerFinished(taskId) {
+  playTimerSound();
+  const display = document.getElementById(`td-${taskId}`);
+  if (display) { display.textContent = '完了！'; display.className = 'timer-display finished'; }
+  const item = document.querySelector(`[data-task-id="${taskId}"]`);
+  if (item) {
+    item.style.transition = 'box-shadow 0.3s';
+    item.style.boxShadow = '0 0 0 3px var(--success)';
+    setTimeout(() => { item.style.boxShadow = ''; }, 1800);
+  }
+  showToast('⏰ 時間になりました！チェックして次へ進もう！');
+}
+
+function showToast(msg) {
+  const existing = document.querySelector('.toast-msg');
+  if (existing) existing.remove();
+  const el = document.createElement('div');
+  el.className = 'toast-msg';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => { el.style.opacity='0'; el.style.transition='opacity 0.3s'; setTimeout(()=>el.remove(),300); }, 2800);
+}
+
+// ===================== FUN FACTS =====================
+const FUN_FACTS = [
+  // === 科学・宇宙 ===
+  {emoji:'🔭', text:'太陽の表面温度は約5500℃だが、外層大気（コロナ）は100万℃以上になる。その理由は未だ完全に解明されていない。'},
+  {emoji:'☀️', text:'光が太陽から地球に届くまで約8分20秒かかる。今見えている太陽の姿は8分前の姿。'},
+  {emoji:'🌌', text:'宇宙には観測可能な範囲だけで約2兆個の銀河がある。天の川銀河は2000〜4000億の星を含む。'},
+  {emoji:'🪐', text:'土星の密度は水より低いため、もし巨大な海があれば土星は浮かぶことができる。'},
+  {emoji:'🌑', text:'月は毎年約3.8cmずつ地球から遠ざかっている。数十億年後には月食が起きなくなる。'},
+  {emoji:'🌪️', text:'木星の大赤斑（巨大嵐）は地球2個分の大きさで、少なくとも350年以上続いている。'},
+  {emoji:'⭐', text:'宇宙の年齢は約138億年。地球の年齢（約46億年）の約3倍にあたる。'},
+  {emoji:'💫', text:'中性子星は太陽の質量を東京23区ほどの大きさに圧縮したもの。砂糖1粒分が10億トン以上になる。'},
+  {emoji:'🌙', text:'金星の1日（自転周期243日）は金星の1年（公転周期225日）より長い。金星では太陽が西から昇る。'},
+  {emoji:'🛸', text:'国際宇宙ステーション（ISS）は90分で地球を1周し、1日に16回日の出・日の入りを体験できる。'},
+  {emoji:'💎', text:'ダイヤモンドは炭素でできており、鉛筆の芯（グラファイト）も同じ炭素。原子の配列だけが違う。'},
+  {emoji:'❄️', text:'雪の結晶は2つとして同じ形がない。成長過程の微細な温度・湿度の差によって無限の形が生まれる。'},
+  {emoji:'🌈', text:'虹は実際には円形だが、地平線が遮るため半円にしか見えない。飛行機から見ると円形の虹が現れる。'},
+  {emoji:'⚡', text:'雷が落ちる際の周囲は太陽表面の約5倍熱い約27,000℃になる。しかし持続時間は一瞬（約0.2秒）。'},
+  {emoji:'🌊', text:'地球の水はほぼすべて小惑星・彗星が衝突して持ち込んだもの。地球は最初「乾いた惑星」だった。'},
+  {emoji:'🧲', text:'地球の磁場は鳥・魚・昆虫のナビゲーションに使われているが、その感知メカニズムは未解明。'},
+  {emoji:'🔬', text:'量子力学では「観測するまで粒子の状態は決まっていない」。シュレーディンガーの猫の思考実験が有名。'},
+  {emoji:'🌡️', text:'絶対零度（−273.15℃）では分子の熱運動が完全に停止する。自然界でこれ以下の温度は存在しない。'},
+  {emoji:'💡', text:'光の速度（約30万km/s）は自然界で最速で、何ものも超えられないとされる（特殊相対性理論）。'},
+  {emoji:'🌍', text:'地球は完全な球形ではなく「回転楕円体」で、赤道半径が極半径より約21km大きい。'},
+  {emoji:'🔥', text:'太陽は毎秒約6億トンの水素をヘリウムに変換している。この核融合が光と熱を生み出す。'},
+  {emoji:'🌠', text:'流れ星の正体はチリや砂粒程度の微小な宇宙塵。大気との摩擦で輝きながら燃え尽きる。'},
+  {emoji:'🧊', text:'水は固体（氷）になると液体より密度が低くなる。これは非常に珍しい性質で、湖が全凍結しない理由。'},
+  {emoji:'💧', text:'水が100℃で沸騰するのは海抜0mの話。エベレスト頂上（約8848m）では約70℃で沸騰する。'},
+  {emoji:'🌬️', text:'空気は重さがある。1立方メートルの空気は約1.2kg。普通の部屋の空気の重さは人間1人分の体重に匹敵する。'},
+  // === 動物・自然 ===
+  {emoji:'🐙', text:'タコは3つの心臓を持ち、血液は青い。ヘモシアニン（銅を含む）が酸素を運ぶため青くなる。'},
+  {emoji:'🦒', text:'チーターは最高時速120kmで走れるが、30秒ほどしか全力疾走できない。体温が上がりすぎるため。'},
+  {emoji:'🦩', text:'フラミンゴは白く生まれる。エビなどから取るカロテノイドで徐々にピンクになる。食事でピンクが決まる。'},
+  {emoji:'🐘', text:'象は唯一、ジャンプできない動物の一つ。体重と骨格の構造上、4本足が同時に地面を離れられない。'},
+  {emoji:'🐝', text:'蜂の巣の六角形は、最小の材料で最大の空間を作る数学的に最効率の形。蜂は本能でこれを作る。'},
+  {emoji:'🦎', text:'カメレオンは目を独立して動かすことができ、360度の視野を持つ。体色変化は温度・気分に連動。'},
+  {emoji:'🦈', text:'サメの骨格は骨ではなく軟骨でできているため、化石として残りにくい。歯の化石は多数発見されている。'},
+  {emoji:'🐜', text:'アリは自分の体重の50倍の重さを運べる。人間換算では約3.5トンを持ち上げることに相当する。'},
+  {emoji:'🐋', text:'クジラの鳴き声は水中を最大16,000km先まで届くこともある。地球上で最も大きな声の生物。'},
+  {emoji:'🐦', text:'カラスは顔を認識し、嫌な記憶を持つ相手に嫌がらせをする。鏡で自分を認識できる数少ない動物の一つ。'},
+  {emoji:'🐱', text:'猫のひげは幅センサーとして機能し、通れる隙間を判断する。ひげを切ると方向感覚が狂う。'},
+  {emoji:'🌲', text:'木は地球上に約3兆本あると推定されている。人間1人当たり約400本に相当する計算。'},
+  {emoji:'🐌', text:'カタツムリは歯を持ち、最大2万5千本の歯が舌にある。ヤスリのように使って食物を削る。'},
+  {emoji:'🦁', text:'ライオンのたてがみが濃いほどテストステロンが高く、メスに人気がある。暑い地域のライオンはたてがみが薄い。'},
+  {emoji:'🐧', text:'ペンギンは飛べないが、水中で時速35kmで泳ぐことができる。翼が高効率のフリッパーに進化した。'},
+  {emoji:'🐢', text:'世界最長寿命の動物はホッキョクニシキハマグリで、500年以上生きる個体が発見されている。'},
+  {emoji:'🦋', text:'チョウの幼虫（毛虫）はサナギの中で完全に液体に溶解し、新しい細胞の配置から変態する。'},
+  {emoji:'🐬', text:'イルカは鏡で自分を認識できる。この自己認識能力を持つ動物はヒト・類人猿・ゾウ・カラス等わずか。'},
+  {emoji:'🐠', text:'深海魚の多くは自分で光を発する「生物発光」を持つ。これを交信・捕食・防衛に使い分ける。'},
+  {emoji:'🍯', text:'ミツバチは一生かけてスプーン1杯（約5g）のハチミツしか作れない。1瓶分に何十万匹もの労働が詰まっている。'},
+  {emoji:'🌳', text:'木は「記憶」を持つ。過去の干ばつを経験した木は、翌年の乾季に備えて気孔の調整をする。'},
+  {emoji:'🦥', text:'ナマケモノは移動がゆっくりすぎて毛に藻類が生え、そこに蛾まで棲むことがある。完全な生態系。'},
+  {emoji:'🐊', text:'ワニは約2億年以上前から形がほとんど変わっていない。恐竜時代を生き延びた「生きた化石」。'},
+  {emoji:'🦜', text:'オウムは言葉を真似るだけでなく、文脈を理解して応答できる個体が確認されている。'},
+  {emoji:'🐙', text:'タコは夢を見ると考えられており、睡眠中に体の色が変化する映像が研究者によって観察されている。'},
+  {emoji:'🌿', text:'地球上で最も長く生きている生物のひとつは「パンドー」というアスペン（樹木）の群生体。推定8万年以上。'},
+  // === 歴史 ===
+  {emoji:'🏛️', text:'ピラミッドが建設された時代（約5000年前）、マンモスはまだ生きていた（小型種がシベリアに残存）。'},
+  {emoji:'👑', text:'クレオパトラが生きた時代は、現代よりもピラミッド建設時代の方が遠い過去。歴史の圧縮感がある。'},
+  {emoji:'⚔️', text:'バイキングは北アメリカ大陸をコロンブスより約500年早く発見していた（ヴィンランド遺跡で証明）。'},
+  {emoji:'🐉', text:'チンギス・ハーンの帝国は最盛期に全陸地の約25%を支配し、史上最大の陸続き帝国を築いた。'},
+  {emoji:'🗼', text:'ナポレオンの身長は約169cmで、当時のフランス人平均より高かった。「小さい」はイギリスの誇張宣伝。'},
+  {emoji:'🌍', text:'コロンブスが1492年に到達したのはアメリカ大陸本土ではなく、バハマ諸島のサン・サルバドル島。'},
+  {emoji:'🌺', text:'日本の江戸時代（260年）は世界で最も平和な時代の一つで、文化・芸術が独自発展を遂げた。'},
+  {emoji:'🍫', text:'チョコレートは16世紀のスペイン人がアステカ帝国から持ち帰るまでヨーロッパに存在しなかった。'},
+  {emoji:'🎭', text:'モナ・リザはルーブル美術館に展示される前、フランス王フランソワ1世の浴室に飾られていた。'},
+  {emoji:'🏟️', text:'古代ギリシャのオリンピック（紀元前776年〜）では、選手は裸で競技していた。神への捧げ物として。'},
+  {emoji:'🧪', text:'マリー・キュリーはノーベル賞を2回（物理学・化学）受賞した史上初の人物。放射能研究の先駆者。'},
+  {emoji:'🖨️', text:'印刷機（グーテンベルク、1440年代）が発明されたとき、日本では室町幕府の時代だった。'},
+  {emoji:'🌎', text:'パスポートが一般的になったのは第一次世界大戦後。それ以前は多くの国境を自由に越えられた。'},
+  {emoji:'🚀', text:'1969年の月面着陸計画に関わったNASA技術者の平均年齢は28歳だった。若者たちが人類の夢を実現した。'},
+  {emoji:'🗡️', text:'第一次世界大戦は「クリスマスまでに終わる」と言われていたが、4年以上続き1500万人以上が犠牲になった。'},
+  {emoji:'🏯', text:'縄文時代の日本（約1万年前〜）は世界最古の土器文化の一つを持っていた。現在確認最古の土器。'},
+  {emoji:'⛩️', text:'日本は世界で唯一、元号制度（令和など）を現在も使い続けている国。1500年以上の歴史を持つ。'},
+  {emoji:'🌐', text:'アメリカ独立宣言（1776年）とアダム・スミス「国富論」は同じ1776年に発表された。歴史的な年。'},
+  {emoji:'🎠', text:'ヴェルサイユ宮殿の建設コストはフランス国家財政を圧迫し、フランス革命の一因になったとも言われる。'},
+  {emoji:'🐈', text:'古代エジプトでは猫は神聖視された。飼い猫が死ぬと飼い主は眉毛を剃って喪に服した。'},
+  {emoji:'🌿', text:'古代ローマ人は鉛の容器でワインを保存したため、慢性的な鉛中毒だった可能性がある。帝国衰退の一因という説も。'},
+  {emoji:'👓', text:'眼鏡は13世紀のイタリアで発明された。印刷技術の普及で読書人口が増え、近視が社会問題になった。'},
+  {emoji:'🎎', text:'明治維新（1868年）から敗戦（1945年）までわずか77年。日本の近代化の速さは世界史上稀有な事例。'},
+  {emoji:'📜', text:'最古の文字「楔形文字」はメソポタミア（現イラク）で約5500年前に発明された。最初の内容は商品の記録。'},
+  {emoji:'🏺', text:'古代ギリシャのアルキメデスは「てこ」の原理を発見し「十分長いてこがあれば地球も動かせる」と言った。'},
+  // === 人体・医学 ===
+  {emoji:'🦠', text:'人間の体には約37兆個の細胞があり、腸内には約100兆個の細菌が住む。細菌の数の方が圧倒的に多い。'},
+  {emoji:'👁️', text:'目のまばたきは1日に約15,000〜20,000回。視界が遮断されている時間を合計すると約30分になる。'},
+  {emoji:'🧠', text:'脳の重さは体重の約2%だが、エネルギーの約20%を消費する。考えることは意外とカロリーを使う。'},
+  {emoji:'🦴', text:'人間の骨格は約206本の骨だが、赤ちゃんは約300本。成長とともに骨が融合して数が減る。'},
+  {emoji:'💓', text:'心臓は一生涯で約30億回以上拍動する。毎日約10万回、休まず動き続ける驚異の臓器。'},
+  {emoji:'💧', text:'人間は体の約60%が水分。脳は約75%、血液は約83%が水分で構成されている。'},
+  {emoji:'😂', text:'大笑いすると全身で最大80の筋肉を使う。笑いは最高の全身運動の一つとも言える。'},
+  {emoji:'👆', text:'指紋は一卵性双生児でも一致しない。同じDNAを持つ双子でも異なる指紋を持つ。'},
+  {emoji:'👃', text:'人間の鼻は約1兆種類の匂いを識別できるという研究がある。以前の1万種類説を大幅に更新。'},
+  {emoji:'🩸', text:'人体の全血液をつなげると地球を約2周半（約100,000km）に相当する長さになる。'},
+  {emoji:'😮', text:'深呼吸すると副交感神経が刺激され、心拍数と血圧が下がる。最も手軽なストレス解消法。'},
+  {emoji:'💤', text:'睡眠中、脳は老廃物（アミロイドβなど）を除去する。睡眠不足はこの処理を妨げ認知症リスクを高める。'},
+  {emoji:'🔬', text:'DNAを全て伸ばすと地球と太陽の間を約200往復できる長さになる。それが細胞の核の中に収まっている。'},
+  {emoji:'👀', text:'視覚情報は目に映ってから脳が「見た」と認識するまで約0.1〜0.15秒のタイムラグがある。'},
+  {emoji:'😄', text:'笑いは免疫細胞（NK細胞）を活性化させる。1日15〜20分の笑いで免疫力が高まるという研究がある。'},
+  {emoji:'🫁', text:'人間は唯一、自分の意志で「呼吸を止める」ことができる動物。他の多くの動物は反射的に呼吸する。'},
+  {emoji:'🫀', text:'皮膚は人体最大の臓器で、成人の皮膚を広げると約1.7m²（畳1枚分）になる。防護・体温調節・感覚を担う。'},
+  {emoji:'🧬', text:'人間のDNAの約98.7%はチンパンジーと共通している。わずか1.3%の差が多くの能力の違いを生み出す。'},
+  {emoji:'🤧', text:'くしゃみは時速160〜300kmで飛び出し、最大8mの距離に飛散する。止めるのは医学的にも危険。'},
+  {emoji:'🦷', text:'人間の歯のエナメル質は体の中で最も硬い組織。骨より硬く、一度失うと自然再生しない。'},
+  // === 食べ物・料理 ===
+  {emoji:'🍯', text:'ハチミツは何千年経っても腐らない。古代エジプトの墓から発見されたハチミツも食べられた。抗菌性が鍵。'},
+  {emoji:'🥑', text:'アボカドは植物学的には「果物」（ベリー類）に分類される。石果類の一種でもある。'},
+  {emoji:'🥕', text:'ニンジンはもともと紫色だった。17世紀にオランダで現在のオレンジ色の品種が品種改良で普及した。'},
+  {emoji:'🍫', text:'チョコレートの原材料カカオ豆は、かつてアステカ・メキシコで通貨として使われていた。'},
+  {emoji:'☕', text:'コーヒーは果物（コーヒーチェリー）の種子。コーヒーの木はエチオピア原産で、9世紀頃発見されたとされる。'},
+  {emoji:'🍕', text:'イタリアのナポリで生まれたピザは、もともと貧しい労働者のファストフード。王族が食べ始めて広まった。'},
+  {emoji:'🌶️', text:'唐辛子の辛さを測る単位「スコヴィル値」は1912年に薬学者スコヴィルが考案。純カプサイシンは1600万単位。'},
+  {emoji:'🍓', text:'イチゴは植物学的には果物ではなく「偽果」に分類される。正確には花托が肥大したもの。'},
+  {emoji:'🌿', text:'わさびの辛み成分は切ってから15分で揮発し始め、辛みが弱まる。すりたてが一番辛い理由。'},
+  {emoji:'🍺', text:'世界最古のレシピは4,000年以上前のメソポタミアの粘土板に刻まれたビールの作り方。'},
+  {emoji:'🧂', text:'「Salary（給料）」はラテン語の「塩（sal）」が語源。古代ローマでは塩が通貨として兵士に支払われた。'},
+  {emoji:'🍌', text:'バナナはDNAの約60%が人間と共通している。生物の根源的な仕組みは共有されている。'},
+  {emoji:'🍍', text:'パイナップルに含まれるブロメラインという酵素は肉を柔らかくし、同時に口の粘膜も少し分解しようとする。'},
+  {emoji:'🫘', text:'コーヒーを飲むと短期記憶が強化され、語彙の定着率が上がるという研究がある。適量なら学習の味方。'},
+  {emoji:'🧀', text:'世界で最も高価なチーズの一つはセルビアの雌ロバの乳で作られる「ポウル」で、1kgで約100万円以上。'},
+  {emoji:'🌾', text:'人類が農業を始めたのは約1万年前。それ以前の99%以上の歴史は狩猟採集生活だった。'},
+  {emoji:'🫐', text:'ブルーベリーは世界で最も抗酸化物質（アントシアニン）を豊富に含む食品の一つとされる。'},
+  {emoji:'🍣', text:'「うま味（umami）」は5番目の基本味として2002年に公式認定された。最初に発見したのは日本人科学者・池田菊苗（1908年）。'},
+  {emoji:'🧁', text:'砂糖が「贅沢品」から「日用品」になったのは17〜18世紀のカリブ海植民地での大規模生産から。歴史と深く絡む食品。'},
+  {emoji:'🥚', text:'卵は「完全食品」と呼ばれ、人間が必要とするほぼ全てのアミノ酸を含む。ビタミンCのみ含まない。'},
+  // === 心理学・脳科学 ===
+  {emoji:'🧠', text:'人間は1日に約60,000〜70,000個の思考をし、その約80%はネガティブな内容とされる。意識的に変えることが大切。'},
+  {emoji:'💊', text:'プラセボ効果は偽物とわかっていても効果が出ることがある（「オープンラベルプラセボ」）。脳の力は侮れない。'},
+  {emoji:'🎯', text:'「フロー状態（ゾーン）」に入ると時間感覚が歪み、パフォーマンスが最大になる。チクセントミハイが命名。'},
+  {emoji:'🌉', text:'吊り橋効果：危険な場所での体のドキドキを恋愛感情と脳が誤認する現象。実験で証明されている。'},
+  {emoji:'🎭', text:'ザイガルニク効果：未完成のタスクは完成したものより記憶に残りやすい。だからドラマの続きが気になる。'},
+  {emoji:'🪞', text:'ダニング＝クルーガー効果：能力の低い人ほど自己評価が高く、能力の高い人ほど自分を過小評価する傾向。'},
+  {emoji:'🔄', text:'フィードバックループ：小さな成功体験がドーパミンを分泌させ、次の行動意欲を高める。習慣化の鍵。'},
+  {emoji:'🌟', text:'ピグマリオン効果：期待をかけられた人は実際にそれに応えるパフォーマンスを発揮する傾向がある。'},
+  {emoji:'📱', text:'人間は1日に平均200回以上スマートフォンを確認する。通知1回で集中力回復に20分かかるという研究も。'},
+  {emoji:'😴', text:'睡眠不足は血中アルコール濃度0.1%（酒気帯び運転レベル）と同等の判断力低下をもたらす。'},
+  {emoji:'🎪', text:'「テトリス効果」：ゲームや作業を繰り返した後、夢の中でもその動作パターンが現れる現象。学習の深さを示す。'},
+  {emoji:'🌈', text:'選択的知覚（カラーバス効果）：赤を意識し始めると赤いものが目に入る。見たいものを見るのが人間の本質。'},
+  {emoji:'🔮', text:'確証バイアス：人は自分の信念を裏付ける情報を無意識に選んで集めてしまう。批判的思考が必要な理由。'},
+  {emoji:'🤝', text:'返報性の原理：何かをもらうと返さなければならない義務感を感じる普遍的な心理。文化を超えて働く。'},
+  {emoji:'⏳', text:'人間は子供の頃より大人になると時間が速く感じる。「新しい体験の割合」が減るため記憶の密度が薄くなるから。'},
+  {emoji:'🔑', text:'「プルースト効果」：においは記憶と感情を最も直接的に呼び起こす感覚。幼少期と匂いのリンクが強い理由。'},
+  {emoji:'💡', text:'意志力は筋肉のように使えば疲れ、休ませれば回復する。重要な決断を朝にすべき理由がここにある。'},
+  {emoji:'🎵', text:'人間は音楽を聴くと自動的にリズムに合わせようとする（エントレインメント）。これは社会的絆形成の進化的特性。'},
+  {emoji:'🛌', text:'初頭効果と新近効果：リストの最初と最後の項目が最も記憶に残りやすい。試験勉強に活用できる法則。'},
+  {emoji:'😄', text:'笑いは社会的絆を強化するために進化した。類人猿も笑うが、ユーモアを作り出せるのは人間だけ。'},
+  // === テクノロジー ===
+  {emoji:'💾', text:'最初のコンピューターウイルス「Creeper」（1971年）は破壊目的ではなく実験目的で作られた無害なプログラムだった。'},
+  {emoji:'🌐', text:'世界初のウェブサイトは1991年にCERNのティム・バーナーズ＝リーが作成。今もネット上で公開されている。'},
+  {emoji:'📱', text:'初代iPhone（2007年）発表時、BlackBerryのCEOは「需要はない」と言った。翌年のシェアは激変した。'},
+  {emoji:'🛰️', text:'地球軌道上には運用中の衛星が約7,000基以上あり、スペースデブリを含めると数万個以上が飛んでいる。'},
+  {emoji:'🖥️', text:'最初のコンピューターバグは1947年、ハーバード大学のコンピューターにガが挟まった実際の「虫（bug）」だった。'},
+  {emoji:'📺', text:'電子レンジは1945年にレーダー技術者がポケットのチョコレートが溶けたことに気づいて偶然発明した。'},
+  {emoji:'🔒', text:'GPSは元々軍事技術。民間開放は1983年の大韓航空機撃墜事件をきっかけにレーガン大統領が決断した。'},
+  {emoji:'🎮', text:'PlayStation（PS1）は1994年に日本で発売。CD-ROMを採用しゲーム業界に革命をもたらした。'},
+  {emoji:'📧', text:'初めて電子メールを送ったのは1971年、Ray Tomlinson。送信先は自分自身の別のコンピューターだった。'},
+  {emoji:'🤖', text:'ディープラーニングの理論は1980年代に存在していたが、コンピューターの性能不足で実用化が30年遅れた。'},
+  {emoji:'📡', text:'Wi-Fiという名前に特定の意味はない。「Hi-Fi（ハイファイ）」に似せて作ったブランド名にすぎない。'},
+  {emoji:'🔐', text:'パスワードの歴史は2500年以上前まで遡る。古代ローマ軍が夜間歩哨で使った「合言葉」が原型。'},
+  {emoji:'📊', text:'Netflixは1997年にDVDの宅配レンタルサービスとして創業した。ストリーミングへの移行は2007年。'},
+  {emoji:'🔋', text:'リチウムイオン電池の開発者・吉野彰がノーベル化学賞を受賞（2019年）。スマホ普及の立役者。'},
+  {emoji:'🖱️', text:'コンピューターのマウスは1964年にダグラス・エンゲルバートが発明。最初は木製の箱だった。'},
+  // === スポーツ ===
+  {emoji:'🏊', text:'水泳のバタフライ泳法は平泳ぎのルールの抜け穴から生まれた。両腕を水上から出す動作が禁止されていなかった。'},
+  {emoji:'⚽', text:'サッカーボールの黒白模様は1970年メキシコW杯で白黒テレビ放送用に見やすくデザインされた経緯がある。'},
+  {emoji:'🎾', text:'テニスのスコアが「15、30、40」という表記は、時計の針（15分ごと）から来たという説が有力。'},
+  {emoji:'🏀', text:'バスケットボールは1891年、体育教師のジェームス・ネイスミスが冬の室内スポーツとして考案した。'},
+  {emoji:'🥊', text:'ボクシングのラウンドは現在3分だが、19世紀には選手が倒れるまで（または降参まで）無制限だった。'},
+  {emoji:'🏃', text:'マラソンの42.195kmという距離は1908年ロンドン五輪で王室の都合でスタート地点が変更された偶然の産物。'},
+  {emoji:'⛳', text:'ゴルフボールのディンプル（くぼみ）は空気抵抗を減らし、滑らかなボールより約2倍遠くに飛ばせる。'},
+  {emoji:'🏋️', text:'相撲の番付制度は1757年から続く歴史的ランキングシステム。世界最古のスポーツランキングの一つとも言われる。'},
+  {emoji:'🏈', text:'アメリカンフットボールの「ハドル（輪陣作戦）」は聴覚障害者がサインを隠すために始めたという起源説がある。'},
+  {emoji:'🎿', text:'スキーは約5000年前の北欧で狩猟・移動手段として使われていた。スポーツとして始まったのは19世紀。'},
+  {emoji:'🏊', text:'マイケル・フェルプスは2008年北京五輪で金メダル8個を獲得。1大会の金メダル数の世界記録。'},
+  {emoji:'⚾', text:'大リーグ（MLB）の公式球は試合前に特定の川の粘土でこすって光沢を消す。この儀式は長年続いている。'},
+  // === 数学 ===
+  {emoji:'🔢', text:'円周率π（パイ）は無限に続く無理数で、現在は小数点以下100兆桁以上が計算されている。'},
+  {emoji:'0️⃣', text:'ゼロ（0）の概念は古代インドで発明され（約7世紀）、アラビア経由で西洋に伝わった。ゼロなし計算は非常に困難。'},
+  {emoji:'🌻', text:'フィボナッチ数列（1,1,2,3,5,8,13...）はひまわりの種・貝殻のらせん・花びらの数など自然界に多く現れる。'},
+  {emoji:'🎂', text:'確率の「誕生日のパラドックス」：23人いれば50%以上の確率で同じ誕生日の人がいる。直感に反する数学の真実。'},
+  {emoji:'♾️', text:'無限には「大きさ」がある。自然数の無限と実数の無限では後者の方が「大きい」（カントールの定理）。'},
+  {emoji:'💻', text:'コンピューターの計算はすべて「0と1」の2進法で行われる。この基礎は17世紀のライプニッツが作った。'},
+  {emoji:'🏆', text:'「フェルマーの最終定理」は350年間証明されなかったが、1995年にワイルズが証明し数学史上の快挙となった。'},
+  {emoji:'🦋', text:'カオス理論（バタフライ効果）：初期条件の微小な違いが複雑なシステムでは巨大な差を生む。天気予報の限界の理由。'},
+  {emoji:'🎲', text:'「モンティ・ホール問題」：3ドアの選択後にハズレを1つ開けてもらったら変更すべき。変更時の勝率は2/3。'},
+  {emoji:'🔑', text:'暗号技術の多くは素数を使った「公開鍵暗号」に依存しており、素数の研究が国家安全保障に直結している。'},
+  {emoji:'🧩', text:'「ケーニヒスベルクの橋」問題（1736年）を解こうとしてオイラーがグラフ理論を発明した。数学の美しい歴史。'},
+  {emoji:'🌀', text:'√2（ルート2）が無理数と証明したピタゴラス派の学者は、秘密を漏らしたため溺死させられたという伝説がある。'},
+  // === 地理 ===
+  {emoji:'🌏', text:'ロシアは世界最大の国で日本の約45倍の面積を持つ。11のタイムゾーンにまたがり、端から端で9時間の時差がある。'},
+  {emoji:'🏝️', text:'インドネシアは約1万7000の島からなり、世界最多の島を持つ国の一つ。人口は世界4位。'},
+  {emoji:'🌊', text:'マリアナ海溝の最深部チャレンジャー深淵は約11,000m。エベレストを沈めてもさらに2000m余る深さ。'},
+  {emoji:'🏔️', text:'エベレストの頂上は年間約4cm移動している（インド・ユーラシアプレートの衝突）。毎年少しずつ高くなる。'},
+  {emoji:'🧊', text:'南極大陸の氷が全部溶けると、世界の海面は約60m上昇すると推定されている。主要都市の多くが水没する。'},
+  {emoji:'🏜️', text:'サハラ砂漠は世界最大の砂漠だが、全体の約80%は砂ではなく岩や礫で覆われている。砂漠＝砂ではない。'},
+  {emoji:'🗾', text:'日本は世界62位の国土面積だが、排他的経済水域（EEZ）は世界6位の広さを誇る。海の資源大国。'},
+  {emoji:'🌏', text:'東京は世界最大の都市圏で、人口約3,700万人（首都圏）。世界の都市圏人口ランキング1位。'},
+  {emoji:'💧', text:'地球上の淡水の約70%は氷河として固まっており、飲料水として使えるのは全水の約0.3%のみ。'},
+  {emoji:'🌋', text:'アイスランドは国土の約11%が氷河に覆われながら活火山も多い。火と氷が共存する独特の大地。'},
+  {emoji:'🌍', text:'アフリカ大陸はユーラシア大陸・南北アメリカ・ヨーロッパを合わせた面積より大きい。地図では小さく見えるが錯覚。'},
+  {emoji:'🏖️', text:'日本の海岸線は約29,751kmで世界11位の長さ。多くの島々が海岸線を長くしている。'},
+  // === 芸術・音楽 ===
+  {emoji:'🎵', text:'ベートーヴェンは完全に耳が聞こえなくなった後に第9交響曲（合唱）を作曲した。音楽を頭の中で聞いた。'},
+  {emoji:'🎼', text:'モーツァルトは5歳で最初の作曲を行い、生涯で600曲以上の作品を残した。35歳で死去した天才の生涯。'},
+  {emoji:'🖼️', text:'モナ・リザは縦77cm×横53cmの小さい絵。多くの来館者がその小ささに驚く。'},
+  {emoji:'🎨', text:'ピカソは一生で約50,000点の作品を制作した（絵画・彫刻・陶器・デザインなど含む）。'},
+  {emoji:'🎹', text:'「ピアノ」はもともと「pianoforte（弱く強く）」という名前で、強弱がつけられる楽器として登場した。'},
+  {emoji:'🎷', text:'ジャズ音楽は19世紀末〜20世紀初頭にニューオーリンズのアフリカ系アメリカ人コミュニティで生まれた。'},
+  {emoji:'🎻', text:'バッハは生前あまり評価されなかったが、没後79年に作品が再発見されクラシック音楽の基礎になった。'},
+  {emoji:'🌻', text:'ゴッホが生涯で売れた絵は1枚だけという話は有名だが、実際には数枚売れていたという研究もある。'},
+  {emoji:'🎬', text:'映画フィルムは1秒間に24コマで撮影・再生される。これが「映画らしい動き」の基準（視覚残像効果）。'},
+  {emoji:'🎤', text:'世界で最も多く歌われる曲は「ハッピーバースデー」で、年間数百億回以上歌われると推定される。'},
+  {emoji:'🖌️', text:'印象派（モネ・ルノワールなど）は当初パリの公式展覧会に拒絶され、「落選展」を自ら開催した。'},
+  {emoji:'🎌', text:'日本の浮世絵はヨーロッパの印象派画家（モネ・ドガ等）に大きな影響を与えた（ジャポニスム）。'},
+  // === 英語・言語 ===
+  {emoji:'🔤', text:'英語の「E」は最も使われる文字で全文字の約13%を占める。逆に「Z」はわずか0.07%しか使われない。'},
+  {emoji:'📝', text:'「Set」は英語で最も多くの意味を持つ単語とされ、辞書に430以上の用法が記録されている。'},
+  {emoji:'🌧️', text:'英語に「Petrichor（ペトリコール）」という言葉がある。雨の後に土が発する独特の香りを表す美しい単語。'},
+  {emoji:'🔡', text:'「Typewriter」はキーボードの最上段（QWERTY行）だけで打てる最も長い一般的な英単語（10文字）。'},
+  {emoji:'⌨️', text:'「Stewardesses」はキーボードの左手だけで打てる英語で最も長い一般的な単語（11文字）。試してみよう。'},
+  {emoji:'🌍', text:'英語は世界で最も多くの国で使われる言語。公用語・共通語として約117カ国で採用されている。'},
+  {emoji:'🦁', text:'「Rhythm」は母音のない最も長い英単語の一つ。子音（r,h,y,t,h,m）だけで成立する珍しい語。'},
+  {emoji:'👋', text:'「Goodbye」は「God be with you（神があなたと共にあらんことを）」が時代を経て縮まった言葉。'},
+  {emoji:'🥪', text:'「Sandwich」はサンドイッチ伯爵（Earl of Sandwich）の名前から。食べながらトランプするために考案した説がある。'},
+  {emoji:'😱', text:'「Panic（パニック）」はギリシャ神話の牧神「Pan」の名から来た。Panが引き起こす突然の恐怖を指す。'},
+  {emoji:'🌐', text:'世界には約7,000の言語があるが、2週間に1言語のペースで絶滅しており、今世紀末には半減すると予測される。'},
+  {emoji:'🇰🇷', text:'韓国語のハングルは15世紀に世宗大王が学者に作らせた人工文字で、非常に規則的な構造を持つ。'},
+  {emoji:'🇯🇵', text:'日本語には「木漏れ日」「わびさび」など英語に1語で対応する言葉がない独自表現が多くある。'},
+  {emoji:'🎯', text:'言語習得に最も効果的なのは「i+1理論」：今の自分より少し上の内容に触れ続けること（S.クラッシェン）。'},
+  {emoji:'🧠', text:'新しい言語を学ぶとアルツハイマー病の発症を平均4〜5年遅らせるという研究がある。最高の脳トレ。'},
+  {emoji:'😴', text:'脳は睡眠中に昼間学んだことを整理する。就寝前の学習は記憶定着率が最大40%向上するという研究がある。'},
+  {emoji:'🔁', text:'「思い出す練習（テスト効果）」は繰り返し読むより2〜3倍記憶に残る。クイズ形式の学習が最強。'},
+  {emoji:'🪞', text:'シャドーイングは脳のミラーニューロンを活性化させる学習法。プロスポーツ選手のイメトレと同じ仕組み。'},
+  {emoji:'💭', text:'英語を使う夢を見始めたら、学習が脳に定着しているサイン。夢は無意識の学習記録。'},
+  {emoji:'💪', text:'外国語で考えると感情的バイアスが減り、より合理的な判断ができるという研究がある。英語脳は冷静。'},
+  // === 雑学・不思議 ===
+  {emoji:'🌡️', text:'エッフェル塔は夏に約17cm高くなる。熱で鉄が膨張するため（熱膨張の法則）。'},
+  {emoji:'🌀', text:'空が青い理由はレイリー散乱。太陽光の短波長（青）がより多く散乱されるため青く見える。夕焼けが赤いのも同じ原理。'},
+  {emoji:'🐃', text:'「Buffalo buffalo Buffalo buffalo buffalo buffalo Buffalo buffalo」は文法的に完全に正しい英語の文。'},
+  {emoji:'📏', text:'辞書に載る最長の英単語「Pneumonoultramicroscopicsilicovolcanoconiosis」は45文字。珪肺症の一種。'},
+  {emoji:'🔭', text:'太陽から地球が受けるエネルギーは1時間分だけで、全人類が1年間使うエネルギーより多い。再生エネルギーの可能性。'},
+  {emoji:'🎬', text:'夢の中では初めて会う人は出てこない。夢に登場する人物は全員、過去に一度は見た顔から作られる。'},
+  {emoji:'🌍', text:'地球は約50億年後に太陽に飲み込まれる可能性がある。だから今この瞬間を精一杯生きることに意味がある。'},
+  {emoji:'🌊', text:'砂漠の砂は無限ではない。建設用の「角張った砂」は枯渇が近づいており、砂の争奪戦が起きている地域もある。'},
+  {emoji:'🎵', text:'音楽を聴くと脳の複数の領域（言語・運動・感情・視覚）が同時に活性化され、全脳ワークアウトになる。'},
+  {emoji:'🌟', text:'今日も学習を続けているあなたは、世界中の同世代のほとんどの人より確実に一歩前に進んでいる。続けることが最強の戦略。'},
+  // === 追加: 科学・宇宙 ===
+  {emoji:'🔬', text:'1グラムの土の中には約1億個の細菌が生息している。地球全体の微生物の総重量は動植物全体の合計を上回る。'},
+  {emoji:'🌡️', text:'絶対零度（−273.15℃）では原子の運動が理論上完全に止まる。宇宙の平均温度は−270.45℃で絶対零度に近い。'},
+  {emoji:'💡', text:'人間の脳が処理する情報量は1秒間に約11,000,000ビット。しかし意識的に認識できるのはわずか約50ビット。'},
+  {emoji:'🌍', text:'地球の内核は太陽の表面より熱い約5,400℃。その熱は地球誕生時の余熱と放射性元素の崩壊熱による。'},
+  {emoji:'🫧', text:'水素は宇宙で最も多い元素で、全原子の約92%を占める。次にヘリウムが約8%、残り全ての元素は合わせて1%未満。'},
+  {emoji:'🦠', text:'ウイルスは生物か非生物か今も議論中。自己複製はできるが、宿主細胞なしでは増殖できないため「生命の境界」に存在する。'},
+  {emoji:'🌀', text:'ブラックホールの特異点では既知の物理法則がすべて破れる。アインシュタインの一般相対性理論もそこでは機能しない。'},
+  {emoji:'🧪', text:'元素周期表の元素118個のうち、自然界に存在するのは94個。残り24個は加速器で人工的に合成されたもの。'},
+  {emoji:'🪨', text:'地球上の岩石の中で最も古いものは約44億年前のもの。月の石の中には46億年前のものが含まれている。'},
+  {emoji:'🌬️', text:'地球の大気の重さは約5.15×10¹⁸kg。この重さが1気圧（約1013hPa）を生み出し、私たちの体を毎秒10トン近い力で押している。'},
+  // === 追加: 動物・自然 ===
+  {emoji:'🦋', text:'チョウの幼虫（毛虫）がサナギになる際、体はほぼ完全に溶解する。記憶の一部はチョウになっても残ることが研究で示されている。'},
+  {emoji:'🐙', text:'タコは3つの心臓と青い血液を持つ。体色を変える細胞は皮膚に約2億個あり、一部の種は光を感じる皮膚光受容体も持つ。'},
+  {emoji:'🦅', text:'ハヤブサの急降下速度は時速390km以上。これは地球上で最速の動物であり、戦闘機のパイロットが失神するGを受ける速度に匹敵する。'},
+  {emoji:'🐘', text:'アフリカゾウは20km先の水場を感知できる。足裏の感覚器官で地面を伝わる低周波振動（インフラサウンド）を感じ取るため。'},
+  {emoji:'🌳', text:'木は空気の約95%と土から吸った水で作られる。葉の光合成で二酸化炭素（空気中の炭素）が幹や枝になる仕組み。'},
+  {emoji:'🐬', text:'イルカは眠るとき脳の半分だけ眠らせ、残り半分で泳ぎながら呼吸を続ける（単半球睡眠）。渡り鳥も飛びながら同様に眠る。'},
+  {emoji:'🦑', text:'コウイカは色盲（色を識別できない）にもかかわらず、完璧に周囲に擬態できる。その仕組みは目の偏光受容によるとされる。'},
+  {emoji:'🐜', text:'アリコロニーは単純なルールに従う個体が集まることで複雑な集合知を発揮する。これは「創発」の代表例で、AIの群知能研究に応用されている。'},
+  {emoji:'🌿', text:'植物は「話す」ことができる。傷つくと揮発性化合物を放出し、近くの同種植物に危険を知らせる。植物の「言語」の研究が進んでいる。'},
+  {emoji:'🪸', text:'サンゴは動物と植物の共生体。体内の植物（褐虫藻）が光合成でサンゴに栄養を供給し、水温上昇でその藻が逃げると白化現象が起きる。'},
+  {emoji:'🐺', text:'オオカミの復活がイエローストーン公園の川の流れを変えた。捕食者がいることでシカの行動が変わり、植生が回復し、川岸が安定した（栄養カスケード）。'},
+  // === 追加: 歴史 ===
+  {emoji:'🏛️', text:'古代ローマのコロッセオは収容人数5万〜8万人。現代のスタジアム並みの規模を西暦80年に完成させた土木技術は今も謎が多い。'},
+  {emoji:'📜', text:'中国の火薬・羅針盤・印刷術・紙の「四大発明」は文明の発展に革命をもたらした。火薬が初めて軍事利用されたのは唐の時代（9世紀）。'},
+  {emoji:'⚔️', text:'モンゴル帝国は13世紀に史上最大の連続陸地帝国を築いた。最盛期には地球の陸地面積の22%、当時の世界人口の約25%を支配した。'},
+  {emoji:'🗺️', text:'1492年にコロンブスがカリブ海に到着した際、彼はインドに着いたと信じて死ぬまで訂正しなかった。アメリカ大陸は後に別の人の名前で命名された。'},
+  {emoji:'🔭', text:'ガリレオは地動説を支持したとして1633年に異端審問で有罪になった。カトリック教会が正式に誤りを認めたのは359年後の1992年。'},
+  {emoji:'🎠', text:'フランス革命（1789年）でギロチンが「人道的」な処刑器具として導入された。発明者ギヨタン博士は自分の発明に生涯恥じて、姓を変えようとしたといわれる。'},
+  {emoji:'🏰', text:'マチュピチュはスペイン征服者に発見されなかった唯一のインカの大都市。1911年にハイラム・ビンガムが「発見」するまで西洋世界では知られていなかった。'},
+  {emoji:'💌', text:'ヴァイキングは「野蛮人」のイメージがあるが、現代のヨーロッパ法制度の基礎となる複雑な法律体系や民主主義的な集会（アルシング）を持っていた。'},
+  {emoji:'🌍', text:'アフリカ分割（1884〜85年のベルリン会議）でヨーロッパ列強が直線の国境で大陸を分割した。この人工的国境が現代アフリカの民族紛争の原因の一つとなっている。'},
+  {emoji:'✈️', text:'ライト兄弟の初飛行（1903年）からわずか66年後にアポロ11号が月に着陸した。人類の航空技術の進歩がいかに急速だったかを示す。'},
+  // === 追加: 人体・医学 ===
+  {emoji:'🧠', text:'脳は体重の約2%しかないが、エネルギーの約20%を消費する。脳細胞は絶えず活動しており、「何もしていない」時でも活発に機能している（デフォルトモードネットワーク）。'},
+  {emoji:'❤️', text:'心臓は生涯で平均30億回拍動する。1日に約7,000リットルの血液を送り出し、血管の総延長は約10万kmで地球2周半に相当する。'},
+  {emoji:'🦷', text:'歯のエナメル質は人体で最も硬い組織。しかし一度失われると再生できない。対照的に骨は絶えず分解・再生を繰り返している。'},
+  {emoji:'🫁', text:'肺の内面積を広げると、テニスコート1面分（約70m²）になる。約3億個の肺胞が薄い膜でガス交換を行うため、この巨大な表面積が必要。'},
+  {emoji:'🧬', text:'ヒトゲノムは約30億塩基対からなる。これをA4用紙に印刷すると200万ページ（東京タワーの高さの300倍以上の積み上げ）になる。'},
+  {emoji:'💤', text:'レム睡眠中は脳が覚醒時と同等に活発になる。体は麻痺状態（夢の動作を実行しないため）だが、目が激しく動く（Rapid Eye Movement）。'},
+  {emoji:'🦴', text:'人間は生まれたとき約270〜300個の骨があるが、大人になると約206個になる。成長とともに複数の骨が融合するため。'},
+  {emoji:'👁️', text:'人間の目は約1,000万色を識別できるとされる。しかし約8%の男性と約0.5%の女性は色覚異常を持ち、特定の色の区別が難しい。'},
+  {emoji:'🧫', text:'腸内細菌叢は「第二の脳」と呼ばれ、腸と脳は迷走神経で直接繋がっている。腸内細菌の組成が気分・行動・認知機能に影響することが判明している。'},
+  {emoji:'💉', text:'天然痘ワクチンは人類が根絶した唯一の感染症（1980年WHO宣言）。ワクチン接種の概念を生んだジェンナーは「医学の父」の一人とされる。'},
+  // === 追加: 食べ物・料理 ===
+  {emoji:'🍕', text:'ピザはアメリカでイタリア移民によって広まり、現在では本場イタリアよりも多様なスタイルが存在する。NYスタイル・シカゴディープディッシュなど地域ごとに独自進化した。'},
+  {emoji:'🌶️', text:'唐辛子の辛さの成分カプサイシンは実際には味ではなく、痛み（灼熱感）として感じられる。植物が種を守るために動物に食べられないよう進化させた化学兵器。'},
+  {emoji:'🫒', text:'オリーブオイルは約6000年前から地中海沿岸で使われてきた。古代ギリシャでは通貨・燃料・薬・美容として使われ「液体の黄金」と呼ばれた。'},
+  {emoji:'🍜', text:'ラーメンは日本で独自進化した料理。中国の麺料理が明治時代に伝わり、昭和期に「インスタントラーメン」（1958年日清食品）として世界に広まった。'},
+  {emoji:'🧀', text:'チーズの種類は世界に1,000〜1,800種類あるとされる。フランスだけで400種類以上存在し、「毎日違うチーズを食べても1年で飽きない」と言われる。'},
+  {emoji:'🍫', text:'チョコレートの原料カカオ豆は長い間貨幣として使われた。アステカ文明では100粒で奴隷1人が買えるほど貴重で、飲料として神聖視されていた。'},
+  {emoji:'🍵', text:'日本茶・中国茶・紅茶はすべて同じ植物（カメリア・シネンシス）の葉から作られる。違いは発酵（酸化）の度合いだけで、緑茶＝非発酵、烏龍茶＝半発酵、紅茶＝完全発酵。'},
+  {emoji:'🥑', text:'アボカドは植物学的には「果物」（1粒の巨大な種を持つベリー）に分類される。世界で最もカロリーが高い果物で、1個に約300kcal含まれる。'},
+  {emoji:'🧁', text:'バニラは世界で2番目に高価なスパイス（1位はサフラン）。手作業での受粉が必要なため生産コストが高く、世界の供給の80%がマダガスカル産。'},
+  {emoji:'🫙', text:'発酵食品は世界中の文化に存在する。日本の味噌・納豆、韓国のキムチ、ドイツのザワークラウト、エチオピアのインジェラなど、腸内環境を整える発酵文化は人類共通の知恵。'},
+  // === 追加: 心理学・脳科学 ===
+  {emoji:'🎭', text:'人間は1日に約12,000〜60,000の思考を持つとされ、その約80%がネガティブ、約95%が前日の繰り返しだという研究がある。思考のパターンに気づくことが心理的健康の鍵とされる。'},
+  {emoji:'🪞', text:'「スポットライト効果」：自分が気にしている失敗や外見の変化を、他人は実際にはほとんど気づいていない。人は自分が思うほど他人に注目されていない。'},
+  {emoji:'🧩', text:'「フロー状態」は能力と課題の難易度が適切にマッチした時に生まれる。心理学者チクセントミハイが提唱したこの概念は、最高のパフォーマンスと幸福感の鍵とされる。'},
+  {emoji:'🤝', text:'「ミラーニューロン」は他者の行動を観察するだけで発火する神経細胞。共感・模倣・言語学習の基盤で、「社会脳」の基礎とも呼ばれる。'},
+  {emoji:'😴', text:'「睡眠学習」は限定的。睡眠中に新しい情報を学ぶことは難しいが、日中に学んだ記憶は睡眠中に海馬から大脳皮質に転送され定着する。睡眠は記憶の「保存」に必須。'},
+  {emoji:'🏆', text:'「ドーパミン」は「快楽」ではなく「期待・動機づけ」の神経伝達物質。報酬そのものより報酬を予測する時に最も多く分泌され、これが「もう1回」の欲求を生む。'},
+  {emoji:'🔐', text:'「確証バイアス」：人は自分の既存の信念を支持する情報を無意識に求め、矛盾する情報を無視する傾向がある。ソーシャルメディアの「エコーチェンバー」はこれを増幅させる。'},
+  {emoji:'💬', text:'コミュニケーションの研究では言葉そのものよりも、声のトーン・表情・姿勢が与える印象の方が大きいとされる（メラビアンの法則）。ただしこれは感情表現の文脈に限定される。'},
+  {emoji:'🌱', text:'「成長マインドセット」（Carol Dweck）：能力は固定ではなく努力で伸ばせると信じることで、実際にパフォーマンスが向上する。「まだできない」というフレーミングが学習を加速させる。'},
+  {emoji:'⏰', text:'人間の時間感覚は感情状態によって変わる。楽しい時は速く、退屈・恐怖時はゆっくり感じる。これは注意資源の配分が変わることで脳の「内部クロック」の刻み方が変化するため。'},
+  // === 追加: テクノロジー ===
+  {emoji:'🖥️', text:'最初のコンピュータ「ENIAC」（1945年）は重さ30トン、18,000本の真空管を使い、部屋全体を占拠した。現在のスマートフォンはこれの1兆倍以上の計算能力を持つ。'},
+  {emoji:'🌐', text:'インターネットの前身「ARPANET」は1969年、米国防総省が核攻撃後も通信を継続するために開発した。最初の送信は「LOGIN」の最初の2文字「LO」でシステムがクラッシュした。'},
+  {emoji:'🤖', text:'「人工知能」という言葉は1956年のダートマス会議で生まれた。当時の研究者は「10年以内に機械が人間のように考えられる」と予測したが、それは70年近く経った今も議論中。'},
+  {emoji:'📱', text:'現在地球上に稼働しているスマートフォンは約68億台。2007年に初代iPhoneが発売されてから17年足らずで、世界人口の約85%が携帯電話を持つようになった。'},
+  {emoji:'🔋', text:'リチウムイオン電池を開発した吉野彰氏はノーベル化学賞（2019年）を受賞。この電池なしにスマートフォン・電気自動車・再生可能エネルギーの普及はなかった。'},
+  {emoji:'🛡️', text:'量子コンピュータが実用化されると、現在の暗号通信（RSA暗号）の多くが破られる可能性がある。これを防ぐ「耐量子暗号」の標準化が世界規模で進んでいる。'},
+  {emoji:'🧬', text:'CRISPR-Cas9遺伝子編集技術は「分子のはさみ」と呼ばれる。2020年にノーベル化学賞受賞。遺伝疾患治療への応用が期待される一方、デザイナーベビーへの懸念も高まっている。'},
+  {emoji:'🚗', text:'自動運転車の倫理問題「トロッコ問題」：ブレーキが効かない場合、1人を犠牲にして5人を救うか？機械にこの判断を委ねることの倫理的問題は未解決のまま開発が進む。'},
+  // === 追加: スポーツ ===
+  {emoji:'⚽', text:'サッカーは世界で最も人気のあるスポーツで、約40億人のファンがいるとされる。2022年カタールW杯の決勝戦（アルゼンチン対フランス）は史上最多の15億人が視聴した。'},
+  {emoji:'🏊', text:'水泳の「バタフライ」泳法は1952年以降に生まれた。もともと平泳ぎの変形として生まれたが、速すぎるため独立した種目になった。それでも最も体力を消耗する泳ぎ方とされる。'},
+  {emoji:'🏀', text:'バスケットボールはカナダ人コーチのジェームズ・ネイスミスが1891年に発明。最初のゴールは実際の桃のカゴで、ボールが入るたびに人が上に登って取り出す必要があった。'},
+  {emoji:'🎾', text:'テニスの「ラブ（0点）」の語源は諸説あり、フランス語の「卵（l\'œuf）」から派生したという説と、「愛のため（for love）に遊ぶ」という説がある。'},
+  {emoji:'🏋️', text:'人間の最大筋力は緊急時に制限が解除される。「火事場の馬鹿力」は実在し、極度のストレス下でアドレナリンが分泌され、通常は脳が保護のため制限している力が発揮される。'},
+  {emoji:'🧗', text:'フリーソロクライミングでエル・キャピタン（900m）を初登頂したアレックス・オノルドは、脳スキャンで恐怖を感じる扁桃体の活動が通常の人より著しく低いことが判明している。'},
+  {emoji:'🎯', text:'アーチェリーは人類最古の競技の一つで、少なくとも1万年の歴史がある。戦争・狩猟の道具から始まり、現代オリンピックでは近代技術を使った精密スポーツへと進化した。'},
+  {emoji:'⛷️', text:'スキーは約8,000年前の北欧・中央アジアで移動手段として発明された。現代の競技スキーに発展したのは19世紀ノルウェーで、世界最初のスキー競技会は1767年に開催された。'},
+  // === 追加: 数学 ===
+  {emoji:'♾️', text:'無限には大きさがある。カントールの対角線論法により、実数の無限（連続無限）は自然数の無限（可算無限）より「大きい」ことが証明されている。無限にも階層がある。'},
+  {emoji:'🎲', text:'モンティ・ホール問題：ドアが3つあり1つに車が。1つ選んだ後、司会がハズレのドアを開ける。ドアを変えるべきか？答えは「変えるべき」（確率2/3）。多くの数学者も最初は直感で間違える。'},
+  {emoji:'📐', text:'ユークリッドの「原論」（紀元前300年頃）は数学史上最も影響力のある教科書。5つの公理から始まる演繹体系は2000年以上使われ続け、「数学的証明」の概念を確立した。'},
+  {emoji:'🌀', text:'マンデルブロート集合は数式z→z²+cの繰り返しから生まれる。どこまで拡大しても自己相似的な複雑さが現れ、単純なルールから無限の複雑さが生まれる「フラクタル」の代表例。'},
+  {emoji:'🎴', text:'確率論はギャンブルから生まれた。17世紀フランスのパスカルとフェルマーが賭博の勝負を数学的に分析したことが確率論の出発点となり、現代の統計・金融・保険の基礎を築いた。'},
+  {emoji:'🔢', text:'ゴールドバッハの予想（1742年）：「2より大きいすべての偶数は2つの素数の和で表せる」はまだ証明も反例も見つかっていない。4=2+2、6=3+3…と確認できるが無限の証明は未解決。'},
+  {emoji:'📊', text:'統計的有意性（p値<0.05）は「95%の確率で正しい」を意味しない。「帰無仮説が真の場合にこれほど極端な結果が出る確率が5%未満」を意味する。多くの科学者もこれを誤解している。'},
+  {emoji:'🔵', text:'四色定理（1976年）は世界初のコンピュータ証明。どんな地図も4色以内で隣接する領域が同色にならないよう塗れるという定理で、人間が手で確認できないほどの場合分けをコンピュータが処理した。'},
+  // === 追加: 地理 ===
+  {emoji:'🏔️', text:'エベレストは標高8,848mで地球最高峰だが、地球の中心から最も遠い山頂はエクアドルのチンボラソ山（6,263m）。地球は赤道方向に膨らんでいるため赤道近くの山が中心から遠い。'},
+  {emoji:'🌊', text:'太平洋は地球上の全大陸を合わせた面積より広い。地球の水の約46%を占め、最深部のマリアナ海溝（約11,000m）はエベレストを沈めても頂上が海面下1,000m以上になる。'},
+  {emoji:'🏝️', text:'グリーンランドは名前に反して大部分が氷に覆われ、アイスランドは名前に反して比較的緑が多い。これはバイキングが意図的に人を惑わすように命名したとも、単純な誤解とも言われる。'},
+  {emoji:'🗻', text:'富士山は独立峰のように見えるが、実は3つの異なる火山（古富士・新富士・先小御岳）が重なった複成火山。現在の姿になったのは約1万年前。最後の噴火は1707年（宝永大噴火）。'},
+  {emoji:'🌋', text:'環太平洋火山帯（「火の輪」）は太平洋を取り囲む地震・火山活動の多い地域。世界の活火山の75%、地震の90%がここに集中している。日本はこの帯上に位置する。'},
+  {emoji:'🏜️', text:'サハラ砂漠は世界最大の砂漠のイメージがあるが、実はそれは「熱帯砂漠」として最大。砂漠を「年間降水量250mm以下の地域」と定義すると、南極大陸（年間降水量50mm以下）が世界最大の砂漠。'},
+  {emoji:'🌍', text:'アフリカ大陸は実際には地図が示すよりはるかに大きい。メルカトル図法は高緯度地域を拡大する。実際のアフリカは米国・中国・インド・ヨーロッパ・日本を全部合わせたより広い。'},
+  {emoji:'🗼', text:'東京は世界最大の都市圏（約3,700万人）だが、行政区域としての「東京都」の人口は約1,400万人。都市圏人口には埼玉・千葉・神奈川・茨城の一部も含まれる。'},
+  // === 追加: 芸術・音楽 ===
+  {emoji:'🎵', text:'モーツァルトは35年の短い生涯で600曲以上を作曲した。5歳から作曲を始め、35歳で亡くなるまで1年平均17曲以上という驚異的なペースで作品を残した。'},
+  {emoji:'🖼️', text:'モナリザには眉毛がない。当時の流行で眉毛を剃るのがエレガントとされたという説と、長年の洗浄・修復で消えたという説がある。また最近の研究で眉毛があった痕跡が発見されている。'},
+  {emoji:'🎭', text:'シェイクスピアは約1,700の英単語を発明したとされる。「bedroom（寝室）」「lonely（孤独な）」「obscene（わいせつな）」「uncomfortable（不快な）」なども彼の作品が初出とされる。'},
+  {emoji:'🎬', text:'映画「サイレントヒル」などホラーゲーム音楽で知られる山岡晃は、心理的不安を生む「認知的不協和」を意図的に音楽に使う。不快な周波数の組み合わせが本能的な恐怖反応を引き起こす。'},
+  {emoji:'🏺', text:'古代ギリシャの建造物は当初は白い大理石と思われていたが、研究により鮮やかに彩色されていたことが判明した。時間とともに色が落ち、18〜19世紀の発掘時にはすでに白くなっていた。'},
+  {emoji:'🎸', text:'ビートルズの解散から50年以上経った2023年、「最後のビートルズの新曲」がAIを活用してリリースされた。John Lennonの古い音声から声を復元し、生存するメンバーと共演させる形で制作された。'},
+  {emoji:'🖌️', text:'ゴッホが生涯に売れた絵はたった1枚（「赤いブドウ畑」）。死後に名声を得た彼の作品は現在1枚数百億円の価値がある。彼が9年間で残した860点以上の油絵のほとんどが今では世界的名作とされる。'},
+  {emoji:'🎻', text:'バッハの「平均律クラヴィーア曲集」は音楽の「旧約聖書」と呼ばれる。西洋音楽の理論的基盤を確立し、ベートーベン・ショパン・ジャズ・ロック・映画音楽まであらゆる音楽に影響を与えた。'},
+  // === 追加: 英語・言語 ===
+  {emoji:'🗣️', text:'世界には約7,000の言語が存在するが、そのうち約40%が「消滅の危機」にある。平均して2週間に1つの言語が消滅しているとされ、今世紀末までに半数が消えると予測されている。'},
+  {emoji:'📚', text:'日本語は世界で最も習得が難しい言語の一つとされる（英語話者向け）。文字体系が3つ（ひらがな・カタカナ・漢字）あり、漢字だけで2,000字以上の常用漢字を使いこなす必要がある。'},
+  {emoji:'🔤', text:'英語のアルファベット26文字は古代フェニキア文字→ギリシャ文字→ラテン文字と約3,000年かけて進化した。現代英語のAはもともと牛の頭（αleph）を表していた。'},
+  {emoji:'💭', text:'翻訳が難しい言葉の例：ポルトガル語「Saudade（サウダージ）」＝過去の愛しいものへの郷愁と喜びが混ざった感情。日本語「木漏れ日」＝木の葉の間から差し込む光。どちらも他言語に1語では訳せない。'},
+  {emoji:'🌍', text:'「Swahili（スワヒリ語）」は東アフリカの共通語で約2億人が話す。アフリカ最大の言語の一つだが、実は話者の大多数が第二言語として学んだもので、母語話者は比較的少ない。'},
+  {emoji:'🔡', text:'英語で最も長い1語の単語はニュモノウルトラミクロスコーピックシリコヴォルカノコニオシス（pneumonoultramicroscopicsilicovolcanoconiosis, 45文字）という肺疾患の名前。辞書に載る単語として最長とされる。'},
+  {emoji:'🎓', text:'敬語（Honorifics）は日本語で特に発達しているが、実は多くの言語に存在する。フランス語のtu/vous、ドイツ語のdu/Sie、韓国語の다양한 경어体など、社会的関係を言語で表現するのは普遍的文化。'},
+  {emoji:'📖', text:'「Oxford English Dictionary」は英語の単語を100万語以上収録。最初の完全版完成（1928年）まで70年以上かかった。ボランティアからの70万件以上の引用例提出という市民参加型の大プロジェクトだった。'},
+  {emoji:'🔊', text:'英語のアクセントはソーシャルメディアの影響で急速に変化している。特に若者の間では「フォニー（偽物）アクセント」や「インターネットスピーク」が現実世界の発音に影響を与え始めている。'},
+  // === 追加: 雑学・不思議 ===
+  {emoji:'🎰', text:'宝くじで当選する確率（約1億分の1）は、雷に2回打たれる確率（約900万分の1）より低い。人間は確率の直感が苦手で、感情的に印象的な出来事を過大評価する（可用性ヒューリスティック）。'},
+  {emoji:'🌌', text:'もし太陽が直径1mのボールに縮小された場合、最も近い恒星（プロキシマ・ケンタウリ）は約289kmの距離になる。宇宙がいかに「空っぽ」かを示すスケール感。'},
+  {emoji:'⏳', text:'クレオパトラが生きた時代は、現代より古代ローマのコロッセオ（80年完成）建設に近い。ピラミッド完成（紀元前2560年頃）から彼女の時代（紀元前69〜30年）の方が、彼女から現代よりも遠い。'},
+  {emoji:'🔥', text:'ろうそくの炎の中心（暗い部分）は実は燃えていない。燃料の気化した部分が燃える前の「未燃ガス」の領域で、炎の外側（明るい部分）が最も温度が高く、中心は比較的低温。'},
+  {emoji:'🌏', text:'地図は必ず「嘘をつく」。球体を平面に展開する際には必ず歪みが生じるため、どの地図も面積・形・距離・方向のいずれかを犠牲にしている。完全に正確な地図は3次元の地球儀のみ。'},
+  {emoji:'🎪', text:'「6次の隔たり」（6 degrees of separation）：世界のどんな2人も平均6人の知人を介してつながっているという仮説。SNSの発展により現在は「3.5次の隔たり」まで縮まったという研究もある。'},
+  {emoji:'💰', text:'お金は細菌の温床。流通する紙幣の平均的な細菌数は1枚あたり数千〜数万個。ドル紙幣の研究では3,000種以上の細菌が検出された。電子マネーが衛生面でも普及する理由の一つ。'},
+  {emoji:'🦷', text:'人間の指紋と同様に、舌紋（舌の模様）も個人を特定できる。また虹彩・耳の形・声紋・歩き方（歩容）なども個人識別に使える。生体認証の可能性は指紋・顔以外にも広がっている。'},
+
+  {emoji:'🔭', text:'NASAのボイジャー1号は1977年に打ち上げられ、2012年に太陽圏を出て星間空間に到達した。現在地球から約240億km離れた場所を秒速約17kmで飛び続けている。'},
+  {emoji:'🦎', text:'カメレオンが体色を変えるのは擬態のためだけでなく、体温調節・コミュニケーション・感情表現のためでもある。色変化は皮膚内のナノ結晶の配置が変わることで起きる。'},
+  {emoji:'🏯', text:'江戸時代（1603〜1868年）の日本は約260年間ほぼ鎖国状態を維持し、国内で独自の文化・芸術・技術が発展した。この平和な時代に歌舞伎・浮世絵・俳句などの文化が花開いた。'},
+  {emoji:'🫀', text:'人間の血液型（ABO式）は20世紀初頭に発見されたが、実は人体には血液型以外にも数十種類の血液型システムが存在する。輸血医学ではこれらすべての適合を考慮する必要がある。'},
+  {emoji:'🌮', text:'メキシコ料理が2010年にユネスコ無形文化遺産に登録された。フランス料理・地中海料理・日本料理などとともに、料理が「無形文化遺産」として認められる時代になっている。'},
+  {emoji:'🧘', text:'マインドフルネス瞑想の研究では、8週間の実践でストレスと不安が減少し、灰白質の密度が増加することが確認されている。現代医学で最も科学的証拠の多い非薬物療法の一つ。'},
+  {emoji:'💾', text:'1956年に初めて発売されたハードディスクは重さ1トン、容量わずか5MB。現在のスマートフォンのストレージ（64GB〜数TB）と比べると技術の進歩の凄まじさがわかる。'},
+  {emoji:'🏄', text:'サーフィンは約2000年前のポリネシア・ハワイで始まったと考えられる文化的実践。ヨーロッパ人の到来で一時禁止されたが、20世紀に復活し世界中に広まった。2020年東京五輪から正式種目。'},
+  {emoji:'🔮', text:'数学の「ゼロ」の概念は古代インドで確立され（西暦628年頃）、アラビア語を経てヨーロッパに伝わった。ゼロなしには現代数学・コンピュータ・物理学はすべて不可能だった。'},
+  {emoji:'🌐', text:'バチカン市国は面積約0.44km²（皇居の約3分の2）で世界最小の独立国家。人口は約800人。独自の郵便制度・銀行・放送局（バチカン放送）・鉄道を持つれっきとした独立国。'},
+  {emoji:'🎼', text:'ベートーベンは完全に耳が聞こえなくなってから「第九交響曲」を作曲した。音楽の振動を感じ、楽器の音を頭の中に「聴く」方法で、人類史上最も有名な交響曲の一つを生み出した。'},
+  {emoji:'✍️', text:'英語の「OK」は世界で最も多く使われる言葉の一つとされる。語源は諸説あり、最有力説は1839年にボストン新聞が「all correct」のユーモア誤綴り「oll korrect」を略したもの。'},
+  {emoji:'🎪', text:'古代オリンピックは紀元前776年から紀元後393年まで約1,000年以上続いた。競技は走る・投げる・格闘など基本競技のほか、戦車レース・音楽・詩などの芸術競技も含まれていた。'},
+  {emoji:'🔬', text:'プラスチックは1907年にベークライトが発明されて以来、人類が生産した総量は約83億トン。そのうち91%はリサイクルされておらず、深海・山頂・南極・人体からもマイクロプラスチックが検出されている。'},
+  {emoji:'🌙', text:'月面に残された宇宙飛行士の足跡は何百万年も残り続ける。月には大気も風もなく、足跡を消す侵食作用がないため。ただし宇宙からの微隕石衝突で数百万年かけて徐々に消える。'},
+  {emoji:'🦋', text:'ある種のカタツムリ（ヴィーナスカタツムリ）は交尾の際に「愛の矢」と呼ばれる炭酸カルシウムの針を相手に打ち込む。これはホルモンを注入して受精確率を高めるための驚くべき戦略。'},
+  {emoji:'📡', text:'1977年8月15日、ビッグイヤー電波望遠鏡が宇宙から72秒間の強い電波信号を受信した。科学者がメモに「Wow!」と書いたことで「Wow!シグナル」と呼ばれるが、今も原因は解明されていない。'},
+  {emoji:'🏳️', text:'エスペラントは1887年にポーランドの医師ザメンホフが創った人工言語。世界平和のために作られ、現在約200万人が話す。最も成功した人工言語で、ユネスコも普及を支持している。'},
+
+];
+
+let shownFactIds = [];
+
+const DAILY_QUOTES = [
+  {emoji:'🔬', quote:'天才とは、努力する才能のことである。', author:'アルベルト・アインシュタイン'},
+  {emoji:'🌌', quote:'想像力は知識よりも重要だ。知識には限りがあるが、想像力は世界を包み込む。', author:'アルベルト・アインシュタイン'},
+  {emoji:'⚗️', quote:'人生に恐れるものは何もない。ただ理解すべきものがあるだけだ。', author:'マリー・キュリー'},
+  {emoji:'💡', quote:'私は失敗したのではない。うまくいかない方法を一万通り発見したのだ。', author:'トーマス・エジソン'},
+  {emoji:'🪐', quote:'どれほど困難に見えても、科学と忍耐があればすべてを達成できる。', author:'スティーブン・ホーキング'},
+  {emoji:'🍎', quote:'もし私が遠くを見渡せたとすれば、巨人たちの肩の上に立っていたからだ。', author:'アイザック・ニュートン'},
+  {emoji:'🚀', quote:'ハングリーであれ、愚か者であれ。', author:'スティーブ・ジョブズ'},
+  {emoji:'💻', quote:'今日うまくいかなくても、明日諦めなければいい。', author:'ビル・ゲイツ'},
+  {emoji:'🏎️', quote:'夢を持ち続けろ。夢が人生を動かす原動力になる。', author:'本田宗一郎'},
+  {emoji:'🔥', quote:'失敗のない人生などない。大切なのは失敗から何を学ぶかだ。', author:'本田宗一郎'},
+  {emoji:'🌱', quote:'成功の秘訣は、あきらめないことだ。', author:'松下幸之助'},
+  {emoji:'☀️', quote:'素直な心で物事を見れば、道はおのずと開ける。', author:'松下幸之助'},
+  {emoji:'🌐', quote:'志を高く持て。高い志が高い結果を生む。', author:'孫正義'},
+  {emoji:'💎', quote:'人生の目標は高く設定するほどいい。月を目指せば、少なくとも星には届く。', author:'孫正義'},
+  {emoji:'📦', quote:'最も危険なことは、リスクを取らないことだ。', author:'ジェフ・ベゾス'},
+  {emoji:'🏆', quote:'あなたが諦めない限り、失敗ではない。', author:'稲盛和夫'},
+  {emoji:'⚡', quote:'情熱こそが、すべての偉大な仕事の出発点だ。', author:'稲盛和夫'},
+  {emoji:'⚾', quote:'努力は必ず報われる。もし報われない努力があるなら、それはまだ努力とは呼べない。', author:'王貞治'},
+  {emoji:'🎯', quote:'小さいことを積み重ねるのが、とんでもないところへ行くただ一つの道だ。', author:'イチロー'},
+  {emoji:'🥊', quote:'不可能とは、偉大なことを成し遂げる力を持つ人間が使う言葉ではない。', author:'モハメド・アリ'},
+  {emoji:'🏀', quote:'私はキャリアで9000本以上のシュートを外し、300試合に負けた。だから私は成功した。', author:'マイケル・ジョーダン'},
+  {emoji:'⚽', quote:'成功する前に諦めてしまう人があまりにも多い。', author:'ペレ'},
+  {emoji:'🏃', quote:'昨日の自分を超えることだけを考えろ。', author:'ウサイン・ボルト'},
+  {emoji:'🌟', quote:'限界は自分が作り出す幻想に過ぎない。', author:'ロジャー・フェデラー'},
+  {emoji:'🎨', quote:'偉大な芸術家は、見えないものを見る。', author:'フィンセント・ファン・ゴッホ'},
+  {emoji:'🎵', quote:'今日できないことは明日もできない。しかし今日やれば、明日はもっとうまくできる。', author:'ベートーヴェン'},
+  {emoji:'🖊️', quote:'始めることが、仕事の半分だ。', author:'マーク・トウェイン'},
+  {emoji:'📚', quote:'今日読まない人は、読めない人と変わらない。', author:'マーク・トウェイン'},
+  {emoji:'🎭', quote:'何かを学ぶのに遅すぎることは決してない。', author:'レオナルド・ダ・ヴィンチ'},
+  {emoji:'🦅', quote:'木は嵐によって根が深まる。困難があなたを強くする。', author:'エイブラハム・リンカーン'},
+  {emoji:'🕊️', quote:'成功とは、失敗から失敗へと向かっても情熱を失わないことだ。', author:'ウィンストン・チャーチル'},
+  {emoji:'🌍', quote:'教育とは、世界を変えるために使える最も強力な武器だ。', author:'ネルソン・マンデラ'},
+  {emoji:'🌸', quote:'千里の道も一歩から。', author:'老子'},
+  {emoji:'🏯', quote:'最大の名誉は、決して失敗しないことではなく、失敗するたびに立ち上がることだ。', author:'孔子'},
+  {emoji:'🦉', quote:'よく生きることは、よく学ぶことだ。', author:'ソクラテス'},
+  {emoji:'🌙', quote:'私たちは、繰り返すことで優秀になる。卓越とは行為ではなく習慣だ。', author:'アリストテレス'},
+  {emoji:'🧠', quote:'知ることが力だ。', author:'フランシス・ベーコン'},
+  {emoji:'🌅', quote:'今この瞬間に集中せよ。過去は変えられず、未来はまだ来ていない。', author:'マルクス・アウレリウス'},
+  {emoji:'🔑', quote:'人は自分が信じる通りになる。', author:'レフ・トルストイ'},
+  {emoji:'🌠', quote:'夢見ることができれば、実現することができる。', author:'ヴィクトル・ユーゴー'},
+  {emoji:'🌺', quote:'一番大切なのは、今日一日を精一杯生きることだ。', author:'渋沢栄一'},
+  {emoji:'🍃', quote:'諦めない心が、道を切り拓く。', author:'坂本龍馬'},
+  {emoji:'🌄', quote:'人の真価は、困難なときにこそ現れる。', author:'西郷隆盛'},
+  {emoji:'🎋', quote:'迷ったときこそ、難しい方を選べ。そこに成長がある。', author:'大谷翔平'},
+  {emoji:'🏔️', quote:'頂上を目指す前に、一歩一歩の積み重ねを大切にしろ。', author:'野村克也'},
+  {emoji:'🌈', quote:'言語を学ぶことは、もう一つの魂を持つことだ。', author:'カール大帝'},
+  {emoji:'💫', quote:'外国語を学ぶ者は、新しい世界の窓を開く。', author:'ゲーテ'},
+  {emoji:'🌟', quote:'どんな言語でも、最初の一歩は「諦めないこと」だ。', author:'ネルソン・マンデラ'},
+  {emoji:'✨', quote:'今日も完走したあなたへ。継続こそが最大の才能だ。', author:'松下幸之助'},
+  {emoji:'🎊', quote:'努力した時間は、決して裏切らない。今日の一歩が明日の飛躍になる。', author:'イチロー'},
+  {emoji:'💪', quote:'強さとは、挑戦し続けることだ。今日もよくやった。', author:'モハメド・アリ'},
+  {emoji:'🌻', quote:'種を蒔く者だけが、収穫の喜びを知ることができる。', author:'ゲーテ'},
+  {emoji:'🦁', quote:'勇気は恐れがないことではない。恐れながらも前に進むことだ。', author:'ネルソン・マンデラ'},
+  {emoji:'🌊', quote:'波が高いほど、サーファーは高く飛べる。困難はチャンスだ。', author:'リチャード・ブランソン'},
+  {emoji:'🧩', quote:'今日学んだことは、永遠にあなたのものだ。誰も奪えない。', author:'ベンジャミン・フランクリン'},
+  {emoji:'🔭', quote:'遠くを見る目を持つ者だけが、偉大な旅ができる。', author:'ガリレオ・ガリレイ'},
+  {emoji:'🎯', quote:'目標を持った今日の努力は、無目的な1年より価値がある。', author:'本田宗一郎'},
+  {emoji:'🌏', quote:'英語は翼だ。その翼で、世界全体があなたの舞台になる。', author:'未来のあなたへ'},
+  {emoji:'🏅', quote:'今日1日、全力を出し切ったあなたは、すでに勝者だ。', author:'王貞治'},
+  {emoji:'🌞', quote:'夜明けは必ず来る。暗闇の中で諦めなかった者だけが、その光を見ることができる。', author:'マルティン・ルター・キング'},
+];
+
+function getNextFact() {
+  if (shownFactIds.length >= FUN_FACTS.length) shownFactIds = [];
+  const remaining = FUN_FACTS.map((_,i)=>i).filter(i=>!shownFactIds.includes(i));
+  const idx = remaining[Math.floor(Math.random()*remaining.length)];
+  shownFactIds.push(idx);
+  return { ...FUN_FACTS[idx], shown: shownFactIds.length, total: FUN_FACTS.length };
+}
+
+function showFact() {
+  const { emoji, text, shown, total } = getNextFact();
+
+  const overlay = document.createElement('div');
+  overlay.className = 'fact-overlay';
+  overlay.innerHTML = `
+    <div class="fact-card">
+      <div class="fact-tag">✨ タスク完了！ &nbsp;·&nbsp; 英語雑学 ${shown}/${total}</div>
+      <span class="fact-emoji-big">${emoji}</span>
+      <div class="fact-body">${text}</div>
+      <div class="fact-count">これで ${shown} 個の雑学をゲット！残り ${total - shown} 個</div>
+      <button class="fact-close" onclick="closeFact(this.closest('.fact-overlay'))">よし、次も頑張ろう！ 🚀</button>
+      <div class="fact-progress-bar"><div class="fact-progress-fill" id="fpf"></div></div>
+    </div>
+  `;
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeFact(overlay); });
+  document.body.appendChild(overlay);
+
+  spawnFactSparkles(overlay);
+
+  let pct = 100;
+  const fillEl = overlay.querySelector('#fpf');
+  const ivl = setInterval(() => {
+    pct -= 100 / 120; // 12 seconds
+    if (fillEl) fillEl.style.width = Math.max(0, pct) + '%';
+    if (pct <= 0) { clearInterval(ivl); closeFact(overlay); }
+  }, 100);
+  overlay._ivl = ivl;
+}
+
+function closeFact(overlay) {
+  if (!overlay || overlay._closing) return;
+  overlay._closing = true;
+  clearInterval(overlay._ivl);
+  overlay.classList.add('closing');
+  setTimeout(() => overlay.remove(), 220);
+}
+
+function spawnFactSparkles(overlay) {
+  const emojis = ['⭐','✨','🌟','💫','🎉','🎊'];
+  for (let i = 0; i < 8; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'fact-sparkle';
+      el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      const tx = (Math.random()-0.5)*200;
+      const ty = -(80 + Math.random()*120);
+      el.style.cssText = `bottom:${120+Math.random()*80}px;left:${20+Math.random()*60}%;--tx:${tx}px;--ty:${ty}px;`;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1200);
+    }, i * 80);
+  }
+}
+
+
+// ===================== TIMER SOUND =====================
+function playTimerSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [[523.25,0],[659.25,0.18],[783.99,0.36],[1046.5,0.54]].forEach(([freq, delay]) => {
+      const osc  = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.type = 'sine'; osc.frequency.value = freq;
+      const t = ctx.currentTime + delay;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(0.28, t + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.55);
+      osc.start(t); osc.stop(t + 0.6);
+    });
+  } catch(e) {}
+}
+
+// ===================== DAILY COMPLETE MODAL =====================
+function showDailyComplete() {
+  const q = DAILY_QUOTES[Math.floor(Math.random() * DAILY_QUOTES.length)];
+  const overlay = document.createElement('div');
+  overlay.className = 'daily-overlay';
+  overlay.innerHTML = `
+    <div class="daily-card">
+      <div class="daily-stars" id="dstars"></div>
+      <span class="daily-trophy">🏆</span>
+      <div class="daily-title">今日のタスク、完全制覇！</div>
+      <div class="daily-sub">素晴らしい！1日分の努力があなたの未来を作っている</div>
+      <span class="daily-quote-emoji">${q.emoji}</span>
+      <div class="daily-quote-text">"${q.quote}"</div>
+      <div class="daily-quote-author">— ${q.author}</div>
+      <button class="daily-close-btn" onclick="closeDailyModal(this.closest('.daily-overlay'))">明日も頑張ろう！ 🌟</button>
+    </div>
+  `;
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeDailyModal(overlay); });
+  document.body.appendChild(overlay);
+  spawnDailyStars(overlay.querySelector('#dstars'));
+}
+
+function closeDailyModal(overlay) {
+  if (!overlay || overlay._closing) return;
+  overlay._closing = true;
+  overlay.classList.add('closing');
+  setTimeout(() => overlay.remove(), 250);
+}
+
+function spawnDailyStars(container) {
+  if (!container) return;
+  const emojis = ['⭐','🌟','✨','💫','🎉','🎊','🌈','🏅'];
+  for (let i = 0; i < 20; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'daily-star';
+      const sx = (Math.random() - 0.5) * 340 + 'px';
+      const sy = -(120 + Math.random() * 200) + 'px';
+      const sr = (Math.random() - 0.5) * 720 + 'deg';
+      el.style.cssText = 'left:' + (10 + Math.random() * 80) + '%;top:' + (20 + Math.random() * 60) + '%;--sx:' + sx + ';--sy:' + sy + ';--sr:' + sr + ';animation-delay:' + (i * 0.06) + 's;animation-duration:' + (1.5 + Math.random() * 0.8) + 's;';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      container.appendChild(el);
+    }, i * 60);
+  }
+}
+
+// ===================== TASK DETAILS =====================
+var TASK_DETAILS = {
+  "Quizlet": {
+    purpose: "語彙は英語力の土台。スペースド・リピティション（間隔反復法）により忘却曲線に逆らって単語を長期記憶に定着させます。1日15〜20語が脳科学的に最適な習得ペースです。",
+    methods: ["フラッシュカードモードで表→裏の順に確認する", "学習（Learn）モードに切り替えて正誤テスト形式で練習する", "正答率が低いカードを繰り返し重点復習する", "音声ボタンを必ず押して発音と意味を一緒に覚える", "例文も読んで単語の使われ方と文脈をつかむ"],
+    tip: "単語を見て意味を思い出す「認識」から始め、慣れたら意味から単語を言える「再生」に挑戦。音で覚えることでリスニング力にも直結します。"
+  },
+  "シャドーイング": {
+    purpose: "英語のリズム・イントネーション・発話速度への慣れを促進。脳と口を同時に動かすことで、自動的に英語が出てくる回路を作ります。プロも使う最強のトレーニング法です。",
+    methods: ["まず音声を1回通して聴き、全体の意味をつかむ", "スクリプトを目で追いながら口パクで音に追いつく練習をする", "スクリプトを見ながら声に出して真似する（小声でもOK）", "スクリプトなしで音声だけを追いかけて挑戦する", "自分の声を録音して元の音声と比べて改善点を確認する"],
+    tip: "完璧に追いつけなくて大丈夫です。70%できれば十分な練習になります。1文ずつ区切って完コピを目指すとレベルが上がります。"
+  },
+  "発音": {
+    purpose: "正確な発音の習得はリスニング力にも直結します。英語の音を正確に認識・発音できるようになることで聞き取れる音が増え、スピーキングへの自信にもつながります。",
+    methods: ["YouGlishで実際のネイティブが使う発音例を多数確認する", "口の形・舌の位置を鏡で見ながら練習する", "最小対語（minimal pairs）を繰り返し練習する（例：light対right）", "録音して自分の発音を客観的に確認する", "IPA（国際音声記号）を参考に口の動きを意識する"],
+    tip: "英語の音は日本語にない音が多数あります。特に /r/ /l/ /v/ /th/ /ae/ は集中練習が効果的。毎日少しずつ積み上げることが大切です。"
+  },
+  "リスニング": {
+    purpose: "大量インプットにより英語の音声パターンを脳に刷り込みます。聴き取れない音があっても止めないことが重要で、慣れることで徐々に聞き取れるようになります。",
+    methods: ["内容を予測しながら聴く（タイトルやテーマから推測）", "聞き取れなかった箇所をメモして後でスクリプトで確認する", "同じ素材を速度変更して繰り返し聴く", "聴きながら内容を日本語で要約するアクティブリスニングを試す"],
+    tip: "全部聞き取ろうとしなくてOK。重要単語をキャッチして全体の意味をつかむ訓練が先です。慣れると自然に細部も聞こえるようになります。"
+  },
+  "スピーキング": {
+    purpose: "インプットをアウトプットに変換する訓練。流暢さより「継続して話し続けること」を優先します。間違いを恐れず話す習慣がスピーキング上達の最短路です。",
+    methods: ["まず使いたい表現を3つ事前に決めておく", "考えていることを英語で独り言として声に出す（独り言英語）", "会話を録音して後で聴き直し、改善点を確認する", "オンライン英会話ではテーマを決めて臨み、使いたい表現を意識的に使う"],
+    tip: "文法の正確さよりも「言いたいことが伝わるか」を優先しましょう。ネイティブも間違えます。とにかく口を動かすことが上達の秘訣です。"
+  },
+  "文法": {
+    purpose: "英語の構造を理解することで表現の幅が広がり、誤解のないコミュニケーションが可能になります。文法は「ルールの暗記」より「パターンの体得」が目標です。",
+    methods: ["まずルールを理解してから例文を5つ暗記する", "学んだ文法を使って自分の状況に当てはめた例文を作る", "実際の英語（映画・本）でそのパターンを探して確認する", "練習問題よりも実際の文章での使用例を増やすことを重視する"],
+    tip: "文法書を1冊完璧にするより、日常でよく使う文法パターン50個を使いこなせる方が実用的です。暗記より繰り返し使うことを重視してください。"
+  },
+  "表現": {
+    purpose: "単語を個別に覚えるより「塊（チャンク）」として覚える方が自然な英語話者に近づけます。ネイティブが実際に使うフレーズを体に染み込ませます。",
+    methods: ["表現を声に出して5回繰り返す", "自分の実際の状況に当てはめた例文を作る", "類似表現とニュアンスの違いを確認する", "英会話や日記で積極的に使ってみる"],
+    tip: "微妙なニュアンスの違い（例：want to と would like to）を理解することでより自然な英語になります。フレーズごと丸暗記が近道です。"
+  },
+  "記録": {
+    purpose: "アウトプットと振り返りにより学習内容を定着させます。進捗の可視化により長期的なモチベーション維持にも効果的です。",
+    methods: ["今日覚えた単語・表現ベスト3を書く", "難しかったこと・新しい気づきをメモする", "明日試してみたいことを1つ書く"],
+    tip: "完璧な文章を書く必要はありません。箇条書きでOK。日本語でも英語でも構いません。継続することが最も大切です。"
+  },
+  "ディクテーション": {
+    purpose: "聴き取れない音を特定する最も効果的な方法。リスニング・スペリング・文法・語彙を同時に強化できます。",
+    methods: ["まず一度全部通して聴く", "短いチャンク（5〜10語）ごとに止めて書き取る", "答え合わせをして音声と照合する", "聴き取れなかった部分を繰り返し聴いて分析する"],
+    tip: "聴き取れなかった箇所があなたの弱点です。音の連結（リンキング）と音の脱落（リダクション）が特に難しいポイントなので重点的に練習しましょう。"
+  },
+  "多読": {
+    purpose: "語彙・文法・文化背景の自然な習得と読書速度の向上。大量の英語テキストに触れることで英語を英語のまま理解する力を養います。",
+    methods: ["知らない単語は飛ばして全体の流れをつかむ", "1ページ60秒を目安に読み進める", "気に入った表現をメモしておく", "辞書を引きすぎず、文脈から意味を推測する練習をする"],
+    tip: "理解度70%でOK。完璧に理解しようとせず、どんどん読み進めることで読書速度と語彙力が同時に上がります。"
+  },
+  "鑑賞": {
+    purpose: "自然な英語表現・文化背景・イントネーションに無意識にさらされます。楽しみながら英語の生きた使われ方を習得できます。",
+    methods: ["最初は字幕なしで挑戦（わからなくてOK）", "次に英語字幕で内容を確認する", "気になった表現はLanguage Reactorで即座に調べる", "印象的なセリフをシャドーイング練習する"],
+    tip: "Language ReactorのChrome拡張を使うとNetflixやYouTubeで英語字幕の単語をワンクリックで調べられます。強力な学習ツールとして積極的に活用しましょう。"
+  },
+  "準備": {
+    purpose: "適切なツールと環境の整備が継続学習の基盤です。最初の準備を丁寧に行うことで、毎日の学習がスムーズになります。",
+    methods: ["指示に従って各ツールをインストール・設定する", "無料版で始めて必要に応じて有料版を検討する", "スマートフォンとPCの両方に入れておくと隙間時間も活用できる"],
+    tip: "一度設定すれば後は使うだけです。アカウント情報はメモしておきましょう。"
+  },
+  "計画": {
+    purpose: "週次・月次の振り返りによりPDCAサイクルを回します。学習の効率化と長期的な継続のために欠かせないメタ認知トレーニングです。",
+    methods: ["達成したことを書き出す（自己承認）", "できなかったことの原因を分析する", "来週の改善点を具体的に1〜2つ決める", "毎週同じ時間に行うルーティンにする"],
+    tip: "計画の修正は失敗ではなく改善です。柔軟に調整しながら続けることが1年後の大きな差につながります。"
+  },
+  "復習": {
+    purpose: "エビングハウスの忘却曲線によれば、学習後24時間以内の復習で記憶定着率が最大になります。新しいことを覚えるより、覚えたことを忘れない努力の方が重要です。",
+    methods: ["前日・今週学習した単語をQuizlet復習モードで高速スキャン", "シャドーイング素材を1回通して声に出す", "覚えにくかった表現を3つ書き出して繰り返す"],
+    tip: "復習は短時間でも効果大。毎日15分の復習を積み重ねることで、1年後には忘れない英語力が身につきます。"
+  }
+};
+
+function getTaskDetail(task) {
+  return TASK_DETAILS[task.type] || null;
+}
+
+function toggleDetail(taskId, event) {
+  event.stopPropagation();
+  var btn = document.getElementById("dbtn-" + taskId);
+  var panel = document.getElementById("dpanel-" + taskId);
+  if (!btn || !panel) return;
+  var isOpen = panel.classList.contains("open");
+  panel.classList.toggle("open", !isOpen);
+  btn.classList.toggle("open", !isOpen);
+  btn.textContent = isOpen ? "詳細 ▾" : "詳細 ▴";
+}
+
+// ===================== STATE =====================
+let startDate = null;
+let completedTasks = {};
+let currentPhase = 0;
+let currentFilter = 'all';
+let theme = 'light';
+
+function loadState() {
+  const sd = localStorage.getItem('eng_start_date');
+  if (sd) startDate = new Date(sd);
+  completedTasks = JSON.parse(localStorage.getItem('eng_completed') || '{}');
+  theme = localStorage.getItem('eng_theme') || 'light';
+  document.documentElement.setAttribute('data-theme', theme);
+}
+
+function saveCompleted() {
+  localStorage.setItem('eng_completed', JSON.stringify(completedTasks));
+}
+
+function getTodayDayNum() {
+  if (!startDate) return 1;
+  const now = new Date();
+  const diff = Math.floor((now - startDate) / (1000*60*60*24));
+  return Math.max(1, Math.min(365, diff+1));
+}
+
+function getPhaseForDay(d) {
+  if (d<=90) return 0;
+  if (d<=180) return 1;
+  if (d<=270) return 2;
+  return 3;
+}
+
+function getDayData(dayNum) {
+  for (const phase of PROGRAM) {
+    for (const week of phase.weeks) {
+      for (const day of week.days) {
+        if (day.day === dayNum) return {day, week, phase};
+      }
+    }
+  }
+  return null;
+}
+
+function getDayCompletedCount(dayNum) {
+  let total=0, done=0;
+  const data = getDayData(dayNum);
+  if (!data) return {total:0,done:0};
+  data.day.tasks.forEach(t => { total++; if (completedTasks[t.id]) done++; });
+  return {total,done};
+}
+
+function calcStreak() {
+  if (!startDate) return 0;
+  const today = getTodayDayNum();
+  let streak = 0;
+  for (let d=today; d>=1; d--) {
+    const {total,done} = getDayCompletedCount(d);
+    if (total>0 && done/total >= 0.5) streak++;
+    else if (d<today) break;
+  }
+  return streak;
+}
+
+function calcOverall() {
+  let total=0, done=0;
+  PROGRAM.forEach(p => p.weeks.forEach(w => w.days.forEach(d => {
+    d.tasks.forEach(t => { total++; if (completedTasks[t.id]) done++; });
+  })));
+  return {total,done,pct: total>0 ? Math.round(done/total*100) : 0};
+}
+
+function calcWeek() {
+  const todayDay = getTodayDayNum();
+  const weekStart = Math.floor((todayDay-1)/7)*7+1;
+  const weekEnd = weekStart+6;
+  let total=0, done=0;
+  for (let d=weekStart; d<=weekEnd; d++) {
+    const c = getDayCompletedCount(d);
+    total+=c.total; done+=c.done;
+  }
+  return {total,done,pct: total>0 ? Math.round(done/total*100) : 0};
+}
+
+// ===================== UI =====================
+function setStartDate() {
+  const v = document.getElementById('start-date-input').value;
+  if (!v) { alert('開始日を選択してください'); return; }
+  startDate = new Date(v);
+  localStorage.setItem('eng_start_date', v);
+  showMainApp();
+}
+
+function showMainApp() {
+  document.getElementById('setup-screen').style.display = 'none';
+  document.getElementById('main-app').style.display = 'block';
+  updateHeader();
+  showPhase(0);
+}
+
+function updateHeader() {
+  const today = getTodayDayNum();
+  const streak = calcStreak();
+  const overall = calcOverall();
+  const week = calcWeek();
+  document.getElementById('streak-badge').textContent = `🔥 ${streak}日連続`;
+  document.getElementById('day-badge').textContent = `Day ${today}`;
+  document.getElementById('total-badge').textContent = `${overall.pct}% 達成`;
+  document.getElementById('stat-overall').textContent = `${overall.pct}%`;
+  document.getElementById('stat-overall-sub').textContent = `${overall.done} / ${overall.total} タスク`;
+  document.getElementById('bar-overall').style.width = overall.pct+'%';
+  document.getElementById('stat-week').textContent = `${week.pct}%`;
+  document.getElementById('stat-week-sub').textContent = `${week.done} / ${week.total} タスク（今週）`;
+  document.getElementById('bar-week').style.width = week.pct+'%';
+  document.getElementById('stat-days').textContent = today;
+  document.getElementById('bar-days').style.width = (today/365*100)+'%';
+  document.getElementById('stat-streak').textContent = `🔥 ${streak}`;
+  updateTodayCard();
+}
+
+function updateTodayCard() {
+  const today = getTodayDayNum();
+  const data = getDayData(today);
+  if (!data) return;
+  const {day,week,phase} = data;
+  const {total,done} = getDayCompletedCount(today);
+  const pct = total>0 ? Math.round(done/total*100) : 0;
+  document.getElementById('today-label').textContent = `今日 · Day ${today} · ${new Date().toLocaleDateString('ja-JP')}`;
+  document.getElementById('today-title').textContent = day.theme;
+  document.getElementById('today-theme').textContent = `${phase.name} · Week ${week.week}`;
+  document.getElementById('today-prog-text').textContent = `${done} / ${total} タスク完了`;
+  document.getElementById('today-bar').style.width = pct+'%';
+  document.getElementById('today-card').style.background = done===total && total>0
+    ? 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)'
+    : 'linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%)';
+}
+
+function showPhase(phaseIdx) {
+  document.querySelectorAll('.phase-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.phase-tab[data-phase="${phaseIdx}"]`).classList.add('active');
+  currentPhase = phaseIdx;
+  const content = document.getElementById('content-area');
+  content.innerHTML = '';
+
+  if (phaseIdx === 0) {
+    showTodayView(content);
+  } else {
+    const phase = PROGRAM[phaseIdx-1];
+    const banner = document.createElement('div');
+    const colors = ['','#22c55e','#3b82f6','#a855f7','#f97316'];
+    const descs = ['','脳科学に基づき音韻・語彙・文法の基礎を確立。1日1〜2時間で頻出英単語2000語と発音の基盤を作る',
+      '大量のインプット（多聴・多読・シャドーイング）で英語回路を構築。語彙を3000語に拡張',
+      '実際の会話でアウトプットを開始。オンライン英会話・英語日記で流暢さを向上',
+      'ネイティブ速度での理解と自然な会話を定着。語彙4000語達成・B1〜B2レベルへ'];
+    banner.className = 'phase-banner';
+    banner.style.cssText = `background:${colors[phaseIdx]}20; border-color:${colors[phaseIdx]};`;
+    banner.innerHTML = `<h3 style="color:${colors[phaseIdx]}">${phase.name} (${phase.days})</h3><p>${descs[phaseIdx]}</p>`;
+    content.appendChild(banner);
+    phase.weeks.forEach(week => renderWeek(content, week, phase, phaseIdx));
+  }
+}
+
+function showTodayView(content) {
+  const today = getTodayDayNum();
+  const data = getDayData(today);
+  if (!data) { content.innerHTML = '<p style="color:var(--text2);padding:20px;">データが見つかりません</p>'; return; }
+  const {day, week, phase} = data;
+  const phaseIdx = getPhaseForDay(today)+1;
+  const singleWeek = {week: week.week, theme: week.theme, days: [day]};
+  renderWeek(content, singleWeek, phase, phaseIdx, true);
+}
+
+function renderWeek(container, week, phase, phaseIdx, autoOpen=false) {
+  const today = getTodayDayNum();
+  const colors = ['','var(--p1)','var(--p2)','var(--p3)','var(--p4)'];
+  const color = colors[phaseIdx] || 'var(--primary)';
+
+  let weekTotal=0, weekDone=0;
+  week.days.forEach(d => {
+    d.tasks.forEach(t => { weekTotal++; if (completedTasks[t.id]) weekDone++; });
+  });
+  const weekPct = weekTotal>0 ? Math.round(weekDone/weekTotal*100) : 0;
+
+  const section = document.createElement('div');
+  section.className = 'week-section';
+  const isCurrentWeek = week.days.some(d => d.day===today);
+  if (isCurrentWeek || autoOpen) section.classList.add('open');
+
+  section.innerHTML = `
+    <div class="week-header" onclick="toggleWeek(this)">
+      <div class="week-badge" style="background:${color}">W${week.week}</div>
+      <div class="week-info">
+        <div class="week-title">Week ${week.week}：${week.theme}</div>
+        <div class="week-sub">Day ${week.days[0]?.day} 〜 Day ${week.days[week.days.length-1]?.day} · ${weekTotal}タスク</div>
+      </div>
+      <div class="week-progress">
+        <div class="week-pct" style="color:${color}">${weekPct}%</div>
+        <div style="font-size:0.72rem;color:var(--text2)">${weekDone}/${weekTotal}</div>
+      </div>
+      <div class="week-chevron">▼</div>
+    </div>
+    <div class="week-days" id="week-${week.week}-days"></div>
+  `;
+  container.appendChild(section);
+
+  const daysContainer = section.querySelector(`#week-${week.week}-days`);
+  week.days.forEach(day => renderDay(daysContainer, day, today, phaseIdx));
+}
+
+function renderDay(container, day, today, phaseIdx) {
+  const {total,done} = getDayCompletedCount(day.day);
+  const isToday = day.day===today;
+  const badgeClass = done===total&&total>0?'complete': done>0?'partial':'todo';
+  const badgeText = done===total&&total>0?'✅ 完了': done>0?`${done}/${total}`:'未着手';
+
+  const section = document.createElement('div');
+  section.className = 'day-section';
+  section.id = `day-${day.day}`;
+  if (isToday) section.classList.add('open');
+
+  section.innerHTML = `
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-num">Day ${day.day}${isToday?'<br><span class="today-marker">TODAY</span>':''}</div>
+      <div class="day-name">${day.theme}</div>
+      <div class="day-done-badge ${badgeClass}">${badgeText}</div>
+      <div class="week-chevron">▼</div>
+    </div>
+    <div class="day-tasks" id="tasks-day-${day.day}"></div>
+  `;
+  container.appendChild(section);
+
+  const tasksContainer = section.querySelector(`#tasks-day-${day.day}`);
+  day.tasks.forEach(task => renderTask(tasksContainer, task, day.day));
+}
+
+function renderTask(container, task, dayNum) {
+  if (currentFilter !== 'all' && task.type !== currentFilter) return;
+  const isDone = !!completedTasks[task.id];
+  const totalSecs = parseSeconds(task.time);
+  const detail = getTaskDetail(task);
+  let detailHTML = '';
+  if (detail) {
+    const methodsHTML = detail.methods.map(m => '<li>' + m + '</li>').join('');
+    detailHTML =
+      '<button id="dbtn-' + task.id + '" class="task-detail-btn" onclick="toggleDetail(\'' + task.id + '\',event)">詳細 ▾</button>' +
+      '<div id="dpanel-' + task.id + '" class="task-detail-panel">' +
+        '<div class="detail-section"><div class="detail-label">目的</div><div class="detail-text">' + detail.purpose + '</div></div>' +
+        '<div class="detail-section"><div class="detail-label">学習方法</div><ul class="detail-methods">' + methodsHTML + '</ul></div>' +
+        '<div class="detail-section"><div class="detail-label">ポイント</div><div class="detail-tip">' + detail.tip + '</div></div>' +
+      '</div>';
+  }
+  const item = document.createElement('div');
+  item.className = `task-item${isDone?' done':''}`;
+  item.setAttribute('data-task-id', task.id);
+  item.setAttribute('data-day', dayNum);
+  item.onclick = () => toggleTask(task.id, dayNum);
+  item.innerHTML = `
+    <div class="task-checkbox"></div>
+    <div class="task-content">
+      <div class="task-header">
+        <span class="task-icon">${task.icon}</span>
+        <span class="task-type-badge type-${task.type}">${task.type}</span>
+        <span class="task-time">⏱ ${task.time}</span>
+      </div>
+      <div class="task-text">${task.content}</div>
+      <div class="task-timer">
+        <button id="tb-${task.id}" class="timer-btn" onclick="toggleTimer('${task.id}',${totalSecs});event.stopPropagation()">▶</button>
+        <span id="td-${task.id}" class="timer-display">${formatTime(totalSecs)}</span>
+        <button class="timer-reset" onclick="resetTimer('${task.id}',${totalSecs});event.stopPropagation()" title="リセット">↺</button>
+      </div>
+      ${detailHTML}
+    </div>
+  `;
+  container.appendChild(item);
+}
+
+function toggleTask(taskId, dayNum) {
+  const wasCompleted = !!completedTasks[taskId];
+  completedTasks[taskId] = !wasCompleted;
+  saveCompleted();
+
+  const item = document.querySelector(`[data-task-id="${taskId}"]`);
+  if (item) {
+    item.classList.toggle('done', !wasCompleted);
+    if (!wasCompleted) {
+      item.classList.add('just-done');
+      setTimeout(() => item.classList.remove('just-done'), 400);
+    }
+  }
+
+  const {total,done} = getDayCompletedCount(dayNum);
+  const allDone = done===total && total>0;
+  if (allDone && !wasCompleted) {
+    launchConfetti();
+    setTimeout(() => showDailyComplete(), 1200);
+  }
+  if (!wasCompleted) setTimeout(() => showFact(), allDone ? 2800 : 250);
+  updateDayBadge(dayNum);
+  updateWeekProgress(dayNum);
+  updateHeader();
+}
+
+function updateDayBadge(dayNum) {
+  const {total,done} = getDayCompletedCount(dayNum);
+  const badge = document.querySelector(`#day-${dayNum} .day-done-badge`);
+  if (!badge) return;
+  badge.className = 'day-done-badge';
+  if (done===total&&total>0) { badge.classList.add('complete'); badge.textContent='✅ 完了'; }
+  else if (done>0) { badge.classList.add('partial'); badge.textContent=`${done}/${total}`; }
+  else { badge.classList.add('todo'); badge.textContent='未着手'; }
+}
+
+function updateWeekProgress(dayNum) {
+  const data = getDayData(dayNum);
+  if (!data) return;
+  const weekNum = data.week.week;
+  let wt=0,wd=0;
+  data.week.days.forEach(d => {
+    d.tasks.forEach(t => { wt++; if(completedTasks[t.id]) wd++; });
+  });
+  const pct = wt>0?Math.round(wd/wt*100):0;
+  const weekSec = document.querySelector(`.week-badge[style*="W${weekNum}"]`);
+  // find week section by week badge content
+  const allBadges = document.querySelectorAll('.week-badge');
+  allBadges.forEach(b => {
+    if (b.textContent===`W${weekNum}`) {
+      const header = b.closest('.week-header');
+      if (header) {
+        const pctEl = header.querySelector('.week-pct');
+        const subEl = header.querySelector('.week-pct + div');
+        if (pctEl) pctEl.textContent = pct+'%';
+        if (subEl) subEl.textContent = `${wd}/${wt}`;
+      }
+    }
+  });
+}
+
+function toggleWeek(header) {
+  header.closest('.week-section').classList.toggle('open');
+}
+
+function toggleDay(header) {
+  header.closest('.day-section').classList.toggle('open');
+}
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const phase = currentPhase;
+  showPhase(phase);
+}
+
+function scrollToToday() {
+  const todayEl = document.getElementById(`day-${getTodayDayNum()}`);
+  if (todayEl) {
+    todayEl.scrollIntoView({behavior:'smooth', block:'center'});
+    todayEl.classList.add('open');
+  } else {
+    showPhase(0);
+    setTimeout(() => {
+      const el = document.getElementById(`day-${getTodayDayNum()}`);
+      if (el) el.scrollIntoView({behavior:'smooth', block:'center'});
+    }, 200);
+  }
+}
+
+function toggleTheme() {
+  theme = theme==='light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('eng_theme', theme);
+  document.querySelector('.theme-btn').textContent = theme==='dark' ? '☀️' : '🌙';
+}
+
+function confirmReset() {
+  if (confirm('⚠️ すべての進捗がリセットされます。本当によいですか？')) {
+    localStorage.clear();
+    location.reload();
+  }
+}
+
+function launchConfetti() {
+  const container = document.getElementById('confetti-container');
+  const colors = ['#6366f1','#22c55e','#f59e0b','#ef4444','#8b5cf6','#3b82f6'];
+  for (let i=0; i<40; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.cssText = `
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-delay:${Math.random()*0.5}s;
+      animation-duration:${1+Math.random()}s;
+      width:${6+Math.random()*8}px;
+      height:${6+Math.random()*8}px;
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+    `;
+    container.appendChild(el);
+    setTimeout(() => el.remove(), 2500);
+  }
+}
+
+// ===================== INIT =====================
+loadState();
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('start-date-input').value = today;
+
+if (startDate) {
+  showMainApp();
+} else {
+  document.getElementById('setup-screen').style.display = 'block';
+}
+</script>
+</body>
+</html>
+
