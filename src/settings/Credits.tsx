@@ -16,6 +16,19 @@ const SOURCES: { name: string; use: string; license: string; url: string; note?:
     note: 'Tatoeba の投稿者のみなさん',
   },
   {
+    name: '雑学365個',
+    use: '図鑑の雑学。前回アプリの雑学を点検・修正し、英語版（やさしい版・標準版）を作成。1つずつに出典（主に英語版ウィキペディア）を付けた',
+    license: '本文はこのアプリで作成',
+    url: 'https://en.wikipedia.org/',
+    note: '出典は各カードの下に表示',
+  },
+  {
+    name: '名言60個',
+    use: '1日完了の画面。原文の英語と日本語訳。原典を確認できないものは「伝えられる」と表示',
+    license: '引用（短い名言・ことわざ）',
+    url: 'https://en.wikiquote.org/',
+  },
+  {
     name: '日本語訳・補いの例文',
     use: 'NGSL 各語の短い日本語訳、Tatoeba に適した例文がない17語の例文',
     license: 'CC BY-SA 4.0',

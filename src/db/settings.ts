@@ -23,6 +23,9 @@ export function defaultSettings(now = Date.now()): Settings {
     diagnosedAt: 0,
     reviewCap: 150,
     contentVersion: 0,
+    likedCategories: [],
+    lastTrophyDay: '',
+    phaseNotice: 0,
   }
 }
 

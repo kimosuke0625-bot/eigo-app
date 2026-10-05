@@ -3,6 +3,8 @@ import { db, type Settings } from '../db/schema'
 import { BLOCK_LABELS, PILLAR_LABELS, currentBlock, dayKey, planMenu, type PracticeKind } from './menu'
 import { DEV_PHASE } from './devPhase'
 import { needsBackupReminder } from '../settings/backupReminder'
+import { updateSettings } from '../db/settings'
+import { loadStreak } from '../habit/streak'
 
 export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnostic }: {
   settings: Settings
@@ -21,6 +23,8 @@ export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnos
     [today],
     {} as Partial<Record<string, number>>,
   )
+  // 練習の記録が変わるたびに連続日数を計算し直す
+  const streak = useLiveQuery(() => loadStreak(), [])
   const menu = planMenu(settings.targetMinutes, settings.blockOrder)
   const doneSeconds = Object.values(doneByKind).reduce<number>((s, x) => s + (x ?? 0), 0)
   const doneMin = Math.floor(doneSeconds / 60)
@@ -50,8 +54,25 @@ export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnos
         </div>
       )}
 
+      {settings.phaseNotice > 0 && (
+        <div className="banner ok">
+          🎉 語彙が増えたので <strong>Phase {settings.phaseNotice}</strong> に上がりました。カードの答えの形や素材が変わります。
+          <button className="btn secondary block" style={{ marginTop: 8 }} onClick={() => void updateSettings({ phaseNotice: 0 })}>
+            わかった
+          </button>
+        </div>
+      )}
+
       <section className="card stack">
-        <p className="muted">{dateLabel}</p>
+        <div className="row" style={{ justifyContent: 'space-between' }}>
+          <span className="muted">{dateLabel}</span>
+          {streak && (
+            <span className="streak">
+              🔥 連続 <strong>{streak.current}</strong>日{streak.todayDone ? ' ✓' : ''}
+              {streak.ticketLeft && <span className="muted" title="今週のお休み券"> 🎫</span>}
+            </span>
+          )}
+        </div>
         {settings.cue && <p className="cue">{settings.cue}</p>}
         <div>
           <div className="row" style={{ justifyContent: 'space-between', marginBottom: 6 }}>
@@ -63,7 +84,14 @@ export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnos
         <button className="btn block" onClick={() => onStart(startKind)}>
           ▶ {BLOCK_LABELS[nowBlock]}のメニューを始める
         </button>
-        <p className="muted">最低ラインは「復習カード5分」。これだけでもその日は継続になります。</p>
+        {streak && !streak.todayDone ? (
+          <button className="btn secondary block" onClick={() => onStart('review')}>
+            ⏱ 今日は5分だけ（復習カードの最低ライン）
+          </button>
+        ) : (
+          <p className="muted">✓ 今日の最低ライン（5分）は達成済み。今日の雑学は図鑑に入っています。</p>
+        )}
+        <p className="muted">5分練習すればその日は「継続」。週に1回はお休み券で、休んでも連続日数が途切れません。</p>
       </section>
 
       {settings.blockOrder.map((block) => {

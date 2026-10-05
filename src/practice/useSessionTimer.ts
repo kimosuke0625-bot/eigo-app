@@ -5,8 +5,9 @@ import { dayKey } from '../today/menu'
 /**
  * 練習画面を開いている時間を sessions に記録する。
  * 画面が隠れている間は数えない。iPhone で途中でアプリが閉じられても失われないよう10秒ごとに保存する。
+ * maxPerDay を渡すと、同じ種類の練習の1日の合計がその秒数を超えた分は数えない（雑学を読む時間など）。
  */
-export function useSessionTimer(kind: string, pillar: Pillar) {
+export function useSessionTimer(kind: string, pillar: Pillar, maxPerDay?: number) {
   const result = useRef<Record<string, number>>({})
 
   useEffect(() => {
@@ -14,11 +15,20 @@ export function useSessionTimer(kind: string, pillar: Pillar) {
     let last = Date.now()
     let id: number | undefined
     let stopped = false
-    const created = db.sessions.add({ at: last, day: dayKey(), kind, pillar, seconds: 0 }).then((k) => (id = k))
+    let allowed = Infinity
+    const day = dayKey()
+    const created = db.sessions.add({ at: last, day, kind, pillar, seconds: 0 }).then(async (k) => {
+      id = k
+      if (maxPerDay !== undefined) {
+        const before = (await db.sessions.where('day').equals(day).filter((x) => x.kind === kind && x.id !== k).toArray())
+          .reduce((sum, x) => sum + x.seconds, 0)
+        allowed = Math.max(0, maxPerDay - before)
+      }
+    })
 
     const tick = () => {
       const now = Date.now()
-      if (document.visibilityState === 'visible') seconds += Math.min(now - last, 15000) / 1000
+      if (document.visibilityState === 'visible') seconds = Math.min(allowed, seconds + Math.min(now - last, 15000) / 1000)
       last = now
     }
     const save = async () => {
@@ -40,7 +50,7 @@ export function useSessionTimer(kind: string, pillar: Pillar) {
         if (id !== undefined && seconds < 5) await db.sessions.delete(id)
       })
     }
-  }, [kind, pillar])
+  }, [kind, pillar, maxPerDay])
 
   return result
 }

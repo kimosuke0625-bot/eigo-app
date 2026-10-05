@@ -5,6 +5,7 @@ import { backupFileName, exportAll, importAll, parseBackup, type BackupFile } fr
 import { BLOCK_LABELS } from '../today/menu'
 import { speak, speechSupported, useEnglishVoices } from '../speech/voices'
 import { Credits } from './Credits'
+import { playChime } from '../rewards/sound'
 
 function Seg<T extends string | number>({ value, options, onChange }: {
   value: T
@@ -137,6 +138,9 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
           <span>効果音</span>
           <Seg value={settings.sound ? 'on' : 'off'} onChange={(v) => set({ sound: v === 'on' })}
             options={[{ value: 'on', label: 'オン' }, { value: 'off', label: 'オフ' }]} />
+          {settings.sound && (
+            <button className="btn secondary" style={{ marginTop: 8 }} onClick={() => playChime()}>🔔 試しに鳴らす</button>
+          )}
         </div>
         <div className="field">
           <span>画面の色</span>

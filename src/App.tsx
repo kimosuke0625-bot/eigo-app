@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useSettings } from './db/settings'
-import { db, type ThemeMode } from './db/schema'
+import { db, type Settings, type ThemeMode } from './db/schema'
 import { TodayScreen } from './today/TodayScreen'
 import { SettingsScreen } from './settings/SettingsScreen'
 import { Onboarding } from './settings/Onboarding'
@@ -13,6 +13,11 @@ import { ReviewScreen } from './practice/ReviewScreen'
 import { NewCardsScreen } from './practice/NewCardsScreen'
 import { DiagnosticScreen } from './assessment/DiagnosticScreen'
 import type { PracticeKind } from './today/menu'
+import { ProgressScreen } from './progress/ProgressScreen'
+import { CollectionScreen } from './rewards/CollectionScreen'
+import { useDailyRewards } from './rewards/useDailyRewards'
+import { setSoundEnabled } from './rewards/sound'
+import { checkPhase } from './progress/autoPhase'
 
 export type Tab = 'today' | 'practice' | 'progress' | 'materials' | 'collection' | 'settings'
 
@@ -57,10 +62,27 @@ export default function App() {
 
   useEffect(() => {
     loadNgsl().catch((e: Error) => setContentError(e.message))
+    void checkPhase()
   }, [])
+  useEffect(() => setSoundEnabled(settings?.sound ?? true), [settings?.sound])
 
   if (!settings) return null
   if (!settings.onboarded) return <Onboarding settings={settings} />
+  return <Main settings={settings} tab={tab} setTab={setTab} overlay={overlay} setOverlay={setOverlay}
+    contentError={contentError} dueCount={dueCount} setClock={setClock} />
+}
+
+function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCount, setClock }: {
+  settings: Settings
+  tab: Tab
+  setTab: (t: Tab) => void
+  overlay: Overlay
+  setOverlay: (o: Overlay) => void
+  contentError: string
+  dueCount: number
+  setClock: (n: number) => void
+}) {
+  const rewards = useDailyRewards(settings, overlay === null)
 
   const close = () => { setOverlay(null); setClock(Date.now()) }
   const start = (k: PracticeKind) => setOverlay({ practice: k })
@@ -78,14 +100,12 @@ export default function App() {
   } else if (tab === 'practice') {
     body = <PracticeHub onStart={start} dueCount={dueCount} />
   } else if (tab === 'progress') {
-    body = <Placeholder title="進捗" devPhase={3}
-      text="学習時間・継続日数・語彙数・正答率のグラフをフェーズ3で追加します。記録はすでに端末内に保存されています。" />
+    body = <ProgressScreen settings={settings} />
   } else if (tab === 'materials') {
     body = <Placeholder title="素材" devPhase={4}
       text="内蔵素材の一覧と、文章を貼り付けて取り込む機能をフェーズ4で追加します。" />
   } else if (tab === 'collection') {
-    body = <Placeholder title="図鑑" devPhase={3}
-      text="前回アプリの雑学365個（英語版つき）と称号をフェーズ3で追加します。" />
+    body = <CollectionScreen settings={settings} />
   } else {
     body = <SettingsScreen settings={settings} onDiagnostic={() => setOverlay({ diagnostic: true })} />
   }
@@ -101,6 +121,7 @@ export default function App() {
 
       {contentError && <div className="banner warn">{contentError}。通信できる場所でもう一度開いてください。</div>}
       {body}
+      {rewards}
 
       {!overlay && (
         <nav className="tabbar" aria-label="画面の切り替え">

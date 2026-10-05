@@ -7,6 +7,7 @@ import { speak, speechSupported } from '../speech/voices'
 import { AnswerFace, Highlight, SpeakButton } from './WordParts'
 import { useSessionTimer } from './useSessionTimer'
 import { applyEdit } from '../content/edits'
+import { playCorrect, playTry } from '../rewards/sound'
 
 // item は利用者の修正を反映した語（表の面に使う）、raw は元の語（答えの面が修正を反映して表示する）
 type Current = { card: Card; item: Item; raw: Item; mode: PresentMode; shownAt: number }
@@ -30,6 +31,9 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
   const revealed = revealedAt > 0
   const [showJa, setShowJa] = useState(false)
   const [done, setDone] = useState({ total: 0, recalled: 0 })
+  // 思い出せた回数の連続（コンボ）。続くほど効果音が高くなる
+  const combo = useRef(0)
+  const [comboShown, setComboShown] = useState(0)
   const answerMs = useRef(0)
   const tts = speechSupported()
 
@@ -63,8 +67,13 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
 
   const grade = useCallback(async (g: Grade) => {
     if (!current || !queue) return
-    const updated = await recordReview(current.card, g, { answerMs: answerMs.current, mode: current.mode })
+    // 効果音はタップの直後に鳴らす（iPhone では待ち時間をはさむと鳴らないことがある）
     const recalled = g >= 2
+    combo.current = recalled ? combo.current + 1 : 0
+    setComboShown(combo.current)
+    if (recalled) playCorrect(combo.current)
+    else playTry()
+    const updated = await recordReview(current.card, g, { answerMs: answerMs.current, mode: current.mode })
     setDone((d) => ({ total: d.total + 1, recalled: d.recalled + (recalled ? 1 : 0) }))
     result.current.reviews = (result.current.reviews ?? 0) + 1
     result.current.recalled = (result.current.recalled ?? 0) + (recalled ? 1 : 0)
@@ -105,7 +114,8 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
   return (
     <div className="review">
       <div className="row" style={{ justifyContent: 'space-between', marginBottom: 8 }}>
-        <span className="muted">残り {remaining} 枚・済み {done.total}</span>
+        <span className="muted">残り {remaining} 枚・思い出そうとした回数 {done.total}</span>
+        {comboShown >= 3 && <span className="combo" key={comboShown}>🔥 {comboShown}連続</span>}
         <span className="tag">{mode === 'word' ? '単語' : mode === 'chunk' ? '例文' : '聞き取り'}</span>
       </div>
 

@@ -121,16 +121,30 @@ export interface Assessment {
   writingTypes?: number
 }
 
+/**
+ * 雑学の利用者ごとの状態。雑学の本文は public/data/facts.json にあり、ここには保存しない。
+ * id は facts.json の id。
+ */
 export interface Fact {
   id: string
   category: string
-  englishEasy: string
-  englishStandard: string
-  japanese: string
-  source: string
-  rarity: 'common' | 'rare'
-  series?: string
+  /** 図鑑に入った日時（未取得なら undefined） */
   acquiredAt?: number
+  /** 取得した日の日付キー */
+  acquiredDay?: string
+  /** 「雑学の確認」で外したもの */
+  excluded?: boolean
+}
+
+/** 毎日の語彙の記録（進捗グラフ用） */
+export interface Snapshot {
+  day: string
+  /** FSRS の安定度が21日以上のカード数（定着した語彙） */
+  mature: number
+  /** カードの総数 */
+  cards: number
+  /** 知っている語として登録した数 */
+  known: number
 }
 
 export interface Reward {
@@ -173,6 +187,12 @@ export interface Settings {
   reviewCap: number
   /** 取り込み済みの語彙データの版 */
   contentVersion: number
+  /** 「もっと知りたい」を押した雑学の分野 */
+  likedCategories: string[]
+  /** 1日完了のトロフィー画面を出した日 */
+  lastTrophyDay: string
+  /** 自動で上がった Phase のお知らせ（0 = なし） */
+  phaseNotice: number
 }
 
 export class EigoDB extends Dexie {
@@ -188,6 +208,7 @@ export class EigoDB extends Dexie {
   settings!: EntityTable<Settings, 'key'>
   knownWords!: EntityTable<KnownWord, 'itemId'>
   edits!: EntityTable<ItemEdit, 'itemId'>
+  snapshots!: EntityTable<Snapshot, 'day'>
 
   constructor(name = 'eigo') {
     super(name)
@@ -213,12 +234,17 @@ export class EigoDB extends Dexie {
     this.version(3).stores({
       edits: 'itemId',
     })
+    // フェーズ3：毎日の語彙の記録、雑学の取得日
+    this.version(4).stores({
+      snapshots: 'day',
+      facts: 'id, category, acquiredAt, acquiredDay',
+    })
   }
 }
 
 /** 書き出しの対象。items は教材データから作り直せるので含めない */
 export const TABLE_NAMES = [
-  'cards', 'reviews', 'knownWords', 'edits', 'materials', 'sessions',
+  'cards', 'reviews', 'knownWords', 'edits', 'snapshots', 'materials', 'sessions',
   'recordings', 'assessments', 'facts', 'rewards', 'settings',
 ] as const
 
