@@ -4,6 +4,9 @@ import { dayKey } from '../today/menu'
 /** 最低ライン：その日に5分以上練習すれば「継続」 */
 export const MIN_SECONDS = 5 * 60
 
+/** 学習時間には数えるが、最低ライン（継続の判定）には数えない記録の種類（雑学を読む時間） */
+export const NOT_PRACTICE = new Set(['facts'])
+
 /** 日付キー（YYYY-MM-DD）を1日ずつ進める */
 export function addDays(day: string, n: number): string {
   const [y, m, d] = day.split('-').map(Number)
@@ -58,10 +61,12 @@ export function computeStreak(achieved: Set<string>, today: string, firstDay: st
   return { current, best, restDays, ticketLeft: !usedWeeks.has(weekStart(today)), todayDone: achieved.has(today) }
 }
 
-/** 日ごとの練習秒数 */
+/** 日ごとの練習秒数（雑学を読む時間は含めない） */
 export async function dayTotals(database: EigoDB = db): Promise<Map<string, number>> {
   const totals = new Map<string, number>()
-  await database.sessions.each((s) => totals.set(s.day, (totals.get(s.day) ?? 0) + s.seconds))
+  await database.sessions.each((s) => {
+    if (!NOT_PRACTICE.has(s.kind)) totals.set(s.day, (totals.get(s.day) ?? 0) + s.seconds)
+  })
   return totals
 }
 

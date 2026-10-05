@@ -57,3 +57,21 @@ describe('連続日数とお休み券', () => {
     expect(r.restDays.size).toBe(0)
   })
 })
+
+describe('最低ラインに数える時間', () => {
+  it('雑学を読む時間は継続の判定に含めない', async () => {
+    const { EigoDB } = await import('../db/schema')
+    const { loadStreak } = await import('./streak')
+    const database = new EigoDB('streak-facts')
+    await database.sessions.bulkAdd([
+      { at: 0, day: '2026-10-06', kind: 'facts', pillar: 'input', seconds: 600 },
+      { at: 0, day: '2026-10-07', kind: 'review', pillar: 'language', seconds: 200 },
+      { at: 0, day: '2026-10-07', kind: 'facts', pillar: 'input', seconds: 200 },
+      { at: 0, day: '2026-10-08', kind: 'review', pillar: 'language', seconds: 300 },
+    ])
+    const r = await loadStreak(database, '2026-10-08')
+    expect(r.totals.get('2026-10-07')).toBe(200)
+    expect(r.todayDone).toBe(true)
+    expect(r.current).toBe(1)
+  })
+})

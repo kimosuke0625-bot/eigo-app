@@ -3,7 +3,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { db, type Settings } from '../db/schema'
 import { updateSettings } from '../db/settings'
 import { dayKey } from '../today/menu'
-import { loadStreak, MIN_SECONDS } from '../habit/streak'
+import { loadStreak, MIN_SECONDS, NOT_PRACTICE } from '../habit/streak'
 import { startOfDay } from '../srs/queue'
 import { acquireFact, pickFact, useFacts, type FactContent } from './facts'
 import { quoteForDay, useQuotes } from './quotes'
@@ -29,9 +29,16 @@ export function useDailyRewards(settings: Settings, idle: boolean) {
   const today = dayKey()
   const facts = useFacts()
   const quotes = useQuotes()
-  const seconds = useLiveQuery(
-    async () => (await db.sessions.where('day').equals(today).toArray()).reduce((s, x) => s + x.seconds, 0),
-    [today], 0,
+  // 学習時間（トロフィーの判定）は雑学を読む時間も含め、最低ライン（雑学カード）は練習の時間だけで判定する
+  const { seconds, practice } = useLiveQuery(
+    async () => {
+      const list = await db.sessions.where('day').equals(today).toArray()
+      return {
+        seconds: list.reduce((s, x) => s + x.seconds, 0),
+        practice: list.filter((x) => !NOT_PRACTICE.has(x.kind)).reduce((s, x) => s + x.seconds, 0),
+      }
+    },
+    [today], { seconds: 0, practice: 0 },
   )
   const gotToday = useLiveQuery(() => db.facts.where('acquiredDay').equals(today).count(), [today], -1)
   const [fact, setFact] = useState<FactContent | null>(null)
@@ -40,7 +47,7 @@ export function useDailyRewards(settings: Settings, idle: boolean) {
 
   useEffect(() => {
     if (!idle || !facts || busy.current || fact || trophy) return
-    if (seconds >= MIN_SECONDS && gotToday === 0) {
+    if (practice >= MIN_SECONDS && gotToday === 0) {
       busy.current = true
       void (async () => {
         const owned = new Map((await db.facts.toArray()).map((f) => [f.id, f]))
@@ -65,7 +72,7 @@ export function useDailyRewards(settings: Settings, idle: boolean) {
         busy.current = false
       })()
     }
-  }, [idle, facts, seconds, gotToday, fact, trophy, settings, today])
+  }, [idle, facts, seconds, practice, gotToday, fact, trophy, settings, today])
 
   if (fact && facts) return <FactArrived fact={fact} data={facts} settings={settings} onClose={() => setFact(null)} />
   if (trophy) {

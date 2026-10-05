@@ -91,7 +91,7 @@ export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnos
         ) : (
           <p className="muted">✓ 今日の最低ライン（5分）は達成済み。今日の雑学は図鑑に入っています。</p>
         )}
-        <p className="muted">5分練習すればその日は「継続」。週に1回はお休み券で、休んでも連続日数が途切れません。</p>
+        <p className="muted">5分練習すればその日は「継続」（雑学を読む時間は含みません）。週に1回はお休み券で、休んでも連続日数が途切れません。</p>
       </section>
 
       {settings.blockOrder.map((block) => {
