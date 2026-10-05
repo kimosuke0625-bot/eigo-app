@@ -38,4 +38,9 @@ describe('日付とブロック', () => {
     expect(currentBlock(new Date(2026, 0, 1, 12))).toBe('noon')
     expect(currentBlock(new Date(2026, 0, 1, 21))).toBe('night')
   })
+  it('区切りの時刻を変えられる', () => {
+    expect(currentBlock(new Date(2026, 0, 1, 12), 13, 18)).toBe('morning')
+    expect(currentBlock(new Date(2026, 0, 1, 17), 13, 18)).toBe('noon')
+    expect(currentBlock(new Date(2026, 0, 1, 18), 13, 18)).toBe('night')
+  })
 })

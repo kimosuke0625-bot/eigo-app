@@ -18,7 +18,7 @@ export function TodayScreen({ settings, onNavigate }: { settings: Settings; onNa
   const doneMin = Math.floor(doneSeconds / 60)
   const remaining = Math.max(0, settings.targetMinutes - doneMin)
   const pct = Math.min(100, (doneMin / settings.targetMinutes) * 100)
-  const nowBlock = currentBlock()
+  const nowBlock = currentBlock(new Date(), settings.morningEnd, settings.noonEnd)
 
   const date = new Date()
   const dateLabel = date.toLocaleDateString('ja-JP', { month: 'long', day: 'numeric', weekday: 'short' })

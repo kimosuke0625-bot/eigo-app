@@ -15,6 +15,8 @@ export function defaultSettings(now = Date.now()): Settings {
     theme: 'system',
     voiceURI: '',
     blockOrder: ['morning', 'noon', 'night'],
+    morningEnd: 11,
+    noonEnd: 17,
     restDays: [],
     lastBackupAt: 0,
     createdAt: now,

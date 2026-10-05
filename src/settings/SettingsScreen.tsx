@@ -21,6 +21,8 @@ function Seg<T extends string | number>({ value, options, onChange }: {
   )
 }
 
+const hours = (from: number, to: number) => Array.from({ length: to - from + 1 }, (_, i) => from + i)
+
 export function SettingsScreen({ settings }: { settings: Settings }) {
   const set = (patch: Partial<Settings>) => updateSettings(patch)
   const voices = useEnglishVoices()
@@ -66,6 +68,24 @@ export function SettingsScreen({ settings }: { settings: Settings }) {
             </li>
           ))}
         </ul>
+        <div className="row" style={{ marginTop: 8 }}>
+          <label className="field" style={{ flex: 1, marginBottom: 0 }}>
+            <span>朝が終わる時刻</span>
+            <select value={settings.morningEnd}
+              onChange={(e) => set({ morningEnd: Number(e.target.value), noonEnd: Math.max(settings.noonEnd, Number(e.target.value) + 1) })}>
+              {hours(5, 14).map((h) => <option key={h} value={h}>{h}時</option>)}
+            </select>
+          </label>
+          <label className="field" style={{ flex: 1, marginBottom: 0 }}>
+            <span>昼が終わる時刻</span>
+            <select value={settings.noonEnd} onChange={(e) => set({ noonEnd: Number(e.target.value) })}>
+              {hours(settings.morningEnd + 1, 22).map((h) => <option key={h} value={h}>{h}時</option>)}
+            </select>
+          </label>
+        </div>
+        <p className="muted" style={{ marginTop: 6 }}>
+          今日の画面の「いま」の表示に使います。朝 〜{settings.morningEnd}時、昼 〜{settings.noonEnd}時、夜 それ以降。
+        </p>
       </section>
 
       <section className="card">
@@ -123,32 +143,50 @@ export function SettingsScreen({ settings }: { settings: Settings }) {
   )
 }
 
+function isAppleMobile() {
+  // iPadOS の Safari は Mac と名乗るため、タッチ対応かどうかでも判定する
+  return /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+    (navigator.userAgent.includes('Macintosh') && navigator.maxTouchPoints > 1)
+}
+
+function download(file: File, name: string) {
+  const url = URL.createObjectURL(file)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = name
+  document.body.appendChild(a)
+  a.click()
+  a.remove()
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
+}
+
 function BackupSection() {
   const fileRef = useRef<HTMLInputElement>(null)
   const [pending, setPending] = useState<BackupFile | null>(null)
   const [message, setMessage] = useState<{ kind: 'ok' | 'warn'; text: string } | null>(null)
 
   const doExport = async () => {
-    const data = await exportAll()
-    const name = backupFileName()
-    const file = new File([JSON.stringify(data)], name, { type: 'application/json' })
-    // iPhone のホーム画面アプリでは共有シートから「ファイルに保存」する
-    if (navigator.canShare?.({ files: [file] })) {
-      try {
-        await navigator.share({ files: [file], title: name })
-      } catch {
-        return // 共有シートを閉じた
+    try {
+      const data = await exportAll()
+      const name = backupFileName()
+      const file = new File([JSON.stringify(data)], name, { type: 'application/json' })
+      // iPhone のホーム画面アプリではダウンロードが使えないため、共有シートから「ファイルに保存」する。
+      // PC の Chrome も canShare を true と返すが共有に失敗するので、iPhone・iPad に限る
+      if (isAppleMobile() && navigator.canShare?.({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], title: name })
+        } catch (err) {
+          if ((err as Error).name === 'AbortError') return // 共有シートを閉じた
+          download(file, name)
+        }
+      } else {
+        download(file, name)
       }
-    } else {
-      const url = URL.createObjectURL(file)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = name
-      a.click()
-      setTimeout(() => URL.revokeObjectURL(url), 1000)
+      await updateSettings({ lastBackupAt: Date.now() })
+      setMessage({ kind: 'ok', text: `${name} を書き出しました。` })
+    } catch (err) {
+      setMessage({ kind: 'warn', text: `書き出しに失敗しました：${(err as Error).message}` })
     }
-    await updateSettings({ lastBackupAt: Date.now() })
-    setMessage({ kind: 'ok', text: `${name} を書き出しました。` })
   }
 
   const onPick = async (e: React.ChangeEvent<HTMLInputElement>) => {

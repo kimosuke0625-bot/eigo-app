@@ -110,6 +110,10 @@ export interface Settings {
   theme: ThemeMode
   voiceURI: string
   blockOrder: BlockId[]
+  /** 朝ブロックが終わる時刻（時） */
+  morningEnd: number
+  /** 昼ブロックが終わる時刻（時） */
+  noonEnd: number
   /** お休み券を使った日付キー */
   restDays: string[]
   lastBackupAt: number

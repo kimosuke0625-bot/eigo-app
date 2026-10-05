@@ -84,10 +84,10 @@ export function dayKey(date = new Date()): string {
   return `${date.getFullYear()}-${p(date.getMonth() + 1)}-${p(date.getDate())}`
 }
 
-/** 時刻からいまのブロックを決める（朝 〜11時、昼 〜17時、夜 それ以降） */
-export function currentBlock(date = new Date()): BlockId {
+/** 時刻からいまのブロックを決める（初期値：朝 〜11時、昼 〜17時、夜 それ以降） */
+export function currentBlock(date = new Date(), morningEnd = 11, noonEnd = 17): BlockId {
   const h = date.getHours()
-  if (h < 11) return 'morning'
-  if (h < 17) return 'noon'
+  if (h < morningEnd) return 'morning'
+  if (h < noonEnd) return 'noon'
   return 'night'
 }
