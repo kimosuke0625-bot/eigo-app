@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { isHighQualityVoice, speak, speechSupported, voiceScore } from '../speech/voices'
+import { isBannedVoice, isHighQualityVoice, speak, speechSupported, voiceScore } from '../speech/voices'
 
 /**
  * 端末からアプリに見えている声の一覧（名前・識別子・言語）。
@@ -23,7 +23,7 @@ export function VoiceDiagnostics() {
   const text = [
     `端末：${navigator.userAgent}`,
     `声の数：全部 ${voices.length}、英語 ${voices.filter((v) => v.lang.toLowerCase().startsWith('en')).length}`,
-    ...shown.map((v) => `${v.name}\t${v.voiceURI}\t${v.lang}\t${v.localService ? '端末内' : 'ネット'}${v.default ? '\t標準' : ''}${isHighQualityVoice(v) ? '\t高品質と判定' : ''}`),
+    ...shown.map((v) => `${v.name}\t${v.voiceURI}\t${v.lang}\t${v.localService ? '端末内' : 'ネット'}${v.default ? '\t標準' : ''}${isHighQualityVoice(v) ? '\t高品質と判定' : ''}${isBannedVoice(v) ? '\t使わない' : ''}`),
   ].join('\n')
 
   const copy = async () => {
@@ -53,10 +53,13 @@ export function VoiceDiagnostics() {
               <div style={{ flex: 1, minWidth: 0 }}>
                 <strong>{v.name}</strong>
                 {isHighQualityVoice(v) && <span className="tag fit-just">高品質</span>}
+                {isBannedVoice(v) && <span className="tag fit-hard">使わない</span>}
                 {v.default && <span className="tag">標準</span>}
                 <div className="muted voice-id">{v.voiceURI}・{v.lang}・{v.localService ? '端末内' : 'ネット'}</div>
               </div>
-              <button className="icon-btn" aria-label={`${v.name}で試聴`} onClick={() => speak('This is a test of my voice.', v.voiceURI)}>▶</button>
+              {!isBannedVoice(v) && (
+                <button className="icon-btn" aria-label={`${v.name}で試聴`} onClick={() => speak('This is a test of my voice.', v.voiceURI)}>▶</button>
+              )}
             </li>
           ))}
         </ul>

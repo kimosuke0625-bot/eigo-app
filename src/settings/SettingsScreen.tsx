@@ -3,7 +3,7 @@ import type { BlockId, EffectsLevel, Settings, ThemeMode } from '../db/schema'
 import { updateSettings } from '../db/settings'
 import { backupFileName, exportAll, importAll, parseBackup, type BackupFile } from '../db/backup'
 import { BLOCK_LABELS } from '../today/menu'
-import { isHighQualityVoice, speak, speechSupported, useEnglishVoices } from '../speech/voices'
+import { isAppleMobile, isHighQualityVoice, speak, speechSupported, useEnglishVoices } from '../speech/voices'
 import { Credits } from './Credits'
 import { AsrSection } from './AsrSection'
 import { AudioBankSection } from './AudioBankSection'
@@ -144,10 +144,10 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
           ) : (
             <p className="muted">英語の声が見えていません。端末の標準の声で読み上げます。</p>
           )}
-          {!voices.some(isHighQualityVoice) && <div className="banner info" style={{ marginTop: 8 }}><VoiceInstallGuide /></div>}
+          {!isAppleMobile() && !voices.some(isHighQualityVoice) && <div className="banner info" style={{ marginTop: 8 }}><VoiceInstallGuide /></div>}
           <VoiceDiagnostics />
           <small className="muted">
-            ★ は高品質な声。多聴・多読、シャドーイング、ディクテーションの内蔵素材と、聞き分けドリルの単語は、
+            ★ は高品質な声。遊び用の声は選べません。多聴・多読、シャドーイング、ディクテーションの内蔵素材と、聞き分けドリルの単語は、
             アプリに入っている音声（人の録音と、PC で作った高品質な合成音声）で再生します。端末の声は、復習カードの例文などに使います。
           </small>
         </div>
@@ -189,12 +189,6 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
       <Credits />
     </div>
   )
-}
-
-function isAppleMobile() {
-  // iPadOS の Safari は Mac と名乗るため、タッチ対応かどうかでも判定する
-  return /iPhone|iPad|iPod/.test(navigator.userAgent) ||
-    (navigator.userAgent.includes('Macintosh') && navigator.maxTouchPoints > 1)
 }
 
 function download(file: File, name: string) {

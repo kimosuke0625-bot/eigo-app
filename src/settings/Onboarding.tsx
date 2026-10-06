@@ -79,14 +79,10 @@ export function Onboarding({ settings }: { settings: Settings }) {
               <li>ホーム画面のアイコンから開く</li>
             </ol>
           </div>
-          <div>
-            <strong>高品質の英語音声を追加する</strong>
-            <ol className="steps">
-              <li>「設定」アプリ →「アクセシビリティ」→「読み上げコンテンツ」→「声」</li>
-              <li>「英語」を選び、好きな声（「拡張」や「高品質」と書かれたもの）をダウンロード</li>
-              <li>このアプリの「設定」で声を選んで試聴する</li>
-            </ol>
-          </div>
+          {/* iPhone は追加した声を Web アプリに見せないため、声の追加の手順は出さない。PC だけ一言 */}
+          {!isIOS() && (
+            <p className="muted">PC では Microsoft Edge か Chrome で開くと、聞き取りやすい声で読み上げます。</p>
+          )}
           <div className="row">
             <button className="btn secondary" onClick={() => setStep(1)}>戻る</button>
             <button className="btn" style={{ flex: 1 }} onClick={finish}>はじめる</button>
