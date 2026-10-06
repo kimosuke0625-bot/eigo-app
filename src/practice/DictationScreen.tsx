@@ -4,7 +4,7 @@ import { db, type Settings } from '../db/schema'
 import { applyEdit } from '../content/edits'
 import { loadBuiltinMaterials, useMaterials, type Mat } from '../content/materials'
 import { countWords, splitSentences } from '../speech/sentences'
-import { highQualityVoices, speak } from '../speech/voices'
+import { speak, speechSupported } from '../speech/voices'
 import { loadMaterialAudio, materialClips, playFile } from '../speech/clips'
 import { diffWords, type DiffToken } from './dictationScore'
 import { useSessionTimer } from './useSessionTimer'
@@ -69,12 +69,12 @@ function Dictation({ settings, material, onExit }: { settings: Settings; materia
 
   useEffect(() => { void pickSentences(material).then(setItems) }, [material])
 
-  // 再生できる音（内蔵の音声ファイルか、端末の高品質な声）がなければ練習できない
-  if (items && !items.some((x) => x.file) && !highQualityVoices().length) {
+  // 再生できる音（内蔵の音声ファイルか、端末の読み上げ）がなければ練習できない
+  if (items && !items.some((x) => x.file) && !speechSupported()) {
     return (
       <section className="card stack">
         <h2>ディクテーション</h2>
-        <p>この端末に高品質な英語の声が入っていないため、例文を再生できません。設定の「読み上げの声」の案内に従って声を追加してください。</p>
+        <p>この端末のブラウザは読み上げに対応していないため、例文を再生できません。</p>
         <button className="btn secondary block" onClick={onExit}>戻る</button>
       </section>
     )

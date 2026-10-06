@@ -3,11 +3,12 @@ import type { BlockId, EffectsLevel, Settings, ThemeMode } from '../db/schema'
 import { updateSettings } from '../db/settings'
 import { backupFileName, exportAll, importAll, parseBackup, type BackupFile } from '../db/backup'
 import { BLOCK_LABELS } from '../today/menu'
-import { speak, speechSupported, useEnglishVoices } from '../speech/voices'
+import { isHighQualityVoice, speak, speechSupported, useEnglishVoices } from '../speech/voices'
 import { Credits } from './Credits'
 import { AsrSection } from './AsrSection'
 import { playChime } from '../rewards/sound'
 import { VoiceInstallGuide } from './VoiceInstallGuide'
+import { VoiceDiagnostics } from './VoiceDiagnostics'
 
 function Seg<T extends string | number>({ value, options, onChange }: {
   value: T
@@ -124,14 +125,14 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
 
       <section className="card">
         <h2>声と演出</h2>
-        <label className="field">
-          <span>読み上げの声（高品質な声だけ）</span>
+        <div className="field">
+          <span>読み上げの声</span>
           {speechSupported() && voices.length > 0 ? (
             <div className="row">
               <select value={settings.voiceURI} onChange={(e) => set({ voiceURI: e.target.value })} style={{ flex: 1 }}>
-                <option value="">自動（最初の高品質な声）</option>
+                <option value="">自動（使える中で一番よい声）</option>
                 {voices.map((v) => (
-                  <option key={v.voiceURI} value={v.voiceURI}>{v.name}（{v.lang}）</option>
+                  <option key={v.voiceURI} value={v.voiceURI}>{isHighQualityVoice(v) ? '★ ' : ''}{v.name}（{v.lang}）</option>
                 ))}
               </select>
               <button className="btn secondary" type="button"
@@ -140,13 +141,15 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
               </button>
             </div>
           ) : (
-            <div className="banner warn"><VoiceInstallGuide /></div>
+            <p className="muted">英語の声が見えていません。端末の標準の声で読み上げます。</p>
           )}
+          {!voices.some(isHighQualityVoice) && <div className="banner info" style={{ marginTop: 8 }}><VoiceInstallGuide /></div>}
+          <VoiceDiagnostics />
           <small className="muted">
-            機械的で聞き取りにくい声は使いません。多聴・多読、シャドーイング、ディクテーションの内蔵素材と、聞き分けドリルの単語は、
+            ★ は高品質な声。多聴・多読、シャドーイング、ディクテーションの内蔵素材と、聞き分けドリルの単語は、
             アプリに入っている音声（人の録音と、PC で作った高品質な合成音声）で再生します。端末の声は、復習カードの例文などに使います。
           </small>
-        </label>
+        </div>
         <div className="field">
           <span>演出の量</span>
           <Seg<EffectsLevel> value={settings.effects} onChange={(v) => set({ effects: v })}

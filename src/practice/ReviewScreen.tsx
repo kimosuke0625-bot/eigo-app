@@ -4,7 +4,7 @@ import { db, type Card, type Item, type Settings } from '../db/schema'
 import { GRADES, GRADE_LABELS, formatInterval, previewIntervals, type Grade } from '../srs/fsrs'
 import { chooseMode, nextCard, type PresentMode } from '../srs/queue'
 import { recordReview, todaysQueue } from '../srs/store'
-import { highQualityVoices, speak } from '../speech/voices'
+import { speak, speechSupported } from '../speech/voices'
 import { AnswerFace, Highlight, SpeakButton } from './WordParts'
 import { useSessionTimer } from './useSessionTimer'
 import { applyEdit } from '../content/edits'
@@ -36,8 +36,8 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
   const combo = useRef(0)
   const [comboShown, setComboShown] = useState(0)
   const answerMs = useRef(0)
-  // 聞き取りの出題は、端末に高品質な声があるときだけ
-  const tts = highQualityVoices().length > 0
+  // 聞き取りの出題は、端末で読み上げができるとき
+  const tts = speechSupported()
 
   useEffect(() => {
     todaysQueue().then(setQueue)

@@ -14,7 +14,7 @@ const groupOf = (key: string) => PAIR_GROUPS.find((g) => g.key === key)!
 
 /**
  * 単語の音声を再生する。人の録音（Wikimedia Commons）を第一候補に、なければ PC で作った高品質な合成音声。
- * clipIndex でどの話者の声かを選ぶ（同じ問題を聞き直すときは同じ声）。音声ファイルがない語だけ端末の高品質な声で読む。
+ * clipIndex でどの話者の声かを選ぶ（同じ問題を聞き直すときは同じ声）。音声ファイルがない語だけ端末の声で読む。
  */
 function playWord(audio: Record<string, WordClip[]>, word: string, clipIndex: number, rate: number, voiceURI: string): WordClip | undefined {
   const clips = audio[word] ?? []
@@ -25,7 +25,7 @@ function playWord(audio: Record<string, WordClip[]>, word: string, clipIndex: nu
 }
 
 function speakerLabel(c?: WordClip) {
-  if (!c) return '端末の高品質な声'
+  if (!c) return '端末の読み上げ'
   return c.kind === 'human' ? `人の録音（${c.speaker}、${c.origin}）` : `合成音声（${c.speaker}）`
 }
 

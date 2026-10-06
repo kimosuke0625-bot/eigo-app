@@ -5,10 +5,11 @@ export function speechSupported() {
 }
 
 /**
- * 高品質な声か。機械的で聞き取りにくい声は使わない。
- * - iPhone・Mac：「拡張（enhanced）」「プレミアム（premium）」の声だけ
+ * 高品質な声か。
+ * - iPhone・Mac：「拡張（enhanced）」「プレミアム（premium）」の声
  * - Windows の Edge：Natural（ニューラル）の声
  * - Chrome：Google の声
+ * ※ iPhone の Safari は、利用者が追加した声を Web アプリに見せないことがある。見えている一覧は設定画面で確認できる。
  */
 export function isHighQualityVoice(v: Pick<SpeechSynthesisVoice, 'voiceURI' | 'name'>): boolean {
   const id = `${v.voiceURI} ${v.name}`
@@ -16,22 +17,42 @@ export function isHighQualityVoice(v: Pick<SpeechSynthesisVoice, 'voiceURI' | 'n
   return /natural|neural|premium|enhanced|google/i.test(id)
 }
 
+/** Mac・iPhone の、聞き取りの練習に向かない遊びの声やかなり古い声 */
+const NOVELTY = /albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|deranged|hysterical|pipe organ|fred|junior|ralph|kathy|princess|eloquence|rocko|shelley|sandy|grandma|grandpa|eddy|flo|reed/i
+
+/**
+ * 声のよさの順位（大きいほどよい）。高品質な声 > ふつうの英語の声 > 古い声・遊びの声。
+ * 同じ段階では、端末の中で動く声、アメリカ・イギリス英語を優先する。
+ */
+export function voiceScore(v: Pick<SpeechSynthesisVoice, 'voiceURI' | 'name' | 'lang' | 'localService'>): number {
+  let s = 0
+  if (isHighQualityVoice(v)) s += 100
+  if (NOVELTY.test(`${v.voiceURI} ${v.name}`)) s -= 100
+  if (/^en[-_](us|gb)/i.test(v.lang)) s += 10
+  if (v.localService) s += 2
+  return s
+}
+
 function englishVoices(): SpeechSynthesisVoice[] {
   if (!speechSupported()) return []
   return speechSynthesis.getVoices().filter((v) => v.lang.toLowerCase().startsWith('en'))
 }
 
-/** 使ってよい（高品質な）英語の声 */
+/** 使える英語の声を、よい順に並べたもの */
+export function rankedVoices(): SpeechSynthesisVoice[] {
+  return englishVoices().sort((a, b) => voiceScore(b) - voiceScore(a))
+}
+
 export function highQualityVoices(): SpeechSynthesisVoice[] {
   return englishVoices().filter(isHighQualityVoice)
 }
 
-/** 端末に入っている高品質な英語の声の一覧（読み込みが遅い端末にも対応） */
+/** 端末から見えている英語の声（よい順）。読み込みが遅い端末にも対応 */
 export function useEnglishVoices(): SpeechSynthesisVoice[] {
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([])
   useEffect(() => {
     if (!speechSupported()) return
-    const load = () => setVoices(highQualityVoices())
+    const load = () => setVoices(rankedVoices())
     load()
     speechSynthesis.addEventListener('voiceschanged', load)
     return () => speechSynthesis.removeEventListener('voiceschanged', load)
@@ -39,31 +60,31 @@ export function useEnglishVoices(): SpeechSynthesisVoice[] {
   return voices
 }
 
-/** 高品質な声が入っていないときに知らせる（App が案内を表示する） */
+/** 高品質な声が見つからなかったことを、一度だけ小さく知らせる（App が表示する） */
 export const NO_HQ_VOICE_EVENT = 'eigo:no-hq-voice'
+let notified = false
 
-/** 選んだ声（なければ最初の高品質な声）。高品質な声が1つもなければ undefined */
+/** 選んだ声。選んでいなければ、使える中で一番よい英語の声。英語の声が1つも見えなければ undefined */
 export function pickVoice(voiceURI: string): SpeechSynthesisVoice | undefined {
-  const hq = highQualityVoices()
-  return hq.find((v) => v.voiceURI === voiceURI) ?? hq[0]
+  const ranked = rankedVoices()
+  return ranked.find((v) => v.voiceURI === voiceURI) ?? ranked[0]
 }
 
 /**
- * 英文を読み上げる。高品質な声がなければ読み上げず、案内を出して false を返す。
- * （聞き取りの練習なので、機械的な声で間違った音を覚えないようにする）
+ * 英文を読み上げる。音は止めない：高品質な声がなくても、使える中で一番よい英語の声で必ず読む。
+ * 英語の声が一覧に1つも見えないときも、言語だけ英語にして端末の標準の声で読む。
  */
 export function speak(text: string, voiceURI: string, rate = 1, onEnd?: () => void): boolean {
-  if (!speechSupported()) return false
+  if (!speechSupported()) { onEnd?.(); return false }
   const voice = pickVoice(voiceURI)
-  if (!voice) {
+  if (!notified && !(voice && isHighQualityVoice(voice))) {
+    notified = true
     window.dispatchEvent(new Event(NO_HQ_VOICE_EVENT))
-    onEnd?.()
-    return false
   }
   speechSynthesis.cancel()
   const u = new SpeechSynthesisUtterance(text)
-  u.voice = voice
-  u.lang = voice.lang
+  if (voice) u.voice = voice
+  u.lang = voice?.lang ?? 'en-US'
   u.rate = rate
   if (onEnd) { u.onend = onEnd; u.onerror = onEnd }
   speechSynthesis.speak(u)

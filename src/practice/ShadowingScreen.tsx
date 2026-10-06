@@ -4,7 +4,7 @@ import { useMaterials, type Mat } from '../content/materials'
 import { dayKey } from '../today/menu'
 import { splitSentences } from '../speech/sentences'
 import { playSentences } from '../speech/clips'
-import { highQualityVoices } from '../speech/voices'
+import { speechSupported } from '../speech/voices'
 import { startRecording, type Recording } from '../speech/recorder'
 import { ratioOf, useKnowledge } from './ReadingParts'
 import { MicGate, PlayBlobButton, SelfRating, useTranscriber } from './SpeakParts'
@@ -81,7 +81,7 @@ function ShadowSession({ material, settings, mic, onExit }: { material: Mat; set
   const ref = `${material.id}#${offset}`
   const result = useSessionTimer('shadowing', 'fluency', undefined, ref)
   const audio = useMaterialAudio(material.id)
-  const tts = !!audio || highQualityVoices().length > 0
+  const tts = !!audio || speechSupported()
   const [stage, setStage] = useState<Stage>(0)
   // 変動練習：段階が進むほど速くする（0.8 → 1.0）。自分で変えてもよい
   const [rate, setRate] = useState(0.8)
@@ -173,7 +173,7 @@ function ShadowSession({ material, settings, mic, onExit }: { material: Mat; set
           <h2 style={{ margin: 0 }}>{material.title}</h2>
           <span className="muted">{offset + 1}〜{Math.min(offset + SEGMENT, all.length)}文目 / {all.length}文</span>
         </div>
-        {!tts && <p className="banner warn">この素材には内蔵の音声がなく、端末に高品質な英語の声も入っていないため、手本を再生できません（設定の「読み上げの声」に追加の手順があります）。</p>}
+        {!tts && <p className="banner warn">この端末のブラウザは読み上げに対応していないため、手本を再生できません。</p>}
         <VoiceNote audio={audio} />
 
         <div className="seg" aria-label="速さ">

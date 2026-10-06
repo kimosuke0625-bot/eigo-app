@@ -16,6 +16,6 @@ export function useMaterialAudio(materialId: string): MaterialAudio | null | und
 
 /** いま聞いている声の説明（どの話者の声か） */
 export function VoiceNote({ audio }: { audio: MaterialAudio | null | undefined }) {
-  if (!audio) return <p className="muted voice-note">🔈 声：端末の高品質な声</p>
+  if (!audio) return <p className="muted voice-note">🔈 声：端末の読み上げ</p>
   return <p className="muted voice-note">🔈 声：{audio.voiceLabel}（PC で作った高品質な合成音声）</p>
 }

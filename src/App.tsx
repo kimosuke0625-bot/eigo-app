@@ -18,7 +18,6 @@ import { SpeechScreen } from './practice/SpeechScreen'
 import { FluencyHub } from './practice/FluencyHub'
 import { HelpButton } from './practice/PracticeHelp'
 import { NO_HQ_VOICE_EVENT } from './speech/voices'
-import { VoiceInstallGuide } from './settings/VoiceInstallGuide'
 import { ReviewScreen } from './practice/ReviewScreen'
 import { NewCardsScreen } from './practice/NewCardsScreen'
 import { DiagnosticScreen } from './assessment/DiagnosticScreen'
@@ -96,7 +95,8 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
   // 高品質な声がなくて読み上げられなかったときの案内
   const [noVoice, setNoVoice] = useState(false)
   useEffect(() => {
-    const on = () => setNoVoice(true)
+    // 一度だけ出して、8秒たったら自動で消す（練習の邪魔をしない）
+    const on = () => { setNoVoice(true); window.setTimeout(() => setNoVoice(false), 8000) }
     window.addEventListener(NO_HQ_VOICE_EVENT, on)
     return () => window.removeEventListener(NO_HQ_VOICE_EVENT, on)
   }, [])
@@ -152,11 +152,9 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
 
       {contentError && <div className="banner warn">{contentError}。通信できる場所でもう一度開いてください。</div>}
       {noVoice && (
-        <div className="modal-back" role="dialog" aria-modal="true" onClick={() => setNoVoice(false)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <VoiceInstallGuide />
-            <button className="btn block" style={{ marginTop: 12 }} onClick={() => setNoVoice(false)}>閉じる</button>
-          </div>
+        <div className="toast" role="status">
+          <span>🔈 高品質な英語の声が見つからないため、使える中で一番よい声で読み上げています（設定 →「読み上げの声」で確認できます）。</span>
+          <button className="icon-btn" aria-label="閉じる" onClick={() => setNoVoice(false)}>✕</button>
         </div>
       )}
       {body}

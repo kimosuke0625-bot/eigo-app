@@ -334,3 +334,9 @@ details summary { cursor: pointer; color: var(--primary); font-size: 0.9rem; }
 .rec-list li { display: flex; gap: 8px; align-items: center; padding: 8px 0; border-top: 1px solid var(--border); font-size: 0.85rem; }
 .rec-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .err { color: var(--danger); font-weight: 700; }
+.toast { position: fixed; left: 12px; right: 12px; bottom: calc(80px + env(safe-area-inset-bottom)); z-index: 40; display: flex; gap: 8px; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow); padding: 8px 10px; font-size: 0.8rem; max-width: 560px; margin: 0 auto; }
+.toast span { flex: 1; }
+.toast .icon-btn { width: 32px; height: 32px; }
+.voice-list { list-style: none; }
+.voice-list li { display: flex; gap: 8px; align-items: center; padding: 6px 0; border-top: 1px solid var(--border); font-size: 0.85rem; }
+.voice-id { font-size: 0.72rem; word-break: break-all; }

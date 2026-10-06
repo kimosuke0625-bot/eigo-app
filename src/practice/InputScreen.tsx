@@ -4,7 +4,7 @@ import { useMaterials, useReadLog, KIND_LABELS, type Mat } from '../content/mate
 import { fitDistance } from '../content/knownRatio'
 import { splitSentences } from '../speech/sentences'
 import { playSentences } from '../speech/clips'
-import { highQualityVoices } from '../speech/voices'
+import { speechSupported } from '../speech/voices'
 import { FitBadge, MaterialText, QuestionsPanel, ratioOf, useKnowledge } from './ReadingParts'
 import { useSessionTimer } from './useSessionTimer'
 import { Steps } from '../ui/Steps'
@@ -112,8 +112,8 @@ function InputSessionBody({ material, settings, index, ratio, onExit, onBack, on
     }
     return { sentences: list, breaks: starts }
   }, [material.body])
-  // 内蔵の音声ファイル（高品質な合成音声）があればそれを使い、なければ端末の高品質な声で読む
-  const tts = !!audio || highQualityVoices().length > 0
+  // 内蔵の音声ファイル（高品質な合成音声）があればそれを使い、なければ端末の声で読む
+  const tts = !!audio || speechSupported()
   const stages = useMemo(() => {
     const s: Exclude<Stage, 'done'>[] = []
     if (settings.questionsFirst && material.questions) s.push('preview')
