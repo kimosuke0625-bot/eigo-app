@@ -45,13 +45,18 @@ function audioEl(): HTMLAudioElement {
   return el
 }
 
-/** 音声ファイルを再生する。終わったら（失敗しても）onEnd を呼ぶ。止める関数を返す */
+/** アプリに内蔵した音声ファイルを再生する（public/audio/ からの相対パス） */
 export function playFile(file: string, rate = 1, onEnd?: () => void): () => void {
+  return playUrl(base() + file, rate, onEnd)
+}
+
+/** 音声を再生する。終わったら（失敗しても）onEnd を呼ぶ。止める関数を返す */
+export function playUrl(url: string, rate = 1, onEnd?: () => void): () => void {
   const a = audioEl()
   a.onended = null
   a.onerror = null
   a.pause()
-  a.src = base() + file
+  a.src = url
   a.playbackRate = rate
   // 速さを変えても音の高さは変えない
   ;(a as HTMLAudioElement & { preservesPitch?: boolean }).preservesPitch = true

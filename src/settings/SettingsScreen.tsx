@@ -6,6 +6,7 @@ import { BLOCK_LABELS } from '../today/menu'
 import { isHighQualityVoice, speak, speechSupported, useEnglishVoices } from '../speech/voices'
 import { Credits } from './Credits'
 import { AsrSection } from './AsrSection'
+import { AudioBankSection } from './AudioBankSection'
 import { playChime } from '../rewards/sound'
 import { VoiceInstallGuide } from './VoiceInstallGuide'
 import { VoiceDiagnostics } from './VoiceDiagnostics'
@@ -179,6 +180,8 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
         </p>
         <button className="btn secondary block" onClick={onDiagnostic}>診断テストを受ける</button>
       </section>
+
+      <AudioBankSection />
 
       <AsrSection settings={settings} />
 

@@ -4,7 +4,7 @@ import { applyEdit } from '../content/edits'
 import { fitOf, FIT_LABELS, knownRatio, loadFormIndex, loadKnownSet, type RatioResult } from '../content/knownRatio'
 import type { Mat, Question } from '../content/materials'
 import { introduce } from '../srs/store'
-import { speak } from '../speech/voices'
+import { bankRef, playText } from '../speech/audioBank'
 
 /** 既知語率の計算に使う「知っている語」と語形の索引 */
 export function useKnowledge() {
@@ -49,7 +49,7 @@ function WordPopup({ word, itemId, settings, onClose }: {
       <div className="row" style={{ justifyContent: 'space-between' }}>
         <strong style={{ fontSize: '1.1rem' }}>{item?.english ?? word}</strong>
         <div className="row">
-          <button className="icon-btn" aria-label="読み上げ" onClick={() => speak(item?.english ?? word, settings.voiceURI)}>🔊</button>
+          <button className="icon-btn" aria-label="読み上げ" onClick={() => playText({ ref: item ? bankRef.head(item.english) : undefined, text: item?.english ?? word, voiceURI: settings.voiceURI })}>🔊</button>
           <button className="icon-btn" aria-label="閉じる" onClick={onClose}>✕</button>
         </div>
       </div>

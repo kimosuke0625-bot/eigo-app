@@ -34,6 +34,10 @@ export function AudioCredits() {
         <strong>多聴・多読・シャドーイング・ディクテーションの内蔵素材の音声</strong>：PC で作った合成音声（Kokoro-82M、Apache-2.0）。
         素材ごとに6種類の声（アメリカ英語・イギリス英語、男性・女性）を使い分けています。
       </p>
+      <p>
+        <strong>見出し語・カードの例文・雑学・名言の音声</strong>：PC で作った合成音声（Kokoro-82M、Apache-2.0）。文ごとに6種類の声を使い分けています。
+        音声ファイルは音声置き場（<a href="https://github.com/kimosuke0625-bot/eigo-audio" target="_blank" rel="noreferrer">eigo-audio</a>）で公開しています。
+      </p>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { speak } from '../speech/voices'
+import { bankRef, playText, prepare } from '../speech/audioBank'
 import { updateSettings } from '../db/settings'
 import type { Settings } from '../db/schema'
 import { factEnglish, type FactContent, type FactsData } from './facts'
@@ -18,9 +18,12 @@ export function FactCard({ fact, data, settings, autoSpeak = false }: {
   const english = factEnglish(fact, settings.phase)
   const category = data.categories.find((c) => c.key === fact.category)?.ja ?? fact.category
   const liked = settings.likedCategories.includes(fact.category)
+  // Phase 1〜2 はやさしい版、3以降は標準版の音声
+  const ref = bankRef.fact(fact.id, settings.phase <= 2)
+  useEffect(() => { void prepare(ref) }, [ref.key]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (autoSpeak) speak(english, settings.voiceURI)
+    if (autoSpeak) playText({ ref, text: english, voiceURI: settings.voiceURI })
   }, [autoSpeak, english, settings.voiceURI])
 
   const toggleLike = () => updateSettings({
@@ -40,8 +43,8 @@ export function FactCard({ fact, data, settings, autoSpeak = false }: {
         <span className="muted fact-hint">{flipped ? 'タップで英語に戻る' : 'タップで日本語を見る'}</span>
       </button>
       <div className="row">
-        <button className="btn secondary" onClick={() => speak(english, settings.voiceURI)}>🔊 聞く</button>
-        <button className="btn secondary" onClick={() => speak(english, settings.voiceURI, 0.8)}>🐢 ゆっくり</button>
+        <button className="btn secondary" onClick={() => playText({ ref, text: english, voiceURI: settings.voiceURI })}>🔊 聞く</button>
+        <button className="btn secondary" onClick={() => playText({ ref, text: english, voiceURI: settings.voiceURI, rate: 0.8 })}>🐢 ゆっくり</button>
         <button className={`btn ${liked ? '' : 'secondary'}`} onClick={() => void toggleLike()} aria-pressed={liked}>
           {liked ? '★ この分野を多めに' : '☆ もっと知りたい'}
         </button>

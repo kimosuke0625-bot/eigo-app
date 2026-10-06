@@ -4,7 +4,8 @@ import { db, type Card, type Item, type Settings } from '../db/schema'
 import { GRADES, GRADE_LABELS, formatInterval, previewIntervals, type Grade } from '../srs/fsrs'
 import { chooseMode, nextCard, type PresentMode } from '../srs/queue'
 import { recordReview, todaysQueue } from '../srs/store'
-import { speak, speechSupported } from '../speech/voices'
+import { speechSupported } from '../speech/voices'
+import { bankRef, playText } from '../speech/audioBank'
 import { AnswerFace, Highlight, SpeakButton } from './WordParts'
 import { useSessionTimer } from './useSessionTimer'
 import { applyEdit } from '../content/edits'
@@ -53,7 +54,10 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
     setCurrent({ card, item, raw: raw!, mode, shownAt: Date.now() })
     setRevealedAt(0)
     setShowJa(false)
-    if (mode === 'listen') speak(item.examples[0]?.en ?? item.english, settings.voiceURI)
+    if (mode === 'listen') {
+      const t = item.examples[0]?.en
+      playText({ ref: t ? bankRef.example(t) : bankRef.head(item.english), text: t ?? item.english, voiceURI: settings.voiceURI })
+    }
   }, [tts, settings.voiceURI])
 
   useEffect(() => {
@@ -127,7 +131,7 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
         {mode === 'word' && (
           <div className="row" style={{ justifyContent: 'center' }}>
             <span className="headword">{item.english}</span>
-            <SpeakButton text={item.english} voiceURI={settings.voiceURI} />
+            <SpeakButton text={item.english} voiceURI={settings.voiceURI} bank={bankRef.head(item.english)} />
           </div>
         )}
         {mode === 'chunk' && (
@@ -135,8 +139,10 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
         )}
         {mode === 'listen' && (
           <div className="row" style={{ justifyContent: 'center', gap: 12 }}>
-            <SpeakButton big text={item.examples[0]?.en ?? item.english} voiceURI={settings.voiceURI} label="もう一度聞く" />
-            <SpeakButton big text={item.examples[0]?.en ?? item.english} voiceURI={settings.voiceURI} rate={0.8} label="ゆっくり" />
+            <SpeakButton big text={item.examples[0]?.en ?? item.english} voiceURI={settings.voiceURI} label="もう一度聞く"
+              bank={item.examples[0] ? bankRef.example(item.examples[0].en) : bankRef.head(item.english)} />
+            <SpeakButton big text={item.examples[0]?.en ?? item.english} voiceURI={settings.voiceURI} rate={0.8} label="ゆっくり"
+              bank={item.examples[0] ? bankRef.example(item.examples[0].en) : bankRef.head(item.english)} />
           </div>
         )}
 

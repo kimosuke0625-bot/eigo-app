@@ -1,5 +1,5 @@
 import type { Settings } from '../db/schema'
-import { speak } from '../speech/voices'
+import { bankRef, playText } from '../speech/audioBank'
 import { Confetti } from './Confetti'
 import { FactCard } from './FactCard'
 import type { FactContent, FactsData } from './facts'
@@ -46,8 +46,8 @@ export function DailyComplete({ quote, settings, streak, minutes, onClose }: {
             <p className="quote-ja">{quote.ja}</p>
             <footer>— {quote.author}{quote.attributed && <span className="muted">（の言葉と伝えられる）</span>}</footer>
             <div className="row" style={{ justifyContent: 'center', marginTop: 8 }}>
-              <button className="btn secondary" onClick={() => speak(quote.en, settings.voiceURI)}>🔊 英語で聞く</button>
-              <button className="btn secondary" onClick={() => speak(quote.en, settings.voiceURI, 0.8)}>🐢 ゆっくり</button>
+              <button className="btn secondary" onClick={() => playText({ ref: bankRef.quote(quote.en), text: quote.en, voiceURI: settings.voiceURI })}>🔊 英語で聞く</button>
+              <button className="btn secondary" onClick={() => playText({ ref: bankRef.quote(quote.en), text: quote.en, voiceURI: settings.voiceURI, rate: 0.8 })}>🐢 ゆっくり</button>
             </div>
           </blockquote>
         )}

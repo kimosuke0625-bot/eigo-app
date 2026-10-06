@@ -27,8 +27,8 @@ export async function loadTts() {
 const tmp = mkdtempSync(join(tmpdir(), 'eigo-tts-'))
 process.on('exit', () => rmSync(tmp, { recursive: true, force: true }))
 
-/** 英文を読み上げて mp3 に保存する。文の前後の無音は短く切る */
-export async function synthToMp3(text, voice, dest, { speed = 1 } = {}) {
+/** 英文を読み上げて mp3 に保存する。文の前後の無音は短く切る。bitrate：見出し語は48k、文は32k */
+export async function synthToMp3(text, voice, dest, { speed = 1, bitrate = '48k' } = {}) {
   const t = await loadTts()
   const audio = await t.generate(text, { voice, speed })
   const wav = join(tmp, 'out.wav')
@@ -36,6 +36,6 @@ export async function synthToMp3(text, voice, dest, { speed = 1 } = {}) {
   execFileSync(ffmpeg, [
     '-y', '-loglevel', 'error', '-i', wav,
     '-af', 'silenceremove=start_periods=1:start_threshold=-50dB,areverse,silenceremove=start_periods=1:start_threshold=-50dB,areverse,apad=pad_dur=0.15',
-    '-ac', '1', '-ar', '24000', '-b:a', '48k', dest instanceof URL ? fileURLToPath(dest) : dest,
+    '-ac', '1', '-ar', '24000', '-b:a', bitrate, dest instanceof URL ? fileURLToPath(dest) : dest,
   ])
 }

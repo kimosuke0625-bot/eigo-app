@@ -1,18 +1,22 @@
-import { Fragment, useState, type ReactNode } from 'react'
+import { Fragment, useEffect, useState, type ReactNode } from 'react'
 import type { Example, Item } from '../db/schema'
-import { speak } from '../speech/voices'
+import { bankRef, playText, prepare, type BankRef } from '../speech/audioBank'
 import { hideExample, restoreExamples, saveGloss, useEdited } from '../content/edits'
 
-export function SpeakButton({ text, voiceURI, rate = 1, label = '読み上げ', big = false }: {
+export function SpeakButton({ text, voiceURI, rate = 1, label = '読み上げ', big = false, bank }: {
   text: string
   voiceURI: string
+  /** 音声置き場の音声（あれば PC で作った音声で再生する） */
+  bank?: BankRef
   rate?: number
   label?: string
   big?: boolean
 }) {
+  // 表示されたら音声を先に用意しておき、押した瞬間に鳴るようにする
+  useEffect(() => { if (bank) void prepare(bank) }, [bank?.kind, bank?.key]) // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <button type="button" className={big ? 'btn secondary speak-big' : 'icon-btn'} aria-label={label}
-      onClick={(e) => { e.stopPropagation(); speak(text, voiceURI, rate) }}>
+      onClick={(e) => { e.stopPropagation(); playText({ ref: bank, text, voiceURI, rate }) }}>
       🔊{big && <span> {label}</span>}
     </button>
   )
@@ -46,7 +50,7 @@ function ExampleLine({ ex, item, voiceURI, showJa, canReplace }: {
           <div className="en"><Highlight text={ex.en} forms={item.forms ?? [item.english]} /></div>
           {showJa && <div className="muted">{ex.ja}</div>}
         </div>
-        <SpeakButton text={ex.en} voiceURI={voiceURI} label="例文を読み上げ" />
+        <SpeakButton text={ex.en} voiceURI={voiceURI} label="例文を読み上げ" bank={bankRef.example(ex.en)} />
       </div>
       <div className="row example-meta">
         {ex.enId ? (
@@ -133,7 +137,7 @@ export function AnswerFace({ item: original, phase, voiceURI, showJa, onToggleJa
       {!hideHeadword && (
         <div className="row" style={{ justifyContent: 'center' }}>
           <span className="headword">{item.english}</span>
-          <SpeakButton text={item.english} voiceURI={voiceURI} />
+          <SpeakButton text={item.english} voiceURI={voiceURI} bank={bankRef.head(item.english)} />
         </div>
       )}
       {english ? (
