@@ -28,6 +28,7 @@ export function defaultSettings(now = Date.now()): Settings {
     phaseNotice: 0,
     questionsFirst: true,
     asrEnabled: false,
+    helpSeen: [],
   }
 }
 

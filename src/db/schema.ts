@@ -218,6 +218,8 @@ export interface Settings {
   questionsFirst: boolean
   /** 音声認識（Whisper）を使う。モデルの取得に同意したら true */
   asrEnabled: boolean
+  /** 「この練習について」を一度見た練習 */
+  helpSeen: string[]
 }
 
 export class EigoDB extends Dexie {

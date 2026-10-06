@@ -12,6 +12,11 @@ import { InputScreen } from './practice/InputScreen'
 import { DictationScreen } from './practice/DictationScreen'
 import { SpeedReadScreen } from './practice/SpeedReadScreen'
 import { MaterialsScreen } from './content/MaterialsScreen'
+import { ShadowingScreen } from './practice/ShadowingScreen'
+import { PronunciationScreen } from './practice/PronunciationScreen'
+import { SpeechScreen } from './practice/SpeechScreen'
+import { FluencyHub } from './practice/FluencyHub'
+import { HelpButton } from './practice/PracticeHelp'
 import { ReviewScreen } from './practice/ReviewScreen'
 import { NewCardsScreen } from './practice/NewCardsScreen'
 import { DiagnosticScreen } from './assessment/DiagnosticScreen'
@@ -24,7 +29,7 @@ import { checkPhase } from './progress/autoPhase'
 
 export type Tab = 'today' | 'practice' | 'progress' | 'materials' | 'collection' | 'settings'
 
-type Overlay = { practice: PracticeKind; materialId?: string } | { diagnostic: true } | null
+type Overlay = { practice: PracticeKind; materialId?: string; speed?: boolean } | { diagnostic: true } | null
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: 'today', label: '今日', icon: '☀️' },
@@ -94,16 +99,24 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
   if (overlay && 'diagnostic' in overlay) {
     body = <DiagnosticScreen onDone={close} />
   } else if (overlay?.practice === 'review') {
-    body = <ReviewScreen key="review" settings={settings} onExit={close} onAddCards={() => start('addCards')} />
+    body = <><div className="practice-top"><HelpButton k="review" settings={settings} /></div><ReviewScreen key="review" settings={settings} onExit={close} onAddCards={() => start('addCards')} /></>
   } else if (overlay?.practice === 'addCards') {
-    body = <NewCardsScreen key="add" settings={settings} onExit={close} onReview={() => start('review')} />
+    body = <><div className="practice-top"><HelpButton k="addCards" settings={settings} /></div><NewCardsScreen key="add" settings={settings} onExit={close} onReview={() => start('review')} /></>
   } else if (overlay?.practice === 'input') {
-    body = <InputScreen key={overlay.materialId ?? 'input'} settings={settings} materialId={overlay.materialId} onExit={close}
-      onDictation={(id) => start('dictation', id)} />
+    body = <><div className="practice-top"><HelpButton k="input" settings={settings} /></div><InputScreen key={overlay.materialId ?? 'input'} settings={settings} materialId={overlay.materialId} onExit={close}
+      onDictation={(id) => start('dictation', id)} /></>
   } else if (overlay?.practice === 'dictation') {
-    body = <DictationScreen key={overlay.materialId ?? 'dict'} settings={settings} materialId={overlay.materialId} onExit={close} />
+    body = <><div className="practice-top"><HelpButton k="dictation" settings={settings} /></div><DictationScreen key={overlay.materialId ?? 'dict'} settings={settings} materialId={overlay.materialId} onExit={close} /></>
+  } else if (overlay?.practice === 'shadowing') {
+    body = <ShadowingScreen settings={settings} onExit={close} />
+  } else if (overlay?.practice === 'pronunciation') {
+    body = <PronunciationScreen settings={settings} onExit={close} />
+  } else if (overlay?.practice === 'speech') {
+    body = <SpeechScreen settings={settings} onExit={close} />
+  } else if (overlay?.practice === 'fluency' && !overlay.materialId && !overlay.speed) {
+    body = <FluencyHub onSpeech={() => start('speech')} onSpeed={() => setOverlay({ practice: 'fluency', speed: true })} onExit={close} />
   } else if (overlay?.practice === 'fluency') {
-    body = <SpeedReadScreen key={overlay.materialId ?? 'speed'} settings={settings} materialId={overlay.materialId} onExit={close} />
+    body = <><div className="practice-top"><HelpButton k="speedRead" settings={settings} /></div><SpeedReadScreen key={overlay.materialId ?? 'speed'} settings={settings} materialId={overlay.materialId} onExit={close} /></>
   } else if (tab === 'today') {
     body = <TodayScreen settings={settings} dueCount={dueCount} onSettings={() => setTab('settings')}
       onStart={start} onDiagnostic={() => setOverlay({ diagnostic: true })} />

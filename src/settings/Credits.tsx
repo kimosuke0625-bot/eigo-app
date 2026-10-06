@@ -62,6 +62,8 @@ const SOFTWARE: { name: string; license: string }[] = [
   { name: 'ts-fsrs（復習スケジューラ）', license: 'MIT' },
   { name: 'Dexie.js（データ保存）', license: 'Apache-2.0' },
   { name: 'React', license: 'MIT' },
+  { name: 'Transformers.js（ブラウザ内の音声認識）', license: 'Apache-2.0' },
+  { name: 'Whisper（OpenAI）／ whisper-tiny.en（ONNX 変換版：onnx-community）', license: 'MIT' },
 ]
 
 export function Credits() {

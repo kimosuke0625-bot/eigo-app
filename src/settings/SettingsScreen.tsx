@@ -5,6 +5,7 @@ import { backupFileName, exportAll, importAll, parseBackup, type BackupFile } fr
 import { BLOCK_LABELS } from '../today/menu'
 import { speak, speechSupported, useEnglishVoices } from '../speech/voices'
 import { Credits } from './Credits'
+import { AsrSection } from './AsrSection'
 import { playChime } from '../rewards/sound'
 
 function Seg<T extends string | number>({ value, options, onChange }: {
@@ -170,6 +171,8 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
         </p>
         <button className="btn secondary block" onClick={onDiagnostic}>診断テストを受ける</button>
       </section>
+
+      <AsrSection settings={settings} />
 
       <BackupSection />
       <Credits />

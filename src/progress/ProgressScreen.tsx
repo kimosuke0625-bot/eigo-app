@@ -3,6 +3,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { db, type Settings } from '../db/schema'
 import { dayKey, PILLAR_LABELS } from '../today/menu'
 import { loadStreak, MIN_SECONDS } from '../habit/streak'
+import { RecordingLibrary, ShadowingTable } from './SpeakingProgress'
 import { CalendarHeat, LineChart, StackedWeekBars, StatTile } from './charts'
 import { fillDaily, PILLARS, weeklyMetric, weeklyPillars, weeklyRecall, writeSnapshot } from './stats'
 
@@ -94,8 +95,20 @@ export function ProgressScreen({ settings }: { settings: Settings }) {
       </section>
 
       <section className="card">
-        <h2>話す速さ・シャドーイング</h2>
-        <p className="muted">録音の練習（開発フェーズ5）を追加すると表示されます。</p>
+        <h2>話す速さ（4/3/2スピーチ・1分あたりの語数）</h2>
+        {hasMetric('speakingWpm')
+          ? <LineChart label="話す速さ" format={(v) => `${Math.round(v)}`} points={metric('speakingWpm')} color="var(--series-3)" />
+          : <p className="muted">4/3/2スピーチを録音し、設定で音声認識を有効にすると表示されます。</p>}
+      </section>
+
+      <section className="card">
+        <h2>シャドーイング（素材ごとの初回と最新）</h2>
+        <ShadowingTable />
+      </section>
+
+      <section className="card">
+        <h2>録音（新しい順に20件）</h2>
+        <RecordingLibrary />
       </section>
 
       <section className="card">
