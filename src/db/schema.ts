@@ -72,6 +72,27 @@ export interface ItemEdit {
 }
 
 /** 知っている語（診断テストや「もう知っている」で登録） */
+/** 書いた作文・話した音声日記（4週間ごとの測定の作文もここに残す） */
+export interface JournalEntry {
+  id?: number
+  at: number
+  day: string
+  /** write：短い作文、diary：音声日記、assessment：測定の5分間作文 */
+  kind: 'write' | 'diary' | 'assessment'
+  /** 書いた英文、または音声日記を文字にしたもの */
+  text: string
+  /** 使うよう示した今日の語 */
+  targets: string[]
+  /** そのうち実際に使った語 */
+  used: string[]
+  words: number
+  /** 使った語の種類の数 */
+  types: number
+  /** 音声日記の録音（recordings の id） */
+  recordingId?: number
+  prompt: string
+}
+
 export interface KnownWord {
   itemId: string
   source: 'diagnostic' | 'self'
@@ -236,6 +257,7 @@ export class EigoDB extends Dexie {
   knownWords!: EntityTable<KnownWord, 'itemId'>
   edits!: EntityTable<ItemEdit, 'itemId'>
   snapshots!: EntityTable<Snapshot, 'day'>
+  journal!: EntityTable<JournalEntry, 'id'>
 
   constructor(name = 'eigo') {
     super(name)
@@ -270,12 +292,16 @@ export class EigoDB extends Dexie {
     this.version(5).stores({
       recordings: '++id, sessionId, kind, ref, at',
     })
+    // フェーズ6：作文と音声日記
+    this.version(6).stores({
+      journal: '++id, at, day, kind',
+    })
   }
 }
 
 /** 書き出しの対象。items は教材データから作り直せるので含めない */
 export const TABLE_NAMES = [
-  'cards', 'reviews', 'knownWords', 'edits', 'snapshots', 'materials', 'sessions',
+  'cards', 'reviews', 'knownWords', 'edits', 'snapshots', 'journal', 'materials', 'sessions',
   'recordings', 'assessments', 'facts', 'rewards', 'settings',
 ] as const
 

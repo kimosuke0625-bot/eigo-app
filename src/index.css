@@ -340,3 +340,11 @@ details summary { cursor: pointer; color: var(--primary); font-size: 0.9rem; }
 .voice-list { list-style: none; }
 .voice-list li { display: flex; gap: 8px; align-items: center; padding: 6px 0; border-top: 1px solid var(--border); font-size: 0.85rem; }
 .voice-id { font-size: 0.72rem; word-break: break-all; }
+
+/* ---- フェーズ6：書く・話す・Claude ---- */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { border: 1px solid var(--border); background: var(--surface); border-radius: 99px; padding: 4px 12px; font-size: 0.85rem; min-height: 32px; }
+.chip.used { border-color: var(--success); background: var(--success-light); color: var(--success); font-weight: 700; }
+.prompt-text { white-space: pre-wrap; word-break: break-word; font-family: inherit; font-size: 0.85rem; background: var(--surface2); border-radius: var(--radius-sm); padding: 10px; max-height: 320px; overflow-y: auto; }
+.claude-box { display: flex; flex-direction: column; gap: 6px; }
+.claude-box a.btn { text-decoration: none; }

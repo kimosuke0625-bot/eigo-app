@@ -8,6 +8,9 @@ import { speechSupported } from '../speech/voices'
 import { FitBadge, MaterialText, QuestionsPanel, ratioOf, useKnowledge } from './ReadingParts'
 import { useSessionTimer } from './useSessionTimer'
 import { Steps } from '../ui/Steps'
+import { ClaudePromptBox } from './ClaudePromptBox'
+import { summaryPrompt, type Level } from './claudePrompts'
+import { currentLevel } from './output'
 import { useMaterialAudio, VoiceNote, type MaterialAudio } from './AudioParts'
 
 const RATES = [0.8, 1, 1.2]
@@ -260,6 +263,7 @@ function InputSessionBody({ material, settings, index, ratio, onExit, onBack, on
               <p className="banner ok">内容確認：{Math.round((result.current.comprehension ?? 0) * material.questions.length)} / {material.questions.length} 問 正解</p>
             )}
             <p className="muted">出典：{material.source}{material.sourceUrl && <> （<a href={material.sourceUrl} target="_blank" rel="noreferrer">元の文章</a>・{material.license}）</>}</p>
+            <SummaryCheck material={material} settings={settings} />
             <button className="btn block" onClick={onDictation}>✍️ この素材でディクテーション（3文）</button>
             <button className="btn secondary block" onClick={() => setStage('read')}>もう一度読む</button>
             <button className="btn secondary block" onClick={onExit}>今日の画面に戻る</button>
@@ -267,6 +271,27 @@ function InputSessionBody({ material, settings, index, ratio, onExit, onBack, on
         )}
       </section>
       {stage !== 'done' && <button className="btn secondary block" onClick={() => { pause(); onExit() }}>ここでやめる</button>}
+    </div>
+  )
+}
+
+/** 内容を英語で2〜3文に要約し、Claude に理解が合っているかを確かめてもらう（取り込んだ素材は問いがないので特に） */
+function SummaryCheck({ material, settings }: { material: Mat; settings: Settings }) {
+  const [open, setOpen] = useState(material.kind === 'mine')
+  const [summary, setSummary] = useState('')
+  const [level, setLevel] = useState<Level | null>(null)
+  useEffect(() => { void currentLevel(settings.phase).then(setLevel) }, [settings.phase])
+  if (!open) return <button className="btn secondary block" onClick={() => setOpen(true)}>📝 英語で要約して Claude に確かめてもらう</button>
+  return (
+    <div className="stack">
+      <label className="field">
+        <span>内容を英語で2〜3文に要約しましょう</span>
+        <textarea className="paste-area" rows={4} value={summary} onChange={(e) => setSummary(e.target.value)} placeholder="This text is about ..." />
+      </label>
+      {summary.trim().split(/\s+/).length >= 5 && level && (
+        <ClaudePromptBox label="要約を Claude に確かめてもらう（依頼文をコピー）"
+          prompt={summaryPrompt({ level, title: material.title, body: material.body, summary })} />
+      )}
     </div>
   )
 }

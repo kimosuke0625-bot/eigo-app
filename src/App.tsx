@@ -16,6 +16,8 @@ import { ShadowingScreen } from './practice/ShadowingScreen'
 import { PronunciationScreen } from './practice/PronunciationScreen'
 import { SpeechScreen } from './practice/SpeechScreen'
 import { FluencyHub } from './practice/FluencyHub'
+import { OutputScreen } from './practice/OutputScreen'
+import { ConversationScreen } from './practice/ConversationScreen'
 import { HelpButton } from './practice/PracticeHelp'
 import { NO_HQ_VOICE_EVENT } from './speech/voices'
 import { ReviewScreen } from './practice/ReviewScreen'
@@ -120,6 +122,10 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
     body = <ShadowingScreen settings={settings} onExit={close} />
   } else if (overlay?.practice === 'pronunciation') {
     body = <PronunciationScreen settings={settings} onExit={close} />
+  } else if (overlay?.practice === 'output') {
+    body = <OutputScreen settings={settings} onExit={close} />
+  } else if (overlay?.practice === 'conversation') {
+    body = <ConversationScreen settings={settings} onExit={close} />
   } else if (overlay?.practice === 'speech') {
     body = <SpeechScreen settings={settings} onExit={close} />
   } else if (overlay?.practice === 'fluency' && !overlay.materialId && !overlay.speed) {

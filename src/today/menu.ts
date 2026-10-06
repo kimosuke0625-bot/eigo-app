@@ -10,6 +10,9 @@ export type PracticeKind =
   | 'addCards'
   | 'dictation'
   | 'speech'
+  | 'conversation'
+  | 'assessment'
+  | 'roleplay'
 
 export interface MenuItem {
   kind: PracticeKind

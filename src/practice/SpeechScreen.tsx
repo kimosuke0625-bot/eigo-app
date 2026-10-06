@@ -8,6 +8,9 @@ import { useSessionTimer } from './useSessionTimer'
 import { Steps } from '../ui/Steps'
 import { HelpButton } from './PracticeHelp'
 import { playChime } from '../rewards/sound'
+import { ClaudePromptBox } from './ClaudePromptBox'
+import { correctionPrompt, type Level } from './claudePrompts'
+import { currentLevel } from './output'
 
 const STEPS = ['話題と準備', '4分', '3分', '2分', 'ふり返り']
 const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`
@@ -46,6 +49,8 @@ function Speech({ settings, mic, onExit }: { settings: Settings; mic: boolean; o
   const [takes, setTakes] = useState<Take[]>([])
   const [self, setSelf] = useState<number | null>(null)
   const transcriber = useTranscriber(settings)
+  const [level, setLevel] = useState<Level | null>(null)
+  useEffect(() => { void currentLevel(settings.phase).then(setLevel) }, [settings.phase])
   const queue = useRef(Promise.resolve())
   const saved = useRef(false)
 
@@ -173,7 +178,11 @@ function Speech({ settings, mic, onExit }: { settings: Settings; mic: boolean; o
                   <p className="muted">{takes[2].transcript}</p>
                 </details>
               )}
-              <p className="muted">回を重ねて語数が増えていれば、流暢さが伸びています。Claude に添削してもらう依頼文は開発フェーズ6で追加します。</p>
+              <p className="muted">回を重ねて語数が増えていれば、流暢さが伸びています。</p>
+              {takes[2]?.transcript && level && (
+                <ClaudePromptBox label="3回目の話を Claude に添削してもらう（依頼文をコピー）"
+                  prompt={correctionPrompt({ level, text: takes[2].transcript, kind: 'speech', topic: topic.en })} />
+              )}
               <button className="btn block" disabled={!allSettled} onClick={onExit}>
                 {allSettled ? '今日の画面に戻る' : '計算が終わるまでお待ちください'}
               </button>
