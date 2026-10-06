@@ -39,7 +39,7 @@ export function AudioBankSection() {
           </tbody>
         </table>
       )}
-      {cached && <p className="muted">この端末に保存した音声：{cached.files.toLocaleString()}件・約{(cached.bytes / 1024 / 1024).toFixed(1)}MB</p>}
+      {cached && <p className="muted">この端末に保存した音声：{cached.files.toLocaleString()}件・約{cached.bytes < 1024 * 1024 ? `${Math.max(1, Math.round(cached.bytes / 1024))}KB` : `${(cached.bytes / 1024 / 1024).toFixed(1)}MB`}</p>}
       {!confirm
         ? <button className="btn secondary" onClick={() => setConfirm(true)}>保存した音声を消す</button>
         : (
