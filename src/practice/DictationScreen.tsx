@@ -4,7 +4,8 @@ import { db, type Settings } from '../db/schema'
 import { applyEdit } from '../content/edits'
 import { loadBuiltinMaterials, useMaterials, type Mat } from '../content/materials'
 import { countWords, splitSentences } from '../speech/sentences'
-import { speak, speechSupported } from '../speech/voices'
+import { highQualityVoices, speak } from '../speech/voices'
+import { loadMaterialAudio, materialClips, playFile } from '../speech/clips'
 import { diffWords, type DiffToken } from './dictationScore'
 import { useSessionTimer } from './useSessionTimer'
 import { playCorrect, playTry } from '../rewards/sound'
@@ -21,17 +22,19 @@ function sample<T>(xs: T[], n: number): T[] {
 }
 
 /** 出題する文を選ぶ：素材が決まっていればその素材から3文、なければ覚えたカードの例文から5文 */
-async function pickSentences(material?: Mat): Promise<{ text: string; source: string }[]> {
+async function pickSentences(material?: Mat): Promise<{ text: string; source: string; file?: string }[]> {
   if (material) {
     const all = splitSentences(material.body).filter(usable)
     const picked = sample(all.map((s, i) => ({ s, i })), 3).sort((a, b) => a.i - b.i)
-    return picked.map(({ s }) => ({ text: s, source: material.title }))
+    // 内蔵素材は、PC で作った高品質な音声ファイルを使う
+    const clips = (await materialClips(material.id))?.clips ?? {}
+    return picked.map(({ s }) => ({ text: s, source: material.title, file: clips[s] }))
   }
   const cards = await db.cards.toArray()
   const reviewed = cards.filter((c) => c.fsrs.reps > 0)
   const items = (await db.items.bulkGet(sample(reviewed.length >= 5 ? reviewed : cards, 30).map((c) => c.itemId)))
     .filter((i) => i !== undefined)
-  const out: { text: string; source: string }[] = []
+  const out: { text: string; source: string; file?: string }[] = []
   for (const raw of items) {
     const item = applyEdit(raw, await db.edits.get(raw.id))
     const ex = item.examples.find((e) => usable(e.en))
@@ -41,7 +44,8 @@ async function pickSentences(material?: Mat): Promise<{ text: string; source: st
   if (out.length < 5) {
     // カードが少ないうちは内蔵の読み物から補う
     const graded = (await loadBuiltinMaterials()).filter((m) => m.kind === 'graded')
-    for (const s of sample(graded.flatMap((m) => splitSentences(m.body).filter(usable).map((t) => ({ text: t, source: m.title }))), 5 - out.length)) out.push(s)
+    const audio = await loadMaterialAudio()
+    for (const s of sample(graded.flatMap((m) => splitSentences(m.body).filter(usable).map((t) => ({ text: t, source: m.title, file: audio[m.id]?.clips[t] }))), 5 - out.length)) out.push(s)
   }
   return out
 }
@@ -55,7 +59,7 @@ export function DictationScreen({ settings, materialId, onExit }: { settings: Se
 
 function Dictation({ settings, material, onExit }: { settings: Settings; material?: Mat; onExit: () => void }) {
   const result = useSessionTimer('dictation', 'language', undefined, material?.id)
-  const [items, setItems] = useState<{ text: string; source: string }[] | null>(null)
+  const [items, setItems] = useState<{ text: string; source: string; file?: string }[] | null>(null)
   const [index, setIndex] = useState(0)
   const [answer, setAnswer] = useState('')
   const [checked, setChecked] = useState<{ tokens: DiffToken[]; score: number } | null>(null)
@@ -65,11 +69,12 @@ function Dictation({ settings, material, onExit }: { settings: Settings; materia
 
   useEffect(() => { void pickSentences(material).then(setItems) }, [material])
 
-  if (!speechSupported()) {
+  // 再生できる音（内蔵の音声ファイルか、端末の高品質な声）がなければ練習できない
+  if (items && !items.some((x) => x.file) && !highQualityVoices().length) {
     return (
       <section className="card stack">
         <h2>ディクテーション</h2>
-        <p>この端末のブラウザは読み上げに対応していないため、ディクテーションができません。</p>
+        <p>この端末に高品質な英語の声が入っていないため、例文を再生できません。設定の「読み上げの声」の案内に従って声を追加してください。</p>
         <button className="btn secondary block" onClick={onExit}>戻る</button>
       </section>
     )
@@ -89,7 +94,11 @@ function Dictation({ settings, material, onExit }: { settings: Settings; materia
     )
   }
 
-  const listen = (rate: number) => { speak(item.text, settings.voiceURI, rate); setPlays((p) => p + 1) }
+  const listen = (rate: number) => {
+    if (item.file) playFile(item.file, rate)
+    else speak(item.text, settings.voiceURI, rate)
+    setPlays((p) => p + 1)
+  }
   const check = () => {
     const r = diffWords(item.text, answer)
     setChecked(r)

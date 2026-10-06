@@ -1,3 +1,4 @@
+import { AudioCredits } from './AudioCredits'
 // アプリ内の「出典」画面。教材を追加したら必ずここにも書く
 
 const SOURCES: { name: string; use: string; license: string; url: string; note?: string }[] = [
@@ -64,6 +65,7 @@ const SOFTWARE: { name: string; license: string }[] = [
   { name: 'React', license: 'MIT' },
   { name: 'Transformers.js（ブラウザ内の音声認識）', license: 'Apache-2.0' },
   { name: 'Whisper（OpenAI）／ whisper-tiny.en（ONNX 変換版：onnx-community）', license: 'MIT' },
+  { name: 'Kokoro-82M（音声合成。PC で音声ファイルを作るのに使用）', license: 'Apache-2.0' },
 ]
 
 export function Credits() {
@@ -84,6 +86,8 @@ export function Credits() {
       <p className="muted">
         NGSL を元にした語彙データ（日本語訳を含む）は、元のライセンスにならい CC BY-SA 4.0 で公開しています。
       </p>
+      <h3 style={{ fontSize: '0.9rem' }}>音声</h3>
+      <AudioCredits />
       <h3 style={{ fontSize: '0.9rem' }}>使っているソフトウェア</h3>
       <ul className="credits">
         {SOFTWARE.map((s) => (

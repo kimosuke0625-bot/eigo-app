@@ -3,8 +3,8 @@ import { db, type Settings } from '../db/schema'
 import { useMaterials, type Mat } from '../content/materials'
 import { dayKey } from '../today/menu'
 import { splitSentences } from '../speech/sentences'
-import { speakSentences } from '../speech/reader'
-import { speechSupported } from '../speech/voices'
+import { playSentences } from '../speech/clips'
+import { highQualityVoices } from '../speech/voices'
 import { startRecording, type Recording } from '../speech/recorder'
 import { ratioOf, useKnowledge } from './ReadingParts'
 import { MicGate, PlayBlobButton, SelfRating, useTranscriber } from './SpeakParts'
@@ -12,6 +12,7 @@ import { matchScore, shouldShowScore } from './speaking'
 import { useSessionTimer } from './useSessionTimer'
 import { Steps } from '../ui/Steps'
 import { HelpButton } from './PracticeHelp'
+import { useMaterialAudio, VoiceNote } from './AudioParts'
 
 /** 1回のシャドーイングで扱う文の数（長すぎるとついていけない） */
 const SEGMENT = 4
@@ -79,7 +80,8 @@ function ShadowSession({ material, settings, mic, onExit }: { material: Mat; set
   const sentences = all.slice(offset, offset + SEGMENT)
   const ref = `${material.id}#${offset}`
   const result = useSessionTimer('shadowing', 'fluency', undefined, ref)
-  const tts = speechSupported()
+  const audio = useMaterialAudio(material.id)
+  const tts = !!audio || highQualityVoices().length > 0
   const [stage, setStage] = useState<Stage>(0)
   // 変動練習：段階が進むほど速くする（0.8 → 1.0）。自分で変えてもよい
   const [rate, setRate] = useState(0.8)
@@ -91,6 +93,7 @@ function ShadowSession({ material, settings, mic, onExit }: { material: Mat; set
   const [blob, setBlob] = useState<Blob | null>(null)
   const [self, setSelf] = useState<number | null>(null)
   const [match, setMatch] = useState<number | null | 'skip' | 'wait'>(null)
+  const [asrError, setAsrError] = useState('')
   const transcriber = useTranscriber(settings)
 
   useEffect(() => () => { stopTts.current(); rec.current?.cancel() }, [])
@@ -98,7 +101,8 @@ function ShadowSession({ material, settings, mic, onExit }: { material: Mat; set
   const play = (onEnd?: () => void) => {
     stopTts.current()
     setPlaying(true)
-    stopTts.current = speakSentences({
+    stopTts.current = playSentences({
+      clips: audio?.clips,
       sentences, from: 0, rate, voiceURI: settings.voiceURI,
       onIndex: setCurrent,
       onEnd: () => { setPlaying(false); setCurrent(-1); onEnd?.() },
@@ -146,11 +150,14 @@ function ShadowSession({ material, settings, mic, onExit }: { material: Mat; set
     if (blob && blob.size && transcriber.enabled && shouldShowScore(previous)) {
       setMatch('wait')
       const t = await transcriber.run(blob)
-      if (t !== null) {
-        m = matchScore(text, t)
+      if (t?.ok) {
+        m = matchScore(text, t.text)
         setMatch(m)
         result.current.shadowMatch = m
-      } else setMatch('skip')
+      } else {
+        setMatch('skip')
+        setAsrError(t && !t.ok ? t.reason : '')
+      }
     } else setMatch('skip')
     if (blob && blob.size) {
       await db.recordings.add({ sessionId: 0, audio: blob, at: Date.now(), kind: 'shadowing', ref, text, self: value, match: m })
@@ -166,7 +173,8 @@ function ShadowSession({ material, settings, mic, onExit }: { material: Mat; set
           <h2 style={{ margin: 0 }}>{material.title}</h2>
           <span className="muted">{offset + 1}〜{Math.min(offset + SEGMENT, all.length)}文目 / {all.length}文</span>
         </div>
-        {!tts && <p className="banner warn">この端末は読み上げに対応していないため、手本の音声を出せません。</p>}
+        {!tts && <p className="banner warn">この素材には内蔵の音声がなく、端末に高品質な英語の声も入っていないため、手本を再生できません（設定の「読み上げの声」に追加の手順があります）。</p>}
+        <VoiceNote audio={audio} />
 
         <div className="seg" aria-label="速さ">
           {RATES.map((r) => <button key={r} aria-pressed={rate === r} onClick={() => { setRate(r); stop() }}>{r}倍</button>)}
@@ -210,14 +218,15 @@ function ShadowSession({ material, settings, mic, onExit }: { material: Mat; set
                 {typeof match === 'number' && (
                   <p className="banner ok">手本との一致率（語の単位）：<strong>{Math.round(match * 100)}%</strong></p>
                 )}
-                {match === 'skip' && settings.asrEnabled && blob.size > 0 && (
+                {asrError && <p className="banner warn">一致率を出せませんでした：{asrError}</p>}
+                {match === 'skip' && !asrError && settings.asrEnabled && blob.size > 0 && (
                   <p className="muted">今回は一致率を出しません（慣れてきたら3回に1回だけ表示します）。自分の耳で聞き比べましょう。</p>
                 )}
                 {!settings.asrEnabled && blob.size > 0 && (
                   <p className="muted">設定で音声認識を有効にすると、手本との一致率も出せます。</p>
                 )}
                 <div className="row">
-                  <button className="btn secondary" style={{ flex: 1 }} onClick={() => { setBlob(null); setSelf(null); setMatch(null) }}>もう一度録音</button>
+                  <button className="btn secondary" style={{ flex: 1 }} onClick={() => { setBlob(null); setSelf(null); setMatch(null); setAsrError('') }}>もう一度録音</button>
                   <button className="btn" style={{ flex: 1 }} onClick={() => go(4)}>終える</button>
                 </div>
               </div>

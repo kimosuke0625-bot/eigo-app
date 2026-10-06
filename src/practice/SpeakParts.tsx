@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { Settings } from '../db/schema'
 import { micSupported, playBlob, startRecording, unlockAudioAndMic, type Recording } from '../speech/recorder'
-import { loadAsr, transcribe, useAsrStatus } from '../speech/asr'
+import { loadAsr, transcribeSafe, useAsrStatus, type TranscribeResult } from '../speech/asr'
 import { SELF_RATINGS } from './speaking'
 
 /**
@@ -109,7 +109,7 @@ export function SelfRating({ question, onRate }: { question: string; onRate: (v:
 
 /**
  * 録音を文字にする。設定で音声認識を有効にしていなければ何もしない（null）。
- * 失敗しても練習は続けられるよう、エラーは null として返す。
+ * 失敗しても練習は続けられるよう、例外にせず理由つきの結果を返す。
  */
 export function useTranscriber(settings: Settings) {
   const status = useAsrStatus()
@@ -121,13 +121,6 @@ export function useTranscriber(settings: Settings) {
   return {
     enabled,
     status,
-    run: async (blob: Blob): Promise<string | null> => {
-      if (!enabled) return null
-      try {
-        return await transcribe(blob)
-      } catch {
-        return null
-      }
-    },
+    run: async (blob: Blob): Promise<TranscribeResult | null> => (enabled ? transcribeSafe(blob) : null),
   }
 }

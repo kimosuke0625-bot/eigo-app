@@ -3,11 +3,12 @@ import type { Settings } from '../db/schema'
 import { useMaterials, useReadLog, KIND_LABELS, type Mat } from '../content/materials'
 import { fitDistance } from '../content/knownRatio'
 import { splitSentences } from '../speech/sentences'
-import { speakSentences } from '../speech/reader'
-import { speechSupported } from '../speech/voices'
+import { playSentences } from '../speech/clips'
+import { highQualityVoices } from '../speech/voices'
 import { FitBadge, MaterialText, QuestionsPanel, ratioOf, useKnowledge } from './ReadingParts'
 import { useSessionTimer } from './useSessionTimer'
 import { Steps } from '../ui/Steps'
+import { useMaterialAudio, VoiceNote, type MaterialAudio } from './AudioParts'
 
 const RATES = [0.8, 1, 1.2]
 
@@ -82,7 +83,7 @@ const STAGE_LABELS: Record<Exclude<Stage, 'done'>, string> = {
  * 後で見る設定なら：1 聞く → 2 読む → 3 答える
  * 読み上げが使えない端末では「聞く」を飛ばす。
  */
-function InputSession({ material, settings, index, ratio, onExit, onBack, onDictation }: {
+interface SessionProps {
   material: Mat
   settings: Settings
   index: Map<string, string>
@@ -90,7 +91,16 @@ function InputSession({ material, settings, index, ratio, onExit, onBack, onDict
   onExit: () => void
   onBack: () => void
   onDictation: () => void
-}) {
+}
+
+/** 素材の内蔵音声の読み込みが終わってから、段階（「聞く」を入れるか）を決めて始める */
+function InputSession(props: SessionProps) {
+  const audio = useMaterialAudio(props.material.id)
+  if (audio === undefined) return <p className="muted">音声を準備中…</p>
+  return <InputSessionBody {...props} audio={audio} />
+}
+
+function InputSessionBody({ material, settings, index, ratio, onExit, onBack, onDictation, audio }: SessionProps & { audio: MaterialAudio | null }) {
   const result = useSessionTimer('input', 'input', undefined, material.id)
   // 段落ごとに文に分け、段落の始まりの文の番号を覚えておく（本文を段落つきで表示するため）
   const { sentences, breaks } = useMemo(() => {
@@ -102,7 +112,8 @@ function InputSession({ material, settings, index, ratio, onExit, onBack, onDict
     }
     return { sentences: list, breaks: starts }
   }, [material.body])
-  const tts = speechSupported()
+  // 内蔵の音声ファイル（高品質な合成音声）があればそれを使い、なければ端末の高品質な声で読む
+  const tts = !!audio || highQualityVoices().length > 0
   const stages = useMemo(() => {
     const s: Exclude<Stage, 'done'>[] = []
     if (settings.questionsFirst && material.questions) s.push('preview')
@@ -123,7 +134,8 @@ function InputSession({ material, settings, index, ratio, onExit, onBack, onDict
   const play = (from = Math.max(0, current)) => {
     stop.current()
     setPlaying(true)
-    stop.current = speakSentences({
+    stop.current = playSentences({
+      clips: audio?.clips,
       sentences, from, rate, voiceURI: settings.voiceURI,
       onIndex: setCurrent,
       onEnd: () => { setPlaying(false); setCurrent(-1); setHeard(true) },
@@ -196,6 +208,7 @@ function InputSession({ material, settings, index, ratio, onExit, onBack, onDict
               ))}
             </div>
             <p className="muted">{current >= 0 ? `${current + 1} / ${sentences.length} 文目` : `${sentences.length}文・${material.wordCount}語`}</p>
+            <VoiceNote audio={audio} />
             {questionsPeek}
             <button className={`btn block ${heard ? '' : 'secondary'}`} onClick={next}>
               {heard ? '聞き終えた → 読む' : '聞かずに読む →'}

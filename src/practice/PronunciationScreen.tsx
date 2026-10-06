@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { db, type Settings } from '../db/schema'
-import { speak, speechSupported, useEnglishVoices } from '../speech/voices'
+import { speak } from '../speech/voices'
+import { loadWordAudio, playFile, type WordClip } from '../speech/clips'
 import { MicGate, PlayBlobButton, RecordButton, SelfRating } from './SpeakParts'
 import { buildTrials, PAIR_GROUPS, weakestGroup, type Trial } from './speaking'
 import { useSessionTimer } from './useSessionTimer'
@@ -10,6 +11,23 @@ import { playCorrect, playTry } from '../rewards/sound'
 
 const TRIALS = 16
 const groupOf = (key: string) => PAIR_GROUPS.find((g) => g.key === key)!
+
+/**
+ * 単語の音声を再生する。人の録音（Wikimedia Commons）を第一候補に、なければ PC で作った高品質な合成音声。
+ * clipIndex でどの話者の声かを選ぶ（同じ問題を聞き直すときは同じ声）。音声ファイルがない語だけ端末の高品質な声で読む。
+ */
+function playWord(audio: Record<string, WordClip[]>, word: string, clipIndex: number, rate: number, voiceURI: string): WordClip | undefined {
+  const clips = audio[word] ?? []
+  const clip = clips[clipIndex % Math.max(1, clips.length)]
+  if (clip) playFile(clip.file, rate)
+  else speak(word, voiceURI, rate)
+  return clip
+}
+
+function speakerLabel(c?: WordClip) {
+  if (!c) return '端末の高品質な声'
+  return c.kind === 'human' ? `人の録音（${c.speaker}、${c.origin}）` : `合成音声（${c.speaker}）`
+}
 
 /** これまでの聞き分けの結果（グループごと） */
 async function loadPairStats(): Promise<Map<string, { ok: number; all: number }>> {
@@ -30,15 +48,9 @@ export function PronunciationScreen({ settings, onExit }: { settings: Settings; 
   const [mic, setMic] = useState<boolean | null>(null)
   const [focus, setFocus] = useState<string | null>(null)
   useEffect(() => { void loadPairStats().then((s) => setFocus(weakestGroup(s))) }, [])
-  if (!speechSupported()) {
-    return (
-      <section className="card stack">
-        <h2>発音・聞き分けドリル</h2>
-        <p>この端末のブラウザは読み上げに対応していないため、このドリルはできません。</p>
-        <button className="btn secondary block" onClick={onExit}>戻る</button>
-      </section>
-    )
-  }
+  const [audio, setAudio] = useState<Record<string, WordClip[]> | null>(null)
+  useEffect(() => { void loadWordAudio().then(setAudio) }, [])
+  if (!audio) return <p className="muted">音声を準備中…</p>
   return (
     <div>
       <div className="practice-top"><HelpButton k="pronunciation" settings={settings} /></div>
@@ -49,25 +61,26 @@ export function PronunciationScreen({ settings, onExit }: { settings: Settings; 
             onReady={setMic} />
           <button className="btn secondary block" onClick={onExit}>戻る</button>
         </>
-      ) : <Drill settings={settings} mic={mic} focus={focus} onExit={onExit} />}
+      ) : <Drill settings={settings} mic={mic} focus={focus} audio={audio} onExit={onExit} />}
     </div>
   )
 }
 
-function Drill({ settings, mic, focus, onExit }: { settings: Settings; mic: boolean; focus: string; onExit: () => void }) {
+function Drill({ settings, mic, focus, audio, onExit }: { settings: Settings; mic: boolean; focus: string; audio: Record<string, WordClip[]>; onExit: () => void }) {
   const result = useSessionTimer('pronunciation', 'language')
   const trials = useMemo<Trial[]>(() => buildTrials(focus, TRIALS), [focus])
-  const voices = useEnglishVoices()
   const [i, setI] = useState(0)
   const [answers, setAnswers] = useState<(0 | 1)[]>([])
-  const [voiceURI, setVoiceURI] = useState(settings.voiceURI)
+  // どの話者の声で出題したか（同じ問題の聞き直し・聞き比べは同じ声で）
+  const [clipIndex, setClipIndex] = useState(0)
+  const [clip, setClip] = useState<WordClip | undefined>()
   const [stage, setStage] = useState<'listen' | 'say' | 'done'>('listen')
 
-  // 複数の声で出題する（端末に入っている英語の声から毎回選ぶ）
-  const playTrial = (t: Trial) => {
-    const v = voices.length ? voices[Math.floor(Math.random() * voices.length)].voiceURI : settings.voiceURI
-    setVoiceURI(v)
-    speak(t.pair[t.answer], v, t.rate)
+  // 複数の話者の声で出題する（問題ごとに話者を選び直す）
+  const playTrial = (t: Trial, newVoice = false) => {
+    const idx = newVoice ? Math.floor(Math.random() * 3) : clipIndex
+    if (newVoice) setClipIndex(idx)
+    setClip(playWord(audio, t.pair[t.answer], idx, t.rate, settings.voiceURI))
   }
 
   const trial = trials[i]
@@ -107,8 +120,8 @@ function Drill({ settings, mic, focus, onExit }: { settings: Settings; mic: bool
             <span className="muted">{i + 1} / {trials.length}</span>
             <span className="tag">{groupOf(trial.group).label}</span>
           </div>
-          <button className="btn block big-play" onClick={() => playTrial(trial)}>🔊 聞く</button>
-          <p className="muted">声と速さは毎回変わります（{trial.rate}倍）</p>
+          <button className="btn block big-play" onClick={() => playTrial(trial, !clip)}>🔊 聞く</button>
+          <p className="muted">話者と速さは毎回変わります（{trial.rate}倍）{clip !== undefined || answered ? `・声：${speakerLabel(clip)}` : ''}</p>
           <div className="pair-choices">
             {trial.pair.map((w, k) => {
               const state = !answered ? '' : k === trial.answer ? 'right' : answers[i] === k ? 'wrong' : ''
@@ -120,10 +133,10 @@ function Drill({ settings, mic, focus, onExit }: { settings: Settings; mic: bool
               <p>{answers[i] === trial.answer ? '正解！' : `正解は「${trial.pair[trial.answer]}」`}</p>
               <p className="muted">{groupOf(trial.group).hint}</p>
               <div className="row" style={{ justifyContent: 'center' }}>
-                {trial.pair.map((w) => <button key={w} className="btn secondary" onClick={() => speak(w, voiceURI, 0.8)}>🔊 {w}</button>)}
+                {trial.pair.map((w) => <button key={w} className="btn secondary" onClick={() => playWord(audio, w, clipIndex, 0.9, settings.voiceURI)}>🔊 {w}</button>)}
               </div>
               <button className="btn block" onClick={() => {
-                if (i + 1 < trials.length) { setI(i + 1); playTrial(trials[i + 1]) } else setStage('say')
+                if (i + 1 < trials.length) { setI(i + 1); playTrial(trials[i + 1], true) } else setStage('say')
               }}>{i + 1 < trials.length ? '次へ（すぐに音が出ます）' : '聞き分けの結果へ'}</button>
             </>
           )}
@@ -131,7 +144,7 @@ function Drill({ settings, mic, focus, onExit }: { settings: Settings; mic: bool
       )}
 
       {stage === 'say' && (
-        <SayPair group={sessionWeak} settings={settings} mic={mic} correct={correct} total={trials.length} onDone={() => setStage('done')} />
+        <SayPair group={sessionWeak} settings={settings} audio={audio} mic={mic} correct={correct} total={trials.length} onDone={() => setStage('done')} />
       )}
 
       {stage === 'done' && (
@@ -145,9 +158,10 @@ function Drill({ settings, mic, focus, onExit }: { settings: Settings; mic: bool
   )
 }
 
-function SayPair({ group, settings, mic, correct, total, onDone }: {
+function SayPair({ group, settings, audio, mic, correct, total, onDone }: {
   group: string
   settings: Settings
+  audio: Record<string, WordClip[]>
   mic: boolean
   correct: number
   total: number
@@ -163,7 +177,7 @@ function SayPair({ group, settings, mic, correct, total, onDone }: {
       <h2>言ってみる：{g.label}</h2>
       <p>{g.hint}</p>
       <div className="row" style={{ justifyContent: 'center' }}>
-        {pair.map((w) => <button key={w} className="btn secondary" onClick={() => speak(w, settings.voiceURI, 0.8)}>🔊 {w}</button>)}
+        {pair.map((w) => <button key={w} className="btn secondary" onClick={() => playWord(audio, w, 0, 0.9, settings.voiceURI)}>🔊 {w}</button>)}
       </div>
       <p className="center"><strong>{pair[0]}</strong> → <strong>{pair[1]}</strong> の順に、はっきり言いましょう。</p>
       {mic ? (
@@ -177,7 +191,7 @@ function SayPair({ group, settings, mic, correct, total, onDone }: {
         ) : (
           <div className="stack">
             <div className="row">
-              <button className="btn secondary" onClick={() => { speak(pair[0], settings.voiceURI, 0.8); window.setTimeout(() => speak(pair[1], settings.voiceURI, 0.8), 1200) }}>▶ 手本</button>
+              <button className="btn secondary" onClick={() => { playWord(audio, pair[0], 0, 0.9, settings.voiceURI); window.setTimeout(() => playWord(audio, pair[1], 0, 0.9, settings.voiceURI), 1300) }}>▶ 手本</button>
               <PlayBlobButton blob={blob} />
             </div>
             <p className="muted">手本と自分の声を聞き比べて、口の形や舌の位置の違いを確かめましょう。</p>

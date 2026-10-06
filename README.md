@@ -48,3 +48,16 @@ node scripts/build-materials.mjs      # 多読・多聴の素材30本 → public
 - 雑学：前回アプリの365個を点検し、誤り・根拠不足・重複の42個を外して42個を追加。英語版（やさしい版・標準版）と出典URL（すべて存在を確認）を付けた
 - 名言：`public/data/quotes.json`。原典を確認できないものは attributed（「伝えられる」と表示）
 - 素材：自作の読み物12本、Simple English Wikipedia 11本（CC BY-SA 4.0、版番号つきで出典表示）、イソップ寓話7話（1919年、パブリックドメイン）。内容確認の質問はすべて自作
+
+## 音声ファイル
+
+端末の読み上げ音声は機械的で聞き取りにくいことがあるため、聞き取りの練習の音声はアプリに内蔵しています。
+
+```sh
+node scripts/fetch-word-audio.mjs     # 聞き分けドリルの単語：人の録音を Wikimedia Commons から取得（Lingua Libre の英語母語話者・Wiktionary の発音ファイル。ライセンスをファイルごとに確認）
+node scripts/build-word-audio.mjs     # 1語3つの声になるまで Kokoro-82M（Apache-2.0）の合成音声で補う → public/data/word-audio.json
+node scripts/build-material-audio.mjs # 内蔵素材を文ごとに Kokoro-82M で音声化（6種類の声を素材ごとに使い分け）→ public/data/material-audio.json
+```
+
+- 端末の声をその場で使うときは、高品質な声（iPhone・Mac の「拡張」「プレミアム」、Edge の Natural、Chrome の Google）だけを使う
+- 音声ファイルの変換に ffmpeg（ffmpeg-static）を使うが、PC での準備にだけ使い、アプリには含めない

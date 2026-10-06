@@ -15,8 +15,11 @@ const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).p
 interface Take {
   blob: Blob | null
   seconds: number
-  transcript?: string | null
+  /** 音声認識の状態：waiting（順番待ち）・running（計算中）・done・error・off（認識を使わない） */
+  status: 'waiting' | 'running' | 'done' | 'error' | 'off'
+  transcript?: string
   wpm?: number
+  error?: string
 }
 
 /** 4/3/2スピーチ：同じ話を4分 → 3分 → 2分で3回話す */
@@ -42,39 +45,64 @@ function Speech({ settings, mic, onExit }: { settings: Settings; mic: boolean; o
   const [step, setStep] = useState(0)
   const [takes, setTakes] = useState<Take[]>([])
   const [self, setSelf] = useState<number | null>(null)
-  const [analyzing, setAnalyzing] = useState(false)
   const transcriber = useTranscriber(settings)
+  const queue = useRef(Promise.resolve())
+  const saved = useRef(false)
 
-  const finishRound = (take: Take) => {
-    const next = [...takes, take]
-    setTakes(next)
+  const update = (i: number, patch: Partial<Take>) => setTakes((ts) => ts.map((t, k) => (k === i ? { ...t, ...patch } : t)))
+
+  /**
+   * 話し終えた回から順に、裏で文字にしていく（自己評価をしている間に計算が進む）。
+   * 結果は自己評価の後に表示する（先に自分の耳で判断するため）。
+   */
+  const analyze = (i: number, take: Take) => {
+    queue.current = queue.current.then(async () => {
+      if (take.status === 'off') return
+      update(i, { status: 'running' })
+      const r = await transcriber.run(take.blob!)
+      if (r?.ok) update(i, { status: 'done', transcript: r.text, wpm: wordsPerMinute(r.text, take.seconds) })
+      else update(i, { status: 'error', error: r && !r.ok ? r.reason : '音声認識が無効です' })
+    })
+  }
+
+  const finishRound = (blob: Blob | null, seconds: number) => {
+    const hasAudio = !!blob && blob.size > 0
+    const take: Take = { blob, seconds, status: hasAudio && transcriber.enabled ? 'waiting' : 'off' }
+    const i = takes.length
+    setTakes((ts) => [...ts, take])
+    analyze(i, take)
     playChime()
     setStep(step + 1)
     window.scrollTo({ top: 0 })
   }
 
-  const rate = async (v: number) => {
-    setSelf(v)
-    result.current.speechSelf = v
-    // 録音を保存し、音声認識が使えれば語数を数えて1分あたりの語数を出す
-    setAnalyzing(true)
-    const analyzed: Take[] = []
-    for (const [i, t] of takes.entries()) {
-      let transcript: string | null = null
-      if (t.blob && t.blob.size) {
-        transcript = await transcriber.run(t.blob)
+  // 自己評価の後、全部の回の計算が終わったら録音を保存し、3回目の語数を記録する
+  const allSettled = takes.length === 3 && takes.every((t) => t.status === 'done' || t.status === 'error' || t.status === 'off')
+  useEffect(() => {
+    if (self === null || !allSettled || saved.current) return
+    saved.current = true
+    void (async () => {
+      for (const [i, t] of takes.entries()) {
+        if (!t.blob || !t.blob.size) continue
         await db.recordings.add({
           sessionId: 0, audio: t.blob, at: Date.now(), kind: 'speech', ref: topic.id, text: topic.en,
-          self: v, seconds: t.seconds, round: i + 1, transcript: transcript ?? undefined,
+          self, seconds: t.seconds, round: i + 1, transcript: t.transcript,
         })
       }
-      analyzed.push({ ...t, transcript, wpm: transcript ? wordsPerMinute(transcript, t.seconds) : undefined })
-    }
-    setTakes(analyzed)
-    const last = analyzed.at(-1)
-    if (last?.wpm) result.current.speakingWpm = last.wpm
-    setAnalyzing(false)
+      const last = takes[2]
+      if (last.wpm) result.current.speakingWpm = last.wpm
+    })()
+  }, [self, allSettled, takes, topic, result])
+
+  const wpmCell = (t: Take) => {
+    if (t.status === 'done') return <strong>{t.wpm}</strong>
+    if (t.status === 'running') return <span className="muted">計算中…</span>
+    if (t.status === 'waiting') return <span className="muted">順番待ち</span>
+    if (t.status === 'error') return <span className="err">失敗</span>
+    return <span className="muted">—</span>
   }
+  const running = takes.findIndex((t) => t.status === 'running')
+  const errors = takes.map((t, i) => (t.status === 'error' ? `${['4分', '3分', '2分'][i]}：${t.error}` : null)).filter(Boolean)
 
   return (
     <div>
@@ -109,10 +137,12 @@ function Speech({ settings, mic, onExit }: { settings: Settings; mic: boolean; o
         <section className="card stack">
           <p className="topic-en">{topic.en}</p>
           {self === null ? (
-            <SelfRating question="先に自分で評価：3回目（2分）は、1回目よりなめらかに話せましたか？" onRate={(v) => void rate(v)} />
+            <>
+              <SelfRating question="先に自分で評価：3回目（2分）は、1回目よりなめらかに話せましたか？" onRate={(v) => { setSelf(v); result.current.speechSelf = v }} />
+              {running >= 0 && <p className="muted">（裏で録音を文字にしています：{running + 1} / 3 回目）</p>}
+            </>
           ) : (
             <>
-              {analyzing && <p className="muted">録音を保存し、文字にしています…（長い録音は少し時間がかかります）</p>}
               <table className="viz-table">
                 <thead><tr><th>回</th><th>話した時間</th><th>1分あたりの語数</th><th>録音</th></tr></thead>
                 <tbody>
@@ -120,21 +150,33 @@ function Speech({ settings, mic, onExit }: { settings: Settings; mic: boolean; o
                     <tr key={i}>
                       <td>{['4分', '3分', '2分'][i]}</td>
                       <td>{fmt(t.seconds)}</td>
-                      <td>{t.wpm ?? (transcriber.enabled ? (analyzing ? '…' : '—') : '—')}</td>
+                      <td>{wpmCell(t)}</td>
                       <td>{t.blob && t.blob.size > 0 ? <PlayBlobButton blob={t.blob} label="▶" /> : '—'}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+              {running >= 0 && (
+                <p className="banner info">計算中：{running + 1} / 3 回目の録音を文字にしています。1回あたり数十秒かかることがあります。この画面のままお待ちください。</p>
+              )}
+              {errors.length > 0 && (
+                <div className="banner warn">
+                  語数を出せなかった回があります。
+                  <ul>{errors.map((e) => <li key={e}>{e}</li>)}</ul>
+                </div>
+              )}
               {!transcriber.enabled && <p className="muted">設定で音声認識を有効にすると、1分あたりの語数を自動で数えます。</p>}
-              {takes.some((t) => t.transcript) && (
+              {!mic && <p className="muted">録音なしで練習したため、語数は数えていません。</p>}
+              {takes[2]?.transcript && (
                 <details>
                   <summary>3回目に話した内容（音声認識の結果）</summary>
-                  <p className="muted">{takes.at(-1)?.transcript}</p>
+                  <p className="muted">{takes[2].transcript}</p>
                 </details>
               )}
               <p className="muted">回を重ねて語数が増えていれば、流暢さが伸びています。Claude に添削してもらう依頼文は開発フェーズ6で追加します。</p>
-              {!analyzing && <button className="btn block" onClick={onExit}>今日の画面に戻る</button>}
+              <button className="btn block" disabled={!allSettled} onClick={onExit}>
+                {allSettled ? '今日の画面に戻る' : '計算が終わるまでお待ちください'}
+              </button>
             </>
           )}
         </section>
@@ -144,7 +186,7 @@ function Speech({ settings, mic, onExit }: { settings: Settings; mic: boolean; o
 }
 
 /** 1回分：残り時間を表示しながら録音する。時間になったら自動で止める */
-function Round({ seconds, mic, topic, onDone }: { seconds: number; mic: boolean; topic: Topic; onDone: (t: Take) => void }) {
+function Round({ seconds, mic, topic, onDone }: { seconds: number; mic: boolean; topic: Topic; onDone: (blob: Blob | null, seconds: number) => void }) {
   const [startedAt, setStartedAt] = useState(0)
   const [now, setNow] = useState(0)
   const rec = useRef<Recording | null>(null)
@@ -156,7 +198,7 @@ function Round({ seconds, mic, topic, onDone }: { seconds: number; mic: boolean;
     const elapsed = Math.min(seconds, (Date.now() - startedAt) / 1000)
     const blob = rec.current ? await rec.current.stop() : null
     rec.current = null
-    onDone({ blob, seconds: elapsed })
+    onDone(blob, elapsed)
   }
 
   useEffect(() => {

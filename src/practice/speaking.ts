@@ -1,3 +1,4 @@
+import pairsData from './pairs.json'
 import { diffWords } from './dictationScore'
 
 /**
@@ -37,30 +38,8 @@ export interface PairGroup {
   pairs: [string, string][]
 }
 
-export const PAIR_GROUPS: PairGroup[] = [
-  { key: 'r-l', label: 'R と L', hint: 'R は舌をどこにもつけずに丸める。L は舌先を上の歯の裏につける。',
-    pairs: [['right', 'light'], ['rice', 'lice'], ['read', 'lead'], ['road', 'load'], ['grass', 'glass'], ['pray', 'play'], ['correct', 'collect'], ['fry', 'fly'], ['wrong', 'long'], ['arrive', 'alive']] },
-  { key: 'b-v', label: 'B と V', hint: 'V は上の歯を下くちびるに軽く当てて、息を出しながら声を出す。',
-    pairs: [['berry', 'very'], ['best', 'vest'], ['boat', 'vote'], ['ban', 'van'], ['curb', 'curve']] },
-  { key: 's-th', label: 'S と TH', hint: 'TH は舌先を上の歯に軽く当てて息を出す。',
-    pairs: [['sink', 'think'], ['sick', 'thick'], ['mouse', 'mouth'], ['pass', 'path'], ['sum', 'thumb']] },
-  { key: 'z-dh', label: 'Z と TH（濁る音）', hint: '濁る TH も舌先を歯に当てたまま声を出す。',
-    pairs: [['breeze', 'breathe'], ['closing', 'clothing'], ['zen', 'then']] },
-  { key: 'f-h', label: 'F と H', hint: 'F は上の歯を下くちびるに当てる。日本語の「フ」とは違う。',
-    pairs: [['fall', 'hall'], ['fire', 'hire'], ['food', 'hood'], ['feet', 'heat']] },
-  { key: 's-sh', label: 'S と SH（シ）', hint: 'see は「シー」ではなく「スィー」。SH は唇を丸めて前に出す。',
-    pairs: [['see', 'she'], ['sip', 'ship'], ['seat', 'sheet'], ['save', 'shave'], ['sell', 'shell']] },
-  { key: 'i-ee', label: '短い I と長い EE', hint: 'ship は短く力を抜いた「イ」、sheep は口を横に引いた長い「イー」。',
-    pairs: [['ship', 'sheep'], ['live', 'leave'], ['fill', 'feel'], ['sit', 'seat'], ['bit', 'beat']] },
-  { key: 'a-u', label: 'A（æ）と U（ʌ）', hint: 'cat は口を横に大きく開けた「ア」、cut は口をあまり開けない短い「ア」。',
-    pairs: [['cat', 'cut'], ['bag', 'bug'], ['cap', 'cup'], ['ran', 'run'], ['match', 'much']] },
-  { key: 'er-ar', label: 'ER と AR', hint: 'bird の ER は口をあまり開けずに舌を丸める。AR は口を大きく開ける。',
-    pairs: [['heard', 'hard'], ['firm', 'farm'], ['bird', 'bard'], ['hurt', 'heart']] },
-  { key: 'o-aw', label: 'OU と AW', hint: 'coat は「オウ」と動く。caught は口を縦に開けた伸ばす「オー」。',
-    pairs: [['coat', 'caught'], ['low', 'law'], ['boat', 'bought'], ['so', 'saw']] },
-  { key: 'n-ng', label: 'N と NG', hint: 'NG は舌の奥を上あごにつけて鼻に抜く。最後に「グ」は言わない。',
-    pairs: [['sin', 'sing'], ['win', 'wing'], ['ran', 'rang'], ['thin', 'thing']] },
-]
+// 内容は pairs.json（音声ファイルを作るスクリプトとも共有する）
+export const PAIR_GROUPS = pairsData as PairGroup[]
 
 export interface Trial {
   group: string

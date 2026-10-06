@@ -17,6 +17,8 @@ import { PronunciationScreen } from './practice/PronunciationScreen'
 import { SpeechScreen } from './practice/SpeechScreen'
 import { FluencyHub } from './practice/FluencyHub'
 import { HelpButton } from './practice/PracticeHelp'
+import { NO_HQ_VOICE_EVENT } from './speech/voices'
+import { VoiceInstallGuide } from './settings/VoiceInstallGuide'
 import { ReviewScreen } from './practice/ReviewScreen'
 import { NewCardsScreen } from './practice/NewCardsScreen'
 import { DiagnosticScreen } from './assessment/DiagnosticScreen'
@@ -91,6 +93,13 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
   setClock: (n: number) => void
 }) {
   const rewards = useDailyRewards(settings, overlay === null)
+  // 高品質な声がなくて読み上げられなかったときの案内
+  const [noVoice, setNoVoice] = useState(false)
+  useEffect(() => {
+    const on = () => setNoVoice(true)
+    window.addEventListener(NO_HQ_VOICE_EVENT, on)
+    return () => window.removeEventListener(NO_HQ_VOICE_EVENT, on)
+  }, [])
 
   const close = () => { setOverlay(null); setClock(Date.now()) }
   const start = (k: PracticeKind, materialId?: string) => setOverlay({ practice: k, materialId })
@@ -142,6 +151,14 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
       </header>
 
       {contentError && <div className="banner warn">{contentError}。通信できる場所でもう一度開いてください。</div>}
+      {noVoice && (
+        <div className="modal-back" role="dialog" aria-modal="true" onClick={() => setNoVoice(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <VoiceInstallGuide />
+            <button className="btn block" style={{ marginTop: 12 }} onClick={() => setNoVoice(false)}>閉じる</button>
+          </div>
+        </div>
+      )}
       {body}
       {rewards}
 
