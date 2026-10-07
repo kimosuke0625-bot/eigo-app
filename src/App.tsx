@@ -17,6 +17,7 @@ import { PronunciationScreen } from './practice/PronunciationScreen'
 import { SpeechScreen } from './practice/SpeechScreen'
 import { FluencyHub } from './practice/FluencyHub'
 import { OutputScreen } from './practice/OutputScreen'
+import { AssessmentScreen } from './assessment/AssessmentScreen'
 import { ConversationScreen } from './practice/ConversationScreen'
 import { HelpButton } from './practice/PracticeHelp'
 import { NO_HQ_VOICE_EVENT } from './speech/voices'
@@ -122,6 +123,8 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
     body = <ShadowingScreen settings={settings} onExit={close} />
   } else if (overlay?.practice === 'pronunciation') {
     body = <PronunciationScreen settings={settings} onExit={close} />
+  } else if (overlay?.practice === 'assessment') {
+    body = <AssessmentScreen settings={settings} onExit={close} />
   } else if (overlay?.practice === 'output') {
     body = <OutputScreen settings={settings} onExit={close} />
   } else if (overlay?.practice === 'conversation') {
@@ -138,7 +141,7 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
   } else if (tab === 'practice') {
     body = <PracticeHub onStart={start} dueCount={dueCount} />
   } else if (tab === 'progress') {
-    body = <ProgressScreen settings={settings} />
+    body = <ProgressScreen settings={settings} onAssess={() => start('assessment')} />
   } else if (tab === 'materials') {
     body = <MaterialsScreen onRead={(id) => start('input', id)} onSpeed={(id) => start('fluency', id)} />
   } else if (tab === 'collection') {

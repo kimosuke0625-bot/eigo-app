@@ -4,6 +4,7 @@ import { db, type Settings } from '../db/schema'
 import { dayKey, PILLAR_LABELS } from '../today/menu'
 import { loadStreak, MIN_SECONDS } from '../habit/streak'
 import { RecordingLibrary, ShadowingTable } from './SpeakingProgress'
+import { AssessmentHistory } from '../assessment/AssessmentHistory'
 import { CalendarHeat, LineChart, StackedWeekBars, StatTile } from './charts'
 import { fillDaily, PILLARS, weeklyMetric, weeklyPillars, weeklyRecall, writeSnapshot } from './stats'
 
@@ -12,7 +13,7 @@ const pct = (v: number) => `${Math.round(v * 100)}%`
 const shortWeek = (w: string) => `${Number(w.slice(5, 7))}/${Number(w.slice(8, 10))}`
 
 /** 進捗の画面。過去の自分とだけ比べる（他人との比較や順位は置かない） */
-export function ProgressScreen({ settings }: { settings: Settings }) {
+export function ProgressScreen({ settings, onAssess }: { settings: Settings; onAssess: () => void }) {
   const today = dayKey()
   const [ready, setReady] = useState(false)
   useEffect(() => { void writeSnapshot().then(() => setReady(true)) }, [])
@@ -113,7 +114,7 @@ export function ProgressScreen({ settings }: { settings: Settings }) {
 
       <section className="card">
         <h2>4週間ごとの測定</h2>
-        <p className="muted">語彙・聞き取り・速読・スピーチ・作文の定期測定は開発フェーズ6で追加します。</p>
+        <AssessmentHistory onStart={onAssess} />
       </section>
     </div>
   )

@@ -5,6 +5,7 @@ import { DEV_PHASE } from './devPhase'
 import { needsBackupReminder } from '../settings/backupReminder'
 import { updateSettings } from '../db/settings'
 import { loadStreak } from '../habit/streak'
+import { assessmentDue } from '../assessment/periodic'
 
 export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnostic }: {
   settings: Settings
@@ -14,6 +15,8 @@ export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnos
   onDiagnostic: () => void
 }) {
   const today = dayKey()
+  const lastAssess = useLiveQuery(async () => (await db.assessments.where('kind').equals('periodic').sortBy('at')).at(-1)?.at ?? 0, [], -1)
+  const assessDue = lastAssess !== -1 && assessmentDue(lastAssess || undefined, settings.diagnosedAt > 0 ? settings.diagnosedAt : settings.createdAt)
   const doneByKind = useLiveQuery(
     async () => {
       const out: Partial<Record<string, number>> = {}
@@ -54,6 +57,12 @@ export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnos
         </div>
       )}
 
+      {assessDue && (
+        <div className="banner info">
+          📏 <strong>4週間ごとの測定</strong>の時期です（約20分）。前回の自分と比べて、伸びを確かめましょう。
+          <button className="btn block" style={{ marginTop: 8 }} onClick={() => onStart('assessment')}>測定する</button>
+        </div>
+      )}
       {settings.phaseNotice > 0 && (
         <div className="banner ok">
           🎉 語彙が増えたので <strong>Phase {settings.phaseNotice}</strong> に上がりました。カードの答えの形や素材が変わります。
