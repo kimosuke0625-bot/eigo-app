@@ -34,5 +34,8 @@ export function headKey(lemma: string): string {
 
 /** 声は6種類。英文ごとに決まった声を割り当て、全体で声がまんべんなく出るようにする */
 export function voiceIndex(key: string, voices: number): number {
-  return parseInt(key.slice(-4), 36) % voices
+  const n = parseInt(key.slice(-4), 36)
+  if (Number.isFinite(n) && n >= 0) return n % voices
+  // 連続ものの雑学（s01-1-e など）は末尾に「-」が入って負の数になるので、英数字だけで計算する
+  return (parseInt(key.replace(/[^0-9a-z]/gi, '').slice(-4), 36) || 0) % voices
 }
