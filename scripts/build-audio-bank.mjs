@@ -2,7 +2,7 @@
 // 音声置き場のリポジトリ（../eigo-audio、GitHub Pages で公開）に、できた分から順に公開する。
 //
 // - 作る順番：利用者がこれから学ぶ順（start-rank.txt の順位から NGSL を上へ）。最初の200語のあとに雑学と名言、
-//   続けて残りの語、最後に開始位置より上の語（すでに知っている語）
+//   続けて残りの語、ビジネス語彙（BSL）、最後に開始位置より上の語（すでに知っている語）
 // - 途中で止まっても、作成済みのファイルは飛ばすので、もう一度実行すれば続きから再開する
 // - 300ファイルごと、または20分ごとに index.json を更新して GitHub に送る（アプリはそれを見て音声を使う）
 //
@@ -23,6 +23,8 @@ const log = (msg) => {
 }
 
 const ngsl = JSON.parse(readFileSync(here('../public/data/ngsl.json'), 'utf8')).words
+// ビジネス語彙（BSL）は、基本語のこれから学ぶ語のあとに作る
+const bsl = JSON.parse(readFileSync(here('../public/data/bsl.json'), 'utf8')).words
 const facts = JSON.parse(readFileSync(here('../public/data/facts.json'), 'utf8')).facts
 const quotes = JSON.parse(readFileSync(here('../public/data/quotes.json'), 'utf8')).quotes
 
@@ -40,8 +42,8 @@ function plan() {
   const ahead = byRank.filter((w) => w.rank >= start)
   const behind = byRank.filter((w) => w.rank < start)
   const wordJobs = (w) => [
-    { kind: 'heads', key: headKey(w.lemma), text: w.lemma, bitrate: '48k', label: `${w.rank}位 ${w.lemma}` },
-    ...w.ex.slice(0, 3).map((e) => ({ kind: 'ex', key: textKey(e.en), text: e.en, bitrate: '32k', label: `${w.rank}位の例文` })),
+    { kind: 'heads', key: headKey(w.lemma), text: w.lemma, bitrate: '48k', label: `${w.list ?? ''}${w.rank}位 ${w.lemma}` },
+    ...w.ex.slice(0, 3).map((e) => ({ kind: 'ex', key: textKey(e.en), text: e.en, bitrate: '32k', label: `${w.list ?? ''}${w.rank}位の例文` })),
   ]
   const factJobs = facts.flatMap((f) => [
     { kind: 'facts', key: `${f.id}-e`, text: f.easy, bitrate: '32k', label: `雑学 ${f.id}（やさしい版）` },
@@ -53,6 +55,7 @@ function plan() {
     ...quoteJobs,
     ...factJobs,
     ...ahead.slice(200).flatMap(wordJobs),
+    ...bsl.map((w) => ({ ...w, list: 'ビジネス' })).flatMap(wordJobs),
     ...behind.flatMap(wordJobs),
   ]
 }

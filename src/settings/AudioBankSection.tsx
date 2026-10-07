@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { cachedSize, clearCache, loadBankIndex } from '../speech/audioBank'
 import { nextNewItems } from '../srs/store'
+import { rankLabel } from '../content/ngsl'
 
 /** 内蔵の英文の音声（PC で作って音声置き場に置いたもの）の作成状況と、端末に保存した量 */
 export function AudioBankSection() {
   const [counts, setCounts] = useState<Record<string, number> | null>(null)
   const [cached, setCached] = useState<{ files: number; bytes: number } | null>(null)
-  const [nextRank, setNextRank] = useState<number | null | undefined>(undefined)
+  const [nextRank, setNextRank] = useState<string | null | undefined>(undefined)
   const [confirm, setConfirm] = useState(false)
 
   const refresh = () => {
@@ -15,7 +16,7 @@ export function AudioBankSection() {
   }
   useEffect(() => {
     refresh()
-    void nextNewItems(1).then((items) => setNextRank(items[0]?.ngslRank ?? null))
+    void nextNewItems(1).then((items) => setNextRank(items[0] ? rankLabel(items[0]) : null))
   }, [])
 
   return (
@@ -26,15 +27,15 @@ export function AudioBankSection() {
         まだ作っていない英文は、端末の声で読み上げます。音声は聞いたときに読み込み、一度聞いたものは端末に保存します。
       </p>
       {nextRank !== undefined && (
-        <p>次に覚える語：<strong>{nextRank ? `NGSL ${nextRank}位から` : 'NGSL の語はすべて取りかかり済み'}</strong>
+        <p>次に覚える語：<strong>{nextRank ? `${nextRank}から` : 'すべての語に取りかかり済み'}</strong>
           <span className="muted">（音声はこの順番に作っています）</span></p>
       )}
       {counts && (
         <table className="viz-table">
           <tbody>
-            <tr><td>見出し語</td><td>{counts.heads.toLocaleString()} / 2,809</td></tr>
-            <tr><td>カードの例文</td><td>{counts.ex.toLocaleString()} / 約8,300</td></tr>
-            <tr><td>雑学</td><td>{counts.facts.toLocaleString()} / 730</td></tr>
+            <tr><td>見出し語</td><td>{counts.heads.toLocaleString()} / 4,553（基本語2,809・ビジネス1,744）</td></tr>
+            <tr><td>カードの例文</td><td>{counts.ex.toLocaleString()} / 約12,300</td></tr>
+            <tr><td>雑学</td><td>{counts.facts.toLocaleString()} / 2,030（1,015個×2版）</td></tr>
             <tr><td>名言</td><td>{counts.quotes.toLocaleString()} / 60</td></tr>
           </tbody>
         </table>
