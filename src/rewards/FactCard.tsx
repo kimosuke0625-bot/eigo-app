@@ -37,6 +37,7 @@ export function FactCard({ fact, data, settings, autoSpeak = false }: {
       <div className="row" style={{ justifyContent: 'space-between' }}>
         <span className="tag">{fact.emoji} {category}</span>
         {fact.rare && <span className="tag rare-tag">✨ レア</span>}
+        {fact.series && <span className="tag">📚 {fact.series.title} {fact.series.part}/{fact.series.total}</span>}
       </div>
       <button className="fact-body" onClick={() => setFlipped(!flipped)} aria-label="タップで日本語と英語を切り替え">
         {flipped ? <p className="fact-ja">{fact.ja}</p> : <p className="fact-en">{english}</p>}

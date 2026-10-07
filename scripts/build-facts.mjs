@@ -26,6 +26,7 @@ const CATEGORIES = [
   ['科学・宇宙', 'science'], ['動物・自然', 'nature'], ['歴史', 'history'], ['人体・医学', 'body'],
   ['食べ物・料理', 'food'], ['心理学・脳科学', 'mind'], ['テクノロジー', 'tech'], ['スポーツ', 'sports'],
   ['数学', 'math'], ['地理', 'geography'], ['芸術・音楽', 'arts'], ['英語・言語', 'language'], ['雑学・不思議', 'wonder'],
+  ['ビジネス・経済', 'business'], ['語源', 'etymology'], ['世界の習慣', 'customs'],
 ]
 const catKey = new Map(CATEGORIES)
 
@@ -52,16 +53,26 @@ for (const file of readdirSync(dir).filter((f) => f.endsWith('.jsonl')).sort()) 
       source: r.src,
       rare: RARE.has(isOld ? r.i : r.id),
       origin: isOld ? 'old' : 'new',
+      // 連続もの：{ id, title, part, total }。2話目以降は前の話を手に入れてから出る
+      ...(r.series ? { series: r.series } : {}),
     })
   }
 }
 
 const ids = new Set(facts.map((f) => f.id))
 if (ids.size !== facts.length) throw new Error('雑学の番号が重複しています')
+// 連続ものは1話から最後までそろっていること
+const seriesParts = new Map()
+for (const f of facts) if (f.series) seriesParts.set(f.series.id, [...(seriesParts.get(f.series.id) ?? []), f.series])
+for (const [id, parts] of seriesParts) {
+  const nums = parts.map((p) => p.part).sort((a, b) => a - b)
+  if (nums.some((n, i) => n !== i + 1) || parts.some((p) => p.total !== parts.length)) throw new Error(`連続もの ${id} の話数が合いません`)
+}
 
 writeFileSync(
   here('../public/data/facts.json'),
   JSON.stringify({ version: 1, categories: CATEGORIES.map(([ja, key]) => ({ key, ja })), facts }),
 )
 const removed = 365 - facts.filter((f) => f.origin === 'old').length
+console.log(`連続もの ${seriesParts.size}本`)
 console.log(`雑学 ${facts.length}個（前回から ${365 - removed}、外した ${removed}、新規 ${facts.filter((f) => f.origin === 'new').length}、レア ${facts.filter((f) => f.rare).length}）`)

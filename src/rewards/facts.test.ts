@@ -21,6 +21,16 @@ describe('今日の雑学を選ぶ', () => {
     }
   })
 
+  it('連続ものの続きは、前の話を手に入れてから出る', () => {
+    const s = (part: number) => ({ id: 's1', title: 'T', part, total: 2 })
+    const facts = [fact('p1', 'x', { series: s(1) }), fact('p2', 'y', { series: s(2) })]
+    for (let i = 0; i < 20; i++) {
+      expect(pickFact({ facts, owned: new Map(), reviewedWords: new Set(), liked: new Set(), phase: 1, rand: seeded(i + 1) })?.id).toBe('p1')
+    }
+    const owned = new Map([['p1', { id: 'p1', category: 'science', acquiredAt: 1 }]])
+    expect(pickFact({ facts, owned, reviewedWords: new Set(), liked: new Set(), phase: 1 })?.id).toBe('p2')
+  })
+
   it('全部持っていれば何も出さない', () => {
     const owned = new Map([['a', { id: 'a', category: 'science', acquiredAt: 1 }]])
     expect(pickFact({ facts: [fact('a', 'x')], owned, reviewedWords: new Set(), liked: new Set(), phase: 1 })).toBeUndefined()

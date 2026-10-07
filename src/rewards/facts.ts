@@ -11,6 +11,14 @@ export interface FactContent {
   source: string
   rare: boolean
   origin: 'old' | 'new'
+  /** 連続もの（2話目以降は、前の話を手に入れてから出る） */
+  series?: { id: string; title: string; part: number; total: number }
+}
+
+/** 連続ものの前の話の id（1話目や連続ものでなければ undefined） */
+function previousPart(f: FactContent, facts: FactContent[]): string | undefined {
+  if (!f.series || f.series.part <= 1) return undefined
+  return facts.find((x) => x.series?.id === f.series!.id && x.series.part === f.series!.part - 1)?.id
 }
 
 export interface FactsData {
@@ -68,7 +76,10 @@ export function pickFact(opts: {
   const rand = opts.rand ?? Math.random
   const pool = opts.facts.filter((f) => {
     const s = opts.owned.get(f.id)
-    return !s?.acquiredAt && !s?.excluded
+    if (s?.acquiredAt || s?.excluded) return false
+    const prev = previousPart(f, opts.facts)
+    const p = prev ? opts.owned.get(prev) : undefined
+    return !prev || !!p?.acquiredAt || !!p?.excluded
   })
   if (!pool.length) return undefined
   const weights = pool.map((f) => {
@@ -77,6 +88,8 @@ export function pickFact(opts: {
     let w = 1 + Math.min(hits, 3)
     if (opts.liked.has(f.category)) w *= 2
     if (f.rare) w *= 0.25
+    // 連続ものの続きは、前の話を読んだ翌日以降に出やすくする
+    if (f.series && f.series.part > 1) w *= 3
     return w
   })
   const total = weights.reduce((s, w) => s + w, 0)
