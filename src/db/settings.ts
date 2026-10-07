@@ -29,6 +29,9 @@ export function defaultSettings(now = Date.now()): Settings {
     questionsFirst: true,
     asrEnabled: false,
     helpSeen: [],
+    accentTheme: 'indigo',
+    soundSet: 'classic',
+    lastWeeklySummary: '',
   }
 }
 

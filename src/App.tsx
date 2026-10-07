@@ -28,7 +28,8 @@ import type { PracticeKind } from './today/menu'
 import { ProgressScreen } from './progress/ProgressScreen'
 import { CollectionScreen } from './rewards/CollectionScreen'
 import { useDailyRewards } from './rewards/useDailyRewards'
-import { setSoundEnabled } from './rewards/sound'
+import { setSoundEnabled, setSoundSet } from './rewards/sound'
+import { THEMES } from './rewards/titles'
 import { checkPhase } from './progress/autoPhase'
 
 export type Tab = 'today' | 'practice' | 'progress' | 'materials' | 'collection' | 'settings'
@@ -44,18 +45,21 @@ const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: 'settings', label: '設定', icon: '⚙️' },
 ]
 
-function useTheme(mode: ThemeMode | undefined) {
+function useTheme(mode: ThemeMode | undefined, accent = 'indigo') {
   useEffect(() => {
     if (!mode) return
     const media = window.matchMedia('(prefers-color-scheme: dark)')
     const apply = () => {
       const dark = mode === 'dark' || (mode === 'system' && media.matches)
       document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+      // 称号で解放した配色テーマ（アクセントの色だけを変える）
+      const t = THEMES[accent] ?? THEMES.indigo
+      document.documentElement.style.setProperty('--primary', dark ? t.primaryDark : t.primary)
     }
     apply()
     media.addEventListener('change', apply)
     return () => media.removeEventListener('change', apply)
-  }, [mode])
+  }, [mode, accent])
 }
 
 export default function App() {
@@ -63,7 +67,7 @@ export default function App() {
   const [tab, setTab] = useState<Tab>('today')
   const [overlay, setOverlay] = useState<Overlay>(null)
   const [contentError, setContentError] = useState('')
-  useTheme(settings?.theme)
+  useTheme(settings?.theme, settings?.accentTheme)
   // 期日が来たカードの数（数分ごとに新しく来る分も拾う）
   const [clock, setClock] = useState(() => Date.now())
   useEffect(() => {
@@ -77,6 +81,7 @@ export default function App() {
     void checkPhase()
   }, [])
   useEffect(() => setSoundEnabled(settings?.sound ?? true), [settings?.sound])
+  useEffect(() => setSoundSet(settings?.soundSet ?? 'classic'), [settings?.soundSet])
 
   if (!settings) return null
   if (!settings.onboarded) return <Onboarding settings={settings} />

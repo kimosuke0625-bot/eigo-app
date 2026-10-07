@@ -348,3 +348,10 @@ details summary { cursor: pointer; color: var(--primary); font-size: 0.9rem; }
 .prompt-text { white-space: pre-wrap; word-break: break-word; font-family: inherit; font-size: 0.85rem; background: var(--surface2); border-radius: var(--radius-sm); padding: 10px; max-height: 320px; overflow-y: auto; }
 .claude-box { display: flex; flex-direction: column; gap: 6px; }
 .claude-box a.btn { text-decoration: none; }
+.title-list, .title-grid { list-style: none; text-align: left; }
+.title-list li { padding: 8px 0; border-top: 1px solid var(--border); }
+.title-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; margin-top: 8px; }
+.title-grid li { border: 1px dashed var(--border); border-radius: var(--radius-sm); padding: 8px; font-size: 0.85rem; opacity: 0.6; }
+.title-grid li.got { border-style: solid; border-color: var(--primary); background: var(--primary-light); opacity: 1; }
+.swatch { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: -1px; }
+.options { display: flex; flex-direction: column; gap: 6px; }

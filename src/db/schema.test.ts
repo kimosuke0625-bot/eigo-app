@@ -9,7 +9,7 @@ describe('データベースの索引', () => {
     const used: [string, string][] = [
       ['assessments', 'kind'], ['recordings', 'kind'], ['sessions', 'day'], ['sessions', 'kind'],
       ['cards', 'due'], ['cards', 'itemId'], ['cards', 'introducedAt'], ['reviews', 'at'],
-      ['facts', 'acquiredDay'], ['journal', 'day'], ['items', 'ngslRank'],
+      ['facts', 'acquiredDay'], ['journal', 'day'], ['items', 'ngslRank'], ['sessions', 'at'], ['rewards', 'kind'],
     ]
     for (const [table, field] of used) {
       const schema = database.table(table).schema

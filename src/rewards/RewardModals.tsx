@@ -1,4 +1,7 @@
-import type { Settings } from '../db/schema'
+import type { Recording, Settings } from '../db/schema'
+import { PlayBlobButton } from '../practice/SpeakParts'
+import { SOUND_SETS, THEMES, type TitleDef } from './titles'
+import type { WeekSummary } from './weekly'
 import { bankRef, playText } from '../speech/audioBank'
 import { Confetti } from './Confetti'
 import { FactCard } from './FactCard'
@@ -52,6 +55,73 @@ export function DailyComplete({ quote, settings, streak, minutes, onClose }: {
           </blockquote>
         )}
         <button className="btn block" onClick={onClose}>閉じる</button>
+      </div>
+    </div>
+  )
+}
+
+/** 新しい称号（と解放）のお知らせ。節目では、4週間以上前の録音と今の録音を聞き比べられる */
+export function TitlesArrived({ titles, settings, compare, onClose }: {
+  titles: TitleDef[]
+  settings: Settings
+  compare?: { old: Recording; recent: Recording }
+  onClose: () => void
+}) {
+  return (
+    <div className="modal-back" role="dialog" aria-modal="true" aria-label="新しい称号">
+      <Confetti level={settings.effects} seed={titles.length * 31} />
+      <div className="modal trophy">
+        <div className="trophy-icon" aria-hidden>🎖️</div>
+        <h2>新しい称号</h2>
+        <ul className="title-list">
+          {titles.map((t) => (
+            <li key={t.key}>
+              <strong>{t.name}</strong>
+              <div className="muted">{t.desc}</div>
+              {t.unlock && (
+                <div className="tag fit-just">
+                  {t.unlock.kind === 'theme' ? `配色テーマ「${THEMES[t.unlock.key]?.name}」` : `効果音「${SOUND_SETS[t.unlock.key]}」`}を解放（設定で選べます）
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+        {compare && (
+          <div className="quote">
+            <p><strong>節目の聞き比べ：</strong>{Math.round((compare.recent.at - compare.old.at) / 86_400_000)}日前の自分の声と、最近の声</p>
+            <div className="row" style={{ justifyContent: 'center' }}>
+              <PlayBlobButton blob={compare.old.audio} label="▶ 前の声" />
+              <PlayBlobButton blob={compare.recent.audio} label="▶ 今の声" />
+            </div>
+          </div>
+        )}
+        <button className="btn block" onClick={onClose}>閉じる</button>
+      </div>
+    </div>
+  )
+}
+
+/** 週のまとめ（月曜日の最初に、先週の分を出す） */
+export function WeeklySummaryModal({ summary, titleNames, onClose }: { summary: WeekSummary; titleNames: string[]; onClose: () => void }) {
+  const diff = summary.minutes - summary.prevMinutes
+  return (
+    <div className="modal-back" role="dialog" aria-modal="true" aria-label="週のまとめ">
+      <div className="modal">
+        <p className="modal-kicker">📅 先週のまとめ（{summary.week.slice(5).replace('-', '/')}〜）</p>
+        <div className="stat-row" style={{ marginTop: 8 }}>
+          <div className="stat-tile"><div className="muted">学習時間</div><div className="stat-value">{summary.minutes}分</div>
+            <div className="muted stat-sub">{summary.prevMinutes ? `前の週より ${diff >= 0 ? '+' : ''}${diff}分` : ''}</div></div>
+          <div className="stat-tile"><div className="muted">練習した日</div><div className="stat-value">{summary.days}日</div></div>
+          <div className="stat-tile"><div className="muted">思い出そうとした</div><div className="stat-value">{summary.attempts}回</div></div>
+        </div>
+        <ul className="steps" style={{ marginTop: 10 }}>
+          <li>新しく覚え始めた語：{summary.newCards}語</li>
+          {summary.bestWord && <li>一番よく思い出せた語：<strong>{summary.bestWord}</strong></li>}
+          <li>集めた雑学：{summary.facts}個</li>
+          {titleNames.length > 0 && <li>手に入れた称号：{titleNames.join('、')}</li>}
+        </ul>
+        <p className="muted">比べるのは、過去の自分とだけ。今週も少しずつ続けましょう。</p>
+        <button className="btn block" onClick={onClose}>今週も始める</button>
       </div>
     </div>
   )

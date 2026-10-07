@@ -8,6 +8,22 @@ export function setSoundEnabled(on: boolean) {
   enabled = on
 }
 
+/**
+ * 効果音セット（称号で解放）。同じ音の高さで、音色（波形）と長さだけを変える。
+ * classic：前回アプリのチャイム、bells：ベル、marimba：マリンバ、arcade：ゲーム風
+ */
+const SETS: Record<string, { type: OscillatorType; length: number; volume: number }> = {
+  classic: { type: 'sine', length: 1, volume: 1 },
+  bells: { type: 'triangle', length: 1.6, volume: 0.9 },
+  marimba: { type: 'sine', length: 0.45, volume: 1.1 },
+  arcade: { type: 'square', length: 0.6, volume: 0.35 },
+}
+let set = SETS.classic
+
+export function setSoundSet(key: string) {
+  set = SETS[key] ?? SETS.classic
+}
+
 function audio(): AudioContext | null {
   if (!enabled) return null
   try {
@@ -21,7 +37,9 @@ function audio(): AudioContext | null {
   }
 }
 
-function tone(c: AudioContext, freq: number, delay: number, length = 0.55, volume = 0.28, type: OscillatorType = 'sine') {
+function tone(c: AudioContext, freq: number, delay: number, length = 0.55, volume = 0.28, type?: OscillatorType) {
+  // 音色を指定していない音は、選んだ効果音セットの音色にする
+  if (!type) { type = set.type; length *= set.length; volume *= set.volume }
   const osc = c.createOscillator()
   const gain = c.createGain()
   osc.connect(gain)

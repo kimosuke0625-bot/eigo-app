@@ -3,6 +3,7 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import { db, type Settings } from '../db/schema'
 import { setExcluded, useFacts, type FactContent } from './facts'
 import { FactCard } from './FactCard'
+import { TitlesPanel } from './TitlesPanel'
 import { useSessionTimer } from '../practice/useSessionTimer'
 
 /** 雑学を読む時間は学習時間（インプット）に数えるが、1日10分まで */
@@ -12,7 +13,7 @@ export function CollectionScreen({ settings }: { settings: Settings }) {
   useSessionTimer('facts', 'input', FACT_MINUTES_PER_DAY * 60)
   const data = useFacts()
   const states = useLiveQuery(() => db.facts.toArray(), [], [])
-  const [tab, setTab] = useState<'owned' | 'review'>('owned')
+  const [tab, setTab] = useState<'owned' | 'titles' | 'review'>('owned')
   const [category, setCategory] = useState<string | null>(null)
   const [open, setOpen] = useState<FactContent | null>(null)
 
@@ -25,7 +26,8 @@ export function CollectionScreen({ settings }: { settings: Settings }) {
     <div>
       <div className="seg" style={{ marginBottom: 12 }}>
         <button aria-pressed={tab === 'owned'} onClick={() => setTab('owned')}>集めた雑学</button>
-        <button aria-pressed={tab === 'review'} onClick={() => setTab('review')}>雑学の確認（全{data.facts.length}件）</button>
+        <button aria-pressed={tab === 'titles'} onClick={() => setTab('titles')}>称号</button>
+        <button aria-pressed={tab === 'review'} onClick={() => setTab('review')}>雑学の確認</button>
       </div>
 
       {tab === 'owned' && (
@@ -73,6 +75,8 @@ export function CollectionScreen({ settings }: { settings: Settings }) {
           {!owned.length && <p className="muted">まだ雑学がありません。今日の練習を5分終えると最初の1枚が届きます。</p>}
         </>
       )}
+
+      {tab === 'titles' && <TitlesPanel />}
 
       {tab === 'review' && (
         <section className="card">

@@ -174,6 +174,8 @@ export interface Fact {
   acquiredAt?: number
   /** 取得した日の日付キー */
   acquiredDay?: string
+  /** 雑学クイズに出した日時 */
+  quizzedAt?: number
   /** 「雑学の確認」で外したもの */
   excluded?: boolean
 }
@@ -241,6 +243,12 @@ export interface Settings {
   asrEnabled: boolean
   /** 「この練習について」を一度見た練習 */
   helpSeen: string[]
+  /** 配色テーマ（称号で解放） */
+  accentTheme: string
+  /** 効果音セット（称号で解放） */
+  soundSet: string
+  /** 週のまとめを出した週（週の月曜日の日付キー） */
+  lastWeeklySummary: string
 }
 
 export class EigoDB extends Dexie {

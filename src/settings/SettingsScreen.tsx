@@ -7,6 +7,7 @@ import { isAppleMobile, isHighQualityVoice, speak, speechSupported, useEnglishVo
 import { Credits } from './Credits'
 import { AsrSection } from './AsrSection'
 import { AudioBankSection } from './AudioBankSection'
+import { LookSection } from './LookSection'
 import { playChime } from '../rewards/sound'
 import { VoiceInstallGuide } from './VoiceInstallGuide'
 import { VoiceDiagnostics } from './VoiceDiagnostics'
@@ -180,6 +181,8 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
         </p>
         <button className="btn secondary block" onClick={onDiagnostic}>診断テストを受ける</button>
       </section>
+
+      <LookSection settings={settings} />
 
       <AudioBankSection />
 

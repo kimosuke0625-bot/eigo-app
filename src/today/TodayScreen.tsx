@@ -6,6 +6,7 @@ import { needsBackupReminder } from '../settings/backupReminder'
 import { updateSettings } from '../db/settings'
 import { loadStreak } from '../habit/streak'
 import { assessmentDue } from '../assessment/periodic'
+import { FactQuizCard } from '../rewards/FactQuizCard'
 
 export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnostic }: {
   settings: Settings
@@ -102,6 +103,8 @@ export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnos
         )}
         <p className="muted">5分練習すればその日は「継続」（雑学を読む時間は含みません）。週に1回はお休み券で、休んでも連続日数が途切れません。</p>
       </section>
+
+      <FactQuizCard settings={settings} />
 
       {settings.blockOrder.map((block) => {
         const items = menu.filter((m) => m.block === block)
