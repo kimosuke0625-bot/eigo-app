@@ -36,6 +36,13 @@ export function defaultSettings(now = Date.now()): Settings {
     bslMode: 'after',
     xpTotal: 0,
     xpVersion: 0,
+    questDay: '',
+    questKeys: [],
+    chestDay: '',
+    teaserDay: '',
+    teaserFactId: '',
+    beatDay: '',
+    comebackDay: '',
   }
 }
 

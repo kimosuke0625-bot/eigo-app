@@ -1,6 +1,6 @@
 /*
- * フェーズ6.5：RPG・冒険ゲーム風の見た目。
- * 1段階目は「今日の画面」と「復習カード」と、雑学パックの開封画面だけに使う（.rpg / .rpg-modal の中だけ）。
+ * フェーズ6.5：RPG・冒険ゲーム風の見た目。すべての画面（.app.rpg）と、雑学パックの開封画面（.rpg-modal）に使う。
+ * 配色テーマ（称号で解放）は、ボタンの色（--rpg-btn）と見出しの色（--rpg-accent）を App.tsx が設定する。
  * 配色・枠・背景はすべて CSS と自作の SVG。ゲーム風の書体（DotGothic16）は見出しと数字だけに使い、
  * 英文・日本語訳・説明文は読みやすい普通の書体のままにする。
  * 明るい配色は「羊皮紙の地図」、暗い配色は「夜の旅」。
@@ -14,13 +14,13 @@
   --border: #c9a36b;
   --text: #2a1d10;
   --text2: #6b5235;
-  --primary: #a33d1f;
+  --primary: var(--rpg-btn, #a33d1f);
   --primary-light: #f6e3cf;
   --px-ink: #2a1d10;
   --frame: #5a3d22;
   --frame-inner: #c9a36b;
-  --accent: #8a3b12;
-  --btn: #a33d1f;
+  --accent: var(--rpg-accent, #8a3b12);
+  --btn: var(--rpg-btn, #a33d1f);
   --btn-text: #ffffff;
   --btn2: #f5ead0;
   --btn2-text: #2a1d10;
@@ -41,13 +41,13 @@
   --border: #3b4785;
   --text: #f1eee2;
   --text2: #b9bedc;
-  --primary: #4a5bd6;
+  --primary: var(--rpg-btn-dark, #2c3a99);
   --primary-light: #1d2760;
   --px-ink: #050817;
   --frame: #f2ecd9;
   --frame-inner: #050817;
-  --accent: #ffd86b;
-  --btn: #2c3a99;
+  --accent: var(--rpg-accent-dark, #ffd86b);
+  --btn: var(--rpg-btn-dark, #2c3a99);
   --btn-text: #ffffff;
   --btn2: #1b2452;
   --btn2-text: #f1eee2;

@@ -1,0 +1,201 @@
+/*
+ * フェーズ6.5（2段階目）：すべての画面の部品を RPG 風にする。
+ * あわせて、正直ボーナス・持ち物・旅の手帳・弱点の研究・添削の記録・今日のクエスト・
+ * 先週の自分との対戦・週のボス・旅の地図の見た目。色の変数は rpg.css で決める。
+ */
+.rpg .link-btn { color: var(--accent); }
+.rpg .help-btn { color: var(--accent); border: 2px solid var(--accent); background: var(--surface); }
+.rpg .seg button { background: var(--surface2); border: 2px solid var(--border); border-radius: 6px; color: var(--text); }
+.rpg .seg button[aria-pressed="true"] { background: var(--btn); border-color: var(--px-ink); color: var(--btn-text); box-shadow: 0 2px 0 var(--px-ink); }
+:root[data-theme="dark"] .rpg .seg button[aria-pressed="true"] { border-color: var(--frame); }
+.rpg .seg button:disabled { opacity: 0.55; }
+.rpg .field input[type="text"], .rpg .field input[type="number"], .rpg .field select, .rpg .field textarea,
+.rpg .paste-area, .rpg .dictation-input, .rpg input.search, .rpg .gloss-edit input {
+  background: var(--surface); color: var(--text); border: 2px solid var(--border); border-radius: 6px;
+}
+.rpg .field textarea { width: 100%; padding: 8px 10px; font-size: 1rem; line-height: 1.5; resize: vertical; }
+.rpg input.search { width: 100%; padding: 10px 12px; min-height: 44px; font-size: 1rem; }
+.rpg .chip { background: var(--surface2); border: 2px solid var(--border); color: var(--text); }
+.rpg .chip.used { border-color: var(--success); background: var(--success-light); color: var(--success); }
+.rpg .option { background: var(--surface); border: 2px solid var(--border); border-radius: 6px; color: var(--text); }
+.rpg .option.right { border-color: var(--success); background: var(--success-light); }
+.rpg .option.wrong { border-color: var(--danger); background: var(--surface2); }
+.rpg .stat-tile { background: var(--surface); border: 2px solid var(--frame); border-radius: 6px; box-shadow: 0 2px 0 rgba(42, 29, 16, 0.2); }
+.rpg .stat-value { font-family: var(--font-game); font-weight: 400; color: var(--text); }
+.rpg .prompt-text, .rpg .quote { background: var(--surface2); border: 1px solid var(--border); color: var(--text); }
+.rpg .fact-card { background: var(--surface); border: 2px solid var(--border); }
+.rpg .fact-card.rare { border-color: #d4a017; }
+.rpg .cat-tile { background: var(--surface); border: 2px solid var(--border); color: var(--text); }
+.rpg .cat-tile[aria-pressed="true"] { border-color: var(--accent); background: var(--primary-light); }
+.rpg .fact-list li button { background: var(--surface); border: 2px solid var(--border); color: var(--text); }
+.rpg .title-grid li { border-width: 2px; }
+.rpg .title-grid li.got { border-color: var(--accent); background: var(--primary-light); }
+.rpg .banner.ok { border-color: var(--success); }
+.rpg .banner.warn { border-color: var(--warning); }
+.rpg .banner.info { border-color: var(--frame); }
+.rpg .toast { background: var(--surface); border: 2px solid var(--frame); color: var(--text); }
+.rpg .word-popup { background: var(--surface); border: 2px solid var(--frame); color: var(--text); }
+.rpg .icon-btn, .rpg .mini-btn { background: var(--surface2); border: 2px solid var(--border); color: var(--text); }
+.rpg .dialogue-line { background: var(--surface2); }
+.rpg .dialogue-line.mine { background: var(--primary-light); }
+.rpg .viz-table th, .rpg .viz-table td { border-bottom-color: var(--border); }
+.rpg details summary { color: var(--accent); }
+
+/* 報酬の画面（トロフィー・称号・週のまとめ）もゲームの窓にする */
+.rpg .modal {
+  background: var(--surface); color: var(--text); border: 3px solid var(--frame); border-radius: 8px;
+  box-shadow: inset 0 0 0 2px var(--surface), inset 0 0 0 4px var(--frame-inner), 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+.rpg .modal h2, .rpg .modal-kicker { font-family: var(--font-game); font-weight: 400; color: var(--accent); }
+
+/* ---- 正直ボーナス ---- */
+.float.honest { font-size: 1.25rem; color: #c4f1ff; }
+.honest-line {
+  display: flex; align-items: center; gap: 6px; margin: 4px 0 6px; padding: 6px 10px; font-size: 0.9rem;
+  background: var(--surface2); border: 2px solid var(--border); border-radius: 6px; color: var(--text);
+  animation: rise 0.25s ease;
+}
+.grade-row.three { grid-template-columns: repeat(3, 1fr); }
+
+/* ---- 持ち物 ---- */
+.bag-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 4px; }
+.bag-tabs button {
+  display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 2px; min-height: 58px;
+  background: var(--surface2); border: 2px solid var(--border); border-radius: 6px; color: var(--text); font-size: 0.75rem;
+}
+.bag-tabs button[aria-pressed="true"] { border-color: var(--accent); background: var(--surface); box-shadow: 0 0 0 2px var(--accent) inset; font-weight: 700; }
+
+/* ---- 旅の手帳・弱点の研究・添削の記録 ---- */
+.notes .edit-card .field { margin-bottom: 8px; }
+.phrase-list { list-style: none; }
+.phrase-list .card { margin-top: 10px; padding: 12px 14px; }
+.phrase-head { flex-wrap: nowrap; }
+.phrase-head .px-icon { flex-shrink: 0; }
+.phrase-en { font-size: 1.15rem; flex: 1; min-width: 0; word-break: break-word; }
+.phrase-ja { font-size: 1rem; margin: 2px 0 4px; }
+.phrase-ex { flex-wrap: nowrap; align-items: flex-start; }
+.phrase-ex .en { flex: 1; font-size: 1rem; line-height: 1.5; }
+.phrase-list .btn { flex-shrink: 0; }
+.weak-list { list-style: none; }
+.weak-list > li + li { border-top: 1px dashed var(--border); }
+.weak-row {
+  display: grid; grid-template-columns: 1.6em 1fr auto; grid-template-areas: "rank name count" "rank bar bar" "rank trend trend";
+  gap: 2px 8px; width: 100%; text-align: left; background: none; border: none; padding: 10px 0; color: var(--text); align-items: center;
+}
+.weak-rank { grid-area: rank; font-size: 1.2rem; color: var(--accent); align-self: start; }
+.weak-name { grid-area: name; font-weight: 700; }
+.weak-count { grid-area: count; font-size: 1.2rem; }
+.weak-bar { grid-area: bar; height: 10px; background: var(--track); border: 2px solid var(--bar-edge, var(--px-ink)); border-radius: 4px; overflow: hidden; display: block; }
+.weak-bar > span { display: block; height: 100%; background: linear-gradient(180deg, #ffc0cb 0 25%, #e0452b 25%); }
+.weak-trend { grid-area: trend; font-size: 0.78rem; }
+.tag.focus-tag { background: var(--accent); color: var(--surface); border-color: var(--accent); margin-left: 6px; }
+.fix-list { list-style: none; margin: 4px 0 8px; }
+.fix-line { padding: 8px 0; border-top: 1px solid var(--border); }
+.fix-line p { margin: 2px 0; }
+.fix-before { color: var(--text2); text-decoration: line-through; text-decoration-color: rgba(224, 69, 43, 0.6); }
+.fix-after { font-weight: 700; }
+.fix-label {
+  display: inline-block; font-family: var(--font-game); font-size: 0.75rem;
+  border: 1px solid var(--border); border-radius: 4px; padding: 0 4px; margin-right: 6px; color: var(--text2);
+}
+.fix-meta { font-size: 0.75rem; }
+.log-head { display: flex; gap: 8px; align-items: center; width: 100%; background: none; border: none; color: var(--text); text-align: left; padding: 0; font-weight: 700; }
+.log-head > :last-child { margin-left: auto; font-weight: 400; }
+.side-by-side { display: grid; gap: 12px; }
+@media (min-width: 640px) { .side-by-side { grid-template-columns: 1fr 1fr; } }
+.retell-before { font-size: 1.15rem; line-height: 1.6; text-decoration: underline wavy rgba(224, 69, 43, 0.55); text-underline-offset: 4px; }
+.retell-after { font-size: 1.15rem; font-weight: 700; line-height: 1.6; flex: 1; }
+.today-phrases ul { list-style: none; display: flex; flex-direction: column; gap: 4px; margin: 4px 0; }
+.today-phrases li { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chip.phrase-chip { border-style: dashed; }
+.chip.phrase-chip.used { border-style: solid; }
+.phrase-win { animation: pop 0.35s ease; }
+
+/* ---- 今日の画面：地図への道しるべ・クエスト・対戦・予告 ---- */
+.map-line {
+  display: flex; align-items: center; gap: 6px; width: 100%; margin-top: 8px; padding: 6px 8px; text-align: left;
+  background: var(--surface2); border: 2px solid var(--border); border-radius: 6px; color: var(--text); font-size: 0.82rem;
+}
+.map-line > span:nth-child(2) { flex: 1; }
+.map-line .min { font-family: var(--font-game); color: var(--accent); white-space: nowrap; }
+.quest-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.quest-row {
+  display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; padding: 8px 10px; min-height: 52px;
+  background: var(--surface); border: 2px solid var(--quest-border); border-radius: 6px; color: var(--text);
+}
+.quest-row:disabled { cursor: default; }
+.quest-list li.done .quest-row { background: var(--surface2); }
+.quest-check {
+  flex-shrink: 0; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center;
+  border: 2px solid var(--px-ink); border-radius: 4px; background: var(--surface2); font-weight: 800; color: #2a1d10;
+}
+:root[data-theme="dark"] .quest-check { border-color: var(--frame); }
+.quest-list li.done .quest-check { background: #ffd23f; }
+.quest-text { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.quest-label { font-weight: 700; }
+.quest-list li.done .quest-label { text-decoration: line-through; text-decoration-color: var(--text2); }
+.quest-row .min { font-family: var(--font-game); color: var(--accent); }
+.chest-row { display: flex; align-items: center; gap: 10px; padding-top: 4px; }
+.chest-row p { flex: 1; font-size: 0.85rem; }
+.chest-row .btn { flex: 1; }
+.chest-icon { flex-shrink: 0; }
+.chest-row.ready .chest-icon { animation: bob 1.2s ease-in-out infinite; filter: drop-shadow(0 0 6px #ffd23f); }
+.versus { display: flex; flex-direction: column; gap: 4px; }
+.versus + .versus { margin-top: 8px; }
+.versus-row { display: grid; grid-template-columns: 7.5em 1fr 3.5em; gap: 6px; align-items: center; font-size: 0.8rem; }
+.versus-row .num { text-align: right; font-size: 0.95rem; }
+.vbar { height: 12px; background: var(--track); border: 2px solid var(--bar-edge, var(--px-ink)); border-radius: 4px; overflow: hidden; }
+.vbar > div { height: 100%; transition: width 0.45s ease-out; }
+.vbar.me > div { background: linear-gradient(180deg, #fff3b0 0 25%, var(--xp-a) 25% 70%, var(--xp-b) 70%); }
+.vbar.ghost > div { background: repeating-linear-gradient(45deg, #9aa3b5 0 4px, #c9d1dc 4px 8px); opacity: 0.8; }
+.versus-cheer {
+  text-align: center; font-family: var(--font-game); font-size: 1.3rem; color: #ffd23f;
+  text-shadow: 2px 0 0 #2a1d10, -2px 0 0 #2a1d10, 0 2px 0 #2a1d10, 0 -2px 0 #2a1d10; animation: pop 0.5s ease;
+}
+.rpg .versus-win.cheer { box-shadow: inset 0 0 0 2px var(--surface), inset 0 0 0 4px var(--frame-inner), 0 0 16px #ffd23f; }
+.boss-note { display: flex; align-items: center; gap: 6px; margin-top: 12px; }
+.rpg .menu-item.boss-ready { border-color: #e0452b; box-shadow: 0 2px 0 #e0452b, 0 0 10px rgba(224, 69, 43, 0.35); margin-top: 12px; }
+.teaser-text { font-size: 1.05rem; font-weight: 700; }
+.rpg .teaser { background: linear-gradient(160deg, var(--primary-light), var(--surface) 60%); }
+.banner.comeback { display: flex; gap: 10px; align-items: flex-start; }
+.banner.comeback > div { flex: 1; }
+
+/* ---- 週のボス ---- */
+.boss-stage { text-align: center; }
+.boss-hp { display: flex; align-items: center; gap: 8px; margin: 4px 0 8px; }
+.boss-hp .num { white-space: nowrap; font-size: 0.9rem; }
+.hp-track { flex: 1; }
+.hp-fill { height: 100%; background: linear-gradient(180deg, #ffb3a8 0 25%, #e0452b 25% 70%, #a3271a 70%); transition: width 0.4s ease-out; }
+.boss-art { display: block; margin: 6px auto; }
+.boss-art:not(.idle) { animation: bob 2.2s ease-in-out infinite; }
+.boss-art.hit { animation: boss-hit 0.4s ease-out, bob 2.2s ease-in-out 0.4s infinite; }
+@keyframes boss-hit { 0% { filter: brightness(3); transform: translateX(-6px); } 40% { transform: translateX(6px); } 100% { filter: none; transform: none; } }
+.boss-win .boss-art { filter: drop-shadow(0 0 10px #ffd23f); }
+
+/* ---- 旅の地図 ---- */
+.map-wrap { margin: 8px 0; }
+.map-svg { width: 100%; height: auto; display: block; }
+.map-ground { fill: var(--surface2); stroke: var(--frame); stroke-width: 3; }
+.map-hill { fill: #c9a36b; opacity: 0.45; }
+.map-tree { fill: #2fa84f; opacity: 0.35; }
+.map-road { fill: none; stroke: var(--border); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 2 10; }
+.map-road.walked { stroke: #e0a020; stroke-dasharray: none; stroke-width: 5; }
+.town-base { fill: var(--surface); stroke: var(--border); stroke-width: 3; }
+.town.reached .town-base { stroke: #e0a020; }
+.town:not(.reached) .px-icon { opacity: 0.45; }
+.town-name { font-family: var(--font-game); font-size: 13px; fill: var(--text); }
+.town-sub { font-size: 10px; fill: var(--text2); }
+.map-hero { animation: hero-bob 1.4s ease-in-out infinite; }
+@keyframes hero-bob { 50% { transform: translateY(-3px); } }
+.town-list { list-style: none; margin-top: 6px; }
+.town-list li { padding: 8px 0; border-top: 1px dashed var(--border); }
+.town-list li.reached strong { color: var(--accent); }
+
+/* 演出の量：少なめ */
+[data-fx="low"] .boss-art, [data-fx="low"] .boss-art.hit { animation: none; }
+
+/* 端末の「動きを減らす」設定 */
+@media (prefers-reduced-motion: reduce) {
+  .honest-line, .phrase-win, .versus-cheer, .chest-row.ready .chest-icon, .boss-art, .boss-art.hit, .map-hero { animation: none !important; }
+  .vbar > div, .hp-fill { transition: none; }
+}

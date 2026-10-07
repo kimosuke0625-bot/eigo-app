@@ -6,6 +6,7 @@ import { loadStreak, MIN_SECONDS } from '../habit/streak'
 import { RecordingLibrary, ShadowingTable } from './SpeakingProgress'
 import { AssessmentHistory } from '../assessment/AssessmentHistory'
 import { CalendarHeat, LineChart, StackedWeekBars, StatTile } from './charts'
+import { TravelMap } from './TravelMap'
 import { fillDaily, PILLARS, weeklyMetric, weeklyPillars, weeklyRecall, writeSnapshot } from './stats'
 
 const PILLAR_COLORS = { language: 'var(--series-1)', input: 'var(--series-2)', fluency: 'var(--series-3)', output: 'var(--series-4)' }
@@ -37,6 +38,9 @@ export function ProgressScreen({ settings, onAssess }: { settings: Settings; onA
 
   return (
     <div>
+      <TravelMap settings={settings} />
+      <h2 className="quest-board-title"><span>本当の上達の記録</span></h2>
+      <p className="muted">ここから下は、経験値やレベルとは別の、実際の伸びの記録です。</p>
       <div className="stat-row">
         <StatTile label="連続日数" value={`${streak.current}日`} sub={`最長 ${streak.best}日`} />
         <StatTile label="定着した語彙" value={`${latest?.mature ?? 0}語`} sub={`知っている語 ${latest?.known ?? 0}`} />

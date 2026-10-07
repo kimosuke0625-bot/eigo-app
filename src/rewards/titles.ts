@@ -30,6 +30,12 @@ export interface Stats {
   /** ディクテーションで一致率100%の文がある */
   perfectDictation: boolean
   conversation: number
+  /** 倒した週のボスの数 */
+  bosses: number
+  /** 取り込んだ添削の数 */
+  feedback: number
+  /** 旅の手帳の表現を作文・音声日記で使えた回数の合計 */
+  phrasesUsed: number
 }
 
 export interface Unlock {
@@ -46,13 +52,27 @@ export interface TitleDef {
   test: (s: Stats) => boolean
 }
 
-export const THEMES: Record<string, { name: string; primary: string; primaryDark: string }> = {
-  indigo: { name: 'インディゴ（最初の色）', primary: '#6366f1', primaryDark: '#818cf8' },
-  ocean: { name: 'オーシャン', primary: '#0e7490', primaryDark: '#22d3ee' },
-  forest: { name: 'フォレスト', primary: '#15803d', primaryDark: '#4ade80' },
-  sunset: { name: 'サンセット', primary: '#c2410c', primaryDark: '#fb923c' },
-  sakura: { name: 'さくら', primary: '#be185d', primaryDark: '#f472b6' },
-  night: { name: 'ミッドナイト', primary: '#4338ca', primaryDark: '#a5b4fc' },
+/**
+ * 配色テーマ（RPG 風）。ボタンの色（btn）と、見出し・数字の色（accent）を、明るい配色と暗い配色で変える。
+ * primary は RPG 風の窓の外（グラフなど）で使う色。
+ */
+export interface ThemeDef {
+  name: string
+  primary: string
+  primaryDark: string
+  btn: string
+  btnDark: string
+  accent: string
+  accentDark: string
+}
+export const THEMES: Record<string, ThemeDef> = {
+  indigo: { name: '冒険者（最初の色）', primary: '#a33d1f', primaryDark: '#818cf8', btn: '#a33d1f', btnDark: '#2c3a99', accent: '#8a3b12', accentDark: '#ffd86b' },
+  ocean: { name: '海の旅', primary: '#0e7490', primaryDark: '#22d3ee', btn: '#0e6f8a', btnDark: '#0e5a74', accent: '#0b5566', accentDark: '#7dd3fc' },
+  forest: { name: '森の旅', primary: '#15803d', primaryDark: '#4ade80', btn: '#2f7a3a', btnDark: '#1f5c2c', accent: '#1f5c2c', accentDark: '#a7f3a0' },
+  sunset: { name: '夕焼けの旅', primary: '#c2410c', primaryDark: '#fb923c', btn: '#c2410c', btnDark: '#9a3412', accent: '#9a3412', accentDark: '#fdba74' },
+  sakura: { name: '桜の旅', primary: '#be185d', primaryDark: '#f472b6', btn: '#b8326a', btnDark: '#8a1f52', accent: '#9d174d', accentDark: '#f9a8d4' },
+  night: { name: '真夜中の旅', primary: '#4338ca', primaryDark: '#a5b4fc', btn: '#4338ca', btnDark: '#3730a3', accent: '#3730a3', accentDark: '#c7d2fe' },
+  gold: { name: '黄金の旅（ボス討伐）', primary: '#a16207', primaryDark: '#facc15', btn: '#a16207', btnDark: '#854d0e', accent: '#854d0e', accentDark: '#fde047' },
 }
 
 export const SOUND_SETS: Record<string, string> = {
@@ -87,6 +107,13 @@ export const TITLES: TitleDef[] = [
   { key: 'voice-10', name: '声の記録', desc: '録音を10回した', test: (s) => s.recordings >= 10 },
   { key: 'journal-10', name: '書く習慣', desc: '音声日記・作文を10回した', test: (s) => s.journal >= 10 },
   { key: 'talk-5', name: '会話の扉', desc: 'Claude との会話練習を5回した', test: (s) => s.conversation >= 5 },
+  { key: 'boss-1', name: '初めてのボス討伐', desc: '週のボスを初めて倒した', test: (s) => s.bosses >= 1 },
+  { key: 'boss-4', name: 'ボスハンター', desc: '週のボスを4回倒した', test: (s) => s.bosses >= 4, unlock: { kind: 'theme', key: 'gold' } },
+  { key: 'boss-12', name: '週末の英雄', desc: '週のボスを12回倒した', test: (s) => s.bosses >= 12 },
+  { key: 'boss-52', name: '一年の覇者', desc: '週のボスを52回倒した', test: (s) => s.bosses >= 52 },
+  { key: 'letter-1', name: '師匠の手紙', desc: '添削を初めて取り込んだ', test: (s) => s.feedback >= 1 },
+  { key: 'letter-20', name: '弟子の心得', desc: '添削を20回取り込んだ', test: (s) => s.feedback >= 20 },
+  { key: 'phrase-10', name: '表現の使い手', desc: '旅の手帳の表現を10回使えた', test: (s) => s.phrasesUsed >= 10 },
   // 隠し称号（条件は表示しない）
   { key: 'early-bird', name: '朝の英語', desc: '朝6時より前に練習した', hidden: true, test: (s) => s.earlyBird },
   { key: 'night-owl', name: '夜ふかしの英語', desc: '夜23時より後に練習した', hidden: true, test: (s) => s.nightOwl },
@@ -95,10 +122,11 @@ export const TITLES: TitleDef[] = [
 ]
 
 export async function loadStats(phase: number, rareIds: Set<string>, database: EigoDB = db): Promise<Stats> {
-  const [reviews, cards, facts, assessments, recordings, journal, sessions, streak] = await Promise.all([
+  const [reviews, cards, facts, assessments, recordings, journal, sessions, streak, bosses, feedback, phrases] = await Promise.all([
     database.reviews.count(), database.cards.toArray(), database.facts.toArray(),
     database.assessments.where('kind').equals('periodic').count(), database.recordings.count(),
     database.journal.count(), database.sessions.toArray(), loadStreak(database),
+    database.bosses.filter((b) => b.defeated === 1).count(), database.feedback.count(), database.phrases.toArray(),
   ])
   const owned = facts.filter((f) => f.acquiredAt)
   const hours = sessions.filter((s) => s.seconds >= 60).map((s) => new Date(s.at).getHours())
@@ -119,6 +147,9 @@ export async function loadStats(phase: number, rareIds: Set<string>, database: E
     nightOwl: hours.some((h) => h >= 23),
     perfectDictation: sessions.some((s) => s.kind === 'dictation' && (s.result?.dictation ?? 0) >= 0.999),
     conversation: sessions.filter((s) => s.kind === 'conversation').length,
+    bosses,
+    feedback,
+    phrasesUsed: phrases.reduce((sum, p) => sum + p.used, 0),
   }
 }
 

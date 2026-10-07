@@ -6,12 +6,16 @@ import { HelpButton } from './PracticeHelp'
 import { ClaudePromptBox } from './ClaudePromptBox'
 import { conversationPrompt, SCENES, type Level, type Scene } from './claudePrompts'
 import { currentLevel } from './output'
+import { finishPractice } from '../rewards/packs'
+import { useWeakFocus } from '../notes/hooks'
+import type { FeedbackLink } from '../notes/ImportScreen'
 
 /**
  * Claude との会話練習。場面とレベルを書き込んだ依頼文をコピーして、Claude に貼って会話する。
  * 会話はアプリの外で行うので、終わったら練習した時間を記録する。
  */
-export function ConversationScreen({ settings, onExit }: { settings: Settings; onExit: () => void }) {
+export function ConversationScreen({ settings, onExit, onImport }: { settings: Settings; onExit: () => void; onImport: (link: FeedbackLink) => void }) {
+  const focus = useWeakFocus()
   const [level, setLevel] = useState<Level | null>(null)
   const [scene, setScene] = useState<Scene | null>(null)
   const [logged, setLogged] = useState<number | null>(null)
@@ -21,6 +25,8 @@ export function ConversationScreen({ settings, onExit }: { settings: Settings; o
 
   const log = async (minutes: number) => {
     await db.sessions.add({ at: Date.now(), day: dayKey(), kind: 'conversation', pillar: 'output', seconds: minutes * 60, ref: scene?.id })
+    // ほかの練習と同じく、経験値と雑学パック
+    await finishPractice('conversation', minutes * 60)
     setLogged(minutes)
   }
 
@@ -48,8 +54,9 @@ export function ConversationScreen({ settings, onExit }: { settings: Settings; o
         <section className="card stack">
           <h2>{scene.label}</h2>
           <p>目的：{scene.goal}</p>
-          <ClaudePromptBox label="会話練習の依頼文をコピー" prompt={conversationPrompt({ level, scene })}
-            note="Claude が英語で話しかけてきます。6〜8往復したら、ふり返りを日本語でしてくれます。" />
+          <ClaudePromptBox label="会話練習の依頼文をコピー" prompt={conversationPrompt({ level, scene, focus })}
+            onImport={() => onImport({ source: 'conversation', ref: scene.label })}
+            note="Claude が英語で話しかけてきます。6〜8往復したら、ふり返りを日本語でしてくれます。ふり返りの最後に、取り込み用のまとめが付きます。" />
           {logged === null ? (
             <>
               <p>会話が終わったら、練習した時間を記録しましょう（学習時間の「アウトプット」に入ります）：</p>

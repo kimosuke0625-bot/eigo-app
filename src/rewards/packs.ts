@@ -3,6 +3,7 @@ import { dayKey } from '../today/menu'
 import { MIN_SECONDS, NOT_PRACTICE } from '../habit/streak'
 import { acquireFact, pickFact, type FactContent } from './facts'
 import { addXp, FINISH_SECONDS, practiceXp } from './xp'
+import { getSettings, updateSettings } from '../db/settings'
 
 /**
  * 雑学パック（フェーズ6.5）。練習を1つやり遂げるたびに1つ届き、タップで開ける。
@@ -69,7 +70,12 @@ export async function openPack(pack: Pack, opts: {
   let fact: FactContent | undefined
   let revisit = false
   if (newToday < NEW_FACTS_PER_DAY) {
-    fact = pickFact({ facts: opts.facts, owned, reviewedWords: opts.reviewedWords, liked: opts.liked, phase: opts.phase, rand })
+    // 前の日に予告した雑学があれば、それを最初に入れる
+    const s = await getSettings(database)
+    const teased = s.teaserFactId && s.teaserDay < day && !owned.get(s.teaserFactId)?.acquiredAt
+      ? opts.facts.find((f) => f.id === s.teaserFactId) : undefined
+    if (s.teaserFactId && s.teaserDay < day) await updateSettings({ teaserFactId: '' }, database)
+    fact = teased ?? pickFact({ facts: opts.facts, owned, reviewedWords: opts.reviewedWords, liked: opts.liked, phase: opts.phase, rand })
   }
   if (fact) {
     await acquireFact(fact, day, database)
@@ -85,4 +91,25 @@ export async function openPack(pack: Pack, opts: {
   await database.packs.put(done)
   await addXp(xp, {}, database, day)
   return { pack: done, fact, rarity, revisit, xp }
+}
+
+/**
+ * 明日の雑学の予告。その日の予告をまだ決めていなければ1つ選んで覚えておく。
+ * 翌日以降に最初に開けたパック（新しい雑学が入るとき）に、この雑学が入る。
+ */
+export async function ensureTeaser(opts: { facts: FactContent[]; liked: Set<string>; phase: number; rand?: () => number }, database: EigoDB = db, day = dayKey()): Promise<FactContent | undefined> {
+  const s = await getSettings(database)
+  const states = await database.facts.toArray()
+  const owned = new Map<string, Fact>(states.map((f) => [f.id, f]))
+  // 予告した雑学がまだ届いていなければ（パックを開けなかった日など）、同じものを予告し直す
+  if (s.teaserFactId) {
+    const f = opts.facts.find((x) => x.id === s.teaserFactId)
+    if (f && !owned.get(f.id)?.acquiredAt) {
+      if (s.teaserDay !== day) await updateSettings({ teaserDay: day }, database)
+      return f
+    }
+  }
+  const f = pickFact({ facts: opts.facts, owned, reviewedWords: new Set(), liked: opts.liked, phase: opts.phase, rand: opts.rand })
+  await updateSettings({ teaserDay: day, teaserFactId: f?.id ?? '' }, database)
+  return f
 }

@@ -30,13 +30,21 @@ describe('経験値', () => {
     expect(comboStage(3)).toBe(1)
     expect(comboStage(10)).toBe(3)
     expect(comboStage(50)).toBe(4)
-    expect(reviewXp({ attemptsToday: 0, answerMs: 3000, combo: 10, rand: never }).total).toBe(20)
+    expect(reviewXp({ attemptsToday: 0, answerMs: 3000, combo: 10, rand: never }).total).toBe(13)
+    // 倍率は最大1.5倍
+    expect(reviewXp({ attemptsToday: 0, answerMs: 3000, combo: 99, rand: never }).total).toBe(15)
     // 会心の一撃（1回目の乱数 < 5%、2回目の乱数で2倍か3倍）
     const seq = [0.01, 0.5]
     const g = reviewXp({ attemptsToday: 0, answerMs: 3000, combo: 0, rand: () => seq.shift()! })
     expect(g).toMatchObject({ crit: 2, total: 20 })
     // 出し直しのカードでは会心は出ない
     expect(reviewXp({ attemptsToday: 1, answerMs: 3000, combo: 0, rand: () => 0 }).crit).toBe(1)
+  })
+
+  it('正直ボーナス：「忘れた」を押すと満額のときだけ5を足す（連打・出し直しは除く）', () => {
+    expect(reviewXp({ attemptsToday: 0, answerMs: 3000, combo: 0, forgot: true, rand: never })).toMatchObject({ honest: 5, total: 15 })
+    expect(reviewXp({ attemptsToday: 0, answerMs: 300, combo: 0, forgot: true, rand: never }).honest).toBe(0)
+    expect(reviewXp({ attemptsToday: 2, answerMs: 3000, combo: 0, forgot: true, rand: never }).honest).toBe(0)
   })
 
   it('練習：2分以上でボーナス、1分ごとに3（復習カードは分ごとの分なし）、雑学を読む時間はなし', () => {

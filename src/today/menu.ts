@@ -13,6 +13,9 @@ export type PracticeKind =
   | 'conversation'
   | 'assessment'
   | 'roleplay'
+  | 'retell'
+  | 'importFeedback'
+  | 'boss'
 
 export interface MenuItem {
   kind: PracticeKind

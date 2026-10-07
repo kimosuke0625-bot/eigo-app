@@ -45,6 +45,18 @@ describe('Claude への依頼文', () => {
     expect(p).toContain('I decide to go.')
     expect(p).toContain('decide')
   })
+  it('取り込み用のまとめの形式と、弱点の上位を含める。返事の例は読み取りで空になる', async () => {
+    const { parseFeedback } = await import('../notes/parse')
+    const p = correctionPrompt({ level: { phase: 2, vocab: 1500 }, text: 'I decide to go.', kind: 'diary', focus: ['時制', '冠詞'] })
+    expect(p).toContain('【アプリ取り込み用のまとめ】')
+    expect(p).toContain('種類：音声日記')
+    expect(p).toContain('「時制」「冠詞」')
+    const c = conversationPrompt({ level: { phase: 3, vocab: 2500 }, scene: SCENES[0], focus: ['前置詞'] })
+    expect(c).toContain('種類：会話練習')
+    expect(c).toContain('ふり返りのいちばん最後に')
+    // 依頼文の中の形式の例そのものは、項目が「（…）」なので読み取っても中身のない直しになる
+    expect(parseFeedback(p)).toMatchObject({ source: 'diary', fixes: [], phrases: [] })
+  })
   it('会話練習の場面と目的を含める', () => {
     const p = conversationPrompt({ level: { phase: 3, vocab: 2500 }, scene: SCENES.find((s) => s.id === 'phone')! })
     expect(p).toContain('電話の受け答え')

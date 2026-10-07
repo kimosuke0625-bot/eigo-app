@@ -34,7 +34,7 @@ export function CollectionScreen({ settings }: { settings: Settings }) {
         <>
           <section className="card">
             <h2>集めた雑学 {owned.length} / {total}</h2>
-            <p className="muted">毎日、最低ライン（5分）を終えると1枚届きます。まれにレア雑学も出ます。</p>
+            <p className="muted">練習を1つやり遂げる（2分以上）たびに雑学パックが届き、開けると図鑑に入ります。まれにレア雑学も出ます。</p>
             <div className="cat-grid">
               {data.categories.map((c) => {
                 const all = data.facts.filter((f) => f.category === c.key && !byId.get(f.id)?.excluded)
@@ -72,7 +72,7 @@ export function CollectionScreen({ settings }: { settings: Settings }) {
                 </li>
               ))}
           </ul>
-          {!owned.length && <p className="muted">まだ雑学がありません。今日の練習を5分終えると最初の1枚が届きます。</p>}
+          {!owned.length && <p className="muted">まだ雑学がありません。練習を1つやり遂げると、最初のパックが届きます。</p>}
         </>
       )}
 

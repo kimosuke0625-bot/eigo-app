@@ -11,6 +11,7 @@ import { LookSection } from './LookSection'
 import { playChime } from '../rewards/sound'
 import { VoiceInstallGuide } from './VoiceInstallGuide'
 import { VoiceDiagnostics } from './VoiceDiagnostics'
+import { syncPhraseItems } from '../notes/store'
 
 function Seg<T extends string | number>({ value, options, onChange }: {
   value: T
@@ -262,6 +263,8 @@ function BackupSection() {
   const confirmImport = async () => {
     if (!pending) return
     await importAll(pending)
+    // 旅の手帳の表現の語（items）はバックアップに入れていないので作り直す
+    await syncPhraseItems()
     setPending(null)
     setMessage({ kind: 'ok', text: '読み込みが完了しました。' })
   }

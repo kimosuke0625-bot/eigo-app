@@ -9,6 +9,8 @@ import { Steps } from '../ui/Steps'
 import { HelpButton } from './PracticeHelp'
 import { playChime } from '../rewards/sound'
 import { ClaudePromptBox } from './ClaudePromptBox'
+import { useWeakFocus } from '../notes/hooks'
+import type { FeedbackLink } from '../notes/ImportScreen'
 import { correctionPrompt, type Level } from './claudePrompts'
 import { currentLevel } from './output'
 
@@ -26,7 +28,8 @@ interface Take {
 }
 
 /** 4/3/2スピーチ：同じ話を4分 → 3分 → 2分で3回話す */
-export function SpeechScreen({ settings, onExit }: { settings: Settings; onExit: () => void }) {
+export function SpeechScreen({ settings, onExit, onImport }: { settings: Settings; onExit: () => void; onImport: (link: FeedbackLink) => void }) {
+  const focus = useWeakFocus()
   const [mic, setMic] = useState<boolean | null>(null)
   return (
     <div>
@@ -36,12 +39,12 @@ export function SpeechScreen({ settings, onExit }: { settings: Settings; onExit:
           <MicGate title="4/3/2スピーチ" lead="同じ話を4分 → 3分 → 2分と、時間を縮めて3回話します。全部で10分ほどです。" onReady={setMic} />
           <button className="btn secondary block" onClick={onExit}>戻る</button>
         </>
-      ) : <Speech settings={settings} mic={mic} onExit={onExit} />}
+      ) : <Speech settings={settings} mic={mic} onExit={onExit} focus={focus} onImport={onImport} />}
     </div>
   )
 }
 
-function Speech({ settings, mic, onExit }: { settings: Settings; mic: boolean; onExit: () => void }) {
+function Speech({ settings, mic, onExit, focus, onImport }: { settings: Settings; mic: boolean; onExit: () => void; focus: string[]; onImport: (link: FeedbackLink) => void }) {
   const topics = useMemo(() => TOPICS.filter((t) => t.minPhase <= settings.phase), [settings.phase])
   const [topic, setTopic] = useState<Topic>(() => topics[Math.floor(Math.random() * topics.length)])
   const result = useSessionTimer('fluency', 'fluency', undefined, `speech:${topic.id}`)
@@ -181,7 +184,8 @@ function Speech({ settings, mic, onExit }: { settings: Settings; mic: boolean; o
               <p className="muted">回を重ねて語数が増えていれば、流暢さが伸びています。</p>
               {takes[2]?.transcript && level && (
                 <ClaudePromptBox label="3回目の話を Claude に添削してもらう（依頼文をコピー）"
-                  prompt={correctionPrompt({ level, text: takes[2].transcript, kind: 'speech', topic: topic.en })} />
+                  prompt={correctionPrompt({ level, text: takes[2].transcript, kind: 'speech', topic: topic.en, focus })}
+                  onImport={() => onImport({ source: 'speech' })} />
               )}
               <button className="btn block" disabled={!allSettled} onClick={onExit}>
                 {allSettled ? '今日の画面に戻る' : '計算が終わるまでお待ちください'}

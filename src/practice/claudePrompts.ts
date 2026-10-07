@@ -14,30 +14,80 @@ const LEVEL_TEXT: Record<number, string> = {
   4: '中上級（基本語は身についている。初見の話題で意見を述べたい）',
 }
 
+import { ERROR_TYPES } from '../notes/errorTypes'
+
+/** 苦手ノート（弱点の研究）の上位を「重点的に見てほしい点」として伝える */
+function focusLines(focus?: string[]): string[] {
+  if (!focus?.length) return []
+  return [
+    '',
+    '【重点的に見てほしい点】',
+    `これまでの添削で多かった私の間違いは「${focus.join('」「')}」です。この種類の間違いがあれば、小さなものでも必ず指摘してください。なければ「今回は大丈夫でした」と一言ください。`,
+  ]
+}
+
+/**
+ * 返事の最後に付けてもらう「アプリ取り込み用のまとめ」の指示。
+ * アプリの「添削を取り込む」で読み取る（notes/parse.ts）。形式を変えるときは両方を直す。
+ */
+export function summaryInstruction(kindLabel: string, note = ''): string[] {
+  return [
+    '',
+    '【最後に必ず付けてほしいもの：アプリ取り込み用のまとめ】',
+    '返事のいちばん最後に、下の形式のまとめを、コードブロック（```）の中に入れて付けてください。私の学習アプリに貼り付けて取り込みます。',
+    '- 見出し（■直し 1 など）と項目名（「元の文：」など）は、例のとおりに書いてください。項目名を変えず、1行に1項目で書きます。',
+    `- 「直し」は大事な直しと同じもの（最大5つ）。「新しい表現」は、私が次に使えるとよい表現（2〜3つ）。${note}`,
+    '- 元の文は、私が書いた（話した）文をそのまま写してください。',
+    `- 間違いの種類は、次の中から1つ選んでください：${ERROR_TYPES.join('／')}`,
+    '- 「聞き取りの誤り」は、音声認識の誤りで、私の英語の誤りではないものに使ってください。',
+    '- 解説は日本語で1〜2文。意味と使う場面は日本語、例文は英語で書いてください。',
+    '',
+    '【アプリ取り込み用のまとめ】',
+    `種類：${kindLabel}`,
+    '',
+    '■直し 1',
+    '元の文：（私の文）',
+    '直した文：（直した文）',
+    '間違いの種類：（一覧から1つ）',
+    '解説：（短い解説）',
+    '',
+    '■新しい表現 1',
+    '表現：（英語の表現）',
+    '意味：（日本語の意味）',
+    '例文：（英語の例文）',
+    '使う場面：（どんなときに使うか）',
+    '',
+    '【まとめ ここまで】',
+  ]
+}
+
 function levelLine(l: Level) {
   return `私の英語のレベル：${LEVEL_TEXT[l.phase] ?? LEVEL_TEXT[2]}。知っている英単語はおよそ${l.vocab.toLocaleString()}語です。目標は2年以内にビジネス英会話ができるようになることです。`
 }
 
 /** 作文・音声日記の添削 */
-export function correctionPrompt(o: { level: Level; text: string; kind: 'write' | 'diary' | 'speech'; topic?: string; targets?: string[] }): string {
+export function correctionPrompt(o: { level: Level; text: string; kind: 'write' | 'diary' | 'speech'; topic?: string; targets?: string[]; phrases?: string[]; focus?: string[] }): string {
   const what = o.kind === 'write' ? '短い英作文' : o.kind === 'diary' ? '音声日記（話した英語を音声認識で文字にしたもの。認識の誤りが含まれることがあります）' : 'スピーチ（話した英語を音声認識で文字にしたもの。認識の誤りが含まれることがあります）'
   return [
     `あなたは日本人学習者のための、やさしく的確な英語の先生です。次の${what}を添削してください。`,
     levelLine(o.level),
-    o.topic ? `テーマ：${o.topic}` : '',
-    o.targets?.length ? `今日覚えた語（使うように意識した語）：${o.targets.join(', ')}` : '',
+    ...(o.topic ? [`テーマ：${o.topic}`] : []),
+    ...(o.targets?.length ? [`今日覚えた語（使うように意識した語）：${o.targets.join(', ')}`] : []),
+    ...(o.phrases?.length ? [`使ってみようとした表現（前に教わったもの）：${o.phrases.join(' / ')}`] : []),
+    ...focusLines(o.focus),
     '',
     '【お願い】',
     '1. まず、全体のよかった点を日本語で1〜2文',
     '2. 直した英文の全文（私のレベルで自然な英語に。言いたいことは変えない）',
     '3. 大事な直しを最大5つまで、表で：「元の表現 → 直した表現 → 理由（日本語で短く）」',
-    '4. 今日覚えた語の使い方が正しいか、ひとこと',
+    '4. 今日覚えた語（と、使ってみようとした表現）の使い方が正しいか、ひとこと',
     '5. 次に使えるとよい表現を2つ（例文つき）',
     '細かい誤りを全部直すより、意味が伝わるかどうかと、よくある間違いを優先してください。',
+    ...summaryInstruction(o.kind === 'write' ? '作文' : o.kind === 'diary' ? '音声日記' : 'スピーチ'),
     '',
     '【英文】',
     o.text.trim(),
-  ].filter((x) => x !== '').join('\n')
+  ].filter((x) => x !== null).join('\n').replace(/\n{3,}/g, '\n\n')
 }
 
 export interface Scene {
@@ -64,7 +114,7 @@ export const SCENES: Scene[] = [
 ]
 
 /** Claude との会話練習（役割練習） */
-export function conversationPrompt(o: { level: Level; scene: Scene }): string {
+export function conversationPrompt(o: { level: Level; scene: Scene; focus?: string[] }): string {
   return [
     'あなたと英語の会話練習（ロールプレイ）をしたいです。',
     levelLine(o.level),
@@ -79,6 +129,8 @@ export function conversationPrompt(o: { level: Level; scene: Scene }): string {
     '- 会話の途中では誤りを直さず、会話を続けることを優先してください。',
     '- 6〜8往復したら、または私が「おわり」と書いたら、会話を終えて日本語でふり返りをしてください：',
     '  1) よかった点　2) 直すと自然になる表現を3つ（元の表現 → よりよい表現）　3) この場面で使える定番の表現を3つ',
+    ...focusLines(o.focus),
+    ...summaryInstruction('会話練習', 'このときの「元の文」は、会話の中で私が言った文です。').map((l) => (l.startsWith('返事のいちばん最後') ? 'ふり返りのいちばん最後に、下の形式のまとめを、コードブロック（```）の中に入れて付けてください。私の学習アプリに貼り付けて取り込みます。会話の途中では付けないでください。' : l)),
     '',
     'では、始めてください。',
   ].join('\n')

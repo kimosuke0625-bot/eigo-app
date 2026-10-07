@@ -91,6 +91,10 @@ export interface JournalEntry {
   /** 音声日記の録音（recordings の id） */
   recordingId?: number
   prompt: string
+  /** 使うよう示した「旅の手帳」の表現（phrases の id） */
+  phraseTargets?: number[]
+  /** そのうち実際に使った表現 */
+  phrasesUsed?: number[]
 }
 
 export interface KnownWord {
@@ -229,6 +233,68 @@ export interface Pack {
   rarity?: number
 }
 
+/** 添削のもとになった練習 */
+export type FeedbackSource = 'write' | 'diary' | 'speech' | 'conversation' | 'other'
+
+/** 添削の記録：Claude の返事を取り込んだ1回分（直しと表現は fixes・phrases に分けて保存） */
+export interface Feedback {
+  id?: number
+  at: number
+  day: string
+  source: FeedbackSource
+  /** 元の作文・音声日記（journal の id） */
+  journalId?: number
+  /** 元の録音（recordings の id。スピーチなど） */
+  recordingId?: number
+  /** 会話練習の場面など */
+  ref?: string
+  /** 貼り付けた返事（読み取りの確認用） */
+  raw: string
+}
+
+/** 添削の直し1つ（弱点の研究・言い直しの練習に使う） */
+export interface Fix {
+  id?: number
+  feedbackId: number
+  at: number
+  day: string
+  original: string
+  corrected: string
+  /** 間違いの種類（notes/errorTypes.ts の一覧） */
+  type: string
+  note: string
+  /** 言い直しの練習をした回数 */
+  practiced: number
+  lastPracticedAt?: number
+  /** 最後の自己評価（0 = まだ、1 = おしい、2 = 言えた） */
+  lastResult?: number
+}
+
+/** 旅の手帳（表現ノート）の表現。保存すると復習カードにも加わる（items の id は phrase-<id>） */
+export interface Phrase {
+  id?: number
+  at: number
+  day: string
+  feedbackId?: number
+  expression: string
+  meaning: string
+  example: string
+  scene: string
+  source: FeedbackSource
+  /** 作文・音声日記で実際に使えた回数 */
+  used: number
+  lastUsedAt?: number
+}
+
+/** 週のボス戦（週の月曜日の日付キーごと） */
+export interface BossWeek {
+  week: string
+  at: number
+  /** 出題した語の数 */
+  words: number
+  defeated: 0 | 1
+}
+
 export type EffectsLevel = 'low' | 'medium' | 'high'
 export type ThemeMode = 'system' | 'light' | 'dark'
 export type BlockId = 'morning' | 'noon' | 'night'
@@ -288,6 +354,18 @@ export interface Settings {
   xpTotal: number
   /** 経験値の計算の版（0 = これまでの記録からまだ計算していない） */
   xpVersion: number
+  /** 今日のクエストを選んだ日と、選んだクエスト */
+  questDay: string
+  questKeys: string[]
+  /** 今日のクエストの宝箱を開けた日 */
+  chestDay: string
+  /** 明日の雑学の予告（予告した日と雑学の id） */
+  teaserDay: string
+  teaserFactId: string
+  /** 先週の自分を上回った演出を出した日 */
+  beatDay: string
+  /** おかえりボーナスを受け取った日 */
+  comebackDay: string
 }
 
 export class EigoDB extends Dexie {
@@ -307,6 +385,10 @@ export class EigoDB extends Dexie {
   journal!: EntityTable<JournalEntry, 'id'>
   xpDays!: EntityTable<XpDay, 'day'>
   packs!: EntityTable<Pack, 'id'>
+  feedback!: EntityTable<Feedback, 'id'>
+  fixes!: EntityTable<Fix, 'id'>
+  phrases!: EntityTable<Phrase, 'id'>
+  bosses!: EntityTable<BossWeek, 'week'>
 
   constructor(name = 'eigo') {
     super(name)
@@ -354,6 +436,13 @@ export class EigoDB extends Dexie {
       xpDays: 'day',
       packs: '++id, day, opened',
     })
+    // フェーズ6.5（2段階目）：添削の記録、直し、旅の手帳（表現）、週のボス戦
+    this.version(9).stores({
+      feedback: '++id, at, day, source, journalId',
+      fixes: '++id, feedbackId, day, type',
+      phrases: '++id, at, day, feedbackId',
+      bosses: 'week',
+    })
   }
 }
 
@@ -361,6 +450,7 @@ export class EigoDB extends Dexie {
 export const TABLE_NAMES = [
   'cards', 'reviews', 'knownWords', 'edits', 'snapshots', 'journal', 'materials', 'sessions',
   'recordings', 'assessments', 'facts', 'rewards', 'settings', 'xpDays', 'packs',
+  'feedback', 'fixes', 'phrases', 'bosses',
 ] as const
 
 export const db = new EigoDB()

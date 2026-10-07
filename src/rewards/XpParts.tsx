@@ -21,7 +21,7 @@ export function LevelBar({ total, compact = false }: { total: number; compact?: 
 export interface Float {
   id: number
   text: string
-  kind: 'xp' | 'crit' | 'combo' | 'level'
+  kind: 'xp' | 'crit' | 'combo' | 'level' | 'honest'
 }
 
 /** 飛び出す数字（約0.9秒で消える） */

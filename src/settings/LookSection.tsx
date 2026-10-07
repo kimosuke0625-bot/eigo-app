@@ -16,7 +16,7 @@ export function LookSection({ settings }: { settings: Settings }) {
         {Object.entries(THEMES).map(([key, t]) => (
           <button key={key} aria-pressed={settings.accentTheme === key} disabled={!themes.has(key)}
             onClick={() => void updateSettings({ accentTheme: key })}>
-            <span className="swatch" style={{ background: t.primary }} /> {themes.has(key) ? t.name : '🔒'}
+            <span className="swatch" style={{ background: t.btn }} /> {themes.has(key) ? t.name : '🔒'}
           </button>
         ))}
       </div>

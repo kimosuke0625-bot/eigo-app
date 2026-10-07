@@ -4,7 +4,7 @@ import { grantTitles, newTitles, TITLES, type Stats } from './titles'
 
 const base: Stats = {
   reviews: 0, cards: 0, mature: 0, streak: 0, bestStreak: 0, practiceDays: 0, facts: 0, rareFacts: 0, phase: 1,
-  assessments: 0, recordings: 0, journal: 0, earlyBird: false, nightOwl: false, perfectDictation: false, conversation: 0,
+  assessments: 0, recordings: 0, journal: 0, earlyBird: false, nightOwl: false, perfectDictation: false, conversation: 0, bosses: 0, feedback: 0, phrasesUsed: 0,
 }
 
 describe('称号', () => {

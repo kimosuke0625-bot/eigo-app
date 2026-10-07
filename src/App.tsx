@@ -27,23 +27,27 @@ import { NewCardsScreen } from './practice/NewCardsScreen'
 import { DiagnosticScreen } from './assessment/DiagnosticScreen'
 import type { PracticeKind } from './today/menu'
 import { ProgressScreen } from './progress/ProgressScreen'
-import { CollectionScreen } from './rewards/CollectionScreen'
 import { useDailyRewards } from './rewards/useDailyRewards'
 import { setSoundEnabled, setSoundSet } from './rewards/sound'
 import { THEMES } from './rewards/titles'
 import { checkPhase } from './progress/autoPhase'
 import { PixelIcon } from './ui/PixelIcon'
+import { ImportScreen, type FeedbackLink } from './notes/ImportScreen'
+import { RetellScreen } from './notes/RetellScreen'
+import { BagScreen, type BagSection } from './notes/BagScreen'
+import { BossScreen } from './rewards/BossScreen'
+import { syncPhraseItems } from './notes/store'
 
 export type Tab = 'today' | 'practice' | 'progress' | 'materials' | 'collection' | 'settings'
 
-type Overlay = { practice: PracticeKind; materialId?: string; speed?: boolean } | { diagnostic: true } | null
+type Overlay = { practice: PracticeKind; materialId?: string; speed?: boolean; link?: FeedbackLink } | { diagnostic: true } | null
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
   { id: 'today', label: '今日', icon: 'sun' },
   { id: 'practice', label: '練習', icon: 'sword' },
   { id: 'progress', label: '進捗', icon: 'flag' },
   { id: 'materials', label: '素材', icon: 'book' },
-  { id: 'collection', label: '図鑑', icon: 'bag' },
+  { id: 'collection', label: '持ち物', icon: 'bag' },
   { id: 'settings', label: '設定', icon: 'gear' },
 ]
 
@@ -56,7 +60,13 @@ function useTheme(mode: ThemeMode | undefined, accent = 'indigo') {
       document.documentElement.dataset.theme = dark ? 'dark' : 'light'
       // 称号で解放した配色テーマ（アクセントの色だけを変える）
       const t = THEMES[accent] ?? THEMES.indigo
-      document.documentElement.style.setProperty('--primary', dark ? t.primaryDark : t.primary)
+      const root = document.documentElement.style
+      root.setProperty('--primary', dark ? t.primaryDark : t.primary)
+      // RPG 風の画面のボタンと見出しの色
+      root.setProperty('--rpg-btn', t.btn)
+      root.setProperty('--rpg-btn-dark', t.btnDark)
+      root.setProperty('--rpg-accent', t.accent)
+      root.setProperty('--rpg-accent-dark', t.accentDark)
     }
     apply()
     media.addEventListener('change', apply)
@@ -80,6 +90,8 @@ export default function App() {
 
   useEffect(() => {
     loadNgsl().then(() => loadBsl()).catch((e: Error) => setContentError(e.message))
+    // 旅の手帳の表現を復習カードの語として用意する（バックアップから戻したときも）
+    void syncPhraseItems()
     void checkPhase()
   }, [])
   useEffect(() => setSoundEnabled(settings?.sound ?? true), [settings?.sound])
@@ -102,6 +114,7 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
   setClock: (n: number) => void
 }) {
   const rewards = useDailyRewards(settings, overlay === null)
+  const [bag, setBag] = useState<BagSection>('facts')
   // 高品質な声がなくて読み上げられなかったときの案内
   const [noVoice, setNoVoice] = useState(false)
   useEffect(() => {
@@ -113,6 +126,8 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
 
   const close = () => { setOverlay(null); setClock(Date.now()) }
   const start = (k: PracticeKind, materialId?: string) => setOverlay({ practice: k, materialId })
+  const importFeedback = (link?: FeedbackLink) => setOverlay({ practice: 'importFeedback', link })
+  const openBag = (s: BagSection) => { close(); setTab('collection'); setBag(s) }
 
   let body
   if (overlay && 'diagnostic' in overlay) {
@@ -133,20 +148,26 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
   } else if (overlay?.practice === 'assessment') {
     body = <AssessmentScreen settings={settings} onExit={close} />
   } else if (overlay?.practice === 'output') {
-    body = <OutputScreen settings={settings} onExit={close} />
+    body = <OutputScreen settings={settings} onExit={close} onImport={importFeedback} />
   } else if (overlay?.practice === 'conversation') {
-    body = <ConversationScreen settings={settings} onExit={close} />
+    body = <ConversationScreen settings={settings} onExit={close} onImport={importFeedback} />
   } else if (overlay?.practice === 'roleplay') {
     body = <RoleplayScreen settings={settings} onExit={close} />
   } else if (overlay?.practice === 'speech') {
-    body = <SpeechScreen settings={settings} onExit={close} />
+    body = <SpeechScreen settings={settings} onExit={close} onImport={importFeedback} />
+  } else if (overlay?.practice === 'importFeedback') {
+    body = <ImportScreen link={overlay.link} onExit={close} onNotebook={() => openBag('notebook')} />
+  } else if (overlay?.practice === 'retell') {
+    body = <RetellScreen settings={settings} onExit={close} />
+  } else if (overlay?.practice === 'boss') {
+    body = <BossScreen settings={settings} onExit={close} />
   } else if (overlay?.practice === 'fluency' && !overlay.materialId && !overlay.speed) {
     body = <FluencyHub onSpeech={() => start('speech')} onSpeed={() => setOverlay({ practice: 'fluency', speed: true })} onExit={close} />
   } else if (overlay?.practice === 'fluency') {
     body = <><div className="practice-top"><HelpButton k="speedRead" settings={settings} /></div><SpeedReadScreen key={overlay.materialId ?? 'speed'} settings={settings} materialId={overlay.materialId} onExit={close} /></>
   } else if (tab === 'today') {
     body = <TodayScreen settings={settings} dueCount={dueCount} onSettings={() => setTab('settings')}
-      onStart={start} onDiagnostic={() => setOverlay({ diagnostic: true })} />
+      onStart={start} onDiagnostic={() => setOverlay({ diagnostic: true })} onMap={() => setTab('progress')} />
   } else if (tab === 'practice') {
     body = <PracticeHub onStart={start} dueCount={dueCount} />
   } else if (tab === 'progress') {
@@ -154,15 +175,14 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
   } else if (tab === 'materials') {
     body = <MaterialsScreen onRead={(id) => start('input', id)} onSpeed={(id) => start('fluency', id)} />
   } else if (tab === 'collection') {
-    body = <CollectionScreen settings={settings} />
+    body = <BagScreen settings={settings} section={bag} onSection={setBag} onImport={() => importFeedback()} onRetell={() => start('retell')} />
   } else {
     body = <SettingsScreen settings={settings} onDiagnostic={() => setOverlay({ diagnostic: true })} />
   }
 
-  // フェーズ6.5の1段階目：新しい見た目は「今日の画面」と「復習カード」だけ
-  const rpg = (overlay === null && tab === 'today') || (overlay !== null && 'practice' in overlay && overlay.practice === 'review')
+  // フェーズ6.5：すべての画面を RPG 風の見た目にする
   return (
-    <div className={`app${rpg ? ' rpg' : ''}`}>
+    <div className="app rpg">
       <header className="header">
         <h1>英語マスター 2年計画</h1>
         <span className="phase-chip" style={{ background: PHASE_COLORS[settings.phase] }}>

@@ -10,7 +10,7 @@ import { AnswerFace, Highlight, SpeakButton } from './WordParts'
 import { useSessionTimer } from './useSessionTimer'
 import { applyEdit } from '../content/edits'
 import { playComboStage, playCorrect, playCrit, playLevelUp, playTry } from '../rewards/sound'
-import { addXp, COMBO_STEPS, comboStage, levelFromXp, reviewXp } from '../rewards/xp'
+import { addXp, COMBO_STEPS, comboStage, HONEST_LINES, levelFromXp, reviewXp } from '../rewards/xp'
 import { Floats, LevelBar, Sparks, type Float } from '../rewards/XpParts'
 import { PixelIcon } from '../ui/PixelIcon'
 
@@ -26,7 +26,7 @@ const MODE_PROMPT: Record<PresentMode, string> = {
 const MODE_NAME: Record<PresentMode, string> = { word: '単語', chunk: '例文', listen: '聞き取り' }
 
 /** この戦い（復習の1回）の記録 */
-interface Battle { total: number; recalled: number; xp: number; maxCombo: number; crits: number; levelUps: number }
+interface Battle { total: number; recalled: number; xp: number; maxCombo: number; crits: number; levelUps: number; honest: number }
 
 /**
  * 復習カード（フェーズ6.5：戦闘の画面）。
@@ -45,7 +45,9 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
   const [revealedAt, setRevealedAt] = useState(0)
   const revealed = revealedAt > 0
   const [showJa, setShowJa] = useState(false)
-  const [battle, setBattle] = useState<Battle>({ total: 0, recalled: 0, xp: 0, maxCombo: 0, crits: 0, levelUps: 0 })
+  const [battle, setBattle] = useState<Battle>({ total: 0, recalled: 0, xp: 0, maxCombo: 0, crits: 0, levelUps: 0, honest: 0 })
+  // 正直ボーナスの一言（次に評価するまで出しておく）
+  const [honestLine, setHonestLine] = useState('')
   // 思い出せた回数の連続（コンボ）。続くほど倍率・音・演出が上がる
   const combo = useRef(0)
   const [comboShown, setComboShown] = useState(0)
@@ -108,7 +110,7 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
     combo.current = recalled ? combo.current + 1 : 0
     const stage = comboStage(combo.current)
     setComboShown(combo.current)
-    const gain = reviewXp({ attemptsToday: current.attemptsToday, answerMs: answerMs.current, combo: combo.current })
+    const gain = reviewXp({ attemptsToday: current.attemptsToday, answerMs: answerMs.current, combo: combo.current, forgot: g === 1 })
     const before = levelFromXp(startXp + gained.current).level
     gained.current += gain.total
     const levelUp = levelFromXp(startXp + gained.current).level > before
@@ -120,7 +122,13 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
     if (stageUp) playComboStage(stage)
     if (levelUp) window.setTimeout(playLevelUp, 250)
 
-    addFloat(gain.crit > 1 ? `会心の一撃！ +${gain.total}` : `+${gain.total} XP`, gain.crit > 1 ? 'crit' : 'xp')
+    if (gain.honest > 0) {
+      addFloat(`正直ボーナス +${gain.total}`, 'honest')
+      setHonestLine(HONEST_LINES[battle.honest % HONEST_LINES.length])
+    } else {
+      addFloat(gain.crit > 1 ? `会心の一撃！ +${gain.total}` : `+${gain.total} XP`, gain.crit > 1 ? 'crit' : 'xp')
+      setHonestLine('')
+    }
     if (stageUp) addFloat(`${COMBO_STEPS[stage].name} ×${COMBO_STEPS[stage].mult}`, 'combo')
     if (levelUp) addFloat(`レベルアップ！ Lv ${before + 1}`, 'level')
     if (recalled || gain.crit > 1) setHit({ seed: floatId.current, strength: stage + (gain.crit > 1 ? 2 : 0), crit: gain.crit > 1 })
@@ -132,6 +140,7 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
       maxCombo: Math.max(b.maxCombo, combo.current),
       crits: b.crits + (gain.crit > 1 ? 1 : 0),
       levelUps: b.levelUps + (levelUp ? 1 : 0),
+      honest: b.honest + (gain.honest > 0 ? 1 : 0),
     }))
     const updated = await recordReview(current.card, g, { answerMs: answerMs.current, mode: current.mode })
     void addXp(gain.total, { crit: gain.crit > 1, combo: combo.current })
@@ -140,7 +149,7 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
     // 学習中のカードはこの回のうちにもう一度出す（20分以内に期日が来るもの）
     const rest = queue.filter((c) => c.id !== current.card.id)
     setQueue(updated.due <= Date.now() + 20 * 60 * 1000 ? [...rest, updated] : rest)
-  }, [current, queue, result, addFloat])
+  }, [current, queue, result, addFloat, battle.honest, startXp])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -166,11 +175,13 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
                 <div><dt>思い出せた</dt><dd>{battle.recalled}</dd></div>
                 <div><dt>最高コンボ</dt><dd>{battle.maxCombo}</dd></div>
                 <div><dt>会心の一撃</dt><dd>{battle.crits}</dd></div>
+                <div><dt>正直ボーナス</dt><dd>{battle.honest}</dd></div>
                 <div><dt>経験値</dt><dd>+{battle.xp}</dd></div>
+                <div><dt>思い出そうとした</dt><dd>{battle.total}</dd></div>
               </dl>
               <LevelBar total={shownXp} />
               {battle.levelUps > 0 && <p className="result-lead">レベルが {battle.levelUps} 上がりました！</p>}
-              <p className="muted">思い出せなかったカードも、思い出そうとした分の経験値が入っています。</p>
+              <p className="muted">思い出せなかったカードも、思い出そうとした分の経験値が入っています。「忘れた」と正直に押した分は、正直ボーナスつきです。</p>
             </>
           ) : (
             <p>今日戦う（復習する）カードはありません。</p>
@@ -200,6 +211,7 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
         </div>
       </div>
 
+      {honestLine && <p className="honest-line" key={honestLine + battle.total}><PixelIcon name="star" size={16} /> {honestLine}</p>}
       <Steps steps={['思い出して声に出す', '答えを見て評価する']} current={revealed ? 1 : 0}
         guide={revealed ? '思い出せたかどうかを、正直に4つから選びましょう。' : MODE_PROMPT[mode]} />
       <div className="card-stage">

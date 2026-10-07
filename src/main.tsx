@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client'
 import '@fontsource/dotgothic16/400.css'
 import './index.css'
 import './rpg.css'
+import './rpg-world.css'
 import App from './App.tsx'
 
 // 保存データがブラウザに消されにくくなるよう永続化を要求する

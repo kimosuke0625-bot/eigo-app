@@ -10,18 +10,22 @@ import { FactQuizCard } from '../rewards/FactQuizCard'
 import { LevelBar } from '../rewards/XpParts'
 import { TITLES } from '../rewards/titles'
 import { PixelIcon } from '../ui/PixelIcon'
+import { BossNotice, ComebackBanner, QuestBoard, TeaserCard, VersusWindow } from './JourneyParts'
+import { mapPosition, TOWNS, useVocab } from '../progress/TravelMap'
 
 /**
  * 今日の画面（フェーズ6.5：冒険の旅の拠点）。
  * 旅人のステータス（レベル・経験値・連続日数・持ち物）、今日の旅程、依頼の掲示板（今日のメニュー）。
  */
-export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnostic }: {
+export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnostic, onMap }: {
   settings: Settings
   dueCount: number
   onSettings: () => void
   onStart: (k: PracticeKind) => void
   onDiagnostic: () => void
+  onMap: () => void
 }) {
+  const vocab = useVocab()
   const today = dayKey()
   const lastAssess = useLiveQuery(async () => (await db.assessments.where('kind').equals('periodic').sortBy('at')).at(-1)?.at ?? 0, [], -1)
   const assessDue = lastAssess !== -1 && assessmentDue(lastAssess || undefined, settings.diagnosedAt > 0 ? settings.diagnosedAt : settings.createdAt)
@@ -58,8 +62,14 @@ export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnos
   // 持ち物のパックを開ける（届いたお知らせをもう一度出すと、開封の画面が開く）
   const openPacks = () => db.packs.where('opened').equals(0).modify({ notified: 0 })
 
+  const pos = vocab === undefined ? null : mapPosition(vocab)
+  const nextTown = pos ? TOWNS[pos.town + 1] : undefined
+  // 1日の終わり（夜のブロック、または目標時間を達成した後）に、明日の雑学を予告する
+  const teaser = !!streak?.todayDone && (nowBlock === 'night' || doneMin >= settings.targetMinutes)
+
   return (
     <div className="today-rpg">
+      <ComebackBanner settings={settings} />
       {settings.diagnosedAt <= 0 && (
         <div className="banner info">
           <strong>最初に診断テスト（約4分）</strong>を受けると、ちょうどよい難しさから旅を始められます。
@@ -100,6 +110,13 @@ export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnos
           </div>
         </div>
         <LevelBar total={settings.xpTotal} />
+        {pos && (
+          <button className="map-line" onClick={onMap}>
+            <PixelIcon name={TOWNS[pos.town].icon} size={18} />
+            <span>いまの町：<strong>{TOWNS[pos.town].name}</strong>{nextTown && <>・次の「{nextTown.name}」まで あと <span className="num">{(nextTown.at - vocab!).toLocaleString()}</span> 語</>}</span>
+            <span className="min">地図 ▶</span>
+          </button>
+        )}
         <div className="stat-chips">
           <div className="stat-chip">
             <PixelIcon name="flame" size={20} />
@@ -155,6 +172,10 @@ export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnos
         </p>
       </section>
 
+      <QuestBoard onStart={onStart} />
+      <BossNotice onStart={onStart} />
+      <VersusWindow settings={settings} />
+      <TeaserCard settings={settings} show={teaser} />
       <FactQuizCard settings={settings} />
 
       <h2 className="quest-board-title"><PixelIcon name="scroll" size={22} /> 依頼の掲示板</h2>

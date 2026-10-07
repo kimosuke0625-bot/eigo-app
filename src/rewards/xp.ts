@@ -47,14 +47,33 @@ export function levelFromXp(total: number): LevelInfo {
   return { level, into: rest, need: xpToNext(level) }
 }
 
-/** コンボの段階（0〜4）。段階が上がるほど倍率・音・演出が派手になる */
+/**
+ * コンボの段階（0〜4）。段階が上がるほど倍率・音・演出が派手になる。
+ * 倍率は最大1.5倍に抑える（「思い出せた」と甘く押したくならないように。利用者の決定 2026-10-08）
+ */
 export const COMBO_STEPS = [
   { at: 0, mult: 1, name: '' },
-  { at: 3, mult: 1.2, name: 'コンボ' },
-  { at: 5, mult: 1.5, name: 'グッドコンボ' },
-  { at: 10, mult: 2, name: 'グレートコンボ' },
-  { at: 20, mult: 2.5, name: 'フィーバー' },
+  { at: 3, mult: 1.1, name: 'コンボ' },
+  { at: 5, mult: 1.2, name: 'グッドコンボ' },
+  { at: 10, mult: 1.3, name: 'グレートコンボ' },
+  { at: 20, mult: 1.5, name: 'フィーバー' },
 ] as const
+
+/**
+ * 正直ボーナス：「忘れた」を押したときに足す経験値。
+ * コンボは途切れるが、正直に評価するほうが得だと感じられるようにする（満額のときだけ。連打は除く）
+ */
+export const HONEST_XP = 5
+
+/** 正直ボーナスのときに出す前向きな一言 */
+export const HONEST_LINES = [
+  '忘れたと気づけた語は、次にぐっと覚えやすくなります。',
+  '正直な評価が、ちょうどよい復習の間隔を作ります。',
+  '思い出せなかった今こそ、記憶が強くなるところです。',
+  'ここで答えを見たので、次はきっと思い出せます。',
+  '間違えた分だけ、記憶の地図が正確になります。',
+  '正直に押せるのは、本物の旅人のしるしです。',
+]
 
 export function comboStage(combo: number): number {
   let stage = 0
@@ -67,6 +86,8 @@ export interface ReviewGain {
   mult: number
   /** 会心の一撃の倍率（1 = なし、2 または 3） */
   crit: number
+  /** 正直ボーナス（「忘れた」を押したとき） */
+  honest: number
   total: number
 }
 
@@ -76,15 +97,17 @@ export interface ReviewGain {
  * - 答えを見るまで0.8秒未満（連打）は1
  * - コンボ倍率は、思い出せた連続回数（combo）で決まる
  * - 会心の一撃は、満額（10）のときだけ5%の確率で出る。2倍（4回に3回）か3倍
+ * - 「忘れた」（forgot）を押したときは、満額なら正直ボーナス5を足す
  */
-export function reviewXp(opts: { attemptsToday: number; answerMs: number; combo: number; rand?: () => number }): ReviewGain {
+export function reviewXp(opts: { attemptsToday: number; answerMs: number; combo: number; forgot?: boolean; rand?: () => number }): ReviewGain {
   const rand = opts.rand ?? Math.random
   let base = opts.attemptsToday === 0 ? REVIEW_XP : opts.attemptsToday < 3 ? REPEAT_XP : REPEAT_XP_LATE
   if (opts.answerMs < QUICK_MS) base = Math.min(base, QUICK_XP)
   const mult = COMBO_STEPS[comboStage(opts.combo)].mult
   let crit = 1
   if (base === REVIEW_XP && rand() < CRIT_CHANCE) crit = rand() < 0.75 ? 2 : 3
-  return { base, mult, crit, total: Math.round(base * mult * crit) }
+  const honest = opts.forgot && base === REVIEW_XP ? HONEST_XP : 0
+  return { base, mult, crit, honest, total: Math.round(base * mult * crit) + honest }
 }
 
 /**
