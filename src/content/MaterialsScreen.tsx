@@ -82,6 +82,7 @@ function AddForm({ onDone }: { onDone: (id?: string) => void }) {
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [source, setSource] = useState('')
+  const [audio, setAudio] = useState<File | null>(null)
   const [error, setError] = useState('')
   return (
     <div className="stack">
@@ -98,11 +99,18 @@ function AddForm({ onDone }: { onDone: (id?: string) => void }) {
         <span>出典（任意：サイト名やURL）</span>
         <input type="text" value={source} onChange={(e) => setSource(e.target.value)} />
       </label>
-      <p className="muted">取り込んだ文章はこの端末の中だけに保存され、外には送られません。個人の学習用に使ってください。</p>
+      <label className="field">
+        <span>音声ファイル（任意：英文と同じ内容の朗読。mp3・m4a など）</span>
+        <input type="file" accept="audio/*" onChange={(e) => setAudio(e.target.files?.[0] ?? null)} />
+        {audio && <small className="muted">{audio.name}（{(audio.size / 1024 / 1024).toFixed(1)}MB）</small>}
+        <small className="muted">音声つきの素材は、多聴・多読でこの音声を再生します（文ごとの区切りはなく、全体を通して再生）。</small>
+      </label>
+      <p className="muted">取り込んだ文章と音声はこの端末の中だけに保存され、外には送られません。個人の学習用に使ってください。</p>
       {error && <div className="banner warn">{error}</div>}
       <div className="row">
         <button className="btn" style={{ flex: 1 }} disabled={!body.trim()} onClick={() => {
-          addMaterial(title, body, source).then(onDone, (e: Error) => setError(e.message))
+          if (audio && audio.size > 100 * 1024 * 1024) { setError('音声ファイルが大きすぎます（100MBまで）'); return }
+          addMaterial(title, body, source, undefined, audio ?? undefined).then(onDone, (e: Error) => setError(e.message))
         }}>取り込んで開く</button>
         <button className="btn secondary" onClick={() => onDone()}>やめる</button>
       </div>

@@ -1,0 +1,164 @@
+[
+  {
+    "id": "b01",
+    "title": "A Good Email",
+    "body": "Many people at work read more than a hundred emails a day. So a good email must be short and clear. First, write a subject line that tells the reader what the email is about. For example, \"Meeting on Friday: new time\" is better than \"Hello\".\n\nIn the first sentence, say what you want. Do you need an answer, a decision, or only want to share news? Then give the details. Use short paragraphs, and use a list if you have several points.\n\nAt the end, say clearly what should happen next and by when. For example, \"Could you send me the report by Thursday?\" Before you press send, read the email once more. Check the names, the dates, and the numbers. A small mistake can cause a big problem.",
+    "questions": [
+      { "q": "What should the first sentence of an email do?", "options": ["Say hello in a friendly way", "Say what the writer wants", "Give all the details"], "answer": 1 },
+      { "q": "What should you check before you send an email?", "options": ["Names, dates, and numbers", "The color of the text", "How many emails you sent today"], "answer": 0 }
+    ]
+  },
+  {
+    "id": "b02",
+    "title": "Working from Home",
+    "body": "Since 2020, many companies have let their workers work from home. Some people love it. They do not have to travel to the office, so they save time and money. They can also focus better because the office is often noisy.\n\nBut working from home is not easy for everyone. Some people feel lonely. They miss talking with their coworkers over lunch. Others find it hard to stop working, because their office is also their home.\n\nToday, many companies use a mix. Workers come to the office two or three days a week and work from home on the other days. Managers say this helps people work together and still keep a good balance between work and life. The best plan is different for each team, so it is important to talk about it openly.",
+    "questions": [
+      { "q": "Why do some people find it hard to stop working at home?", "options": ["Their manager calls them at night", "Their office is also their home", "They have too many meetings"], "answer": 1 },
+      { "q": "What do many companies do today?", "options": ["They make everyone work from home", "They make everyone come to the office", "They use a mix of office and home"], "answer": 2 }
+    ]
+  },
+  {
+    "id": "b03",
+    "title": "How a Meeting Should Work",
+    "body": "Meetings take a lot of time, so a good meeting needs a plan. Before the meeting, the leader sends an agenda. The agenda lists the topics and how long each one will take. People can prepare, and they know why they are there.\n\nDuring the meeting, one person keeps time and another person takes notes. The leader makes sure everyone can speak, not only the loudest people. If a topic takes too long, the leader can move it to another day.\n\nAt the end, the group agrees on the next steps. Who will do what, and by when? Within a day, the note taker sends a short summary to everyone. Many experts say that if a meeting has no clear goal, it should be an email instead.",
+    "questions": [
+      { "q": "What is an agenda?", "options": ["A list of topics and times", "A summary of the last meeting", "A list of people who are late"], "answer": 0 },
+      { "q": "What do many experts say about a meeting with no clear goal?", "options": ["It should be longer", "It should be an email instead", "It should have more people"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b04",
+    "title": "The Customer Is Talking",
+    "body": "A coffee shop owner wanted to know why sales were falling. She did not guess. She asked her customers. For two weeks, she put a small card on every table with one question: \"What would make you come here more often?\"\n\nShe got over two hundred answers. Many people said the coffee was good, but the line in the morning was too long. Some said they wanted a place to charge their phones.\n\nSo she made two changes. She let customers order on an app before they arrived, and she added power outlets near the windows. Three months later, morning sales were up by twenty percent. \"The answers were there all the time,\" she said. \"I only had to ask.\"",
+    "questions": [
+      { "q": "What was the main problem in the morning?", "options": ["The coffee was cold", "The line was too long", "The shop opened too late"], "answer": 1 },
+      { "q": "What happened three months after the changes?", "options": ["Morning sales went up by 20 percent", "The shop closed", "Prices went up by 20 percent"], "answer": 0 }
+    ]
+  },
+  {
+    "id": "b05",
+    "title": "What Is Inflation?",
+    "body": "Inflation means that prices in general go up over time. If a cup of coffee costs three dollars this year and three dollars and fifteen cents next year, its price has risen by five percent. When most prices rise like this, the same amount of money buys less.\n\nA little inflation is normal. Many central banks try to keep it at about two percent a year. When inflation is too high, people and businesses find it hard to plan. Workers may need higher pay just to buy the same things.\n\nTo slow inflation, a central bank can raise interest rates. Then borrowing money becomes more expensive, so people and companies spend less. When spending falls, prices usually rise more slowly. But if rates go up too much, the economy can slow down too much.",
+    "questions": [
+      { "q": "What level of inflation do many central banks aim for?", "options": ["About two percent a year", "About ten percent a year", "Zero percent"], "answer": 0 },
+      { "q": "Why do higher interest rates slow inflation?", "options": ["They make prices fall at once", "Borrowing costs more, so people spend less", "They give workers higher pay"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b06",
+    "title": "The First Day at a New Job",
+    "body": "Ryo started his first job at a trading company in April. On the first day, he felt nervous. He arrived twenty minutes early and waited in the lobby.\n\nHis manager, Ms. Lee, showed him around the office. She introduced him to the team and gave him a laptop and an ID card. Then she gave him a list of things to learn in the first month. \"Nobody expects you to know everything,\" she said. \"If you are not sure, ask. A question now saves a mistake later.\"\n\nAt lunch, two coworkers took him to a noodle shop nearby. They told him which meetings were important and which ones he could skip. By the end of the day, Ryo was tired but happy. He wrote down three things he had learned and went home early to rest.",
+    "questions": [
+      { "q": "What did Ms. Lee tell Ryo to do when he is not sure?", "options": ["Search the internet", "Ask a question", "Wait until the next day"], "answer": 1 },
+      { "q": "What did Ryo do at the end of the day?", "options": ["He went out with the team", "He wrote down three things he learned", "He stayed late to finish work"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b07",
+    "title": "Small Talk",
+    "body": "Small talk is a short, friendly conversation about easy topics. In business, it often happens before a meeting starts or during a coffee break. It may seem unimportant, but it helps people feel comfortable and builds trust.\n\nGood topics for small talk are the weather, travel, food, and weekend plans. For example, you can ask, \"Did you have a good trip here?\" or \"Have you tried any good restaurants nearby?\" Topics like money, religion, and politics are usually best avoided.\n\nThe key is to ask open questions and listen. An open question cannot be answered with only yes or no. Instead of \"Do you like Tokyo?\", try \"What do you like about Tokyo?\" Then show interest in the answer and add a little about yourself. A few minutes of small talk can make the real meeting go much better.",
+    "questions": [
+      { "q": "Which topic is usually best avoided in small talk?", "options": ["Food", "Politics", "Travel"], "answer": 1 },
+      { "q": "Which is an open question?", "options": ["Do you like Tokyo?", "Is it raining?", "What do you like about Tokyo?"], "answer": 2 }
+    ]
+  },
+  {
+    "id": "b08",
+    "title": "Why Startups Fail",
+    "body": "Every year, thousands of new companies start with big dreams. But many of them close within five years. Why?\n\nOne study looked at more than a hundred failed startups. The most common reason was simple: there was no market need. The founders built a product that they liked, but not enough customers wanted to pay for it. The second reason was running out of money. The third was having the wrong team.\n\nSuccessful founders often do something different at the start. Before they build the full product, they talk to possible customers and test a simple version. If people do not want it, they change the idea quickly. This is sometimes called a \"pivot\". Failing early and cheaply, they say, is much better than failing late and expensively.",
+    "questions": [
+      { "q": "What was the most common reason startups failed?", "options": ["There was no market need", "The office was too small", "The product was too cheap"], "answer": 0 },
+      { "q": "What is a \"pivot\"?", "options": ["Hiring a new team", "Changing the idea quickly", "Selling the company"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b09",
+    "title": "Giving a Presentation",
+    "body": "Many people are afraid of speaking in front of a group. But a good presentation is a skill, and anyone can learn it.\n\nStart with your goal. What do you want the audience to know or do at the end? Build your talk around one main message, and support it with three points at most. People cannot remember ten points.\n\nKeep your slides simple. Use a few words and a clear picture or chart on each slide. If your slides are full of text, people will read instead of listening to you.\n\nFinally, practice out loud, not only in your head. Time yourself. Ask a friend to listen and tell you which part was unclear. On the day, speak a little slower than normal and look at the people, not at the screen. If you make a mistake, smile and keep going.",
+    "questions": [
+      { "q": "How many supporting points does the writer suggest?", "options": ["Three at most", "At least five", "Ten"], "answer": 0 },
+      { "q": "What happens if slides are full of text?", "options": ["People remember more", "People read instead of listening", "The talk becomes shorter"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b10",
+    "title": "The Supply Chain",
+    "body": "Think about a smartphone. Its parts come from many countries. The screen may be made in Korea, the chips in Taiwan, and the battery in China. The parts are put together in one factory, and then the phones are shipped all over the world. This whole system is called a supply chain.\n\nA supply chain can save money, because each step happens where it is cheapest or best. But it can also break. In 2021, a large ship got stuck in the Suez Canal for six days. Hundreds of other ships had to wait, and many shops ran out of goods.\n\nSince then, many companies have changed their plans. They buy parts from more than one supplier, and they keep more inventory. This costs more, but it makes the business safer when something goes wrong.",
+    "questions": [
+      { "q": "What happened in the Suez Canal in 2021?", "options": ["A new factory opened", "A large ship got stuck", "The canal was closed for a year"], "answer": 1 },
+      { "q": "What have many companies done since then?", "options": ["Used only one supplier", "Bought parts from more than one supplier", "Stopped keeping inventory"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b11",
+    "title": "Business Cards in Japan",
+    "body": "In Japan, exchanging business cards is an important part of meeting someone for the first time. Visitors from other countries are often surprised by how careful people are.\n\nYou hold your card with both hands, with the text facing the other person so they can read it. You say your company name and your own name, and give a small bow. When you receive a card, you also use both hands and take a moment to read it.\n\nDuring a meeting, people often place the cards on the table in front of them, in the same order as the people sitting there. This helps them remember names. It is not polite to write on someone's card or to put it in your back pocket. After the meeting, you put the cards carefully in a card case. A card is treated as part of the person.",
+    "questions": [
+      { "q": "How do people hold a business card when giving it?", "options": ["With one hand", "With both hands", "On the table"], "answer": 1 },
+      { "q": "Why do people place cards on the table during a meeting?", "options": ["To help remember names", "To show they are busy", "To write notes on them"], "answer": 0 }
+    ]
+  },
+  {
+    "id": "b12",
+    "title": "The Power of Feedback",
+    "body": "Feedback is information about how well someone is doing. Good feedback helps people grow, but bad feedback can make them angry or sad.\n\nOne simple method is to describe the situation, the behavior, and the impact. For example: \"In yesterday's meeting with the client, you explained the price very clearly. Because of that, they agreed quickly.\" This is much more useful than \"Good job.\" It tells the person exactly what to keep doing.\n\nThe same method works for problems. \"In this morning's report, three numbers were wrong. Because of that, the manager had to check everything again.\" It talks about the work, not the person.\n\nFeedback should also be timely. If you wait a month, people forget the details. And remember that feedback goes both ways. A good manager often asks, \"What could I do better?\"",
+    "questions": [
+      { "q": "What are the three parts of the simple method?", "options": ["Situation, behavior, and impact", "Price, product, and place", "Who, when, and why"], "answer": 0 },
+      { "q": "Why should feedback be timely?", "options": ["Because people forget the details", "Because managers are busy", "Because it is cheaper"], "answer": 0 }
+    ]
+  },
+  {
+    "id": "b13",
+    "title": "Exchange Rates",
+    "body": "An exchange rate is the price of one currency in another currency. For example, if one US dollar buys 150 yen, the exchange rate is 150 yen to the dollar.\n\nExchange rates change every day. When the yen gets weaker, one dollar buys more yen. This is good news for Japanese companies that sell goods abroad, because their products become cheaper for foreign buyers. It is also good for tourism, because Japan becomes a cheaper place to visit.\n\nBut a weak yen has a downside. Japan imports a lot of oil, food, and other goods. When the yen is weak, these imports cost more, so prices in Japanese shops go up. For people who want to travel overseas, a weak yen also means that hotels and meals abroad feel more expensive.",
+    "questions": [
+      { "q": "Who benefits when the yen gets weaker?", "options": ["Japanese companies that sell goods abroad", "Japanese people who travel overseas", "Companies that import oil"], "answer": 0 },
+      { "q": "Why do prices in Japanese shops go up when the yen is weak?", "options": ["Because imports cost more", "Because taxes go up", "Because shops open longer"], "answer": 0 }
+    ]
+  },
+  {
+    "id": "b14",
+    "title": "A Late Shipment",
+    "body": "Mika works in customer service for an online furniture shop. One morning, a customer called. He had ordered a desk for his new home office, but it had not arrived. It was three days late.\n\nMika checked the order. The desk was stuck at a warehouse because of a storm. She could have said, \"It is not our fault.\" Instead, she said, \"I am very sorry. I understand you need it for work.\" She explained what had happened and gave him a new delivery date.\n\nThen she did one more thing. She offered free delivery on his next order. The customer thanked her and later wrote a good review. \"The desk was late,\" he wrote, \"but the service was excellent.\" Mika's manager shared the review with the whole team as an example of how to handle problems.",
+    "questions": [
+      { "q": "Why was the desk late?", "options": ["The customer gave the wrong address", "It was stuck at a warehouse because of a storm", "It was sold out"], "answer": 1 },
+      { "q": "What did Mika offer the customer?", "options": ["A new desk", "Free delivery on his next order", "A full refund"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b15",
+    "title": "Time Zones and Teams",
+    "body": "Kenji works for a software company in Osaka. His team has members in London and San Francisco. When it is nine in the morning in Osaka, it is midnight in London and five in the afternoon of the day before in San Francisco.\n\nAt first, the team tried to meet every day. Someone always had to join very early or very late, and people got tired. So they changed their way of working.\n\nNow they meet only twice a week, at a time that is fair to most people. On other days, they write updates in a shared document. Each person writes what they did, what they will do next, and any problems. Because of the time difference, work can move forward almost all day. When Kenji goes to bed, his coworkers in London are just starting their day.",
+    "questions": [
+      { "q": "Why did the team stop meeting every day?", "options": ["Someone always had to join very early or late", "The manager left the company", "They finished the project"], "answer": 0 },
+      { "q": "What do team members write in the shared document?", "options": ["Their holiday plans", "What they did, what they will do, and problems", "Only their problems"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b16",
+    "title": "Price and Value",
+    "body": "Why will people pay five dollars for a coffee at one café but only one dollar at a convenience store? The coffee may be similar, but the value is different.\n\nValue is what customers feel they get for their money. At the café, they get a comfortable chair, free Wi-Fi, a nice smell, and a place to meet friends. For many people, that is worth the extra four dollars.\n\nCompanies can set prices in several ways. Some start with their costs and add a profit. Others look at what competitors charge. But many successful companies start with value. They ask, \"What is this worth to the customer?\" A product that saves a business a lot of time can have a high price, even if it was cheap to make. The trick is to understand what the customer really cares about.",
+    "questions": [
+      { "q": "According to the text, what is value?", "options": ["The cost of making a product", "What customers feel they get for their money", "The price of competitors"], "answer": 1 },
+      { "q": "What question do many successful companies ask?", "options": ["How cheap can we make it?", "What do competitors charge?", "What is this worth to the customer?"], "answer": 2 }
+    ]
+  },
+  {
+    "id": "b17",
+    "title": "The Job Interview",
+    "body": "A job interview is a conversation, not a test. The company wants to know if you can do the job and if you will fit in the team. You also want to know if the company is right for you.\n\nPrepare by reading about the company. What does it sell? Who are its customers? What news has there been recently? Then think of stories from your own experience. For a question like \"Tell me about a time you solved a problem,\" a short story works well. Describe the situation, what you did, and the result.\n\nAt the end, the interviewer usually asks, \"Do you have any questions?\" Always have one or two ready. For example, \"What does a successful first year look like in this role?\" A good question shows that you are serious and that you have thought about the job.",
+    "questions": [
+      { "q": "What should you do before the interview?", "options": ["Read about the company", "Ask for a higher salary", "Memorize your résumé word for word"], "answer": 0 },
+      { "q": "What should you do when asked \"Do you have any questions?\"", "options": ["Say no to save time", "Ask one or two prepared questions", "Ask about holidays only"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b18",
+    "title": "Saying No Politely",
+    "body": "At work, people often ask you to do more than you can. Saying yes to everything may seem kind, but it can lead to late nights, poor work, and stress.\n\nSaying no politely is a useful skill. First, thank the person for asking. Then explain your situation briefly. For example: \"Thanks for thinking of me. Right now I am working on the sales report, and it is due on Friday.\"\n\nNext, offer another option if you can. \"I could help next week,\" or \"Maybe Sarah has time? She knows this area well.\" You can also ask your manager to choose: \"Which is more important, the report or this new task?\"\n\nThis way, you are not simply refusing. You are helping the team use its time well. Most people respect someone who is honest about what they can do.",
+    "questions": [
+      { "q": "What is the first step in saying no politely?", "options": ["Thank the person for asking", "Say you are too busy", "Ask your manager"], "answer": 0 },
+      { "q": "What does the writer suggest you can ask your manager?", "options": ["For a holiday", "Which task is more important", "For more money"], "answer": 1 }
+    ]
+  }
+]

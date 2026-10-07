@@ -19,6 +19,7 @@ import { FluencyHub } from './practice/FluencyHub'
 import { OutputScreen } from './practice/OutputScreen'
 import { AssessmentScreen } from './assessment/AssessmentScreen'
 import { ConversationScreen } from './practice/ConversationScreen'
+import { RoleplayScreen } from './practice/RoleplayScreen'
 import { HelpButton } from './practice/PracticeHelp'
 import { NO_HQ_VOICE_EVENT } from './speech/voices'
 import { ReviewScreen } from './practice/ReviewScreen'
@@ -134,6 +135,8 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
     body = <OutputScreen settings={settings} onExit={close} />
   } else if (overlay?.practice === 'conversation') {
     body = <ConversationScreen settings={settings} onExit={close} />
+  } else if (overlay?.practice === 'roleplay') {
+    body = <RoleplayScreen settings={settings} onExit={close} />
   } else if (overlay?.practice === 'speech') {
     body = <SpeechScreen settings={settings} onExit={close} />
   } else if (overlay?.practice === 'fluency' && !overlay.materialId && !overlay.speed) {

@@ -26,7 +26,8 @@ function shuffle<T>(xs: T[], rand: () => number): T[] {
  * 使っていない素材が足りなければ、使ったのが古い素材から選ぶ。
  */
 export function pickUnseenSentences(materials: Mat[], used: Map<string, number>, n = 5, rand: () => number = Math.random) {
-  const builtin = materials.filter((m) => m.kind !== 'mine')
+  // 文ごとの音声がない素材（人の朗読）と、文の頭に話者名がつく対話は使わない
+  const builtin = materials.filter((m) => m.kind !== 'mine' && m.kind !== 'human' && m.kind !== 'dialogue')
   const ordered = [
     ...shuffle(builtin.filter((m) => !used.has(m.id)), rand),
     ...builtin.filter((m) => used.has(m.id)).sort((a, b) => used.get(a.id)! - used.get(b.id)!),

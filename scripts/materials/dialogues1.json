@@ -1,0 +1,385 @@
+[
+  {
+    "id": "d01", "title": "Meeting a New Coworker", "scene": "新しい同僚と初めて会う",
+    "speakers": { "Anna": "f", "Ken": "m" },
+    "lines": [
+      ["Anna", "Hi, you must be Ken. I'm Anna from the marketing team."],
+      ["Ken", "Nice to meet you, Anna. Yes, I just started today."],
+      ["Anna", "Welcome! How is your first day going so far?"],
+      ["Ken", "Pretty well, thanks. Everyone has been very kind."],
+      ["Anna", "That's good to hear. Which team are you on?"],
+      ["Ken", "I'm in sales. I'll be working with the Asian market."],
+      ["Anna", "Oh, great. Then we'll probably work together on some projects."],
+      ["Ken", "I hope so. I still have a lot to learn about our products."],
+      ["Anna", "Don't worry. If you have any questions, just send me a message."],
+      ["Ken", "Thank you. That's really helpful."],
+      ["Anna", "By the way, some of us have lunch together on Fridays. Would you like to join?"],
+      ["Ken", "I'd love to. Thanks for asking."]
+    ],
+    "questions": [
+      { "q": "Which team is Ken on?", "options": ["Marketing", "Sales", "Finance"], "answer": 1 },
+      { "q": "What does Anna invite Ken to do?", "options": ["Join a lunch on Fridays", "Give a presentation", "Visit a customer"], "answer": 0 }
+    ]
+  },
+  {
+    "id": "d02", "title": "Scheduling a Meeting", "scene": "会議の日程を決める",
+    "speakers": { "Mark": "m", "Yuki": "f" },
+    "lines": [
+      ["Mark", "Yuki, do you have a minute? I'd like to set up a meeting about the new website."],
+      ["Yuki", "Sure. When were you thinking?"],
+      ["Mark", "How about Tuesday afternoon?"],
+      ["Yuki", "Tuesday is difficult for me. I'm visiting a client all afternoon."],
+      ["Mark", "I see. What about Wednesday morning, then?"],
+      ["Yuki", "Wednesday at ten works for me."],
+      ["Mark", "Great. It should take about an hour. I'll invite Sam from the design team, too."],
+      ["Yuki", "Good idea. Should I prepare anything?"],
+      ["Mark", "Could you bring the latest numbers on website visits?"],
+      ["Yuki", "No problem. I'll send them to you before the meeting."],
+      ["Mark", "Perfect. I'll send a calendar invitation this afternoon."]
+    ],
+    "questions": [
+      { "q": "Why is Tuesday difficult for Yuki?", "options": ["She is on holiday", "She is visiting a client", "She has another meeting with Sam"], "answer": 1 },
+      { "q": "What will Yuki bring to the meeting?", "options": ["The latest numbers on website visits", "A new design", "The client's contract"], "answer": 0 }
+    ]
+  },
+  {
+    "id": "d03", "title": "A Phone Call to a Supplier", "scene": "仕入れ先に電話する",
+    "speakers": { "Receptionist": "f", "Taro": "m", "Mr. Brown": "m" },
+    "lines": [
+      ["Receptionist", "Good morning, Green Office Supplies. How can I help you?"],
+      ["Taro", "Good morning. This is Taro Sato from Blue Sky Travel. May I speak to Mr. Brown, please?"],
+      ["Receptionist", "One moment, please. I'll put you through."],
+      ["Mr. Brown", "Hello, this is David Brown."],
+      ["Taro", "Hi, Mr. Brown. I'm calling about our order from last week. Order number 4-5-2."],
+      ["Mr. Brown", "Let me check. Yes, I have it here. Is there a problem?"],
+      ["Taro", "We received the chairs, but two of them are the wrong color."],
+      ["Mr. Brown", "I'm very sorry about that. We'll send the correct ones right away."],
+      ["Taro", "Thank you. When can we expect them?"],
+      ["Mr. Brown", "They should arrive by Thursday. Please keep the wrong ones, and our driver will pick them up."],
+      ["Taro", "That's great. Thanks for your help."],
+      ["Mr. Brown", "My pleasure. Again, sorry for the trouble."]
+    ],
+    "questions": [
+      { "q": "What was wrong with the order?", "options": ["The chairs were broken", "Two chairs were the wrong color", "The chairs did not arrive"], "answer": 1 },
+      { "q": "What will happen to the wrong chairs?", "options": ["Taro will throw them away", "The driver will pick them up", "Taro will send them by post"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "d04", "title": "Asking for Help", "scene": "同僚に手伝いを頼む",
+    "speakers": { "Lisa": "f", "Mike": "m" },
+    "lines": [
+      ["Lisa", "Mike, are you busy right now?"],
+      ["Mike", "A little, but what's up?"],
+      ["Lisa", "I'm trying to make a chart in this spreadsheet, and I can't get it right."],
+      ["Mike", "Let me take a look. What do you want the chart to show?"],
+      ["Lisa", "Monthly sales for each region, from January to June."],
+      ["Mike", "OK. First, select the data, including the names of the months."],
+      ["Lisa", "Like this?"],
+      ["Mike", "Yes. Now click Insert, and choose the line chart."],
+      ["Lisa", "Oh, that's much better! I was using the wrong type of chart."],
+      ["Mike", "A line chart is good for showing changes over time."],
+      ["Lisa", "Thanks so much. I owe you a coffee."],
+      ["Mike", "Anytime. And I'll take that coffee!"]
+    ],
+    "questions": [
+      { "q": "What does Lisa want the chart to show?", "options": ["Monthly sales for each region", "The number of employees", "Next year's budget"], "answer": 0 },
+      { "q": "Why is a line chart good here, according to Mike?", "options": ["It is the most colorful", "It shows changes over time", "It is the easiest to print"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "d05", "title": "Checking In at a Hotel", "scene": "出張先のホテルでチェックイン",
+    "speakers": { "Clerk": "m", "Saki": "f" },
+    "lines": [
+      ["Clerk", "Good evening. Welcome to the Harbor Hotel. Do you have a reservation?"],
+      ["Saki", "Yes, I do. The name is Saki Tanaka."],
+      ["Clerk", "Thank you. Let me see. Yes, a single room for three nights."],
+      ["Saki", "That's right. Is breakfast included?"],
+      ["Clerk", "Yes, it is. Breakfast is served from six thirty to ten on the second floor."],
+      ["Saki", "Great. Also, is there a place where I can print some documents?"],
+      ["Clerk", "We have a business center next to the lobby. It's open twenty-four hours."],
+      ["Saki", "Perfect. And what time is checkout?"],
+      ["Clerk", "Checkout is at eleven. If you need a late checkout, please let us know."],
+      ["Saki", "Thank you. I'll be fine."],
+      ["Clerk", "Here is your key card. Your room is 815. Enjoy your stay."]
+    ],
+    "questions": [
+      { "q": "How long is Saki staying?", "options": ["One night", "Three nights", "A week"], "answer": 1 },
+      { "q": "Where can Saki print documents?", "options": ["In her room", "At the business center next to the lobby", "On the second floor"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "d06", "title": "A Project Delay", "scene": "上司にプロジェクトの遅れを報告する",
+    "speakers": { "Hana": "f", "Mr. Clark": "m" },
+    "lines": [
+      ["Hana", "Mr. Clark, do you have five minutes? I need to talk to you about the app project."],
+      ["Mr. Clark", "Of course. Is everything OK?"],
+      ["Hana", "I'm afraid we're behind schedule. We won't be able to finish by the end of this month."],
+      ["Mr. Clark", "I see. What's causing the delay?"],
+      ["Hana", "The payment system is more complex than we expected. We found some security problems during testing."],
+      ["Mr. Clark", "Security is important. How much more time do you need?"],
+      ["Hana", "About two weeks. I've prepared a new schedule."],
+      ["Mr. Clark", "Thank you for telling me early. Can we release part of the app on time?"],
+      ["Hana", "Yes. We could release everything except the payment system this month."],
+      ["Mr. Clark", "Good. Let's do that. Please send the new schedule to the client today."],
+      ["Hana", "I will. Thank you for understanding."]
+    ],
+    "questions": [
+      { "q": "What is causing the delay?", "options": ["A team member is sick", "The payment system is more complex than expected", "The client changed the design"], "answer": 1 },
+      { "q": "What do they decide to do?", "options": ["Cancel the project", "Release everything except the payment system this month", "Hire more people"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "d07", "title": "Ordering at a Business Lunch", "scene": "取引先との昼食で注文する",
+    "speakers": { "Waiter": "m", "Emily": "f", "Jun": "m" },
+    "lines": [
+      ["Waiter", "Are you ready to order?"],
+      ["Emily", "Jun, have you decided? The fish here is very good."],
+      ["Jun", "Then I'll have the fish, please. Does it come with rice?"],
+      ["Waiter", "It comes with potatoes, but we can change that to rice."],
+      ["Jun", "Rice, please. Thank you."],
+      ["Emily", "And I'll have the chicken salad. Could I have the dressing on the side?"],
+      ["Waiter", "Of course. Anything to drink?"],
+      ["Emily", "Just water for me. Jun?"],
+      ["Jun", "Sparkling water, please."],
+      ["Waiter", "Very good. I'll be right back with your drinks."],
+      ["Emily", "So, Jun, how was your flight from Osaka?"],
+      ["Jun", "It was smooth, thanks. I even slept a little."]
+    ],
+    "questions": [
+      { "q": "What does Jun order?", "options": ["The fish with rice", "The chicken salad", "The fish with potatoes"], "answer": 0 },
+      { "q": "Where did Jun fly from?", "options": ["Tokyo", "Osaka", "London"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "d08", "title": "A Customer Complaint", "scene": "お客様の苦情に対応する",
+    "speakers": { "Customer": "m", "Staff": "f" },
+    "lines": [
+      ["Customer", "Hello. I bought this coffee machine here last week, and it already stopped working."],
+      ["Staff", "I'm very sorry to hear that. Could you tell me what happened?"],
+      ["Customer", "It turns on, but no water comes out."],
+      ["Staff", "I see. Do you have the receipt with you?"],
+      ["Customer", "Yes, here it is."],
+      ["Staff", "Thank you. It's under warranty, so we can repair it or give you a new one."],
+      ["Customer", "How long would a repair take?"],
+      ["Staff", "About two weeks, I'm afraid."],
+      ["Customer", "That's too long. I use it every morning."],
+      ["Staff", "I understand. Then let me get you a new one right now."],
+      ["Customer", "Thank you. I appreciate that."],
+      ["Staff", "You're welcome. Again, I'm sorry for the trouble."]
+    ],
+    "questions": [
+      { "q": "What is the problem with the coffee machine?", "options": ["It does not turn on", "No water comes out", "It makes too much noise"], "answer": 1 },
+      { "q": "What does the customer get in the end?", "options": ["A refund", "A repair in two weeks", "A new machine right away"], "answer": 2 }
+    ]
+  },
+  {
+    "id": "d09", "title": "Small Talk Before a Meeting", "scene": "会議の前の雑談",
+    "speakers": { "Sarah": "f", "Kenta": "m" },
+    "lines": [
+      ["Sarah", "Kenta, good to see you again. How have you been?"],
+      ["Kenta", "Very well, thanks. Busy, but good. How about you?"],
+      ["Sarah", "Same here. We just moved into a new office."],
+      ["Kenta", "Oh, really? How do you like it?"],
+      ["Sarah", "It's great. It's much brighter, and it's close to the station."],
+      ["Kenta", "That sounds nice. Did you have a good weekend?"],
+      ["Sarah", "Yes, I went hiking with my family. The weather was perfect."],
+      ["Kenta", "Lucky you. It rained all weekend in Tokyo."],
+      ["Sarah", "Oh no. Did you do anything fun inside?"],
+      ["Kenta", "I watched a few movies and finally cleaned my apartment."],
+      ["Sarah", "That's productive! Well, shall we get started?"],
+      ["Kenta", "Sure, let's begin."]
+    ],
+    "questions": [
+      { "q": "What does Sarah like about the new office?", "options": ["It is bigger and cheaper", "It is brighter and close to the station", "It has a gym"], "answer": 1 },
+      { "q": "What was the weather like in Tokyo on the weekend?", "options": ["Sunny", "Rainy", "Snowy"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "d10", "title": "Negotiating a Price", "scene": "価格の交渉",
+    "speakers": { "Buyer": "f", "Seller": "m" },
+    "lines": [
+      ["Buyer", "Thank you for the quote. Your product is excellent, but the price is higher than our budget."],
+      ["Seller", "I understand. What price did you have in mind?"],
+      ["Buyer", "We were hoping for around ten percent less."],
+      ["Seller", "Ten percent is difficult. But if you order a larger amount, we can lower the price."],
+      ["Buyer", "How large would the order need to be?"],
+      ["Seller", "If you order five hundred units instead of three hundred, we can offer eight percent off."],
+      ["Buyer", "Five hundred is a lot for us. Could we order five hundred but receive them in two deliveries?"],
+      ["Seller", "That should be possible. Three hundred now and two hundred in three months?"],
+      ["Buyer", "That works. And could we pay for each delivery separately?"],
+      ["Seller", "Yes, I think we can agree to that."],
+      ["Buyer", "Great. Please send us a new quote with those terms."],
+      ["Seller", "I'll send it by tomorrow."]
+    ],
+    "questions": [
+      { "q": "What discount does the seller offer for a larger order?", "options": ["Five percent", "Eight percent", "Ten percent"], "answer": 1 },
+      { "q": "How will the products be delivered?", "options": ["All at once", "In two deliveries", "Every month for a year"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "d11", "title": "A Job Interview", "scene": "就職の面接",
+    "speakers": { "Interviewer": "f", "Ryo": "m" },
+    "lines": [
+      ["Interviewer", "Thank you for coming today, Ryo. Could you tell me a little about yourself?"],
+      ["Ryo", "Of course. I studied economics at university, and for the last three years I've worked in sales at an electronics company."],
+      ["Interviewer", "Why are you interested in this position?"],
+      ["Ryo", "I'd like to work with international customers. Your company sells in over thirty countries, and I want to use my English."],
+      ["Interviewer", "Can you tell me about a time you solved a difficult problem?"],
+      ["Ryo", "Last year, one of our biggest customers was unhappy with late deliveries. I visited them, found out the cause, and worked with our warehouse to fix it. They increased their orders by twenty percent."],
+      ["Interviewer", "That's impressive. What is your biggest weakness?"],
+      ["Ryo", "Sometimes I try to do everything myself. I'm learning to ask my team for help earlier."],
+      ["Interviewer", "Good. Do you have any questions for us?"],
+      ["Ryo", "Yes. What does success look like in the first year in this role?"],
+      ["Interviewer", "Good question. Mainly, building strong relationships with our key customers in Asia."]
+    ],
+    "questions": [
+      { "q": "Why is Ryo interested in the position?", "options": ["He wants a higher salary", "He wants to work with international customers", "He wants to work from home"], "answer": 1 },
+      { "q": "What does Ryo say is his weakness?", "options": ["He is often late", "He tries to do everything himself", "He does not like customers"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "d12", "title": "At the Airport", "scene": "空港のカウンターで",
+    "speakers": { "Agent": "f", "Kazu": "m" },
+    "lines": [
+      ["Agent", "Good morning. Where are you flying today?"],
+      ["Kazu", "To Chicago, please."],
+      ["Agent", "May I see your passport?"],
+      ["Kazu", "Here you are."],
+      ["Agent", "Thank you. Are you checking any bags?"],
+      ["Kazu", "Just this one suitcase."],
+      ["Agent", "Please put it on the scale. Would you like a window or an aisle seat?"],
+      ["Kazu", "An aisle seat, please. It's a long flight."],
+      ["Agent", "All right. Here is your boarding pass. Boarding starts at ten fifteen at gate 34."],
+      ["Kazu", "Is the flight on time?"],
+      ["Agent", "Yes, it is. Have a nice flight."],
+      ["Kazu", "Thank you very much."]
+    ],
+    "questions": [
+      { "q": "Where is Kazu flying?", "options": ["To Chicago", "To Boston", "To Tokyo"], "answer": 0 },
+      { "q": "Which seat does Kazu want?", "options": ["A window seat", "An aisle seat", "A seat near the front"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "d13", "title": "Giving Feedback", "scene": "部下にフィードバックする",
+    "speakers": { "Manager": "f", "Tom": "m" },
+    "lines": [
+      ["Manager", "Tom, thanks for your presentation to the client yesterday. Can I share some feedback?"],
+      ["Tom", "Sure, please."],
+      ["Manager", "First, your slides were very clear. The client said the charts were easy to understand."],
+      ["Tom", "Thank you. I worked hard on them."],
+      ["Manager", "It showed. One thing to improve: when the client asked about the price, you looked a little unsure."],
+      ["Tom", "Yes, I wasn't ready for that question."],
+      ["Manager", "Next time, try to prepare answers for the five most likely questions."],
+      ["Tom", "That's a good idea. Could we practice together before the next meeting?"],
+      ["Manager", "Of course. Let's set up thirty minutes next week."],
+      ["Tom", "Thank you. I really appreciate the feedback."]
+    ],
+    "questions": [
+      { "q": "What did the client say about the slides?", "options": ["They were too long", "The charts were easy to understand", "They had mistakes"], "answer": 1 },
+      { "q": "What does the manager suggest Tom do next time?", "options": ["Use more slides", "Prepare answers for the most likely questions", "Talk faster"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "d14", "title": "Booking a Meeting Room", "scene": "会議室を予約する",
+    "speakers": { "Nao": "f", "Front Desk": "m" },
+    "lines": [
+      ["Nao", "Hi, I'd like to book a meeting room for tomorrow afternoon."],
+      ["Front Desk", "Sure. How many people will there be?"],
+      ["Nao", "Eight, including two visitors from outside the company."],
+      ["Front Desk", "Room B on the fifth floor is free from one to four. It has a large screen."],
+      ["Nao", "That's perfect. We only need it from two to three thirty."],
+      ["Front Desk", "OK. Do you need a video connection?"],
+      ["Nao", "Yes, one person will join online from Singapore."],
+      ["Front Desk", "No problem. Do you need anything else? Coffee or water?"],
+      ["Nao", "Water would be nice. And could you register the two visitors at reception?"],
+      ["Front Desk", "Of course. Please send me their names by email."],
+      ["Nao", "I'll do that right away. Thanks."]
+    ],
+    "questions": [
+      { "q": "How many people will be at the meeting?", "options": ["Two", "Five", "Eight"], "answer": 2 },
+      { "q": "Why do they need a video connection?", "options": ["One person will join from Singapore", "They want to record the meeting", "The visitors are late"], "answer": 0 }
+    ]
+  },
+  {
+    "id": "d15", "title": "Asking for a Deadline Extension", "scene": "締め切りの延長をお願いする",
+    "speakers": { "Mei": "f", "Mr. Davis": "m" },
+    "lines": [
+      ["Mei", "Mr. Davis, I'm sorry to bother you. Could I ask about the market report?"],
+      ["Mr. Davis", "Sure. It's due on Friday, right?"],
+      ["Mei", "Yes. I wanted to ask if I could have until next Tuesday."],
+      ["Mr. Davis", "What's the reason?"],
+      ["Mei", "We just received new data from the survey company. If I include it, the report will be much more accurate."],
+      ["Mr. Davis", "I see. When do you think you can finish?"],
+      ["Mei", "I can send a draft on Monday and the final version on Tuesday morning."],
+      ["Mr. Davis", "That should be fine. The board meeting is on Thursday, so Tuesday is the latest."],
+      ["Mei", "Understood. I'll make sure it's ready by Tuesday morning."],
+      ["Mr. Davis", "Thanks for letting me know early."]
+    ],
+    "questions": [
+      { "q": "Why does Mei want more time?", "options": ["She is sick", "She wants to include new survey data", "She has another project"], "answer": 1 },
+      { "q": "When is the board meeting?", "options": ["Monday", "Tuesday", "Thursday"], "answer": 2 }
+    ]
+  },
+  {
+    "id": "d16", "title": "An Online Meeting Problem", "scene": "オンライン会議の不具合",
+    "speakers": { "Chris": "m", "Aiko": "f" },
+    "lines": [
+      ["Chris", "Aiko, can you hear me?"],
+      ["Aiko", "Yes, but your voice is breaking up a little."],
+      ["Chris", "Sorry about that. Is it better now?"],
+      ["Aiko", "Yes, much better. But I can't see your screen."],
+      ["Chris", "Oh, I forgot to share it. One moment. Can you see it now?"],
+      ["Aiko", "Yes, I can see the sales chart."],
+      ["Chris", "Great. Wait, someone just joined. Who's that?"],
+      ["Aiko", "I think it's Peter. Peter, you're on mute."],
+      ["Chris", "Still no sound. Let's continue, and I'll send him the notes later."],
+      ["Aiko", "Good idea. Shall we start with last month's results?"],
+      ["Chris", "Yes, let's do that."]
+    ],
+    "questions": [
+      { "q": "What was the first problem?", "options": ["Chris's voice was breaking up", "Aiko could not join", "The chart was wrong"], "answer": 0 },
+      { "q": "Why could they not hear Peter?", "options": ["He was on mute", "He left the meeting", "His camera was off"], "answer": 0 }
+    ]
+  },
+  {
+    "id": "d17", "title": "Introducing a Product", "scene": "展示会で製品を紹介する",
+    "speakers": { "Visitor": "m", "Rina": "f" },
+    "lines": [
+      ["Visitor", "Excuse me, what is this product?"],
+      ["Rina", "It's a smart water bottle. It reminds you to drink water during the day."],
+      ["Visitor", "How does it do that?"],
+      ["Rina", "It connects to your phone. If you haven't had water for an hour, the bottle lights up."],
+      ["Visitor", "Interesting. How long does the battery last?"],
+      ["Rina", "About two weeks on one charge."],
+      ["Visitor", "And how much does it cost?"],
+      ["Rina", "It's forty-five dollars in stores. For business customers, there are discounts for large orders."],
+      ["Visitor", "I work for a gym chain. We might be interested in selling it to our members."],
+      ["Rina", "That would be a great fit. May I have your business card? I'll send you more information."],
+      ["Visitor", "Sure, here you go."]
+    ],
+    "questions": [
+      { "q": "What does the bottle do if you have not had water for an hour?", "options": ["It makes a sound", "It lights up", "It sends an email"], "answer": 1 },
+      { "q": "Where does the visitor work?", "options": ["At a gym chain", "At a hospital", "At a school"], "answer": 0 }
+    ]
+  },
+  {
+    "id": "d18", "title": "Talking About Sales Results", "scene": "売上の結果について話す",
+    "speakers": { "Paul": "m", "Keiko": "f" },
+    "lines": [
+      ["Paul", "Keiko, have you seen the numbers for the third quarter?"],
+      ["Keiko", "Yes. Overall sales were up five percent compared to last year."],
+      ["Paul", "That's good. Which products did best?"],
+      ["Keiko", "Our new tablets. They sold almost twice as many as we expected."],
+      ["Paul", "Great. And were there any weak areas?"],
+      ["Keiko", "Sales in Europe fell by about three percent. Two big customers reduced their orders."],
+      ["Paul", "Do we know why?"],
+      ["Keiko", "One of them is moving to a cheaper supplier. The other is cutting costs because of the economy."],
+      ["Paul", "Let's discuss a plan for Europe at Monday's meeting."],
+      ["Keiko", "Sure. I'll prepare some ideas."]
+    ],
+    "questions": [
+      { "q": "How did overall sales change?", "options": ["Up five percent", "Down three percent", "No change"], "answer": 0 },
+      { "q": "Where did sales fall?", "options": ["In Asia", "In Europe", "In America"], "answer": 1 }
+    ]
+  }
+]

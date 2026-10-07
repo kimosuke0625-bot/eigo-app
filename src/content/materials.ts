@@ -16,7 +16,19 @@ export interface Mat {
   body: string
   moral?: string
   questions?: Question[]
-  kind: 'graded' | 'wiki' | 'fable' | 'mine'
+  kind: 'graded' | 'business' | 'dialogue' | 'wiki' | 'fable' | 'human' | 'mine'
+  /** 人の朗読など、素材全体が1つの音声ファイル（public/audio/ からの相対パス） */
+  audioFile?: string
+  /** 利用者が取り込んだ音声ファイル */
+  audioBlob?: Blob
+  /** 朗読者 */
+  narrator?: string
+  /** 対話の場面（日本語） */
+  scene?: string
+  /** 対話の話者と性別（f / m） */
+  speakers?: Record<string, 'f' | 'm'>
+  /** 対話のせりふ [話者, せりふ] */
+  lines?: [string, string][]
   source: string
   sourceUrl: string
   license: string
@@ -25,8 +37,11 @@ export interface Mat {
 
 export const KIND_LABELS: Record<Mat['kind'], string> = {
   graded: '読み物（自作）',
+  business: 'ビジネスの読み物',
+  dialogue: 'ビジネスの対話',
   wiki: 'Simple Wikipedia',
   fable: 'イソップ寓話',
+  human: '人の朗読',
   mine: '取り込んだ素材',
 }
 
@@ -60,14 +75,14 @@ export function useMaterials(): Mat[] | undefined {
       .sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0))
       .map((m): Mat => ({
         id: m.id, title: m.title, body: m.body, kind: 'mine', source: m.source,
-        sourceUrl: '', license: m.license, wordCount: m.wordCount,
+        sourceUrl: '', license: m.license, wordCount: m.wordCount, audioBlob: m.audio,
       })),
     ...builtin,
   ]
 }
 
 /** 貼り付けた文章を素材として保存する（端末の中だけ。個人の学習用） */
-export async function addMaterial(title: string, body: string, source: string, database: EigoDB = db): Promise<string> {
+export async function addMaterial(title: string, body: string, source: string, database: EigoDB = db, audio?: Blob): Promise<string> {
   const text = body.replace(/\r\n/g, '\n').trim()
   if (countWords(text) < 5) throw new Error('英文が短すぎます（5語以上）')
   const id = `mine-${Date.now().toString(36)}`
@@ -75,7 +90,8 @@ export async function addMaterial(title: string, body: string, source: string, d
     id,
     title: title.trim() || text.split(/\s+/).slice(0, 6).join(' '),
     body: text,
-    hasAudio: false,
+    hasAudio: !!audio,
+    ...(audio ? { audio } : {}),
     wordCount: countWords(text),
     source: source.trim() || '自分で取り込み',
     license: '個人の学習用（端末の外には出ません）',

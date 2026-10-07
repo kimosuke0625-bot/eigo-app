@@ -44,7 +44,7 @@ async function pickSentences(material?: Mat): Promise<{ text: string; source: st
   }
   if (out.length < 5) {
     // カードが少ないうちは内蔵の読み物から補う
-    const graded = (await loadBuiltinMaterials()).filter((m) => m.kind === 'graded')
+    const graded = (await loadBuiltinMaterials()).filter((m) => m.kind === 'graded' || m.kind === 'business')
     const audio = await loadMaterialAudio()
     for (const s of sample(graded.flatMap((m) => splitSentences(m.body).filter(usable).map((t) => ({ text: t, source: m.title, file: audio[m.id]?.clips[t] }))), 5 - out.length)) out.push(s)
   }

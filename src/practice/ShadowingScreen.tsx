@@ -34,10 +34,12 @@ function useShadowMaterial(): { material?: Mat; fromToday: boolean; loading: boo
   }, [])
   return useMemo(() => {
     if (!materials || !knowledge || todayRef === undefined) return { loading: true, fromToday: false }
-    const today = todayRef ? materials.find((m) => m.id === todayRef) : undefined
+    // 全体で1つの音声ファイルの素材（人の朗読・取り込んだ音声）は文ごとに区切れないので使わない
+    const usable = (m: Mat) => !m.audioFile && !m.audioBlob
+    const today = todayRef ? materials.find((m) => m.id === todayRef && usable(m)) : undefined
     if (today) return { material: today, fromToday: true, loading: false }
     const easiest = materials
-      .filter((m) => m.kind !== 'mine')
+      .filter((m) => m.kind !== 'mine' && usable(m))
       .map((m) => ({ m, r: ratioOf(m, knowledge).ratio }))
       .sort((a, b) => b.r - a.r)[0]?.m
     return { material: easiest, fromToday: false, loading: false }

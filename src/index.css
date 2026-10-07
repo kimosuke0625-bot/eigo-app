@@ -355,3 +355,9 @@ details summary { cursor: pointer; color: var(--primary); font-size: 0.9rem; }
 .title-grid li.got { border-style: solid; border-color: var(--primary); background: var(--primary-light); opacity: 1; }
 .swatch { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: -1px; }
 .options { display: flex; flex-direction: column; gap: 6px; }
+
+/* 対話のせりふ */
+.dialogue { display: flex; flex-direction: column; gap: 6px; }
+.dialogue-line { margin: 0; padding: 6px 10px; border-radius: 10px; background: var(--surface2); line-height: 1.55; }
+.dialogue-line.mine { background: var(--primary-light); }
+.dialogue-line.current { outline: 2px solid var(--primary); }

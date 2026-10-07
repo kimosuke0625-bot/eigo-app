@@ -105,6 +105,8 @@ export interface Material {
   title: string
   body: string
   hasAudio: boolean
+  /** 取り込んだ音声ファイル（本文と同じ内容の朗読など。端末の中だけに保存） */
+  audio?: Blob
   wordCount: number
   knownRatio?: number
   source: string

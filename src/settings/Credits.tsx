@@ -38,6 +38,20 @@ const SOURCES: { name: string; use: string; license: string; url: string; note?:
     note: '訳者名なし（Rand McNally 刊）。Project Gutenberg 版の本文のみを使用',
   },
   {
+    name: 'LibriVox「The Aesop for Children」の朗読',
+    use: '人の朗読つきの素材6本（1本 = 寓話4話）。朗読者：Bob Neufeld、Halle Kill、Katalina Watt、Jill Engle、Lee Smalley、lewildesen',
+    license: 'パブリックドメイン',
+    url: 'https://librivox.org/the-aesop-for-children-by-aesop/',
+    note: 'LibriVox のボランティア朗読者のみなさん（LibriVox の録音はすべてパブリックドメイン：https://librivox.org/pages/public-domain/ ）。本文は The Aesop for Children（1919年）',
+  },
+  {
+    name: 'ビジネスの読み物36本・ビジネス場面の対話36本',
+    use: '多聴・多読、シャドーイング、対話の役割練習の素材と、内容確認の質問',
+    license: 'CC BY-SA 4.0',
+    url: 'https://github.com/kimosuke0625-bot/eigo-app',
+    note: 'このアプリ用に作成',
+  },
+  {
     name: '段階別の読み物12本と内容確認の質問',
     use: '日常・仕事の場面の読み物と、全素材の内容確認の質問',
     license: 'CC BY-SA 4.0',

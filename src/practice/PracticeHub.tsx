@@ -24,6 +24,14 @@ export function PracticeHub({ onStart, dueCount }: { onStart: (k: PracticeKind) 
         )
       })}
       <h3 className="block-title">追加の練習（1日のメニューの外）</h3>
+      <button className="menu-item as-button" onClick={() => onStart('roleplay')}>
+        <div className="body">
+          <div className="name">対話の役割練習</div>
+          <div className="muted">ビジネス場面の対話（36本）で片方の役を担当し、せりふを声に出して録音・聞き比べ</div>
+          <div style={{ marginTop: 4 }}><span className="tag">{PILLAR_LABELS.output}</span></div>
+        </div>
+        <span className="min">▶</span>
+      </button>
       <button className="menu-item as-button" onClick={() => onStart('conversation')}>
         <div className="body">
           <div className="name">Claude と会話練習</div>

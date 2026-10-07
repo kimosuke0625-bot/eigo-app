@@ -11,7 +11,7 @@ import { Steps } from '../ui/Steps'
 import { ClaudePromptBox } from './ClaudePromptBox'
 import { summaryPrompt, type Level } from './claudePrompts'
 import { currentLevel } from './output'
-import { useMaterialAudio, VoiceNote, type MaterialAudio } from './AudioParts'
+import { mmss, useMaterialAudio, useWholeAudio, VoiceNote, type MaterialAudio } from './AudioParts'
 
 const RATES = [0.8, 1, 1.2]
 
@@ -115,8 +115,9 @@ function InputSessionBody({ material, settings, index, ratio, onExit, onBack, on
     }
     return { sentences: list, breaks: starts }
   }, [material.body])
-  // 内蔵の音声ファイル（高品質な合成音声）があればそれを使い、なければ端末の声で読む
-  const tts = !!audio || speechSupported()
+  // 素材全体の音声ファイル（人の朗読・取り込んだ音声）→ 文ごとの内蔵音声（高品質な合成音声）→ 端末の声 の順に使う
+  const whole = useWholeAudio(material.audioFile ?? material.audioBlob)
+  const tts = !!whole || !!audio || speechSupported()
   const stages = useMemo(() => {
     const s: Exclude<Stage, 'done'>[] = []
     if (settings.questionsFirst && material.questions) s.push('preview')
@@ -134,7 +135,13 @@ function InputSessionBody({ material, settings, index, ratio, onExit, onBack, on
 
   useEffect(() => () => stop.current(), [])
 
+  useEffect(() => { if (whole?.ended) setHeard(true) }, [whole?.ended])
+
   const play = (from = Math.max(0, current)) => {
+    if (whole) {
+      whole.play(rate)
+      return
+    }
     stop.current()
     setPlaying(true)
     stop.current = playSentences({
@@ -144,7 +151,7 @@ function InputSessionBody({ material, settings, index, ratio, onExit, onBack, on
       onEnd: () => { setPlaying(false); setCurrent(-1); setHeard(true) },
     })
   }
-  const pause = () => { stop.current(); setPlaying(false) }
+  const pause = () => { whole?.pause(); stop.current(); setPlaying(false) }
   const next = () => {
     pause()
     const i = stages.indexOf(stage as Exclude<Stage, 'done'>)
@@ -197,7 +204,29 @@ function InputSessionBody({ material, settings, index, ratio, onExit, onBack, on
           </>
         )}
 
-        {stage === 'listen' && (
+        {stage === 'listen' && whole && (
+          <>
+            <div className="row">
+              {whole.playing
+                ? <button className="btn" style={{ flex: 1 }} onClick={pause}>⏸ 一時停止</button>
+                : <button className="btn" style={{ flex: 1 }} onClick={() => whole.play(rate)}>▶ {whole.time.now > 0 && !whole.ended ? '続きから' : heard ? 'もう一度聞く' : '再生'}</button>}
+              <button className="btn secondary" onClick={() => whole.restart(rate)}>⏮ 最初から</button>
+            </div>
+            <div className="seg" aria-label="速さ">
+              {RATES.map((r) => (
+                <button key={r} aria-pressed={rate === r} onClick={() => { setRate(r); whole.setRate(r) }}>{r}倍</button>
+              ))}
+            </div>
+            <p className="muted">{mmss(whole.time.now)}{whole.time.total ? ` / ${mmss(whole.time.total)}` : ''}・{material.wordCount}語</p>
+            <p className="muted voice-note">🔈 声：{material.narrator ? `${material.narrator}（人の朗読）` : '取り込んだ音声'}</p>
+            {questionsPeek}
+            <button className={`btn block ${heard ? '' : 'secondary'}`} onClick={next}>
+              {heard ? '聞き終えた → 読む' : '聞かずに読む →'}
+            </button>
+          </>
+        )}
+
+        {stage === 'listen' && !whole && (
           <>
             <div className="row">
               {playing
@@ -223,12 +252,12 @@ function InputSessionBody({ material, settings, index, ratio, onExit, onBack, on
           <>
             {tts && (
               <div className="row">
-                <button className="btn secondary" onClick={() => (playing ? pause() : play())}>{playing ? '⏸ 止める' : '🔊 読みながら聞く'}</button>
-                <span className="muted">文をダブルタップするとそこから再生</span>
+                <button className="btn secondary" onClick={() => ((whole ? whole.playing : playing) ? pause() : play())}>{(whole ? whole.playing : playing) ? '⏸ 止める' : '🔊 読みながら聞く'}</button>
+                {!whole && <span className="muted">文をダブルタップするとそこから再生</span>}
               </div>
             )}
             <MaterialText sentences={sentences} breaks={breaks} current={current} index={index} settings={settings}
-              onSentence={tts ? (i) => play(i) : undefined} />
+              onSentence={tts && !whole ? (i) => play(i) : undefined} />
             {material.moral && <p className="moral">Moral: {material.moral}</p>}
             {questionsPeek}
             <button className="btn block" onClick={next}>読み終えた → 答える</button>

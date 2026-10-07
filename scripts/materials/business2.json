@@ -1,0 +1,164 @@
+[
+  {
+    "id": "b19",
+    "title": "Reading a Profit and Loss Statement",
+    "body": "A profit and loss statement shows how much money a company made and spent in a period, such as a quarter or a year. It is also called an income statement.\n\nAt the top is revenue, the money from sales. Below that is the cost of goods sold, which is what it cost to make or buy the products. Revenue minus the cost of goods sold is the gross profit.\n\nNext come operating expenses, like salaries, rent, and advertising. When you subtract these, you get operating profit. This number shows how well the main business is doing. Finally, after interest and taxes, you reach net profit, the famous \"bottom line\".\n\nInvestors look at more than the bottom line. A company can show a profit because it sold a building, even if its main business is weak. That is why operating profit is so important.",
+    "questions": [
+      { "q": "What is gross profit?", "options": ["Revenue minus the cost of goods sold", "Revenue minus taxes", "Net profit plus salaries"], "answer": 0 },
+      { "q": "Why is operating profit important?", "options": ["It includes the sale of buildings", "It shows how well the main business is doing", "It is always the largest number"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b20",
+    "title": "The Elevator Pitch",
+    "body": "Imagine you get into an elevator with an important investor. You have about thirty seconds before the doors open. What would you say? This short speech is called an elevator pitch.\n\nA good pitch answers three questions. What problem do you solve? Who has this problem? And why is your solution better? For example: \"Small restaurants waste a lot of food because they cannot predict how many customers will come. Our app uses past sales and the weather to predict demand. Our first ten customers cut their food waste by a third.\"\n\nNotice the numbers at the end. They make the pitch believable. Avoid difficult words and long explanations. The goal is not to tell everything. The goal is to make the listener say, \"Tell me more.\"",
+    "questions": [
+      { "q": "How long is an elevator pitch, according to the text?", "options": ["About thirty seconds", "About ten minutes", "About an hour"], "answer": 0 },
+      { "q": "What is the goal of an elevator pitch?", "options": ["To tell everything about the business", "To make the listener want to know more", "To sell the product at once"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b21",
+    "title": "Taking Notes in Meetings",
+    "body": "Taking good notes in a meeting is harder than it looks. Many people try to write down every word, but then they miss what is really happening.\n\nA better way is to listen for three things: decisions, actions, and open questions. A decision is something the group has agreed on. An action is a task with a person's name and a deadline. An open question is something that still needs an answer.\n\nYou can draw three columns on your page, or use three letters: D, A, and Q. When you hear \"OK, let's go with plan B,\" write it under D. When you hear \"Tom will call the supplier by Monday,\" write it under A.\n\nAfter the meeting, clean up your notes while your memory is fresh. Then share them. Your coworkers will thank you.",
+    "questions": [
+      { "q": "What three things should you listen for?", "options": ["Decisions, actions, and open questions", "Names, dates, and places", "Jokes, stories, and examples"], "answer": 0 },
+      { "q": "Which is an example of an action?", "options": ["Let's go with plan B", "Tom will call the supplier by Monday", "Why are sales falling?"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b22",
+    "title": "A Family Business",
+    "body": "In the city of Kyoto, there is a sweets shop that has been open for more than four hundred years. It has been run by the same family for eighteen generations. Japan has more very old companies than any other country. Some are over a thousand years old.\n\nWhy do they last so long? Experts point to a few reasons. They focus on one thing and do it very well. They care more about trust and long-term relationships than about growing fast. And they keep money aside for hard times, so they can survive wars, disasters, and recessions.\n\nBut old companies also change. The sweets shop now sells online and has created new flavors for younger customers. The current owner says, \"To protect our tradition, we must keep changing a little every year.\"",
+    "questions": [
+      { "q": "How long has the sweets shop been open?", "options": ["About forty years", "More than four hundred years", "Over a thousand years"], "answer": 1 },
+      { "q": "What does the current owner say about tradition?", "options": ["It should never change", "To protect it, they must keep changing a little", "It is not important to young people"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b23",
+    "title": "Negotiation Basics",
+    "body": "Negotiation is not a fight. It is a way for two sides to find an agreement that works for both.\n\nBefore you negotiate, know your BATNA. This stands for \"best alternative to a negotiated agreement\". In other words, what will you do if you cannot agree? If you have a good alternative, you can negotiate with more confidence.\n\nDuring the negotiation, focus on interests, not positions. A position is what someone says they want, such as \"We need a lower price.\" An interest is why they want it, such as \"Our budget is small this year.\" If you understand the interest, you may find other solutions. For example, you could keep the price but let them pay over six months.\n\nFinally, listen more than you talk. The more you know about the other side, the better deal you can make.",
+    "questions": [
+      { "q": "What does BATNA mean?", "options": ["Your best alternative if you cannot agree", "The lowest price you will accept", "The other side's budget"], "answer": 0 },
+      { "q": "What is the difference between a position and an interest?", "options": ["A position is why; an interest is what", "A position is what someone wants; an interest is why", "There is no difference"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b24",
+    "title": "Marketing to the Right People",
+    "body": "A small company that makes running shoes had a problem. It spent a lot of money on advertising, but sales did not grow. The ads were shown to everyone, from teenagers to grandparents.\n\nSo the company changed its approach. It studied its best customers and found that most of them were adults aged 30 to 50 who ran long distances on weekends. Many of them cared about avoiding injuries.\n\nThe company stopped showing ads to everyone. Instead, it put ads in running magazines and on running apps. The message also changed: \"Run longer without pain.\" The company even sponsored local marathons. Within a year, sales doubled, and the advertising budget was actually smaller. The lesson is simple. You do not need to reach everyone. You need to reach the right people with the right message.",
+    "questions": [
+      { "q": "Who were most of the company's best customers?", "options": ["Teenagers", "Adults aged 30 to 50 who ran long distances", "Grandparents who walked"], "answer": 1 },
+      { "q": "What happened within a year?", "options": ["Sales doubled with a smaller budget", "The company closed", "The ads were shown to everyone again"], "answer": 0 }
+    ]
+  },
+  {
+    "id": "b25",
+    "title": "The Weekly Report",
+    "body": "Every Friday, Emma writes a short weekly report for her manager. At first, she wrote long reports that described everything she did. Her manager rarely read them to the end.\n\nThen a senior coworker gave her advice. \"Your manager has twenty minutes for twenty reports,\" she said. \"Put the most important thing first.\"\n\nNow Emma uses a simple format with four parts. First, one sentence on the overall status: on track, at risk, or delayed. Second, three main results from the week. Third, any problems and what help she needs. Fourth, the plan for next week.\n\nThe report now fits on one screen. Her manager reads it every week and often replies within an hour. Last month, she even asked Emma to teach the format to the rest of the team.",
+    "questions": [
+      { "q": "What was the problem with Emma's first reports?", "options": ["They were too short", "They were too long and not read to the end", "They were late"], "answer": 1 },
+      { "q": "What comes first in Emma's new format?", "options": ["The plan for next week", "One sentence on the overall status", "A list of problems"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b26",
+    "title": "What Is a Stock?",
+    "body": "When you buy a stock, or a share, you buy a very small part of a company. If the company has one million shares and you own one thousand, you own one tenth of one percent of it.\n\nThere are two main ways to make money from stocks. First, the price of the share can go up. If you buy at ten dollars and sell at fifteen, you make five dollars per share. Second, many companies pay a dividend, which is a part of their profit paid to shareholders.\n\nOf course, prices can also go down. A company can lose customers or make bad decisions. That is why many people buy funds that hold many different stocks. If one company does badly, the others may still do well. Experts often say that stocks are best for money you will not need for many years.",
+    "questions": [
+      { "q": "What is a dividend?", "options": ["A part of the profit paid to shareholders", "The price of a share", "A fee for buying stocks"], "answer": 0 },
+      { "q": "Why do many people buy funds?", "options": ["Funds never go down", "Funds hold many different stocks", "Funds pay higher taxes"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b27",
+    "title": "Cross-Cultural Communication",
+    "body": "A Japanese manager and an American manager were working on a project together. In a meeting, the American asked, \"Can we finish this by the end of the month?\" The Japanese manager said, \"It may be difficult.\" The American heard \"It is possible, but hard.\" The Japanese manager meant \"No.\"\n\nThis kind of misunderstanding is common. Some cultures, like the United States and Germany, often say things directly. Other cultures, like Japan, often expect the listener to understand the meaning from the situation.\n\nNeither way is wrong. But in an international team, it helps to be clear. You can check by asking, \"Just to be sure, does that mean we cannot finish by the end of the month?\" You can also explain your own style: \"In Japan, we often say 'difficult' when we mean 'no'.\" Small steps like these prevent big problems.",
+    "questions": [
+      { "q": "What did the Japanese manager mean by \"It may be difficult\"?", "options": ["Yes", "No", "Maybe next week"], "answer": 1 },
+      { "q": "What does the writer suggest in international teams?", "options": ["Always speak indirectly", "Check the meaning and explain your style", "Avoid meetings"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b28",
+    "title": "The Coffee Chain That Listened",
+    "body": "A large coffee chain was losing customers to small local cafés. Its stores were clean and fast, but customers said they felt like factories.\n\nThe company asked store managers for ideas. One manager suggested letting each store choose some of its own decorations and a few local products. Another suggested training staff to remember regular customers' names and usual orders.\n\nThe company tested these ideas in fifty stores. After six months, the test stores had more regular customers than other stores, and staff were happier too. Many said they enjoyed their work more because they could make real connections.\n\nThe company then spread the ideas to all its stores. The chief executive later said, \"Our best ideas did not come from headquarters. They came from people who talk to customers every day.\"",
+    "questions": [
+      { "q": "What did customers say about the large chain's stores?", "options": ["They were too slow", "They felt like factories", "They were too expensive"], "answer": 1 },
+      { "q": "Where did the best ideas come from, according to the chief executive?", "options": ["Headquarters", "Other companies", "People who talk to customers every day"], "answer": 2 }
+    ]
+  },
+  {
+    "id": "b29",
+    "title": "Managing Your Time",
+    "body": "Many busy people feel that they work all day but do not finish anything important. One reason is that urgent tasks push out important ones.\n\nAn urgent task needs attention now, like a ringing phone. An important task helps you reach your long-term goals, like learning a new skill or planning next year's budget. Some tasks are both, some are neither.\n\nA useful habit is to plan your day the evening before. Choose one important task and do it first, before you check email. Even sixty minutes of focused work in the morning can make a big difference.\n\nAlso, group small tasks together. Answer emails two or three times a day instead of every few minutes. Every time you switch tasks, your brain needs time to focus again. Fewer switches mean more real work.",
+    "questions": [
+      { "q": "What is an example of an important task?", "options": ["A ringing phone", "Learning a new skill", "Checking email every few minutes"], "answer": 1 },
+      { "q": "Why should you group small tasks together?", "options": ["Switching tasks costs time to focus again", "Small tasks are more important", "Your manager likes it"], "answer": 0 }
+    ]
+  },
+  {
+    "id": "b30",
+    "title": "Electric Cars and Business",
+    "body": "Electric cars are changing more than how we drive. They are changing whole industries.\n\nA normal car engine has hundreds of moving parts. An electric motor has far fewer. This is bad news for companies that make engine parts, and many of them must find new products. On the other hand, battery makers are growing fast. Batteries are the most expensive part of an electric car, so companies are racing to make them cheaper and better.\n\nElectric cars also need charging stations. Some oil companies now build chargers at their gas stations. Electricity companies sell special plans for charging at night, when power is cheaper. Even shopping malls add chargers, hoping drivers will shop while they wait. When technology changes, some businesses lose, but new chances appear for those who move quickly.",
+    "questions": [
+      { "q": "Why are electric cars bad news for some parts makers?", "options": ["Electric motors have far fewer moving parts", "Electric cars are too expensive", "Batteries are too heavy"], "answer": 0 },
+      { "q": "Why do some shopping malls add chargers?", "options": ["The law requires it", "They hope drivers will shop while they wait", "Electricity is free at malls"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b31",
+    "title": "A Difficult Client",
+    "body": "Daniel worked at a design company. His newest client changed the plan almost every week. First she wanted blue, then green, then blue again. The project was already two weeks late, and the team was frustrated.\n\nDaniel decided to meet her in person. Instead of complaining, he asked questions. \"What is most important to you in this design? Who will see it?\" He learned that her boss kept giving her new opinions, and she was under a lot of pressure.\n\nSo Daniel suggested a new process. The team would make two options. She would show both to her boss, and they would choose one together within three days. After that, changes would cost extra.\n\nThe client agreed and even seemed relieved. The project finished one week later. The next year, she hired Daniel's company again.",
+    "questions": [
+      { "q": "Why did the client keep changing the plan?", "options": ["She did not like Daniel", "Her boss kept giving her new opinions", "She had no budget"], "answer": 1 },
+      { "q": "What was part of Daniel's new process?", "options": ["Changes after the choice would cost extra", "The client would never see the design", "The team would make ten options"], "answer": 0 }
+    ]
+  },
+  {
+    "id": "b32",
+    "title": "The Gig Economy",
+    "body": "In the gig economy, people work on short jobs, or \"gigs\", instead of having one long-term employer. A driver may take rides through an app, a designer may find projects online, and a translator may work for clients in ten countries.\n\nFor workers, gigs offer freedom. They can choose when and how much to work. Some people do gigs on top of a regular job to earn extra money.\n\nBut there are risks. Gig workers often do not get paid holidays, sick pay, or pensions. Their income can change a lot from month to month. In many countries, governments are discussing new rules to protect them.\n\nFor companies, gig workers make it easy to grow or shrink quickly. But some companies have found that people who feel secure in their jobs work harder and stay longer.",
+    "questions": [
+      { "q": "What is one benefit of gig work for workers?", "options": ["Paid holidays", "Freedom to choose when to work", "A fixed monthly income"], "answer": 1 },
+      { "q": "What are governments discussing?", "options": ["Banning gig work", "New rules to protect gig workers", "Higher taxes for apps"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b33",
+    "title": "Why Prices End in 99",
+    "body": "Have you noticed that many prices end in 99? A shirt costs 19.99 dollars, not 20. A meal costs 980 yen, not 1,000.\n\nThis is not an accident. Studies show that people read prices from left to right and pay most attention to the first number. So 19.99 feels closer to 10 than to 20, even though the difference from 20 is only one cent.\n\nBut some shops do the opposite on purpose. Expensive restaurants and luxury brands often use round numbers like 50 or 200. Round numbers feel simple and confident, and they suggest quality rather than a good deal.\n\nSo the price tag sends a message. A price ending in 99 says \"This is a bargain.\" A round price says \"This is premium.\" Next time you go shopping, see which message each shop is sending.",
+    "questions": [
+      { "q": "Why does 19.99 feel cheaper than 20?", "options": ["People pay most attention to the first number", "It is much cheaper", "Taxes are lower"], "answer": 0 },
+      { "q": "What do round prices often suggest?", "options": ["A big discount", "Quality and confidence", "An old product"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b34",
+    "title": "Learning from Mistakes",
+    "body": "Some companies punish people for mistakes. As a result, workers hide problems until it is too late. Other companies treat mistakes as chances to learn.\n\nAfter a project, these companies hold a short meeting called a review. The team asks four questions. What did we expect to happen? What actually happened? Why was there a difference? What will we do differently next time?\n\nThe key rule is that the review is about the process, not about blaming a person. If a report was late, the question is not \"Who was lazy?\" but \"What in our process made it late?\" Maybe the deadline was unclear, or one person had too much work.\n\nAirlines and hospitals have used this method for many years. When people feel safe to talk about mistakes, the same mistakes happen less often.",
+    "questions": [
+      { "q": "What happens in companies that punish mistakes?", "options": ["Workers hide problems", "Workers learn faster", "There are no mistakes"], "answer": 0 },
+      { "q": "What is the key rule of a review?", "options": ["Find the person to blame", "Focus on the process, not blaming a person", "Keep it secret"], "answer": 1 }
+    ]
+  },
+  {
+    "id": "b35",
+    "title": "A Business Trip to Singapore",
+    "body": "Aya flew from Tokyo to Singapore for a three-day business trip. Her company wanted to find a new partner to sell its kitchen products in Southeast Asia.\n\nOn the first day, she visited two distributors. The first had a big warehouse but seemed more interested in price than in her products. The second was smaller, but the owner asked many questions about how the products were used. He even tried cooking with one of them in the meeting room.\n\nOn the second day, Aya visited shops to see how kitchen products were sold. She noticed that many families cooked in small kitchens, so compact products were popular.\n\nOn the last day, she wrote a report on the plane. She recommended the smaller distributor and suggested making a smaller version of their best-selling pan for the local market.",
+    "questions": [
+      { "q": "Why did Aya like the second distributor?", "options": ["It had a big warehouse", "The owner was very interested in how the products were used", "It offered the lowest price"], "answer": 1 },
+      { "q": "What did Aya notice in the shops?", "options": ["Compact products were popular", "People did not cook at home", "Prices were very high"], "answer": 0 }
+    ]
+  },
+  {
+    "id": "b36",
+    "title": "Your Personal Brand",
+    "body": "A personal brand is what people think of when they hear your name at work. Are you the person who always meets deadlines? The person who explains things clearly? The person who brings new ideas?\n\nYou build your brand through your actions every day, not through a single big success. Small things matter: answering emails on time, being prepared for meetings, and keeping your promises.\n\nIt also helps to share what you know. You could give a short talk to your team about a tool you have learned, or write a useful guide for new staff. People will start to see you as an expert in that area.\n\nFinally, be consistent. If you are helpful on Monday but rude on Friday, people will not know what to expect. Trust grows slowly, but it is one of the most valuable things you can have in your career.",
+    "questions": [
+      { "q": "How do you build your personal brand, according to the text?", "options": ["Through one big success", "Through your actions every day", "Through expensive clothes"], "answer": 1 },
+      { "q": "Why is being consistent important?", "options": ["So people know what to expect", "So you can work less", "So you get promoted quickly"], "answer": 0 }
+    ]
+  }
+]
