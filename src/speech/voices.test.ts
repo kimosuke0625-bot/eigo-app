@@ -38,3 +38,13 @@ describe('使う声の順位', () => {
     expect(voiceScore(voice('Microsoft Libby Online (Natural)', 'en-GB'))).toBeGreaterThan(voiceScore(voice('com.apple.voice.super-compact.en-US.Samantha', 'en-US')))
   })
 })
+
+describe('音声ファイルの名前', () => {
+  it('Windows で使えない名前（con など）を避ける', async () => {
+    const { headKey } = await import('./audioKey')
+    expect(headKey('con')).toBe('con_w')
+    expect(headKey('Aux')).toBe('aux_w')
+    expect(headKey('console')).toBe('console')
+    expect(headKey('ice cream')).toBe('ice_cream')
+  })
+})

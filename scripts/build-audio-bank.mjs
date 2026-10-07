@@ -78,9 +78,15 @@ function writeIndex() {
 function publish() {
   const index = writeIndex()
   const git = (...args) => execFileSync('git', args, { cwd: BANK, stdio: 'pipe' }).toString()
-  git('add', '-A')
-  if (!git('status', '--porcelain').trim()) return
-  git('commit', '-q', '-m', `音声を追加（見出し語 ${index.heads.length}、例文 ${index.ex.length}、雑学 ${index.facts.length}、名言 ${index.quotes.length}）`)
+  // 保存に失敗しても作成は止めない（失敗の理由をログに残し、次の区切りでやり直す）
+  try {
+    git('add', '-A')
+    if (!git('status', '--porcelain').trim()) return
+    git('commit', '-q', '-m', `音声を追加（見出し語 ${index.heads.length}、例文 ${index.ex.length}、雑学 ${index.facts.length}、名言 ${index.quotes.length}）`)
+  } catch (e) {
+    log(`保存（git）に失敗。作成は続けます：${String(e.stderr || e.message).split(String.fromCharCode(10)).filter(Boolean).slice(0, 2).join(' / ')}`)
+    return
+  }
   for (let i = 0; i < 5; i++) {
     try { git('push', '-q'); log(`公開：見出し語 ${index.heads.length}、例文 ${index.ex.length}、雑学 ${index.facts.length}、名言 ${index.quotes.length}`); return }
     catch (e) { log(`送信に失敗（${i + 1}回目）。少し待ってやり直します：${e.message.split('\n')[0]}`); execFileSync('powershell', ['-Command', 'Start-Sleep -Seconds 60']) }

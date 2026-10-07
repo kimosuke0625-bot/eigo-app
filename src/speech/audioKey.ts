@@ -29,7 +29,9 @@ export function textKey(text: string): string {
 
 /** 見出し語のファイル名に使える形（英字以外を _ にする） */
 export function headKey(lemma: string): string {
-  return lemma.toLowerCase().replace(/[^a-z0-9]/g, '_')
+  const key = lemma.toLowerCase().replace(/[^a-z0-9]/g, '_')
+  // Windows で使えないファイル名（con, prn, aux, nul, com1 など）は後ろに _w を付ける（PC で作れず、git にも入らないため）
+  return /^(con|prn|aux|nul|com[0-9]|lpt[0-9])$/.test(key) ? `${key}_w` : key
 }
 
 /** 声は6種類。英文ごとに決まった声を割り当て、全体で声がまんべんなく出るようにする */
