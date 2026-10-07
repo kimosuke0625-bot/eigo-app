@@ -48,7 +48,9 @@ export function useDailyRewards(settings: Settings, idle: boolean) {
   const [titles, setTitles] = useState<{ list: TitleDef[]; compare?: { old: Recording; recent: Recording } } | null>(null)
   const [weekly, setWeekly] = useState<{ summary: WeekSummary; titleNames: string[] } | null>(null)
   const busy = useRef(false)
-  const lastTitleCheck = useRef(0)
+  // 称号を確かめるのは、アプリを開いたときと、練習画面から戻ったとき
+  const titleCheckNeeded = useRef(true)
+  useEffect(() => { if (!idle) titleCheckNeeded.current = true }, [idle])
 
   useEffect(() => {
     if (!idle || !facts || busy.current || fact || trophy || titles || weekly) return
@@ -85,9 +87,9 @@ export function useDailyRewards(settings: Settings, idle: boolean) {
         setTrophy({ streak: streak.current, minutes: Math.floor(seconds / 60) })
         busy.current = false
       })()
-    } else if (Date.now() - lastTitleCheck.current > 60_000) {
-      // 称号の条件を確かめる（練習画面から戻ったときなど、1分に1回まで）
-      lastTitleCheck.current = Date.now()
+    } else if (titleCheckNeeded.current) {
+      // 称号の条件を確かめる（練習画面から戻ったとき）
+      titleCheckNeeded.current = false
       busy.current = true
       void (async () => {
         const stats = await loadStats(settings.phase, new Set(facts.facts.filter((f) => f.rare).map((f) => f.id)))
