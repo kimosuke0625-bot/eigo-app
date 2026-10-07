@@ -32,18 +32,19 @@ import { useDailyRewards } from './rewards/useDailyRewards'
 import { setSoundEnabled, setSoundSet } from './rewards/sound'
 import { THEMES } from './rewards/titles'
 import { checkPhase } from './progress/autoPhase'
+import { PixelIcon } from './ui/PixelIcon'
 
 export type Tab = 'today' | 'practice' | 'progress' | 'materials' | 'collection' | 'settings'
 
 type Overlay = { practice: PracticeKind; materialId?: string; speed?: boolean } | { diagnostic: true } | null
 
 const TABS: { id: Tab; label: string; icon: string }[] = [
-  { id: 'today', label: '今日', icon: '☀️' },
-  { id: 'practice', label: '練習', icon: '🎯' },
-  { id: 'progress', label: '進捗', icon: '📈' },
-  { id: 'materials', label: '素材', icon: '📚' },
-  { id: 'collection', label: '図鑑', icon: '🗂️' },
-  { id: 'settings', label: '設定', icon: '⚙️' },
+  { id: 'today', label: '今日', icon: 'sun' },
+  { id: 'practice', label: '練習', icon: 'sword' },
+  { id: 'progress', label: '進捗', icon: 'flag' },
+  { id: 'materials', label: '素材', icon: 'book' },
+  { id: 'collection', label: '図鑑', icon: 'bag' },
+  { id: 'settings', label: '設定', icon: 'gear' },
 ]
 
 function useTheme(mode: ThemeMode | undefined, accent = 'indigo') {
@@ -158,8 +159,10 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
     body = <SettingsScreen settings={settings} onDiagnostic={() => setOverlay({ diagnostic: true })} />
   }
 
+  // フェーズ6.5の1段階目：新しい見た目は「今日の画面」と「復習カード」だけ
+  const rpg = (overlay === null && tab === 'today') || (overlay !== null && 'practice' in overlay && overlay.practice === 'review')
   return (
-    <div className="app">
+    <div className={`app${rpg ? ' rpg' : ''}`}>
       <header className="header">
         <h1>英語マスター 2年計画</h1>
         <span className="phase-chip" style={{ background: PHASE_COLORS[settings.phase] }}>
@@ -181,7 +184,7 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
         <nav className="tabbar" aria-label="画面の切り替え">
           {TABS.map((t) => (
             <button key={t.id} onClick={() => setTab(t.id)} aria-current={tab === t.id ? 'page' : undefined}>
-              <span className="ico" aria-hidden>{t.icon}</span>
+              <PixelIcon name={t.icon} size={22} />
               {t.label}
             </button>
           ))}

@@ -200,6 +200,35 @@ export interface Reward {
   acquiredAt: number
 }
 
+/** 1日ごとの経験値の記録（過去の自分との比較に使う） */
+export interface XpDay {
+  day: string
+  xp: number
+  /** 会心の一撃の回数 */
+  crits: number
+  /** その日の最高コンボ */
+  maxCombo: number
+}
+
+/** 雑学パック。中身（レア度）は開けたときに決まる */
+export interface Pack {
+  id?: number
+  at: number
+  day: string
+  /** パックが届いた理由（練習の種類、または daily = 最低ライン達成） */
+  source: string
+  /** その練習でもらった経験値（届いたときの表示用） */
+  xp: number
+  /** 0 = 未開封、1 = 開封済み */
+  opened: 0 | 1
+  /** 届いたお知らせを出したか（「あとで」を押したら 1） */
+  notified: 0 | 1
+  openedAt?: number
+  factId?: string
+  /** 0 = おさらい、1 = ふつう、2 = 連続もの、3 = レア */
+  rarity?: number
+}
+
 export type EffectsLevel = 'low' | 'medium' | 'high'
 export type ThemeMode = 'system' | 'light' | 'dark'
 export type BlockId = 'morning' | 'noon' | 'night'
@@ -255,6 +284,10 @@ export interface Settings {
   bslMode: 'after' | 'mix'
   /** 週のまとめを出した週（週の月曜日の日付キー） */
   lastWeeklySummary: string
+  /** 経験値の合計 */
+  xpTotal: number
+  /** 経験値の計算の版（0 = これまでの記録からまだ計算していない） */
+  xpVersion: number
 }
 
 export class EigoDB extends Dexie {
@@ -272,6 +305,8 @@ export class EigoDB extends Dexie {
   edits!: EntityTable<ItemEdit, 'itemId'>
   snapshots!: EntityTable<Snapshot, 'day'>
   journal!: EntityTable<JournalEntry, 'id'>
+  xpDays!: EntityTable<XpDay, 'day'>
+  packs!: EntityTable<Pack, 'id'>
 
   constructor(name = 'eigo') {
     super(name)
@@ -314,13 +349,18 @@ export class EigoDB extends Dexie {
     this.version(7).stores({
       assessments: '++id, at, kind',
     })
+    // フェーズ6.5：経験値（1日ごと）と雑学パック
+    this.version(8).stores({
+      xpDays: 'day',
+      packs: '++id, day, opened',
+    })
   }
 }
 
 /** 書き出しの対象。items は教材データから作り直せるので含めない */
 export const TABLE_NAMES = [
   'cards', 'reviews', 'knownWords', 'edits', 'snapshots', 'journal', 'materials', 'sessions',
-  'recordings', 'assessments', 'facts', 'rewards', 'settings',
+  'recordings', 'assessments', 'facts', 'rewards', 'settings', 'xpDays', 'packs',
 ] as const
 
 export const db = new EigoDB()

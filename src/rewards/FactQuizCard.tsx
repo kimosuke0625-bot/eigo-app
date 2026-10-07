@@ -35,7 +35,7 @@ export function FactQuizCard({ settings }: { settings: Settings }) {
   }
   return (
     <section className="card stack">
-      <h2>🧩 雑学クイズ</h2>
+      <h2 className="win-title">雑学クイズ</h2>
       <p className="muted">数日前に集めた雑学から。空いている所に入る語は？</p>
       <p className="fact-en">{quiz.sentence}</p>
       <div className="options">

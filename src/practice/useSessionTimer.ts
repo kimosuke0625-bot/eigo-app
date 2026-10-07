@@ -1,11 +1,13 @@
 import { useEffect, useRef } from 'react'
 import { db, type Pillar } from '../db/schema'
 import { dayKey } from '../today/menu'
+import { finishPractice } from '../rewards/packs'
 
 /**
  * 練習画面を開いている時間を sessions に記録する。
  * 画面が隠れている間は数えない。iPhone で途中でアプリが閉じられても失われないよう10秒ごとに保存する。
  * ref には使った素材の id などを入れる。
+ * 閉じたときに、やり遂げた練習の経験値を足し、2分以上なら雑学パックを届ける。
  * maxPerDay を渡すと、同じ種類の練習の1日の合計がその秒数を超えた分は数えない（雑学を読む時間など）。
  */
 export function useSessionTimer(kind: string, pillar: Pillar, maxPerDay?: number, ref?: string) {
@@ -49,6 +51,8 @@ export function useSessionTimer(kind: string, pillar: Pillar, maxPerDay?: number
       void save().then(async () => {
         // 数秒だけ開いて閉じた記録は残さない
         if (id !== undefined && seconds < 5) await db.sessions.delete(id)
+        // やり遂げた練習の経験値と雑学パック
+        else if (id !== undefined) await finishPractice(kind, Math.round(seconds), db, day)
       })
     }
   }, [kind, pillar, maxPerDay, ref])

@@ -1,0 +1,245 @@
+/**
+ * 自作のドット絵アイコン（SVG）。12×12 のマス目を文字で描き、1文字が1マス。
+ * 「.」は透明。色の文字は PALETTE を参照する（輪郭の k は画面の配色に合わせて変わる）。
+ */
+const PALETTE: Record<string, string> = {
+  k: 'var(--px-ink, #2a1d10)',
+  w: '#ffffff',
+  s: '#c9d1dc',
+  g: '#8b95a5',
+  y: '#ffd23f',
+  o: '#f28c28',
+  r: '#e0452b',
+  n: '#8a5a2b',
+  m: '#c88a4a',
+  b: '#3b82f6',
+  c: '#7dd3fc',
+  G: '#2fa84f',
+  p: '#8b5cf6',
+  P: '#c4b5fd',
+  f: '#f6c79b',
+}
+
+const ICONS: Record<string, string[]> = {
+  sun: [
+    '.....yy.....',
+    '.y...yy...y.',
+    '..y......y..',
+    '....oooo....',
+    '...oyyyyo...',
+    'yy.oyyyyo.yy',
+    'yy.oyyyyo.yy',
+    '...oyyyyo...',
+    '....oooo....',
+    '..y......y..',
+    '.y...yy...y.',
+    '.....yy.....',
+  ],
+  sword: [
+    '..........kk',
+    '.........kwk',
+    '........kwsk',
+    '.......kwsk.',
+    '......kwsk..',
+    '.....kwsk...',
+    '..k.kwsk....',
+    '..kykssk....',
+    '...kyyk.....',
+    '..knkyyk....',
+    '.knk..kk....',
+    '.kk.........',
+  ],
+  flag: [
+    '.kk.........',
+    '.kkrrrrr....',
+    '.kkrrrrrrr..',
+    '.kkrrwrrrrr.',
+    '.kkrrrrrrr..',
+    '.kkrrrrr....',
+    '.kk.........',
+    '.kk.........',
+    '.kk.........',
+    '.kk.........',
+    'GGGGGG......',
+    'GGGGGGGG....',
+  ],
+  book: [
+    '............',
+    '.kkkk..kkkk.',
+    'kwwwwkkwwwwk',
+    'kwggwkkwggwk',
+    'kwwwwkkwwwwk',
+    'kwggwkkwggwk',
+    'kwwwwkkwwwwk',
+    'kwggwkkwggwk',
+    'kwwwwkkwwwwk',
+    'kbbbbkkbbbbk',
+    '.kkkkkkkkkk.',
+    '............',
+  ],
+  bag: [
+    '....kkkk....',
+    '...kmmmmk...',
+    '....kyyk....',
+    '...kmmmmk...',
+    '..knmmmmnk..',
+    '.knmmmmmmnk.',
+    '.knmmyymmnk.',
+    '.knmyyyymnk.',
+    '.knmmyymmnk.',
+    '.knnmmmmnnk.',
+    '..knnnnnnk..',
+    '...kkkkkk...',
+  ],
+  gear: [
+    '.....kk.....',
+    '..k.kssk.k..',
+    '.kskssssksk.',
+    '..kssggssk..',
+    '.ksgkkkkgsk.',
+    'ksgk....kgsk',
+    'ksgk....kgsk',
+    '.ksgkkkkgsk.',
+    '..kssggssk..',
+    '.kskssssksk.',
+    '..k.kssk.k..',
+    '.....kk.....',
+  ],
+  flame: [
+    '.....r......',
+    '....rr......',
+    '....rrr..r..',
+    '...rroor.r..',
+    '..rrooorrr..',
+    '..roooyorr..',
+    '.rrooyyoorr.',
+    '.rooyyyyoor.',
+    '.rooyyyyyor.',
+    '.rooyywyyor.',
+    '..rooyyyor..',
+    '...rrrrrr...',
+  ],
+  pack: [
+    '.kkkkkkkkkk.',
+    '.kswswswswk.',
+    '.kkkkkkkkkk.',
+    '.kppppppppk.',
+    '.kpppyypppk.',
+    '.kppyyyyppk.',
+    '.kpyyyyyypk.',
+    '.kppyyyyppk.',
+    '.kpppyypppk.',
+    '.kkkkkkkkkk.',
+    '.kswswswswk.',
+    '.kkkkkkkkkk.',
+  ],
+  ticket: [
+    '............',
+    '............',
+    'kkkkkkkkkkkk',
+    'kyyyyykyyyyk',
+    '.kyyyyyyyyk.',
+    '..kyyykyyk..',
+    '..kyyykyyk..',
+    '.kyyyyyyyyk.',
+    'kyyyyykyyyyk',
+    'kkkkkkkkkkkk',
+    '............',
+    '............',
+  ],
+  star: [
+    '.....kk.....',
+    '....kyyk....',
+    '....kyyk....',
+    'kkkkkyykkkkk',
+    'kyyyyyyyyyyk',
+    '.kyyyyyyyyk.',
+    '..kyyyyyyk..',
+    '..kyyyyyyk..',
+    '.kyyykkyyyk.',
+    '.kyyk..kyyk.',
+    'kyyk....kyyk',
+    'kkk......kkk',
+  ],
+  gem: [
+    '............',
+    '...kkkkkk...',
+    '..kcwccbbk..',
+    '.kcwcccbbbk.',
+    'kkkkkkkkkkkk',
+    '.kcccccbbbk.',
+    '..kccccbbk..',
+    '...kccbbk...',
+    '....kcbk....',
+    '.....kk.....',
+    '............',
+    '............',
+  ],
+  hero: [
+    '....kkkk....',
+    '...kGGGGk...',
+    '..kGGGGGGk..',
+    '.kkkkkkkkkk.',
+    '...kffffk...',
+    '...kfkfkfk..',
+    '...kffffk...',
+    '..kbbbbbbk..',
+    '.kfkbbbbkfk.',
+    '.kfknyynkfk.',
+    '..kbbkkbbk..',
+    '..knk..knk..',
+  ],
+  scroll: [
+    '..kkkkkkkk..',
+    '.kmmwwwwwwk.',
+    '.kmkwwwwwwk.',
+    '..kwggggwwk.',
+    '..kwwwwwwwk.',
+    '..kwggggwwk.',
+    '..kwwwwwwwk.',
+    '..kwgggwwwk.',
+    '..kwwwwwwmk.',
+    '.kwwwwwwkmk.',
+    '.kwwwwwwmmk.',
+    '..kkkkkkkk..',
+  ],
+  slime: [
+    '............',
+    '.....kk.....',
+    '....kcck....',
+    '...kccccck..',
+    '..kcwccccck.',
+    '.kcwcccccck.',
+    '.kcckccckck.',
+    'kccckccckcck',
+    'kccccccccbck',
+    'kbccckkkcbbk',
+    '.kbbbbbbbbk.',
+    '..kkkkkkkk..',
+  ],
+}
+
+export type PixelIconName = keyof typeof ICONS
+
+export function PixelIcon({ name, size = 24, className, title }: { name: PixelIconName | string; size?: number; className?: string; title?: string }) {
+  const rows = ICONS[name]
+  if (!rows) return null
+  const rects: { x: number; y: number; w: number; c: string }[] = []
+  rows.forEach((row, y) => {
+    let x = 0
+    while (x < row.length) {
+      const ch = row[x]
+      let w = 1
+      while (row[x + w] === ch) w++
+      if (ch !== '.' && PALETTE[ch]) rects.push({ x, y, w, c: PALETTE[ch] })
+      x += w
+    }
+  })
+  return (
+    <svg className={`px-icon${className ? ` ${className}` : ''}`} width={size} height={size} viewBox="0 0 12 12"
+      shapeRendering="crispEdges" aria-hidden={title ? undefined : true} role={title ? 'img' : undefined}>
+      {title && <title>{title}</title>}
+      {rects.map((r, i) => <rect key={i} x={r.x} y={r.y} width={r.w} height={1} fill={r.c} />)}
+    </svg>
+  )
+}

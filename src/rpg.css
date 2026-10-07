@@ -1,0 +1,316 @@
+/*
+ * フェーズ6.5：RPG・冒険ゲーム風の見た目。
+ * 1段階目は「今日の画面」と「復習カード」と、雑学パックの開封画面だけに使う（.rpg / .rpg-modal の中だけ）。
+ * 配色・枠・背景はすべて CSS と自作の SVG。ゲーム風の書体（DotGothic16）は見出しと数字だけに使い、
+ * 英文・日本語訳・説明文は読みやすい普通の書体のままにする。
+ * 明るい配色は「羊皮紙の地図」、暗い配色は「夜の旅」。
+ */
+.rpg, .rpg-modal {
+  --font-game: 'DotGothic16', 'Hiragino Sans', 'Yu Gothic UI', monospace;
+  --bg: #efe2c2;
+  --bg-solid: #efe2c2;
+  --surface: #fbf5e6;
+  --surface2: #f3e7c9;
+  --border: #c9a36b;
+  --text: #2a1d10;
+  --text2: #6b5235;
+  --primary: #a33d1f;
+  --primary-light: #f6e3cf;
+  --px-ink: #2a1d10;
+  --frame: #5a3d22;
+  --frame-inner: #c9a36b;
+  --accent: #8a3b12;
+  --btn: #a33d1f;
+  --btn-text: #ffffff;
+  --btn2: #f5ead0;
+  --btn2-text: #2a1d10;
+  --quest-border: #a88457;
+  --xp-a: #ffd23f;
+  --xp-b: #f28c28;
+  --track: #3a2a18;
+  --road: #2fa84f;
+  --pack-a: #6b46c1;
+  --pack-b: #a78bfa;
+  --map-line: rgba(122, 88, 46, 0.12);
+}
+:root[data-theme="dark"] .rpg, :root[data-theme="dark"] .rpg-modal {
+  --bg: #0b1026;
+  --bg-solid: #0b1026;
+  --surface: #121a3f;
+  --surface2: #1b2452;
+  --border: #3b4785;
+  --text: #f1eee2;
+  --text2: #b9bedc;
+  --primary: #4a5bd6;
+  --primary-light: #1d2760;
+  --px-ink: #050817;
+  --frame: #f2ecd9;
+  --frame-inner: #050817;
+  --accent: #ffd86b;
+  --btn: #2c3a99;
+  --btn-text: #ffffff;
+  --btn2: #1b2452;
+  --btn2-text: #f1eee2;
+  --quest-border: #5d6699;
+  --track: #050817;
+  --bar-edge: #8b93c9;
+  --success-light: #10301f;
+  --warning-light: #3a2a08;
+}
+
+/* ---- 背景：昼は地図のマス目、夜は星空 ---- */
+.app.rpg { color: var(--text); }
+body:has(.app.rpg) {
+  background-color: var(--bg-solid);
+  background-image:
+    linear-gradient(var(--map-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--map-line) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.5), transparent 60%);
+  background-size: 32px 32px, 32px 32px, 100% 100%;
+  background-attachment: fixed;
+}
+:root[data-theme="dark"] body:has(.app.rpg) {
+  background-color: #0b1026;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 120px 80px, #c7d2fe 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 200px 20px, #fff 50%, transparent 51%),
+    radial-gradient(1px 1px at 260px 140px, #fde68a 50%, transparent 51%),
+    radial-gradient(1px 1px at 60px 170px, #fff 50%, transparent 51%),
+    radial-gradient(ellipse at 50% 120%, #26306b, transparent 70%);
+  background-size: 300px 200px, 300px 200px, 300px 200px, 300px 200px, 300px 200px, 100% 100%;
+}
+
+/* ---- 見出しとタブ ---- */
+.rpg .header { background: var(--bg-solid); border-bottom: 3px double var(--frame); margin-bottom: 14px; }
+.rpg .header h1 { font-family: var(--font-game); font-weight: 400; color: var(--accent); letter-spacing: 0.04em; }
+.rpg .phase-chip { font-family: var(--font-game); font-weight: 400; border: 2px solid var(--px-ink); border-radius: 4px; }
+.tabbar .px-icon { width: 22px; height: 22px; }
+.rpg .tabbar { background: #3b2a1a; border-top: 3px solid var(--frame); }
+:root[data-theme="dark"] .rpg .tabbar { background: #070b1f; }
+.rpg .tabbar button { color: #e9dcc0; }
+.rpg .tabbar button[aria-current="page"] { color: #ffd23f; font-weight: 700; }
+.rpg .tabbar button[aria-current="page"] .px-icon { filter: drop-shadow(0 0 4px rgba(255, 210, 63, 0.7)); }
+
+/* ---- ゲームの窓（枠） ---- */
+.rpg .card, .rpg-modal .win {
+  position: relative;
+  background: var(--surface);
+  border: 3px solid var(--frame);
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 2px var(--surface), inset 0 0 0 4px var(--frame-inner), 0 4px 0 rgba(42, 29, 16, 0.25);
+  padding: 18px 16px 16px;
+  margin-top: 18px;
+}
+:root[data-theme="dark"] .rpg .card, :root[data-theme="dark"] .rpg-modal .win {
+  background: linear-gradient(180deg, #17205050, transparent 40%), var(--surface);
+  box-shadow: 0 0 0 2px #050817, inset 0 0 0 2px #050817, 0 6px 16px rgba(0, 0, 0, 0.45);
+}
+.rpg .win-title, .rpg-modal .win-title {
+  position: absolute; top: -0.95em; left: 12px; margin: 0;
+  background: var(--surface); padding: 0 8px; border-radius: 4px;
+  font-family: var(--font-game); font-weight: 400; font-size: 0.9rem; color: var(--accent); letter-spacing: 0.06em;
+  border: 2px solid var(--frame);
+}
+.rpg .card h2:not(.win-title) { font-family: var(--font-game); font-weight: 400; color: var(--accent); }
+.rpg .num, .rpg-modal .num { font-family: var(--font-game); font-weight: 400; }
+
+/* ---- ボタン ---- */
+.rpg .btn, .rpg-modal .btn {
+  background: var(--btn); color: var(--btn-text);
+  border: 2px solid var(--px-ink); border-radius: 6px;
+  box-shadow: 0 3px 0 var(--px-ink); transition: transform 0.06s, box-shadow 0.06s;
+}
+.rpg .btn:active:not(:disabled), .rpg-modal .btn:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 var(--px-ink); }
+.rpg .btn.secondary, .rpg-modal .btn.secondary { background: var(--btn2); color: var(--btn2-text); border-color: var(--px-ink); }
+:root[data-theme="dark"] .rpg .btn.secondary, :root[data-theme="dark"] .rpg-modal .btn.secondary { border-color: var(--frame); box-shadow: 0 3px 0 #050817; }
+.rpg .btn.start { font-size: 1.05rem; min-height: 52px; }
+
+.rpg .tag { background: var(--surface2); color: var(--text2); border: 1px solid var(--border); }
+.rpg .tag.done { background: var(--success-light); color: var(--success); border-color: var(--success); }
+.rpg .banner { background: var(--surface); border: 3px double var(--frame); color: var(--text); }
+.rpg .steps-guide { background: var(--surface2); border-left-color: var(--accent); color: var(--text); }
+.rpg .steps-list li.now .num { background: var(--btn); border-color: var(--px-ink); }
+.rpg .cue { border-left-color: var(--accent); }
+.rpg .muted { color: var(--text2); }
+
+/* ---- レベルと経験値のバー ---- */
+.lv-bar { display: flex; align-items: center; gap: 8px; }
+.lv-label { font-family: var(--font-game); font-size: 1.5rem; line-height: 1; color: var(--accent); min-width: 3.2em; white-space: nowrap; }
+.lv-small { font-size: 0.7em; margin-right: 2px; }
+.xp-track {
+  flex: 1; height: 14px; background: var(--track); border: 2px solid var(--bar-edge, var(--px-ink)); border-radius: 4px; overflow: hidden;
+  box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.4);
+}
+.xp-fill {
+  height: 100%; background: linear-gradient(180deg, #fff3b0 0 25%, var(--xp-a) 25% 70%, var(--xp-b) 70%);
+  transition: width 0.45s ease-out; animation: xp-in 0.6s ease-out;
+}
+@keyframes xp-in { from { width: 0; } }
+.xp-num { font-family: var(--font-game); font-size: 0.85rem; color: var(--text2); white-space: nowrap; }
+.lv-bar.compact .lv-label { font-size: 1.2rem; min-width: 2.8em; }
+.lv-bar.compact .xp-track { height: 10px; }
+
+/* ---- 今日の画面 ---- */
+.status-win .hero { display: flex; gap: 12px; align-items: center; margin-bottom: 10px; }
+.status-win .hero-icon { flex-shrink: 0; background: var(--surface2); border: 2px solid var(--frame); border-radius: 6px; padding: 4px; image-rendering: pixelated; }
+.status-win .hero-name { font-family: var(--font-game); font-size: 1.1rem; color: var(--text); }
+.status-win .hero-title { font-size: 0.85rem; color: var(--text2); }
+.stat-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; }
+.stat-chip {
+  display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 4px;
+  background: var(--surface2); border: 2px solid var(--border); border-radius: 6px; font-size: 0.75rem; color: var(--text2);
+  text-align: center;
+}
+.stat-chip strong { font-family: var(--font-game); font-weight: 400; font-size: 1.15rem; color: var(--text); line-height: 1.2; }
+button.stat-chip { font: inherit; font-size: 0.75rem; cursor: pointer; }
+button.stat-chip.has { border-color: var(--accent); animation: chip-glow 1.6s ease-in-out infinite; }
+@keyframes chip-glow { 50% { box-shadow: 0 0 10px var(--xp-a); } }
+.road { height: 14px; background: var(--track); border: 2px solid var(--bar-edge, var(--px-ink)); border-radius: 4px; overflow: hidden; }
+.road > div { height: 100%; background: linear-gradient(180deg, #b6f5c6 0 25%, var(--road) 25%); transition: width 0.4s; }
+.quest-board-title { font-family: var(--font-game); font-weight: 400; color: var(--accent); font-size: 1.05rem; margin: 22px 0 0; display: flex; align-items: center; gap: 6px; }
+.rpg .block-title { font-family: var(--font-game); font-weight: 400; font-size: 0.9rem; color: var(--text); margin: 14px 0 6px; }
+.rpg .block-title .now-mark { color: var(--accent); }
+.rpg .menu-item { background: var(--surface); border: 2px solid var(--quest-border); border-radius: 6px; box-shadow: 0 2px 0 var(--quest-border); }
+.rpg .menu-item .min { font-family: var(--font-game); font-weight: 400; color: var(--accent); font-size: 1rem; }
+.rpg .menu-item .quest-icon { flex-shrink: 0; }
+.rpg .menu-item.cleared { background: var(--surface2); }
+.rpg .menu-item .badge { font-family: var(--font-game); font-weight: 400; }
+.rpg .item-win { display: flex; align-items: center; gap: 10px; }
+.rpg .item-win .body { flex: 1; }
+
+/* ---- 復習カード（戦闘） ---- */
+.battle-hud { display: flex; flex-direction: column; gap: 6px; margin-bottom: 4px; }
+.hud-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 0.85rem; color: var(--text2); }
+.hud-row .hud-item { display: inline-flex; align-items: center; gap: 4px; }
+.hud-row strong { font-size: 1.05rem; color: var(--text); }
+.hud-row > :last-child { margin-left: auto; }
+.combo-badge {
+  font-family: var(--font-game); font-size: 0.85rem; padding: 2px 10px; border-radius: 4px;
+  border: 2px solid var(--px-ink); color: #2a1d10; background: #ffd23f; animation: pop 0.3s ease; white-space: nowrap;
+}
+.combo-badge .num { font-size: 1.1rem; }
+.combo-badge .mult { margin-left: 2px; }
+.combo-badge.s2 { background: #f28c28; }
+.combo-badge.s3 { background: #ff5d73; color: #fff; text-shadow: 1px 1px 0 #2a1d10; }
+.combo-badge.s4 { background: linear-gradient(90deg, #ff5d73, #ffd23f, #4ade80, #60a5fa, #c084fc, #ff5d73); background-size: 200% 100%; color: #fff; text-shadow: 1px 1px 0 #2a1d10; animation: pop 0.3s ease, fever 1.2s linear infinite; }
+@keyframes fever { to { background-position: 200% 0; } }
+
+.card-stage { position: relative; }
+.rpg .flashcard.win { animation: card-in 0.22s ease-out; }
+@keyframes card-in { from { transform: translateX(18px); opacity: 0; } }
+.battle.stage-3 .flashcard.win { box-shadow: inset 0 0 0 2px var(--surface), inset 0 0 0 4px var(--frame-inner), 0 0 14px #ff5d73; }
+.battle.stage-4 .flashcard.win { animation: card-in 0.22s ease-out, fever-glow 1.5s linear infinite; }
+@keyframes fever-glow {
+  0%, 100% { box-shadow: 0 0 14px #ff5d73; } 25% { box-shadow: 0 0 14px #ffd23f; }
+  50% { box-shadow: 0 0 14px #4ade80; } 75% { box-shadow: 0 0 14px #60a5fa; }
+}
+.rpg .command { margin-top: 10px; }
+.rpg .grade { border: 2px solid var(--px-ink); border-radius: 6px; box-shadow: 0 3px 0 var(--px-ink); }
+.rpg .grade:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--px-ink); }
+.rpg .grade.g2 { color: #2a1d10; }
+.rpg .grade.g3 { background: #1f8a43; }
+.rpg .grade.g4 { background: #2563eb; }
+
+/* 演出の層（カードの上に重ね、タップを邪魔しない） */
+.hit-layer { position: absolute; inset: 18px 0 0; pointer-events: none; z-index: 3; overflow: visible; }
+.hit-layer .slash {
+  position: absolute; left: -10%; top: 50%; width: 120%; height: 4px; border-radius: 4px;
+  background: linear-gradient(90deg, transparent, #fff, #ffd23f, transparent);
+  transform: rotate(-18deg) scaleX(0); transform-origin: left center; animation: slash 0.32s ease-out forwards;
+  box-shadow: 0 0 8px #ffd23f;
+}
+@keyframes slash { 60% { transform: rotate(-18deg) scaleX(1); opacity: 1; } 100% { transform: rotate(-18deg) scaleX(1); opacity: 0; } }
+.hit-layer .flash { position: absolute; inset: 0; border-radius: 8px; background: #fff7cc; animation: flash 0.4s ease-out forwards; }
+@keyframes flash { from { opacity: 0.85; } to { opacity: 0; } }
+.sparks { position: absolute; left: 50%; top: 45%; width: 0; height: 0; pointer-events: none; }
+.sparks span {
+  position: absolute; width: 6px; height: 6px; left: -3px; top: -3px; border: 1px solid #2a1d10;
+  animation: spark 0.65s ease-out forwards;
+}
+@keyframes spark { from { transform: translate(0, 0); opacity: 1; } to { transform: translate(var(--dx), var(--dy)); opacity: 0; } }
+
+/* 飛び出す数字 */
+/* カードの上端から上へ飛ばす（次のカードの語を隠さない） */
+.floats { position: absolute; left: 0; right: 0; bottom: calc(100% - 34px); display: flex; flex-direction: column-reverse; align-items: center; gap: 2px; pointer-events: none; z-index: 4; }
+.float {
+  font-family: var(--font-game); font-size: 1.5rem; color: #ffd23f; white-space: nowrap;
+  text-shadow: 2px 0 0 #2a1d10, -2px 0 0 #2a1d10, 0 2px 0 #2a1d10, 0 -2px 0 #2a1d10, 2px 2px 0 #2a1d10;
+  animation: float-up 0.9s ease-out forwards;
+}
+.float.crit { font-size: 1.9rem; color: #ff7a45; animation: float-crit 0.95s ease-out forwards; }
+.float.combo { font-size: 1.15rem; color: #7dd3fc; }
+.float.level { font-size: 1.4rem; color: #86efac; }
+@keyframes float-up {
+  0% { transform: translateY(8px) scale(0.7); opacity: 0; }
+  15% { transform: translateY(0) scale(1.15); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: translateY(-46px) scale(1); opacity: 0; }
+}
+@keyframes float-crit {
+  0% { transform: scale(0.5) rotate(-6deg); opacity: 0; }
+  15% { transform: scale(1.35) rotate(3deg); opacity: 1; }
+  30% { transform: scale(1) rotate(-2deg); }
+  75% { opacity: 1; }
+  100% { transform: translateY(-40px); opacity: 0; }
+}
+@keyframes float-fade { 0% { opacity: 0; } 15%, 70% { opacity: 1; } 100% { opacity: 0; } }
+
+/* 演出の量：少なめは数字が出て消えるだけ、ふつうは光と火花、多めは画面の光も */
+[data-fx="low"] .float { animation-name: float-fade; }
+[data-fx="low"] .hit-layer, [data-fx="low"] .combo-badge { animation: none; }
+[data-fx="low"] .hit-layer > * { display: none; }
+[data-fx="low"] .flashcard.win { animation: none; }
+[data-fx="medium"] .hit-layer .flash { opacity: 0.5; animation-duration: 0.3s; }
+
+.result-lead { font-weight: 700; font-size: 1.05rem; }
+.result-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; text-align: center; }
+.result-grid div { background: var(--surface2); border: 2px solid var(--border); border-radius: 6px; padding: 6px; }
+.result-grid dt { font-size: 0.8rem; color: var(--text2); }
+.result-grid dd { font-family: var(--font-game); font-size: 1.4rem; color: var(--text); }
+
+/* ---- 雑学パック ---- */
+.rpg-modal { color: var(--text); }
+.rpg-modal .modal.win { margin-top: 18px; overflow: visible; max-height: calc(100dvh - 64px); overflow-y: auto; padding-top: 22px; }
+.rpg-modal .win-title { top: 6px; }
+.pack-lead { margin-top: 12px; text-align: center; }
+.xp-chip { display: inline-block; font-family: var(--font-game); background: #ffd23f; color: #2a1d10; border: 2px solid var(--px-ink); border-radius: 4px; padding: 0 6px; margin-left: 4px; font-size: 0.9rem; }
+.pack-btn { position: relative; display: block; margin: 14px auto 8px; background: none; border: none; padding: 10px; }
+.pack-art { width: 132px; height: auto; display: block; position: relative; z-index: 1; }
+.pack-btn.sealed .pack-art { animation: bob 2s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-6px) rotate(-2deg); } }
+.pack-btn.charging .pack-art { animation: shake 0.12s linear infinite; }
+@keyframes shake { 25% { transform: translate(-2px, 1px) rotate(-2deg); } 75% { transform: translate(2px, -1px) rotate(2deg); } }
+.pack-rays {
+  position: absolute; inset: -30px; border-radius: 50%; z-index: 0;
+  background: repeating-conic-gradient(from 0deg, var(--glow, #fff) 0 10deg, transparent 10deg 30deg);
+  mask: radial-gradient(circle, #000 30%, transparent 70%); -webkit-mask: radial-gradient(circle, #000 30%, transparent 70%);
+  animation: spin 2.4s linear infinite; opacity: 0.8;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.glow-bronze { --glow: #d08a4a; }
+.glow-silver { --glow: #e8f0ff; }
+.glow-gold { --glow: #ffd23f; }
+.glow-rainbow { --glow: #ff8ad8; }
+.pack-btn.charging .pack-art { filter: drop-shadow(0 0 10px var(--glow, #fff)) drop-shadow(0 0 22px var(--glow, #fff)); }
+.pack-btn.charging.glow-rainbow .pack-art { animation: shake 0.12s linear infinite, hue 0.8s linear infinite; }
+@keyframes hue { to { filter: drop-shadow(0 0 12px #ff8ad8) drop-shadow(0 0 24px #7dd3fc) hue-rotate(360deg); } }
+.pack-reveal { position: relative; text-align: center; margin: 14px 0 10px; animation: pop 0.35s ease; }
+.rarity-label {
+  display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-game); font-size: 1.1rem;
+  padding: 4px 12px; border-radius: 6px; border: 2px solid var(--px-ink); background: var(--surface2);
+  box-shadow: 0 0 14px var(--glow, transparent);
+}
+.pack-reveal.glow-gold .rarity-label { background: #fff3c4; color: #5a3d00; }
+.pack-reveal.glow-rainbow .rarity-label { background: linear-gradient(90deg, #ffd6f0, #fff3c4, #d4f7ff); color: #3b1d4a; }
+.pack-modal[data-fx="low"] .pack-art, .pack-modal[data-fx="low"] .pack-rays { animation: none; }
+.pack-modal[data-fx="low"] .pack-rays { display: none; }
+
+/* 端末の「視差効果を減らす（動きを減らす）」設定：動く演出はすべて止め、数字は出て消えるだけにする */
+@media (prefers-reduced-motion: reduce) {
+  .float, .float.crit { animation-name: float-fade; }
+  .xp-fill, .rpg .flashcard.win, .combo-badge, .pack-art, .pack-reveal, button.stat-chip.has,
+  .battle.stage-4 .flashcard.win, .pack-btn.charging .pack-art { animation: none !important; }
+  .hit-layer .slash, .hit-layer .flash, .sparks, .pack-rays { display: none; }
+  .xp-fill, .road > div { transition: none; }
+}

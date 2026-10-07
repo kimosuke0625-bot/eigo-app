@@ -109,6 +109,17 @@ export function Credits() {
       </p>
       <h3 style={{ fontSize: '0.9rem' }}>音声</h3>
       <AudioCredits />
+      <h3 style={{ fontSize: '0.9rem' }}>書体（フォント）</h3>
+      <ul className="credits">
+        <li>
+          <strong>DotGothic16</strong>
+          <span className="tag">SIL Open Font License 1.1</span>
+          <div className="muted">見出しと数字（レベル、経験値など）のゲーム風の書体。英文・日本語訳・説明文には使っていません。</div>
+          <div className="muted">作成：Fontworks Inc.（The DotGothic16 Project Authors）。@fontsource/dotgothic16 経由でアプリに同梱</div>
+          <a href="https://github.com/fontworks-fonts/DotGothic16" target="_blank" rel="noreferrer">https://github.com/fontworks-fonts/DotGothic16</a>
+        </li>
+      </ul>
+      <p className="muted">アイコン、枠、背景、雑学パックの絵は、このアプリ用に CSS と SVG で作ったものです。</p>
       <h3 style={{ fontSize: '0.9rem' }}>使っているソフトウェア</h3>
       <ul className="credits">
         {SOFTWARE.map((s) => (

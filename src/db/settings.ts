@@ -34,6 +34,8 @@ export function defaultSettings(now = Date.now()): Settings {
     lastWeeklySummary: '',
     bslVersion: 0,
     bslMode: 'after',
+    xpTotal: 0,
+    xpVersion: 0,
   }
 }
 

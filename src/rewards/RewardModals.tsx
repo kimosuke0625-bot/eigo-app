@@ -4,29 +4,7 @@ import { SOUND_SETS, THEMES, type TitleDef } from './titles'
 import type { WeekSummary } from './weekly'
 import { bankRef, playText } from '../speech/audioBank'
 import { Confetti } from './Confetti'
-import { FactCard } from './FactCard'
-import type { FactContent, FactsData } from './facts'
 import type { Quote } from './quotes'
-
-/** 最低ラインを終えたときに届く、今日の雑学 */
-export function FactArrived({ fact, data, settings, onClose }: {
-  fact: FactContent
-  data: FactsData
-  settings: Settings
-  onClose: () => void
-}) {
-  return (
-    <div className="modal-back" role="dialog" aria-modal="true" aria-label="今日の雑学">
-      <Confetti level={fact.rare && settings.effects !== 'low' ? 'high' : settings.effects === 'high' ? 'medium' : 'low'} seed={fact.id.length * 97} />
-      <div className="modal">
-        <p className="modal-kicker">{fact.rare ? '✨ レア雑学が届きました！' : '🎁 今日の雑学が届きました'}</p>
-        <p className="muted">最低ライン（5分）達成。今日の継続が決まりました。</p>
-        <FactCard fact={fact} data={data} settings={settings} autoSpeak />
-        <button className="btn block" style={{ marginTop: 12 }} onClick={onClose}>図鑑に入れる</button>
-      </div>
-    </div>
-  )
-}
 
 /** 1日の目標時間を達成したときのトロフィー画面（前回アプリから引き継ぎ） */
 export function DailyComplete({ quote, settings, streak, minutes, onClose }: {
