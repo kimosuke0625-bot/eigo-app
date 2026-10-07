@@ -5,6 +5,7 @@ import { dayKey } from '../today/menu'
 import { PixelIcon } from '../ui/PixelIcon'
 import { ASR_TYPE } from './errorTypes'
 import { countTypes } from './store'
+import { SpeakButton } from '../practice/WordParts'
 
 /** 先週と比べた増減の言葉（減るのがよいことだが、増えても責めない） */
 function trend(thisWeek: number, lastWeek: number): string {
@@ -16,7 +17,7 @@ function trend(thisWeek: number, lastWeek: number): string {
 }
 
 /** 弱点の研究（苦手ノート）：間違いを種類ごとに数え、多い順に並べる。週ごとの増減も見せる */
-export function WeaknessScreen({ onRetell, onImport }: { onRetell: () => void; onImport: () => void }) {
+export function WeaknessScreen({ voiceURI, onRetell, onImport }: { voiceURI: string; onRetell: () => void; onImport: () => void }) {
   const fixes = useLiveQuery(() => db.fixes.toArray(), [], [] as Fix[])
   const [open, setOpen] = useState<string | null>(null)
   const counts = countTypes(fixes, dayKey())
@@ -51,7 +52,7 @@ export function WeaknessScreen({ onRetell, onImport }: { onRetell: () => void; o
                 </button>
                 {open === c.type && (
                   <ul className="fix-list">
-                    {fixes.filter((f) => f.type === c.type).sort((a, b) => b.at - a.at).map((f) => <FixLine key={f.id} fix={f} />)}
+                    {fixes.filter((f) => f.type === c.type).sort((a, b) => b.at - a.at).map((f) => <FixLine key={f.id} fix={f} voiceURI={voiceURI} />)}
                   </ul>
                 )}
               </li>
@@ -67,11 +68,14 @@ export function WeaknessScreen({ onRetell, onImport }: { onRetell: () => void; o
   )
 }
 
-export function FixLine({ fix }: { fix: Fix }) {
+export function FixLine({ fix, voiceURI }: { fix: Fix; voiceURI: string }) {
   return (
     <li className="fix-line">
       <p className="fix-before"><span className="fix-label">元</span>{fix.original}</p>
-      <p className="fix-after"><span className="fix-label">直</span>{fix.corrected}</p>
+      <div className="row fix-after-row">
+        <p className="fix-after"><span className="fix-label">直</span>{fix.corrected}</p>
+        {fix.corrected && <SpeakButton text={fix.corrected} voiceURI={voiceURI} label="直した文を読み上げ" />}
+      </div>
       {fix.note && <p className="muted">{fix.note}</p>}
       <p className="muted fix-meta">{fix.day.replace(/-/g, '/')}・{fix.type}{fix.practiced > 0 && `・言い直し ${fix.practiced}回`}</p>
     </li>

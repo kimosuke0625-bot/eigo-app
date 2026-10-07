@@ -37,6 +37,7 @@ import { RetellScreen } from './notes/RetellScreen'
 import { BagScreen, type BagSection } from './notes/BagScreen'
 import { BossScreen } from './rewards/BossScreen'
 import { syncPhraseItems } from './notes/store'
+import { SpeechNotice } from './speech/SpeechNotice'
 
 export type Tab = 'today' | 'practice' | 'progress' | 'materials' | 'collection' | 'settings'
 
@@ -198,6 +199,7 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
         </div>
       )}
       {body}
+      <SpeechNotice />
       {rewards}
 
       {!overlay && (

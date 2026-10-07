@@ -199,3 +199,9 @@
   .honest-line, .phrase-win, .versus-cheer, .chest-row.ready .chest-icon, .boss-art, .boss-art.hit, .map-hero { animation: none !important; }
   .vbar > div, .hp-fill { transition: none; }
 }
+
+/* 読み上げのお知らせ */
+.toast.speech-notice.fail { border-color: var(--danger); }
+.fix-after-row { flex-wrap: nowrap; align-items: flex-start; }
+.fix-after-row > p { flex: 1; min-width: 0; }
+.fix-after-row .icon-btn { flex-shrink: 0; }

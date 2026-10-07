@@ -34,8 +34,8 @@ export function BagScreen({ settings, section, onSection, onImport, onRetell }: 
       </nav>
       {section === 'facts' && <CollectionScreen settings={settings} />}
       {section === 'notebook' && <NotebookScreen settings={settings} onImport={onImport} />}
-      {section === 'weak' && <WeaknessScreen onRetell={onRetell} onImport={onImport} />}
-      {section === 'log' && <FeedbackLog onImport={onImport} />}
+      {section === 'weak' && <WeaknessScreen voiceURI={settings.voiceURI} onRetell={onRetell} onImport={onImport} />}
+      {section === 'log' && <FeedbackLog voiceURI={settings.voiceURI} onImport={onImport} />}
     </div>
   )
 }

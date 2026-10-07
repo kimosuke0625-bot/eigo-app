@@ -1,6 +1,6 @@
 // 内蔵の音声ファイル（人の録音と、PC で作った高品質な合成音声）を再生する。
 // iPhone では、画面をタップして一度再生を始めた audio 要素なら、その後は続けて再生できるので、1つの要素を使い回す。
-import { speak } from './voices'
+import { setBeforeSpeak, speak } from './voices'
 
 export interface WordClip {
   file: string
@@ -44,6 +44,8 @@ function audioEl(): HTMLAudioElement {
   el ??= new Audio()
   return el
 }
+// 端末の声で読む前に、鳴っている音声ファイルを止める（iPhone で同時に鳴らすと読み上げが聞こえないことがある）
+setBeforeSpeak(() => { if (el && !el.paused) el.pause() })
 
 /** アプリに内蔵した音声ファイルを再生する（public/audio/ からの相対パス） */
 export function playFile(file: string, rate = 1, onEnd?: () => void): () => void {

@@ -4,9 +4,10 @@ import { db, type Feedback, type Fix, type JournalEntry, type Phrase, type Recor
 import { PlayBlobButton } from '../practice/SpeakParts'
 import { FixLine } from './WeaknessScreen'
 import { deleteFeedback, SOURCE_LABELS } from './store'
+import { SpeakButton } from '../practice/WordParts'
 
 /** 添削の記録：取り込んだ添削を、元の作文・録音と並べて見返す */
-export function FeedbackLog({ onImport }: { onImport: () => void }) {
+export function FeedbackLog({ voiceURI, onImport }: { voiceURI: string; onImport: () => void }) {
   const list = useLiveQuery(() => db.feedback.orderBy('at').reverse().toArray(), [], [] as Feedback[])
   const [open, setOpen] = useState<number | null>(null)
   return (
@@ -24,14 +25,14 @@ export function FeedbackLog({ onImport }: { onImport: () => void }) {
             <span>{SOURCE_LABELS[f.source]}{f.ref ? `（${f.ref}）` : ''}</span>
             <span className="muted">{open === f.id ? '▲ 閉じる' : '▼ 見る'}</span>
           </button>
-          {open === f.id && <LogDetail feedback={f} onDeleted={() => setOpen(null)} />}
+          {open === f.id && <LogDetail feedback={f} voiceURI={voiceURI} onDeleted={() => setOpen(null)} />}
         </section>
       ))}
     </div>
   )
 }
 
-function LogDetail({ feedback, onDeleted }: { feedback: Feedback; onDeleted: () => void }) {
+function LogDetail({ feedback, voiceURI, onDeleted }: { feedback: Feedback; voiceURI: string; onDeleted: () => void }) {
   const data = useLiveQuery(async () => ({
     journal: feedback.journalId ? await db.journal.get(feedback.journalId) : undefined,
     recording: feedback.recordingId ? await db.recordings.get(feedback.recordingId) : undefined,
@@ -52,13 +53,16 @@ function LogDetail({ feedback, onDeleted }: { feedback: Feedback; onDeleted: () 
         </div>
         <div>
           <h3 className="block-title">直し（{data.fixes.length}）</h3>
-          <ul className="fix-list">{data.fixes.map((f) => <FixLine key={f.id} fix={f} />)}</ul>
+          <ul className="fix-list">{data.fixes.map((f) => <FixLine key={f.id} fix={f} voiceURI={voiceURI} />)}</ul>
           {data.phrases.length > 0 && (
             <>
               <h3 className="block-title">新しい表現（{data.phrases.length}）</h3>
               <ul className="fix-list">
                 {data.phrases.map((p) => (
-                  <li key={p.id} className="fix-line"><strong>{p.expression}</strong>{p.meaning && `：${p.meaning}`}{p.example && <p className="muted">{p.example}</p>}</li>
+                  <li key={p.id} className="fix-line">
+                    <div className="row fix-after-row"><p><strong>{p.expression}</strong>{p.meaning && `：${p.meaning}`}</p><SpeakButton text={p.expression} voiceURI={voiceURI} label="表現を読み上げ" /></div>
+                    {p.example && <p className="muted">{p.example}</p>}
+                  </li>
                 ))}
               </ul>
             </>

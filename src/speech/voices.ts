@@ -87,18 +87,85 @@ export function pickVoice(voiceURI: string): SpeechSynthesisVoice | undefined {
  * 使える英語の声が一覧に見えないときも、言語だけ英語にして端末の標準の声で読む。遊び用の声は使わない。
  */
 export function speak(text: string, voiceURI: string, rate = 1, onEnd?: () => void): boolean {
-  if (!speechSupported()) { onEnd?.(); return false }
+  if (!speechSupported()) {
+    reportSpeech({ state: 'fail', reason: 'この端末（ブラウザ）は英文の読み上げに対応していません。' })
+    onEnd?.()
+    return false
+  }
   const voice = pickVoice(voiceURI)
   if (!notified && !isAppleMobile() && !(voice && isHighQualityVoice(voice))) {
     notified = true
     window.dispatchEvent(new Event(NO_HQ_VOICE_EVENT))
   }
-  speechSynthesis.cancel()
+  // iPhone で音声ファイル（復習カードなど）を鳴らした後は、その音が読み上げの邪魔をしないよう止めておく
+  beforeSpeak?.()
+  // iOS 17 以降：消音（マナーモード）のスイッチに関係なく鳴らす（対応していない端末では何もしない）
+  try {
+    const session = (navigator as Navigator & { audioSession?: { type: string } }).audioSession
+    if (session && session.type !== 'playback') session.type = 'playback'
+  } catch { /* 対応していない */ }
+
   const u = new SpeechSynthesisUtterance(text)
   if (voice) u.voice = voice
   u.lang = voice?.lang ?? 'en-US'
   u.rate = rate
-  if (onEnd) { u.onend = onEnd; u.onerror = onEnd }
+  // Safari は読み上げ中の文を参照し続けないと、途中で消えて鳴らないことがある
+  current = u
+  let started = false
+  let finished = false
+  const end = () => { if (finished) return; finished = true; window.clearTimeout(watch); if (current === u) current = null; onEnd?.() }
+  u.onstart = () => { started = true; reportSpeech({ state: 'start' }) }
+  u.onend = () => { reportSpeech({ state: 'end' }); end() }
+  u.onerror = (e) => {
+    // 次の読み上げに切り替えたとき（interrupted・canceled）は失敗ではない
+    if (e.error !== 'interrupted' && e.error !== 'canceled') reportSpeech({ state: 'fail', reason: speechErrorText(e.error) })
+    end()
+  }
+  // 一定時間たっても始まらないときは、黙ったままにせず理由を出す
+  const watch = window.setTimeout(() => {
+    if (started || finished) return
+    reportSpeech({ state: 'fail', reason: '読み上げが始まりませんでした。もう一度押してください。続くときはアプリを閉じて開き直してください。' })
+    speechSynthesis.cancel()
+    end()
+  }, 4000)
+
+  // 前の読み上げが残っていて止まっているとき（iPhone で画面を切り替えた後など）は、止めてから読む
+  if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel()
+  if (speechSynthesis.paused) speechSynthesis.resume()
   speechSynthesis.speak(u)
   return true
+}
+
+let current: SpeechSynthesisUtterance | null = null
+let beforeSpeak: (() => void) | null = null
+/** 端末の声で読む直前に呼ぶ処理（音声ファイルの再生を止める）。clips.ts が登録する */
+export function setBeforeSpeak(fn: () => void) {
+  beforeSpeak = fn
+}
+
+/** 読み上げの様子（画面に「端末の声で読んでいます」や、鳴らなかった理由を出す） */
+export interface SpeechStatus { state: 'start' | 'end' | 'fail'; reason?: string }
+export const SPEECH_STATUS_EVENT = 'eigo:speech-status'
+function reportSpeech(s: SpeechStatus) {
+  if (typeof window !== 'undefined') window.dispatchEvent(new CustomEvent<SpeechStatus>(SPEECH_STATUS_EVENT, { detail: s }))
+}
+
+/** 読み上げの失敗の理由（SpeechSynthesisErrorEvent の error）を短い日本語にする */
+export function speechErrorText(code: string): string {
+  switch (code) {
+    case 'not-allowed':
+      return '端末が読み上げを止めました。ボタンをもう一度押してください（iPhone は押した直後でないと読めません）。'
+    case 'audio-busy':
+    case 'audio-hardware':
+      return 'ほかの音（音楽や通話など）が使っているため、読み上げられませんでした。'
+    case 'language-unavailable':
+    case 'voice-unavailable':
+      return '英語の声が見つかりませんでした。設定 →「読み上げの声」を確かめてください。'
+    case 'text-too-long':
+      return '文が長すぎて読み上げられませんでした。'
+    case 'network':
+      return '通信が必要な声のため、読み上げられませんでした。'
+    default:
+      return `読み上げに失敗しました（${code || '理由不明'}）。もう一度押してください。`
+  }
 }
