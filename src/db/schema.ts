@@ -296,6 +296,10 @@ export class EigoDB extends Dexie {
     this.version(6).stores({
       journal: '++id, at, day, kind',
     })
+    // フェーズ6：測定を種類（初回の診断・4週間ごと）で引けるようにする
+    this.version(7).stores({
+      assessments: '++id, at, kind',
+    })
   }
 }
 
