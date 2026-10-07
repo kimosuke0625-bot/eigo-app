@@ -6,7 +6,7 @@ import { TodayScreen } from './today/TodayScreen'
 import { SettingsScreen } from './settings/SettingsScreen'
 import { Onboarding } from './settings/Onboarding'
 import { PHASE_COLORS } from './ui/theme'
-import { loadNgsl } from './content/ngsl'
+import { loadBsl, loadNgsl } from './content/ngsl'
 import { PracticeHub } from './practice/PracticeHub'
 import { InputScreen } from './practice/InputScreen'
 import { DictationScreen } from './practice/DictationScreen'
@@ -77,7 +77,7 @@ export default function App() {
   const dueCount = useLiveQuery(() => db.cards.where('due').belowOrEqual(clock).count(), [clock], 0)
 
   useEffect(() => {
-    loadNgsl().catch((e: Error) => setContentError(e.message))
+    loadNgsl().then(() => loadBsl()).catch((e: Error) => setContentError(e.message))
     void checkPhase()
   }, [])
   useEffect(() => setSoundEnabled(settings?.sound ?? true), [settings?.sound])

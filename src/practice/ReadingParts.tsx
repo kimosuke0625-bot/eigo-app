@@ -5,6 +5,7 @@ import { fitOf, FIT_LABELS, knownRatio, loadFormIndex, loadKnownSet, type RatioR
 import type { Mat, Question } from '../content/materials'
 import { introduce } from '../srs/store'
 import { bankRef, playText } from '../speech/audioBank'
+import { rankLabel } from '../content/ngsl'
 
 /** 既知語率の計算に使う「知っている語」と語形の索引 */
 export function useKnowledge() {
@@ -54,12 +55,12 @@ function WordPopup({ word, itemId, settings, onClose }: {
         </div>
       </div>
       {item === undefined && <p className="muted">…</p>}
-      {item === null && <p className="muted">NGSL（基本2,809語）に入っていない語です。固有名詞や専門的な語の可能性があります。</p>}
+      {item === null && <p className="muted">基本語（NGSL 2,809語）にもビジネス語彙（BSL 1,744語）にも入っていない語です。固有名詞や専門的な語の可能性があります。</p>}
       {item && (
         <>
           <p>{settings.phase >= 3 && item.definition ? item.definition : item.japanese}</p>
           {settings.phase >= 3 && item.definition && <p className="muted">{item.japanese}</p>}
-          <p className="muted">NGSL {item.ngslRank}位</p>
+          <p className="muted">{rankLabel(item)}</p>
           {status === 'none' && (
             <button className="btn block" onClick={() => void introduce(item.id).then(() => setStatus('card'))}>＋ 復習カードに追加</button>
           )}

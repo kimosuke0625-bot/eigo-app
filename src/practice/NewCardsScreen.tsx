@@ -4,6 +4,7 @@ import type { Item, Settings } from '../db/schema'
 import { introduce, markKnown, newCardsRemaining, nextNewItems } from '../srs/store'
 import { AnswerFace } from './WordParts'
 import { useSessionTimer } from './useSessionTimer'
+import { rankLabel } from '../content/ngsl'
 
 /** 新しいカードを覚える。1枚ずつ意味と例文を確かめ、聞いて、声に出してからカードにする */
 export function NewCardsScreen({ settings, onExit, onReview }: {
@@ -62,7 +63,7 @@ export function NewCardsScreen({ settings, onExit, onReview }: {
     <div>
       <div className="row" style={{ justifyContent: 'space-between', marginBottom: 8 }}>
         <span className="muted">{index + 1} / {items.length}</span>
-        <span className="tag">NGSL {item.ngslRank}位</span>
+        <span className="tag">{rankLabel(item)}</span>
       </div>
       <Steps steps={['聞く', '声に出す', '覚える']} current={-1}
         guide={'新しい語を1つずつ覚えます。🔊で聞き、例文を1回声に出して読んでから「覚える」を押しましょう。'} />

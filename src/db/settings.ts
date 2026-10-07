@@ -32,6 +32,8 @@ export function defaultSettings(now = Date.now()): Settings {
     accentTheme: 'indigo',
     soundSet: 'classic',
     lastWeeklySummary: '',
+    bslVersion: 0,
+    bslMode: 'after',
   }
 }
 

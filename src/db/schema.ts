@@ -247,6 +247,10 @@ export interface Settings {
   accentTheme: string
   /** 効果音セット（称号で解放） */
   soundSet: string
+  /** ビジネス語彙（BSL）の版。取り込み済みの版 */
+  bslVersion: number
+  /** ビジネス語彙を新しいカードに入れる時期：'after' = 基本語のあと、'mix' = 基本語と交互（基本2：ビジネス1） */
+  bslMode: 'after' | 'mix'
   /** 週のまとめを出した週（週の月曜日の日付キー） */
   lastWeeklySummary: string
 }

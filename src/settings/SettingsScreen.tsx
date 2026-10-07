@@ -71,6 +71,19 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
       </section>
 
       <section className="card">
+        <h2>ビジネス語彙</h2>
+        <div className="field">
+          <span>新しいカードに入れる時期</span>
+          <Seg value={settings.bslMode} onChange={(v) => set({ bslMode: v })}
+            options={[{ value: 'after', label: '基本語のあと' }, { value: 'mix', label: '今から混ぜる' }]} />
+          <small className="muted">
+            基本語のあと：基本語（NGSL 2,809語）を覚え終えてから、ビジネス語彙（BSL 1,744語）に進む（初期値）。
+            今から混ぜる：新しいカード3枚のうち1枚をビジネス語彙にする。
+          </small>
+        </div>
+      </section>
+
+      <section className="card">
         <h2>多聴・多読</h2>
         <div className="field">
           <span>内容確認の問い</span>

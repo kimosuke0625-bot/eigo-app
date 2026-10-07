@@ -1,4 +1,5 @@
 import { db, type Card, type EigoDB, type Item } from '../db/schema'
+import { BSL_OFFSET } from '../content/ngsl'
 import { getSettings } from '../db/settings'
 import { newFsrsCard, rate, type Grade } from './fsrs'
 import { buildQueue, newCardsToday, startOfDay } from './queue'
@@ -28,10 +29,27 @@ export async function nextNewItems(limit: number, database: EigoDB = db): Promis
     ...(await database.cards.orderBy('itemId').keys()).map(String),
     ...(await database.knownWords.toCollection().primaryKeys()),
   ])
+  const pick = async (lower: number, upper: number, n: number) => {
+    const out: Item[] = []
+    if (n <= 0) return out
+    await database.items.where('ngslRank').between(lower, upper, true, false).until(() => out.length >= n).each((item) => {
+      if (!taken.has(item.id) && out.length < n) out.push(item)
+    })
+    return out
+  }
+  const { bslMode } = await getSettings(database)
+  if (bslMode !== 'mix') {
+    const basic = await pick(0, BSL_OFFSET, limit)
+    return [...basic, ...(await pick(BSL_OFFSET, Infinity, limit - basic.length))]
+  }
+  // 基本語2：ビジネス語1 の割合で交互に並べる（どちらかが尽きたら残りで埋める）
+  const basic = await pick(0, BSL_OFFSET, limit)
+  const business = await pick(BSL_OFFSET, Infinity, limit)
   const out: Item[] = []
-  await database.items.orderBy('ngslRank').until(() => out.length >= limit).each((item) => {
-    if (!taken.has(item.id) && out.length < limit) out.push(item)
-  })
+  while (out.length < limit && (basic.length || business.length)) {
+    const next = (out.length % 3 === 2 && business.length) || !basic.length ? business.shift() : basic.shift()
+    out.push(next!)
+  }
   return out
 }
 

@@ -2,7 +2,7 @@ import Dexie from 'dexie'
 import { describe, expect, it } from 'vitest'
 import { EigoDB } from '../db/schema'
 import { getSettings, updateSettings } from '../db/settings'
-import { syncItems, type NgslWord } from '../content/ngsl'
+import { rankLabel, syncBsl, syncItems, type NgslWord } from '../content/ngsl'
 import { introduce, markKnown, nextNewItems, recordReview, todaysQueue } from './store'
 import { Rating } from './fsrs'
 
@@ -25,6 +25,16 @@ describe('カードの保存と出題', () => {
     await introduce('ngsl:w3', 0, database)
     const next = await nextNewItems(3, database)
     expect(next.map((i) => i.id)).toEqual(['ngsl:w4', 'ngsl:w5', 'ngsl:w6'])
+  })
+
+  it('ビジネス語彙は初期設定では基本語のあと、「混ぜる」では3枚に1枚', async () => {
+    const database = await freshDb()
+    const biz: NgslWord[] = Array.from({ length: 5 }, (_, i) => ({ ...words[0], id: `bsl:b${i + 1}`, rank: i + 1, lemma: `b${i + 1}` }))
+    await syncBsl({ version: 1, words: biz }, database)
+    expect((await nextNewItems(32, database)).slice(28).map((i) => i.id)).toEqual(['ngsl:w29', 'ngsl:w30', 'bsl:b1', 'bsl:b2'])
+    await updateSettings({ bslMode: 'mix' }, database)
+    expect((await nextNewItems(6, database)).map((i) => i.id)).toEqual(['ngsl:w1', 'ngsl:w2', 'bsl:b1', 'ngsl:w3', 'ngsl:w4', 'bsl:b2'])
+    expect(rankLabel((await database.items.get('bsl:b2'))!)).toBe('ビジネス 2位')
   })
 
   it('同じ語のカードは二重に作らない', async () => {
