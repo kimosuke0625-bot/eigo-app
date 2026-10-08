@@ -52,8 +52,11 @@ export function playFile(file: string, rate = 1, onEnd?: () => void): () => void
   return playUrl(base() + file, rate, onEnd)
 }
 
-/** 音声を再生する。終わったら（失敗しても）onEnd を呼ぶ。止める関数を返す */
-export function playUrl(url: string, rate = 1, onEnd?: () => void): () => void {
+/**
+ * 音声を再生する。終わったら（失敗しても）onEnd を呼ぶ。止める関数を返す。
+ * onError を渡すと、読み込めなかったときは onEnd の代わりにそれを呼ぶ（端末の声に切り替えるため）
+ */
+export function playUrl(url: string, rate = 1, onEnd?: () => void, onError?: () => void): () => void {
   const a = audioEl()
   a.onended = null
   a.onerror = null
@@ -64,9 +67,10 @@ export function playUrl(url: string, rate = 1, onEnd?: () => void): () => void {
   ;(a as HTMLAudioElement & { preservesPitch?: boolean }).preservesPitch = true
   let done = false
   const finish = () => { if (!done) { done = true; onEnd?.() } }
+  const fail = () => { if (!done) { done = true; if (onError) onError(); else onEnd?.() } }
   a.onended = finish
-  a.onerror = finish
-  void a.play().catch(finish)
+  a.onerror = fail
+  void a.play().catch((e: Error) => (e?.name === 'NotAllowedError' ? finish() : fail()))
   return () => { done = true; a.pause() }
 }
 

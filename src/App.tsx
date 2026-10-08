@@ -38,6 +38,9 @@ import { BagScreen, type BagSection } from './notes/BagScreen'
 import { BossScreen } from './rewards/BossScreen'
 import { syncPhraseItems } from './notes/store'
 import { ExprReviewScreen } from './practice/ExprReviewScreen'
+import { prefetchUpcoming } from './speech/audioBank'
+import { db } from './db/schema'
+import { deckOf } from './srs/deck'
 import { dueCounts } from './srs/store'
 import type { Deck } from './srs/deck'
 import { SpeechNotice } from './speech/SpeechNotice'
@@ -78,6 +81,12 @@ function useTheme(mode: ThemeMode | undefined, accent = 'indigo') {
   }, [mode, accent])
 }
 
+async function prefetchDueAudio() {
+  const cards = (await db.cards.where('due').below(Date.now() + 3 * 86_400_000).sortBy('due')).filter((c) => deckOf(c.itemId) === 'word')
+  const items = new Map((await db.items.bulkGet(cards.map((c) => c.itemId))).flatMap((i) => (i ? [[i.id, i] as const] : [])))
+  await prefetchUpcoming(cards, items)
+}
+
 export default function App() {
   const settings = useSettings()
   const [tab, setTab] = useState<Tab>('today')
@@ -96,7 +105,10 @@ export default function App() {
     loadNgsl().then(() => loadBsl()).catch((e: Error) => setContentError(e.message))
     // 旅の手帳の表現を復習カードの語として用意する（バックアップから戻したときも）
     void syncPhraseItems()
+    // これから3日のうちに復習する単語の音声を、通信できるうちに端末へ保存しておく（オフラインでも鳴るように）
     void checkPhase()
+    const t = window.setTimeout(() => { void prefetchDueAudio() }, 5000)
+    return () => window.clearTimeout(t)
   }, [])
   useEffect(() => setSoundEnabled(settings?.sound ?? true), [settings?.sound])
   useEffect(() => setSoundSet(settings?.soundSet ?? 'classic'), [settings?.soundSet])

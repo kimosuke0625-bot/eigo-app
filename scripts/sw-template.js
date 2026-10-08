@@ -108,6 +108,11 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(networkFirst(req, RUNTIME))
     return
   }
+  // PC で作った音声（同じサイトの eigo-audio）。アプリが端末に保存したものを、オフラインでも返す
+  if (url.pathname.includes('/eigo-audio/') && url.pathname.endsWith('.mp3')) {
+    event.respondWith(req.headers.has('range') ? rangeFromCache(req) : cacheFirst(req))
+    return
+  }
   if (!url.href.startsWith(scope.href)) return
   const path = url.href.slice(scope.href.length)
   if (path.startsWith('data/')) { event.respondWith(staleWhileRevalidate(req)); return }

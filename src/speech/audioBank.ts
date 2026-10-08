@@ -39,6 +39,11 @@ export const bankRef = {
 const urlOf = (r: BankRef) => `${BANK_BASE}${r.kind}/${r.key}.mp3`
 /** 端末に保存済みで、すぐ再生できる音声（blob の URL） */
 const ready = new Map<string, string>()
+/** 端末（Cache Storage）に保存済みの音声の URL。オフラインのときは Service Worker がここから返す */
+const cached = new Set<string>()
+if (typeof caches !== 'undefined') {
+  void caches.open(CACHE).then((c) => c.keys()).then((keys) => { for (const k of keys) cached.add(k.url) }).catch(() => {})
+}
 
 export function hasBank(r: BankRef): boolean {
   return !!indexNow?.[r.kind].has(r.key)
@@ -60,6 +65,7 @@ export async function prepare(r: BankRef): Promise<void> {
       await cache?.put(url, fetched.clone())
       res = fetched
     }
+    cached.add(url)
     ready.set(url, URL.createObjectURL(await res.blob()))
   } catch {
     // 通信できないときなどは、その場で端末の声を使う
@@ -74,10 +80,14 @@ export function playText(opts: { ref?: BankRef; text: string; voiceURI: string; 
   const rate = opts.rate ?? 1
   if (opts.ref && hasBank(opts.ref)) {
     const url = urlOf(opts.ref)
-    const src = ready.get(url) ?? url
-    // まだ端末に保存していなければ、次から速く鳴るよう裏で保存しておく
-    if (!ready.has(url)) void prepare(opts.ref)
-    return playUrl(src, rate, opts.onEnd)
+    const saved = ready.get(url)
+    // オフラインで、まだ端末に保存していない音声は読み込めないので、すぐ端末の声で読む（押した直後に読む必要があるため）
+    if (saved || navigator.onLine || cached.has(url)) {
+      // まだ端末に保存していなければ、次から速く鳴るよう裏で保存しておく
+      if (!saved) void prepare(opts.ref)
+      // 読み込めなかったとき（通信が不安定など）は、端末の声に切り替える
+      return playUrl(saved ?? url, rate, opts.onEnd, () => { speak(opts.text, opts.voiceURI, rate, opts.onEnd) })
+    }
   }
   speak(opts.text, opts.voiceURI, rate, opts.onEnd)
   return () => { if ('speechSynthesis' in window) speechSynthesis.cancel() }
@@ -101,4 +111,29 @@ export async function clearCache() {
   if ('caches' in window) await caches.delete(CACHE)
   for (const u of ready.values()) URL.revokeObjectURL(u)
   ready.clear()
+}
+
+/**
+ * これから数日のうちに復習するカードの音声（見出し語と最初の例文）を、通信できるときに先に端末へ保存する。
+ * オフラインでも、単語の復習で PC の音声が鳴るようにするため。一度に多く取りすぎないよう上限を付ける。
+ */
+export async function prefetchUpcoming(cards: { itemId: string }[], items: Map<string, { english: string; examples: { en: string }[] }>, limit = 300) {
+  if (!navigator.onLine || typeof caches === 'undefined') return
+  indexNow = await loadBankIndex()
+  let n = 0
+  for (const c of cards) {
+    const item = items.get(c.itemId)
+    if (!item) continue
+    for (const ref of [bankRef.head(item.english), ...(item.examples[0] ? [bankRef.example(item.examples[0].en)] : [])]) {
+      if (n >= limit || !navigator.onLine) return
+      const url = urlOf(ref)
+      if (cached.has(url) || !hasBank(ref)) continue
+      // 再生用の blob は作らず、端末に保存だけする（たくさん持つと iPhone のメモリを使うため）
+      try {
+        const res = await fetch(url)
+        if (res.ok) { await (await caches.open(CACHE)).put(url, res); cached.add(url) }
+      } catch { return }
+      n++
+    }
+  }
 }
