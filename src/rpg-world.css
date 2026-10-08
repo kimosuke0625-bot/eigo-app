@@ -240,3 +240,9 @@ button.chip { min-height: 40px; }
 details > summary { padding: 8px 0; }
 input[type="checkbox"] { width: 22px; height: 22px; vertical-align: middle; }
 .field input[type="range"], input[type="range"] { min-height: 32px; }
+
+/* 熟語：もう知っている・意味の番号・仕事では避ける（2026-10-09） */
+.known-box { margin-top: 12px; text-align: center; }
+.known-box .muted { font-size: 0.8rem; margin-top: 4px; }
+.expr-card .expr-sense { font-size: 0.8rem; color: var(--text2); margin-top: 2px; }
+.scene-chip.avoid { color: var(--danger, #c0392b); }

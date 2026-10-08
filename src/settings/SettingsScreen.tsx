@@ -10,6 +10,7 @@ import { AudioBankSection } from './AudioBankSection'
 import { OfflineSection } from './OfflineSection'
 import { MyAudioSection } from './MyAudioSection'
 import { ReportsSection } from './ReportsSection'
+import { KnownIdiomsSection } from './KnownIdiomsSection'
 import { LookSection } from './LookSection'
 import { playChime } from '../rewards/sound'
 import { VoiceInstallGuide } from './VoiceInstallGuide'
@@ -91,6 +92,12 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
           <input type="checkbox" checked={settings.idiomShowUnverified} onChange={(e) => set({ idiomShowUnverified: e.target.checked })} />
           「要確認」の熟語も出題する（確認が弱いもの。初期設定では出しません）
         </label>
+        <div className="field">
+          <span>熟語の絞り込み</span>
+          <Seg value={settings.idiomFocus} onChange={(v) => set({ idiomFocus: v })}
+            options={[{ value: 'all', label: 'すべて' }, { value: 'business', label: 'ビジネス向きだけ' }]} />
+          <small className="muted">「ビジネス向きだけ」にすると、札が「ビジネス向き」の熟語だけを新しく加え、復習もそれだけにします（ほかの熟語の記録は残ります）。</small>
+        </div>
         <label className="field">
           <span>1日に新しく加える旅の手帳の表現：{settings.exprNewPerDay}個</span>
           <input type="range" min={1} max={20} step={1} value={settings.exprNewPerDay}
@@ -233,6 +240,7 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
 
       <OfflineSection />
       <MyAudioSection />
+      <KnownIdiomsSection />
       <ReportsSection />
       <AudioBankSection />
 

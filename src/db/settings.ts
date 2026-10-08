@@ -49,6 +49,7 @@ export function defaultSettings(now = Date.now()): Settings {
     idiomVersion: 0,
     idiomNewPerDay: 3,
     idiomShowUnverified: false,
+    idiomFocus: 'all',
   }
 }
 

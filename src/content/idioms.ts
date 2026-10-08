@@ -19,6 +19,13 @@ export interface Idiom {
   ja: string
   /** 句動詞・熟語・決まり文句 */
   type: string
+  /** 同じ見出しの何番目の意味か（1 から）と、カードにした意味の数 */
+  sense: number
+  senseCount: number
+  /** 種類の中での頻度の順位 */
+  typeRank: number
+  /** 基本のあいさつ・お礼など（初期設定で「知っている」扱いにする案の対象。利用者の了承待ち） */
+  basic: boolean
   /** 選んだ意味（Wiktionary の説明。英語） */
   gloss: string
   /** Wiktionary の見出しのページ */
@@ -96,4 +103,25 @@ export function dictionaryLinks(en: string): { name: string; url: string }[] {
     { name: 'Merriam-Webster', url: `https://www.merriam-webster.com/dictionary/${q}` },
     { name: 'Weblio', url: `https://ejje.weblio.jp/content/${q}` },
   ]
+}
+
+/** 熟語を出題するか：「もう知っている」で外したもの、要確認（設定で出さないとき）、絞り込み（ビジネス向きだけ）を除く */
+export function idiomVisible(d: Idiom, opts: { hidden: Set<string>; showUnverified: boolean; focus: 'all' | 'business' }): boolean {
+  if (opts.hidden.has(d.id)) return false
+  if (d.needsCheck && !opts.showUnverified) return false
+  if (opts.focus === 'business' && !d.scenes.includes('ビジネス向き')) return false
+  return true
+}
+
+export async function hiddenIdiomIds(database: EigoDB = db): Promise<Set<string>> {
+  return new Set(await database.hiddenItems.toCollection().primaryKeys())
+}
+
+/** 「もう知っている」：出題から外す（カードと記録は残すので、戻せば続きから復習できる） */
+export async function hideIdiom(itemId: string, database: EigoDB = db) {
+  await database.hiddenItems.put({ itemId, reason: 'known', at: Date.now() })
+}
+
+export async function unhideIdiom(itemId: string, database: EigoDB = db) {
+  await database.hiddenItems.delete(itemId)
 }

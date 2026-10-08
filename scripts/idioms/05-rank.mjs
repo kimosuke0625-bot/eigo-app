@@ -1,6 +1,6 @@
 // 熟語の確認（フェーズ8）その5：数えた回数から、候補の頻度（100万語あたり）を出して並べる。
-// 基準（2026-10-08 に変更）：映画字幕で100万語あたり1回以上（その意味で使われる割合を掛けたもの）、かつ Tatoeba に実在の文が1つ以上。
-// 字幕をまだ数えていなければ Tatoeba で仮に並べる（判定表づくりのため）。
+// 基準：映画字幕で100万語あたり1回以上（その意味で使われる割合を掛けたもの）、かつ Tatoeba に実在の文が1つ以上。
+// 2026-10-09：判定には意味が複数ある。見出しの頻度は「熟語の意味で使われた文の割合（意味の合計）」を掛けて出す。
 // 書き言葉（Wikipedia の取得済み分、Google Books の上位一覧）は基準に使わず、使う場面の札の参考にだけ残す。
 // 出力：eigo-data/work/ranking.json、eigo-data/work/ranking-dropped.json（外した数と理由）
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
@@ -54,9 +54,10 @@ for (const c of cands) {
   if (j?.offensive) { drop('下品・攻撃的と受け取られる言い方（学習用には載せない）'); continue }
   if (j?.duplicate) { drop('別の見出しと同じ表現（同じ文が数えられているので1つにまとめた）'); continue }
   if (j?.transparent) { drop('意味が語の組み合わせどおり（熟語ではない。実在の文を読んで判定）'); continue }
-  if (j && j.k === 0) { drop('その意味で使われた実在の文がない（実在の文を読んで判定）'); continue }
-  if (s !== null && s * (j ? j.share : 1) < 1) { drop('頻度が基準に届かない（映画字幕で100万語あたり1回未満）'); continue }
-  rows.push({ key, word: c.word, type: c.type, tatoeba: t, subtitles: s, wikipedia: w, gbooks: g, raw, share: j ? j.share : null, freq: j ? raw * j.share : raw })
+  if (j && !j.senses.length) { drop('その意味で使われた実在の文がない（実在の文を読んで判定）'); continue }
+  const share = j ? j.senses.reduce((a, x) => a + x.k, 0) / j.n : null
+  if (s !== null && s * (share ?? 1) < 1) { drop('頻度が基準に届かない（映画字幕で100万語あたり1回未満）'); continue }
+  rows.push({ key, word: c.word, type: c.type, tatoeba: t, subtitles: s, wikipedia: w, gbooks: g, raw, share, freq: share !== null ? raw * share : raw })
 }
 rows.sort((a, b) => b.freq - a.freq)
 rows.forEach((r, i) => { r.rank = i + 1 })

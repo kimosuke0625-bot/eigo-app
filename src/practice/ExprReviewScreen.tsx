@@ -3,7 +3,7 @@ import { db, type Card, type Item, type Settings } from '../db/schema'
 import { GRADES, GRADE_LABELS, formatInterval, previewIntervals, type Grade } from '../srs/fsrs'
 import { nextCard, startOfDay } from '../srs/queue'
 import { EXPR_MAX_PER_DAY, introduceIdioms, introducePhrases, recordReview, todaysQueue, waitingIdioms, waitingPhrases } from '../srs/store'
-import { idiomInfo, isIdiom, loadIdioms } from '../content/idioms'
+import { hiddenIdiomIds, hideIdiom, idiomInfo, idiomVisible, isIdiom, loadIdioms } from '../content/idioms'
 import { IdiomDetail, IdiomLabels } from './IdiomDetail'
 import { HelpModal } from './PracticeHelp'
 import { updateSettings } from '../db/settings'
@@ -65,20 +65,26 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
       let idiomError = ''
       try {
         const data = await loadIdioms()
-        const order = data.items.filter((d) => settings.idiomShowUnverified || !d.needsCheck).map((d) => d.id)
+        const hidden = await hiddenIdiomIds()
+        const order = data.items.filter((d) => idiomVisible(d, { hidden, showUnverified: settings.idiomShowUnverified, focus: settings.idiomFocus })).map((d) => d.id)
         idiomsAdded = await introduceIdioms(order)
         idiomsWaiting = await waitingIdioms(order)
       } catch (e) {
         idiomError = (e as Error).message
       }
       const added = await introducePhrases()
+      const hidden = await hiddenIdiomIds()
       const q = (await todaysQueue('expr'))
-        // 「要確認」を出さない設定にしたら、すでに束に入っている要確認の熟語も出さない
-        .filter((c) => settings.idiomShowUnverified || !idiomInfo(c.itemId)?.needsCheck)
+        // すでに束に入っている熟語も、「もう知っている」・要確認（出さない設定のとき）・絞り込み・データから外れたものは出さない
+        .filter((c) => {
+          if (!isIdiom(c.itemId)) return true
+          const d = idiomInfo(c.itemId)
+          return !!d && idiomVisible(d, { hidden, showUnverified: settings.idiomShowUnverified, focus: settings.idiomFocus })
+        })
       setInfo({ added, idiomsAdded, waiting: await waitingPhrases(), idiomsWaiting, phrases: await db.phrases.count(), idiomError })
       setQueue(q)
     })()
-  }, [settings.idiomShowUnverified])
+  }, [settings.idiomShowUnverified, settings.idiomFocus])
 
   const present = useCallback(async (q: Card[]) => {
     const card = nextCard(q, Date.now())
@@ -92,10 +98,10 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
     // 熟語は PC で作った音声（音声置き場の例文と同じ置き場）を先に用意する
     if (isIdiom(card.itemId)) await prepare(bankRef.example(item.english))
     setCurrent({ card, item, scene: await sceneOf(card.itemId), shownAt: Date.now(), attemptsToday })
-    if (isIdiom(card.itemId) && !helpShown.current && !settings.helpSeen.includes('idiom')) {
+    if (isIdiom(card.itemId) && !helpShown.current && !settings.helpSeen.includes('idiom-v2')) {
       helpShown.current = true
       setIdiomHelp(true)
-      void updateSettings({ helpSeen: [...settings.helpSeen, 'idiom'] })
+      void updateSettings({ helpSeen: [...settings.helpSeen, 'idiom-v2'] })
     }
     setRevealedAt(0)
   }, [])
@@ -116,6 +122,15 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
     setFloats((f) => [...f.slice(-4), { id, text, kind }])
     window.setTimeout(() => setFloats((f) => f.filter((x) => x.id !== id)), 950)
   }, [])
+
+  // 「もう知っている」：この熟語を出題から外し、次のカードへ（設定の「知っている熟語」から戻せる）
+  const [knownMsg, setKnownMsg] = useState('')
+  const markKnown = useCallback(async () => {
+    if (!current || !queue) return
+    await hideIdiom(current.card.itemId)
+    setKnownMsg(`「${current.item.english}」を出題から外しました。設定の「知っている熟語」から戻せます。`)
+    setQueue(queue.filter((c) => c.id !== current.card.id))
+  }, [current, queue])
 
   const grade = useCallback(async (g: Grade) => {
     if (!current || !queue) return
@@ -243,6 +258,7 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
         <section className="card flashcard win expr-card" key={`c${card.id}-${current.shownAt}`} onClick={reveal}>
           <span className="win-title">{isIdiom(card.itemId) ? '熟語' : '旅の手帳'}</span>
           <p className="expr-ja">{item.japanese || '（意味が書かれていません）'}</p>
+          {idiom && idiom.senseCount > 1 && <p className="expr-sense">よく使う意味 {idiom.sense}／{idiom.senseCount}（同じ英語の別の意味もカードにしています）</p>}
           {scene && <p className="expr-scene"><span className="fix-label">場面</span>{scene}</p>}
           {revealed ? (
             <div className="answer" onClick={(e) => e.stopPropagation()}>
@@ -280,6 +296,13 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
           ))}
         </div>
       )}
+      {idiom && (
+        <div className="known-box">
+          <button className="btn secondary small" onClick={() => void markKnown()}>もう知っている（出題しない）</button>
+          <p className="muted">押すと、この熟語は出題されなくなります。設定の「知っている熟語」から戻せます。</p>
+        </div>
+      )}
+      {knownMsg && <p className="banner ok">{knownMsg}</p>}
       <button className="btn secondary block" style={{ marginTop: 16 }} onClick={onExit}>ここでやめる</button>
     </div>
   )

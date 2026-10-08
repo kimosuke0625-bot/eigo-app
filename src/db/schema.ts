@@ -290,7 +290,7 @@ export interface Phrase {
 }
 
 /** PC で作った自分の音声（旅の手帳の表現と例文）。key は英文の鍵（audioKey.ts の textKey） */
-/** 「これは怪しい」の報告（熟語など。端末に記録し、バックアップに含める。次の作業で Claude が確かめる） */
+/** 「この表現・訳に疑問がある」の記録（熟語など。端末に記録し、バックアップに含める。次の作業で Claude が確かめる） */
 export interface ContentReport {
   id?: number
   itemId: string
@@ -300,6 +300,14 @@ export interface ContentReport {
   /** どこが怪しいか（意味・例文・場面・その他） */
   what: string
   note: string
+  at: number
+}
+
+/** 出題しない熟語（「もう知っている」を押したもの）。設定の「知っている熟語」から戻せる。バックアップに含める */
+export interface HiddenItem {
+  itemId: string
+  /** known：利用者が「もう知っている」を押した */
+  reason: 'known'
   at: number
 }
 
@@ -402,6 +410,8 @@ export interface Settings {
   idiomNewPerDay: number
   /** 「要確認」の熟語も出題する */
   idiomShowUnverified: boolean
+  /** 熟語の絞り込み：all＝すべて、business＝ビジネス向きだけ */
+  idiomFocus: 'all' | 'business'
 }
 
 export class EigoDB extends Dexie {
@@ -427,6 +437,7 @@ export class EigoDB extends Dexie {
   bosses!: EntityTable<BossWeek, 'week'>
   myAudio!: EntityTable<MyAudio, 'key'>
   reports!: EntityTable<ContentReport, 'id'>
+  hiddenItems!: EntityTable<HiddenItem, 'itemId'>
 
   constructor(name = 'eigo') {
     super(name)
@@ -488,6 +499,9 @@ export class EigoDB extends Dexie {
     this.version(11).stores({
       reports: '++id, itemId, at',
     })
+    this.version(12).stores({
+      hiddenItems: 'itemId, at',
+    })
   }
 }
 
@@ -495,7 +509,7 @@ export class EigoDB extends Dexie {
 export const TABLE_NAMES = [
   'cards', 'reviews', 'knownWords', 'edits', 'snapshots', 'journal', 'materials', 'sessions',
   'recordings', 'assessments', 'facts', 'rewards', 'settings', 'xpDays', 'packs',
-  'feedback', 'fixes', 'phrases', 'bosses', 'reports',
+  'feedback', 'fixes', 'phrases', 'bosses', 'reports', 'hiddenItems',
 ] as const
 
 export const db = new EigoDB()

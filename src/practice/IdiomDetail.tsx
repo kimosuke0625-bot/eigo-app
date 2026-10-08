@@ -6,7 +6,7 @@ const REPORT_KINDS = ['日本語の意味・訳', '例文', '使う場面の札'
 
 /** 札の色分け（会話向き・書き言葉向き・どちらでも は字幕と Wikipedia の回数から出した目安） */
 const labelClass = (s: string) =>
-  s === '会話向き' ? 'talk' : s === '書き言葉向き' ? 'write' : s === 'どちらでも' ? 'both' : s === 'ビジネス向き' ? 'biz' : 'style'
+  s === '会話向き' ? 'talk' : s === '書き言葉向き' ? 'write' : s === 'どちらでも' ? 'both' : s === 'ビジネス向き' ? 'biz' : s === '仕事では避ける' ? 'avoid' : 'style'
 
 /** 答えを見た後、英語のすぐ下に出す：よく使う度（星）と使う場面の札。どの熟語にも札は必ず1つ以上ある */
 export function IdiomLabels({ idiom }: { idiom: Idiom }) {
