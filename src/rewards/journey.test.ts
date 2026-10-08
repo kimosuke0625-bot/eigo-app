@@ -42,6 +42,9 @@ describe('今日のクエスト', () => {
     }
     for (let i = 0; i < 20; i++) await database.reviews.add({ cardId: i, at, rating: 3, state: 2, answerMs: 2000, mode: 'word' })
     for (let i = 0; i < 6; i++) await database.cards.add({ itemId: `w${i}`, fsrs: {} as never, due: at, introducedAt: at })
+    // 文法の問題（文法のクエストが選ばれたとき用）
+    const gramCard = await database.cards.add({ itemId: 'gram-g01-1', fsrs: {} as never, due: at, introducedAt: at })
+    for (let i = 0; i < 5; i++) await database.reviews.add({ cardId: gramCard as number, at, rating: 3, state: 2, answerMs: 2000, mode: 'grammar-fill' })
     await database.journal.add({ at, day, kind: 'write', text: '', targets: [], used: [], words: 0, types: 0, prompt: '', phrasesUsed: [1] })
     const done = await todaysQuests(day, database)
     expect(done.quests.every((q) => q.done)).toBe(true)

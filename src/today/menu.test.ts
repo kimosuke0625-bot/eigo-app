@@ -29,6 +29,24 @@ describe('planMenu', () => {
   })
 })
 
+describe('目標時間を増やしたとき（2026-10-09 利用者の依頼）', () => {
+  it.each([75, 90, 105, 120])('%i分でも4つの柱の比率は 20・15・15・10 のまま（端数は1分以内）', (t) => {
+    const plan = planMenu(t, [...order])
+    const by = (p: string) => sum(plan.filter((x) => x.pillar === p))
+    const want = [20, 15, 15, 10].map((r) => (r * t) / 60)
+    ;[by('language'), by('input'), by('fluency'), by('output')].forEach((m, i) => expect(Math.abs(m - want[i])).toBeLessThan(1))
+  })
+
+  it('単語の復習と新しいカードは60分のときのまま。増えた分は文法・発音などの練習に回る', () => {
+    const p60 = planMenu(60, [...order])
+    const p120 = planMenu(120, [...order])
+    const m = (p: typeof p60, k: string) => p.find((x) => x.kind === k)!.minutes
+    expect(m(p120, 'review')).toBe(m(p60, 'review'))
+    expect(m(p120, 'addCards')).toBe(m(p60, 'addCards'))
+    for (const k of ['grammar', 'pronunciation', 'input', 'shadowing', 'fluency', 'output', 'exprReview']) expect(m(p120, k)).toBeGreaterThan(m(p60, k))
+  })
+})
+
 describe('日付とブロック', () => {
   it('現地時間で日付キーを作る', () => {
     expect(dayKey(new Date(2026, 0, 5, 23, 59))).toBe('2026-01-05')

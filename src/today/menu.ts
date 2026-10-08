@@ -67,21 +67,50 @@ export const BASE_MENU: MenuItem[] = [
 export const BASE_TOTAL = BASE_MENU.reduce((s, m) => s + m.baseMinutes, 0)
 
 /**
- * 目標時間に合わせて各練習の分数を比例配分し、ブロックの順番に並べる。
- * 端数は大きい順に配って合計を目標時間ぴったりにする。各練習は最低1分。
+ * 目標時間を60分より増やしても、時間を増やさない練習（利用者の依頼 2026-10-09）。
+ * 新しい単語の追加と単語の復習は、覚える枚数を自動で増やさないので時間も60分のときのまま。
+ * 増えた時間は同じ柱の練習（文法の修行・発音）や、ほかの柱の練習に回る。
+ */
+export const HOLD_ABOVE_BASE: PracticeKind[] = ['review', 'addCards']
+
+/** 実数の配分を整数にする（端数の大きい順に配り、合計を total ぴったりにする。各要素は最低 min） */
+function roundShares(raw: number[], total: number, min = 1): number[] {
+  const out = raw.map((r) => Math.max(min, Math.floor(r)))
+  let rest = total - out.reduce((s, n) => s + n, 0)
+  const order = raw.map((r, i) => ({ i, frac: r - Math.floor(r) })).sort((a, b) => b.frac - a.frac || a.i - b.i)
+  for (let k = 0; rest > 0; k = (k + 1) % order.length, rest--) out[order[k].i]++
+  for (let k = order.length - 1, guard = 0; rest < 0 && guard < 1000; k = (k - 1 + order.length) % order.length, guard++) {
+    if (out[order[k].i] > min) { out[order[k].i]--; rest++ }
+  }
+  return out
+}
+
+/**
+ * 目標時間に合わせて各練習の分数を配り、ブロックの順番に並べる。
+ * - まず4つの柱に 20・15・15・10 の比率で配る（比率は目標時間を変えても保つ）
+ * - 柱の中では60分のときの分数の比率で配る。ただし60分より多いときは、HOLD_ABOVE_BASE の練習は60分のときの分数のままにし、
+ *   残りを同じ柱のほかの練習に配る
+ * - 端数は大きい順に配って合計を目標時間ぴったりにする。各練習は最低1分
  */
 export function planMenu(targetMinutes: number, blockOrder: BlockId[]): PlannedItem[] {
   const target = Math.max(BASE_MENU.length, Math.round(targetMinutes))
-  const raw = BASE_MENU.map((m) => (m.baseMinutes * target) / BASE_TOTAL)
-  const minutes = raw.map((r) => Math.max(1, Math.floor(r)))
-  let rest = target - minutes.reduce((s, n) => s + n, 0)
-  const order = raw
-    .map((r, i) => ({ i, frac: r - Math.floor(r) }))
-    .sort((a, b) => b.frac - a.frac)
-  for (let k = 0; rest > 0; k = (k + 1) % order.length, rest--) minutes[order[k].i]++
-  for (let k = order.length - 1; rest < 0; k = (k - 1 + order.length) % order.length) {
-    if (minutes[order[k].i] > 1) { minutes[order[k].i]--; rest++ }
-  }
+  const pillars = [...new Set(BASE_MENU.map((m) => m.pillar))]
+  const items = (p: Pillar) => BASE_MENU.map((m, i) => ({ m, i })).filter(({ m }) => m.pillar === p)
+  const baseOf = (p: Pillar) => items(p).reduce((s, { m }) => s + m.baseMinutes, 0)
+  const pillarMinutes = roundShares(pillars.map((p) => (baseOf(p) * target) / BASE_TOTAL), target, 1)
+  const minutes = new Array<number>(BASE_MENU.length).fill(1)
+  pillars.forEach((p, k) => {
+    const list = items(p)
+    const total = Math.max(list.length, pillarMinutes[k])
+    const held = target > BASE_TOTAL ? list.filter(({ m }) => HOLD_ABOVE_BASE.includes(m.kind)) : []
+    const heldSum = held.reduce((s, { m }) => s + m.baseMinutes, 0)
+    const flex = list.filter((x) => !held.includes(x))
+    const flexBase = flex.reduce((s, { m }) => s + m.baseMinutes, 0)
+    const raw = list.map(({ m }) => held.some((h) => h.m === m)
+      ? m.baseMinutes
+      : flex.length && heldSum < total ? (m.baseMinutes * (total - heldSum)) / flexBase : (m.baseMinutes * total) / baseOf(p))
+    roundShares(raw, total, 1).forEach((n, j) => { minutes[list[j].i] = n })
+  })
 
   const blockIndex = (b: BlockId) => {
     const i = blockOrder.indexOf(b)

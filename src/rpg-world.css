@@ -282,3 +282,9 @@ input[type="checkbox"] { width: 22px; height: 22px; vertical-align: middle; }
 .gram-timer span { display: block; height: 100%; background: var(--primary); transition: width 1s linear; }
 .gram-count { margin: 0; }
 .gram-ex textarea { width: 100%; font-size: 1rem; }
+.extra-quest { border-top: 2px dashed var(--border); padding-top: 10px; margin-top: 4px; }
+.plan-preview { border: 2px dashed var(--border); border-radius: 8px; padding: 8px 10px; margin: 6px 0 12px; font-size: 0.9rem; }
+.plan-preview ul { margin: 2px 0 6px; padding-left: 1.2em; }
+.plan-up { color: var(--success); font-weight: 700; }
+.plan-down { color: var(--muted); }
+.forecast { display: block; margin-top: 4px; }

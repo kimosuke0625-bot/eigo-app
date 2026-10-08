@@ -52,6 +52,11 @@ export function defaultSettings(now = Date.now()): Settings {
     idiomFocus: 'all',
     idiomBasicApplied: [],
     grammarShowUnverified: false,
+    extraDay: '',
+    extraKey: '',
+    extraBase: 0,
+    extraClaimed: 0,
+    extraUsed: [],
   }
 }
 

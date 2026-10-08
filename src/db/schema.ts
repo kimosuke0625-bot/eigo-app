@@ -416,6 +416,12 @@ export interface Settings {
   idiomBasicApplied: string[]
   /** 文法の「要確認」の説明も表示する（初期値 false） */
   grammarShowUnverified: boolean
+  /** 追加の依頼：その日（YYYY-MM-DD）、受けている課題、受けた時点の値、達成した数、その日に出した課題 */
+  extraDay: string
+  extraKey: string
+  extraBase: number
+  extraClaimed: number
+  extraUsed: string[]
 }
 
 export class EigoDB extends Dexie {

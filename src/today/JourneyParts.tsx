@@ -5,7 +5,7 @@ import { updateSettings } from '../db/settings'
 import { weekStart } from '../habit/streak'
 import { dayKey, PILLAR_LABELS, type PracticeKind } from './menu'
 import { PixelIcon } from '../ui/PixelIcon'
-import { CHEST_XP, openChest, readQuests, todaysQuests } from '../rewards/quests'
+import { acceptExtra, CHEST_XP, claimExtra, EXTRA_XP, openChest, readExtra, readQuests, todaysQuests } from '../rewards/quests'
 import { claimComeback, COMEBACK_GAP, COMEBACK_XP, daysAway, daysToBoss, isBossDay, loadVersus } from '../rewards/boss'
 import { ensureTeaser } from '../rewards/packs'
 import { useFacts, type FactContent } from '../rewards/facts'
@@ -32,7 +32,7 @@ export function ComebackBanner({ settings }: { settings: Settings }) {
   )
 }
 
-/** 今日のクエスト（3つ）と宝箱 */
+/** 今日のクエスト（目標時間で3〜5つ）と宝箱。宝箱の後は追加の依頼 */
 export function QuestBoard({ onStart }: { onStart: (k: PracticeKind) => void }) {
   const today = dayKey()
   // その日のクエストを決めて残す（自動更新の中では書き込めないので別に行う）
@@ -73,10 +73,49 @@ export function QuestBoard({ onStart }: { onStart: (k: PracticeKind) => void }) 
             setOpening(false)
           }}>宝箱を開ける（+{CHEST_XP} XP と雑学パック）</button>
         ) : (
-          <p className="muted">3つ全部やり遂げると宝箱が開きます（いま {doneCount} / 3）。</p>
+          <p className="muted">{state.quests.length}つ全部やり遂げると宝箱が開きます（いま {doneCount} / {state.quests.length}）。</p>
         )}
       </div>
+      {state.chestOpened && <ExtraQuest onStart={onStart} />}
     </section>
+  )
+}
+
+/** 追加の依頼：宝箱の後に1つずつ受けられる（1日3つまで）。やらなくても損はしない */
+function ExtraQuest({ onStart }: { onStart: (k: PracticeKind) => void }) {
+  const today = dayKey()
+  const [tick, setTick] = useState(0)
+  const st = useLiveQuery(() => readExtra(today), [today, tick])
+  if (!st) return null
+  const { current, claimed, max } = st
+  return (
+    <div className="extra-quest stack">
+      <h3 className="win-title" style={{ fontSize: '0.95rem' }}>追加の依頼（{claimed} / {max}）</h3>
+      {current ? (
+        <>
+          <button className="quest-row" onClick={() => onStart(current.def.start as PracticeKind)} disabled={current.done}>
+            <span className="quest-check" aria-hidden>{current.done ? '✓' : ''}</span>
+            <span className="quest-text">
+              <span className="quest-label">{current.def.label}</span>
+              <span className="muted">{PILLAR_LABELS[current.def.pillar]}・受けてから <span className="num">{Math.min(current.value, current.def.goal)} / {current.def.goal}</span> {current.def.unit}</span>
+            </span>
+            {!current.done && <span className="min">▶</span>}
+          </button>
+          {current.done && (
+            <button className="btn block" onClick={async () => { if (await claimExtra(today)) { playLevelUp(); setTick((t) => t + 1) } }}>
+              報酬を受け取る（+{EXTRA_XP} XP と雑学パック）
+            </button>
+          )}
+        </>
+      ) : claimed >= max ? (
+        <p className="muted">今日の追加の依頼はすべて終えました。お見事です。</p>
+      ) : (
+        <>
+          <p className="muted">時間と元気があれば、もう1つどうぞ。やらなくても連続記録や報酬は減りません。</p>
+          <button className="btn secondary block" onClick={async () => { await acceptExtra(today); setTick((t) => t + 1) }}>追加の依頼を受ける</button>
+        </>
+      )}
+    </div>
   )
 }
 

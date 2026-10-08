@@ -11,6 +11,7 @@ import { OfflineSection } from './OfflineSection'
 import { MyAudioSection } from './MyAudioSection'
 import { ReportsSection } from './ReportsSection'
 import { KnownIdiomsSection } from './KnownIdiomsSection'
+import { PlanPreview, ReviewForecastNote } from './PlanPreview'
 import { LookSection } from './LookSection'
 import { playChime } from '../rewards/sound'
 import { VoiceInstallGuide } from './VoiceInstallGuide'
@@ -56,6 +57,7 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
           <input type="range" min={15} max={120} step={5} value={settings.targetMinutes}
             onChange={(e) => set({ targetMinutes: Number(e.target.value) })} />
         </label>
+        <PlanPreview settings={settings} />
         <label className="field">
           <span>復習カードの目標定着率：{Math.round(settings.retention * 100)}%</span>
           <input type="range" min={85} max={95} step={1} value={Math.round(settings.retention * 100)}
@@ -73,7 +75,8 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
           <span>1日に新しく覚える単語の上限：{settings.wordNewPerDay}枚</span>
           <input type="range" min={3} max={30} step={1} value={settings.wordNewPerDay}
             onChange={(e) => set({ wordNewPerDay: Number(e.target.value) })} />
-          <small className="muted">この上限の中で、正答率が85%前後になるよう自動で増減します（初期値20枚）。</small>
+          <small className="muted">この上限の中で、正答率が85%前後になるよう自動で増減します（初期値20枚）。目標時間を増やしても、この数は自動では増えません。</small>
+          <ReviewForecastNote newPerDay={settings.wordNewPerDay} retention={settings.retention} secondsPerCard={8} unit="枚" />
         </label>
         <h3 className="block-title">表現の復習</h3>
         <label className="field">
@@ -87,6 +90,7 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
           <input type="range" min={0} max={20} step={1} value={settings.idiomNewPerDay}
             onChange={(e) => set({ idiomNewPerDay: Number(e.target.value) })} />
           <small className="muted">熟語を、よく使う順にこの数ずつ表現の復習に加えます（初期値3個。0 にすると加えません）。</small>
+          <ReviewForecastNote newPerDay={settings.idiomNewPerDay} retention={settings.retention} secondsPerCard={20} unit="個" />
         </label>
         <label className="row">
           <input type="checkbox" checked={settings.idiomShowUnverified} onChange={(e) => set({ idiomShowUnverified: e.target.checked })} />
