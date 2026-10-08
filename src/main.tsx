@@ -10,6 +10,11 @@ import App from './App.tsx'
 // 保存データがブラウザに消されにくくなるよう永続化を要求する
 navigator.storage?.persist?.().catch(() => {})
 
+// オフラインでも開けるよう、画面と教材を端末に保存する（公開版だけ。開発中は使わない）
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(() => {}) })
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />

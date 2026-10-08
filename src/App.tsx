@@ -119,6 +119,14 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
 }) {
   const rewards = useDailyRewards(settings, overlay === null)
   const [bag, setBag] = useState<BagSection>('facts')
+  // 通信できないとき（オフライン）の小さな表示
+  const [online, setOnline] = useState(() => navigator.onLine)
+  useEffect(() => {
+    const on = () => setOnline(navigator.onLine)
+    window.addEventListener('online', on)
+    window.addEventListener('offline', on)
+    return () => { window.removeEventListener('online', on); window.removeEventListener('offline', on) }
+  }, [])
   // 高品質な声がなくて読み上げられなかったときの案内
   const [noVoice, setNoVoice] = useState(false)
   useEffect(() => {
@@ -196,6 +204,7 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
         </span>
       </header>
 
+      {!online && <div className="banner info offline-note">📴 オフラインです。練習と記録はそのまま続けられます（記録はこの端末に保存されます）。Claude への依頼など、通信が必要なものは通信が戻ってから使えます。</div>}
       {contentError && <div className="banner warn">{contentError}。通信できる場所でもう一度開いてください。</div>}
       {noVoice && (
         <div className="toast" role="status">

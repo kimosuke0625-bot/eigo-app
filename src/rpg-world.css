@@ -211,3 +211,12 @@
 .expr-card .expr-scene { font-size: 0.95rem; color: var(--text2); margin-top: 6px; }
 .expr-card .expr-en { font-size: 1.4rem; font-weight: 800; line-height: 1.5; margin: 4px 0 10px; text-align: center; word-break: break-word; }
 .expr-card .answer { text-align: left; }
+
+/* フェーズ7：iPhone で押しやすくする（押せる所はおおむね高さ40px以上） */
+.help-btn { min-height: 40px; }
+.mini-btn { min-height: 36px; padding: 4px 12px; }
+.link-btn { min-height: 40px; }
+button.chip { min-height: 40px; }
+details > summary { padding: 8px 0; }
+input[type="checkbox"] { width: 22px; height: 22px; vertical-align: middle; }
+.field input[type="range"], input[type="range"] { min-height: 32px; }
