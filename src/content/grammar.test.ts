@@ -28,8 +28,8 @@ describe('文法の答え合わせ', () => {
 describe('文法のデータ（public/data/grammar.json）', () => {
   const data = JSON.parse(readFileSync('public/data/grammar.json', 'utf8')) as GrammarData
 
-  it('最初の5項目（be動詞〜疑問詞）。どの項目も4種類の問題があり、最後は口頭で即答、自分のことを1文の課題がある', () => {
-    expect(data.items.map((x) => x.id)).toEqual(['g01', 'g02', 'g03', 'g04', 'g05'])
+  it('中学レベルの45項目（g01〜g45）。どの項目も4種類の問題があり、最後は口頭で即答、自分のことを1文の課題がある', () => {
+    expect(data.items.map((x) => x.id)).toEqual(Array.from({ length: 45 }, (_, i) => `g${String(i + 1).padStart(2, '0')}`))
     for (const it of data.items) {
       expect(new Set(it.exercises.map((x) => x.type))).toEqual(new Set(['fill', 'order', 'rewrite', 'oral']))
       expect(it.exercises.at(-1)?.type).toBe('oral')

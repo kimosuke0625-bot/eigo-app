@@ -113,12 +113,19 @@ const outItems = items.map((it, n) => {
 
   const mistakes = it.mistakes.map((m) => {
     if (m.kind !== 'error') return m
+    // 辞書の確かめ方は2つ：活用形（form と tags）か、語義の説明（gloss の文字列がその見出しの説明にある）
     const d = m.dict
-    const list = forms[`${d.lemma}|${d.pos}`] ?? []
-    const ok = list.some((f) => f.form === d.form && d.tags.every((t) => f.tags.includes(t)))
-    if (!ok) fail(it.id, `辞書で確かめられない：${d.lemma} の ${d.tags.join(' ')} が ${d.form}`)
+    const entry = forms[`${d.lemma}|${d.pos}`] ?? { forms: [], glosses: [] }
+    let dictionary
+    if (d.gloss) {
+      if (!entry.glosses.some((g) => g.includes(d.gloss))) fail(it.id, `辞書で確かめられない：${d.lemma}（${d.pos}）の語義に「${d.gloss}」がない`)
+      dictionary = `Wiktionary：${d.lemma}（${d.pos}）の語義「${d.gloss}」`
+    } else {
+      if (!entry.forms.some((f) => f.form === d.form && d.tags.every((t) => f.tags.includes(t)))) fail(it.id, `辞書で確かめられない：${d.lemma} の ${d.tags.join(' ')} が ${d.form}`)
+      dictionary = `Wiktionary：${d.form} は ${d.lemma} の ${d.tags.join('・')}`
+    }
     const lt = ltBad.get(m.wrong) ?? []
-    return { ...m, proof: { languageTool: lt.map((x) => `${x.rule}：${x.message}`), dictionary: `Wiktionary：${d.form} は ${d.lemma} の ${d.tags.join('・')}` } }
+    return { ...m, proof: { languageTool: lt.map((x) => `${x.rule}：${x.message}`), dictionary } }
   })
 
   const exercises = it.exercises.map((x, i) => {
