@@ -18,7 +18,7 @@ const SOURCES: { name: string; use: string; license: string; url: string; note?:
   },
   {
     name: 'Tatoeba',
-    use: '例文と日本語訳（各例文に文番号へのリンクあり）',
+    use: '例文と日本語訳（各例文に文番号へのリンクあり）。熟語では、実在の文を読んで意味を選ぶ根拠と、話し言葉の頻度にも使用',
     license: 'CC BY 2.0 FR',
     url: 'https://tatoeba.org/ja/downloads',
     note: 'Tatoeba の投稿者のみなさん',
@@ -72,6 +72,34 @@ const SOURCES: { name: string; use: string; license: string; url: string; note?:
     url: 'https://en.wikiquote.org/',
   },
   {
+    name: 'Wiktionary（英語版）',
+    use: '熟語・表現の見出し、意味、用法のラベル。機械可読版（kaikki.org）を使用。熟語の日本語の意味はこのアプリで作成',
+    license: 'CC BY-SA 4.0',
+    url: 'https://en.wiktionary.org/',
+    note: 'Wiktionary の執筆者のみなさん。機械可読版：Tatu Ylonen, Wiktextract（https://kaikki.org/）',
+  },
+  {
+    name: 'OpenSubtitles（OPUS 版の英語の字幕）',
+    use: '熟語の頻度（話し言葉）を数えるためだけに利用。字幕の文はアプリにも公開の場所にも入れていません。元データは作成に使った PC の中だけにあります',
+    license: '明示のライセンスなし（出典の表示と論文の引用の依頼に従って記載）',
+    url: 'https://www.opensubtitles.org/',
+    note: 'P. Lison and J. Tiedemann (2016) OpenSubtitles2016: Extracting Large Parallel Corpora from Movie and TV Subtitles. LREC 2016。OPUS：https://opus.nlpl.eu/',
+  },
+  {
+    name: 'Wikipedia 英語版（本文の一部）',
+    use: '熟語の使う場面の札（書き言葉向き・会話向き）の参考。記事の本文の一部（約5.7億語）で回数を数えるためだけに利用し、文はアプリに入れていません。取得したデータは数えたあと消しました',
+    license: 'CC BY-SA 4.0',
+    url: 'https://dumps.wikimedia.org/enwiki/',
+    note: 'Wikipedia の執筆者のみなさん',
+  },
+  {
+    name: 'Google Books Ngram の上位一覧',
+    use: '熟語の使う場面の札（書き言葉向き・会話向き）の参考。2010〜2019年の英語の本で数えた上位の語の組',
+    license: 'CC BY 3.0',
+    url: 'https://github.com/orgtre/google-books-ngram-frequency',
+    note: 'orgtre（元データ：Google Books Ngram Corpus 第3版、Google、CC BY 3.0）',
+  },
+  {
     name: '日本語訳・補いの例文',
     use: 'NGSL・BSL 各語の短い日本語訳、Tatoeba に適した例文がない語の例文（NGSL 17語、BSL 330語）',
     license: 'CC BY-SA 4.0',
@@ -105,7 +133,7 @@ export function Credits() {
         ))}
       </ul>
       <p className="muted">
-        NGSL・BSL を元にした語彙データ（日本語訳を含む）は、元のライセンスにならい CC BY-SA 4.0 で公開しています。
+        NGSL・BSL を元にした語彙データ（日本語訳を含む）と、Wiktionary を元にした熟語のデータは、元のライセンスにならい CC BY-SA 4.0 で公開しています。
       </p>
       <h3 style={{ fontSize: '0.9rem' }}>音声</h3>
       <AudioCredits />

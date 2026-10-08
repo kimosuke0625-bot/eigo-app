@@ -65,7 +65,7 @@ let introducing: Promise<number> = Promise.resolve(0)
 
 async function introducePhrasesNow(now: number, database: EigoDB): Promise<number> {
   const s = await getSettings(database)
-  const today = (await database.cards.where('introducedAt').aboveOrEqual(startOfDay(now)).toArray()).filter((c) => inDeck(c, 'expr')).length
+  const today = (await database.cards.where('introducedAt').aboveOrEqual(startOfDay(now)).toArray()).filter((c) => c.itemId.startsWith('phrase-')).length
   let room = s.exprNewPerDay - today
   if (room <= 0) return 0
   const carded = new Set((await database.cards.toArray()).filter((c) => inDeck(c, 'expr')).map((c) => c.itemId))
@@ -79,6 +79,39 @@ async function introducePhrasesNow(now: number, database: EigoDB): Promise<numbe
     added++
   }
   return added
+}
+
+/**
+ * 熟語を、頻度の高い順に1日に決めた数まで表現の束に加える（旅の手帳の表現とは別に数える）。
+ * order は熟語の id を頻度の順に並べたもの。「要確認」を出さない設定なら、要確認の id は渡さない。加えた数を返す。
+ */
+export function introduceIdioms(order: string[], now = Date.now(), database: EigoDB = db): Promise<number> {
+  const run = introducing.then(() => introduceIdiomsNow(order, now, database))
+  introducing = run.catch(() => 0)
+  return run
+}
+
+async function introduceIdiomsNow(order: string[], now: number, database: EigoDB): Promise<number> {
+  const s = await getSettings(database)
+  const today = (await database.cards.where('introducedAt').aboveOrEqual(startOfDay(now)).toArray()).filter((c) => c.itemId.startsWith('idiom-')).length
+  let room = s.idiomNewPerDay - today
+  if (room <= 0) return 0
+  const carded = new Set((await database.cards.toArray()).filter((c) => inDeck(c, 'expr')).map((c) => c.itemId))
+  let added = 0
+  for (const itemId of order) {
+    if (room <= 0) break
+    if (carded.has(itemId) || !(await database.items.get(itemId))) continue
+    await introduce(itemId, now, database)
+    room--
+    added++
+  }
+  return added
+}
+
+/** まだ表現の束に入っていない熟語の数 */
+export async function waitingIdioms(order: string[], database: EigoDB = db): Promise<number> {
+  const carded = new Set((await database.cards.toArray()).filter((c) => inDeck(c, 'expr')).map((c) => c.itemId))
+  return order.filter((id) => !carded.has(id)).length
 }
 
 /** まだ表現の束に入っていない旅の手帳の表現の数 */

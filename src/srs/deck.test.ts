@@ -3,7 +3,7 @@ import { EigoDB } from '../db/schema'
 import { updateSettings } from '../db/settings'
 import { deckOf } from './deck'
 import { newFsrsCard } from './fsrs'
-import { dueCounts, introducePhrases, newCardsRemaining, recordReview, todaysQueue, waitingPhrases } from './store'
+import { dueCounts, introduceIdioms, introducePhrases, newCardsRemaining, recordReview, todaysQueue, waitingIdioms, waitingPhrases } from './store'
 
 const NOW = new Date(2026, 9, 8, 9).getTime()
 
@@ -61,5 +61,23 @@ describe('単語と表現の束', () => {
     expect(await introducePhrases(NOW, database)).toBe(0)
     expect(await waitingPhrases(database)).toBe(1)
     expect(await newCardsRemaining(NOW, database)).toBe(5)
+  })
+
+  it('熟語は旅の手帳の表現と別に数え、頻度の順（渡した順）に加える', async () => {
+    const database = new EigoDB('deck-4')
+    const order = ['idiom-give-up', 'idiom-at-least', 'idiom-kind-of', 'idiom-as-if']
+    for (const id of order) await database.items.put({ id, kind: 'chunk', english: id.slice(6), examples: [] })
+    const pid = await database.phrases.add({ at: 1, day: '2026-10-08', expression: 'ex', meaning: '', example: '', scene: '', source: 'write', used: 0 }) as number
+    await database.items.put({ id: `phrase-${pid}`, kind: 'chunk', english: 'ex', examples: [] })
+    await updateSettings({ idiomNewPerDay: 2, exprNewPerDay: 1 }, database)
+    expect(await introduceIdioms(order, NOW, database)).toBe(2)
+    expect(await introduceIdioms(order, NOW, database)).toBe(0)
+    // 熟語を加えても、旅の手帳の表現の枠は残る
+    expect(await introducePhrases(NOW, database)).toBe(1)
+    const carded = (await database.cards.toArray()).map((c) => c.itemId)
+    expect(carded).toEqual(expect.arrayContaining(['idiom-give-up', 'idiom-at-least']))
+    expect(carded).not.toContain('idiom-kind-of')
+    expect(await waitingIdioms(order, database)).toBe(2)
+    expect(await todaysQueue('expr', NOW, database)).toHaveLength(3)
   })
 })

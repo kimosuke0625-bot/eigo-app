@@ -211,6 +211,16 @@
 .expr-card .expr-scene { font-size: 0.95rem; color: var(--text2); margin-top: 6px; }
 .expr-card .expr-en { font-size: 1.4rem; font-weight: 800; line-height: 1.5; margin: 4px 0 10px; text-align: center; word-break: break-word; }
 .expr-card .answer { text-align: left; }
+.expr-card .expr-ex-ja { font-size: 0.85rem; color: var(--text2); margin-top: 2px; }
+
+/* 熟語の詳しい情報（フェーズ8） */
+.idiom-detail { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border, var(--surface2)); }
+.idiom-detail .idiom-meta { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin-bottom: 8px; }
+.idiom-detail .idiom-stars { color: var(--warning); letter-spacing: 1px; margin-right: 6px; }
+.idiom-detail .btn.small { min-height: 40px; padding: 6px 12px; font-size: 0.85rem; }
+.idiom-detail .idiom-more { margin-top: 8px; font-size: 0.85rem; word-break: break-word; }
+.idiom-detail .idiom-more textarea { width: 100%; box-sizing: border-box; }
+.tag.idiom-tag { background: var(--accent); color: var(--surface); }
 
 /* フェーズ7：iPhone で押しやすくする（押せる所はおおむね高さ40px以上） */
 .help-btn { min-height: 40px; }

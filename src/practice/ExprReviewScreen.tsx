@@ -2,8 +2,10 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { db, type Card, type Item, type Settings } from '../db/schema'
 import { GRADES, GRADE_LABELS, formatInterval, previewIntervals, type Grade } from '../srs/fsrs'
 import { nextCard, startOfDay } from '../srs/queue'
-import { EXPR_MAX_PER_DAY, introducePhrases, recordReview, todaysQueue, waitingPhrases } from '../srs/store'
-import { playText } from '../speech/audioBank'
+import { EXPR_MAX_PER_DAY, introduceIdioms, introducePhrases, recordReview, todaysQueue, waitingIdioms, waitingPhrases } from '../srs/store'
+import { idiomInfo, isIdiom, loadIdioms } from '../content/idioms'
+import { IdiomDetail } from './IdiomDetail'
+import { bankRef, playText, prepare } from '../speech/audioBank'
 import { prepareMine } from '../speech/myAudio'
 import { Steps } from '../ui/Steps'
 import { PixelIcon } from '../ui/PixelIcon'
@@ -16,11 +18,14 @@ import { Floats, LevelBar, Sparks, type Float } from '../rewards/XpParts'
 type Current = { card: Card; item: Item; scene: string; shownAt: number; attemptsToday: number }
 interface Battle { total: number; recalled: number; xp: number; maxCombo: number; crits: number; levelUps: number; honest: number }
 
-/** 表現の語（phrase-<id>）から、旅の手帳の「使う場面」を引く */
+/** 表現の語から「使う場面」を引く（旅の手帳の表現は手帳の場面、熟語は場面の札） */
 async function sceneOf(itemId: string): Promise<string> {
+  if (isIdiom(itemId)) return idiomInfo(itemId)?.scenes.join('・') ?? ''
   const m = itemId.match(/^phrase-(\d+)$/)
   return m ? (await db.phrases.get(Number(m[1])))?.scene ?? '' : ''
 }
+
+interface Info { added: number; idiomsAdded: number; waiting: number; idiomsWaiting: number; phrases: number; idiomError: string }
 
 /**
  * 表現の復習（2026-10-08 利用者の依頼で単語の復習と分けた）。
@@ -30,7 +35,7 @@ async function sceneOf(itemId: string): Promise<string> {
 export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Settings; onExit: () => void; onImport: () => void }) {
   const result = useSessionTimer('exprReview', 'output')
   const [queue, setQueue] = useState<Card[] | null>(null)
-  const [info, setInfo] = useState({ added: 0, waiting: 0, phrases: 0 })
+  const [info, setInfo] = useState<Info>({ added: 0, idiomsAdded: 0, waiting: 0, idiomsWaiting: 0, phrases: 0, idiomError: '' })
   const [current, setCurrent] = useState<Current | null>(null)
   const [revealedAt, setRevealedAt] = useState(0)
   const revealed = revealedAt > 0
@@ -49,13 +54,26 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
 
   useEffect(() => {
     void (async () => {
-      // 旅の手帳の表現を、1日に決めた数まで表現の束に加えてから始める
+      // 熟語と旅の手帳の表現を、それぞれ1日に決めた数まで表現の束に加えてから始める（熟語は頻度の高い順）
+      let idiomsAdded = 0
+      let idiomsWaiting = 0
+      let idiomError = ''
+      try {
+        const data = await loadIdioms()
+        const order = data.items.filter((d) => settings.idiomShowUnverified || !d.needsCheck).map((d) => d.id)
+        idiomsAdded = await introduceIdioms(order)
+        idiomsWaiting = await waitingIdioms(order)
+      } catch (e) {
+        idiomError = (e as Error).message
+      }
       const added = await introducePhrases()
-      const q = await todaysQueue('expr')
-      setInfo({ added, waiting: await waitingPhrases(), phrases: await db.phrases.count() })
+      const q = (await todaysQueue('expr'))
+        // 「要確認」を出さない設定にしたら、すでに束に入っている要確認の熟語も出さない
+        .filter((c) => settings.idiomShowUnverified || !idiomInfo(c.itemId)?.needsCheck)
+      setInfo({ added, idiomsAdded, waiting: await waitingPhrases(), idiomsWaiting, phrases: await db.phrases.count(), idiomError })
       setQueue(q)
     })()
-  }, [])
+  }, [settings.idiomShowUnverified])
 
   const present = useCallback(async (q: Card[]) => {
     const card = nextCard(q, Date.now())
@@ -66,6 +84,8 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
     const attemptsToday = await db.reviews.where('cardId').equals(card.id!).filter((r) => r.at >= since).count()
     // 答えを見た瞬間に鳴らせるよう、自分の音声を先に用意する
     await prepareMine(item.english)
+    // 熟語は PC で作った音声（音声置き場の例文と同じ置き場）を先に用意する
+    if (isIdiom(card.itemId)) await prepare(bankRef.example(item.english))
     setCurrent({ card, item, scene: await sceneOf(card.itemId), shownAt: Date.now(), attemptsToday })
     setRevealedAt(0)
   }, [])
@@ -78,7 +98,7 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
     answerMs.current = now - current.shownAt
     setRevealedAt(now)
     // 答えを見たらすぐ英語を聞かせる（押した直後なので iPhone でも鳴る）
-    playText({ text: current.item.english, voiceURI: settings.voiceURI })
+    playText({ ref: isIdiom(current.card.itemId) ? bankRef.example(current.item.english) : undefined, text: current.item.english, voiceURI: settings.voiceURI })
   }, [current, revealed, settings.voiceURI])
 
   const addFloat = useCallback((text: string, kind: Float['kind']) => {
@@ -154,10 +174,14 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
               </dl>
               <LevelBar total={shownXp} />
             </>
-          ) : info.phrases === 0 ? (
+          ) : info.phrases === 0 && info.idiomError ? (
             <p>旅の手帳に表現がまだありません。作文や音声日記の添削を Claude に頼んで取り込むと、ここで復習できます。</p>
           ) : (
             <p>今日復習する表現はありません。</p>
+          )}
+          {info.idiomError && <p className="banner warn">{info.idiomError}（通信できるときにもう一度開いてください）</p>}
+          {info.idiomsWaiting > 0 && (
+            <p className="muted">まだ復習に入っていない熟語が {info.idiomsWaiting} 個あります。よく使う順に1日 {settings.idiomNewPerDay} 個ずつ加わります（設定で変えられます）。</p>
           )}
           {info.waiting > 0 && (
             <p className="muted">旅の手帳には、まだ復習に入っていない表現が {info.waiting} 個あります。1日に {settings.exprNewPerDay} 個ずつ加わります（設定で変えられます）。</p>
@@ -173,7 +197,11 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
   const intervals = revealed ? previewIntervals(card.fsrs, revealedAt, settings.retention) : null
   const remaining = queue.filter((c) => c.due <= current.shownAt).length
   const stage = comboStage(comboShown, 'expr')
+  const idiom = idiomInfo(card.itemId)
   const example = item.examples[0]?.en
+  const exampleJa = idiom ? item.examples[0]?.ja : ''
+  const bank = idiom ? bankRef.example(item.english) : undefined
+  const exBank = idiom && example ? bankRef.example(example) : undefined
 
   return (
     <div className={`review battle expr-battle stage-${stage}`} data-fx={fx}>
@@ -184,10 +212,12 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
           <span className="hud-item"><PixelIcon name="scroll" size={18} /> <strong className="num">{battle.total}</strong>回</span>
           {comboShown >= EXPR_COMBO_AT[1]
             ? <span className={`combo-badge s${stage}`} key={comboShown}><span className="num">{comboShown}</span> COMBO <span className="mult">×{COMBO_STEPS[stage].mult}</span></span>
-            : <span className="tag">表現</span>}
+            : <span className={`tag ${idiom ? 'idiom-tag' : ''}`}>{isIdiom(card.itemId) ? '熟語' : '旅の手帳'}</span>}
         </div>
       </div>
-      {info.added > 0 && battle.total === 0 && <p className="honest-line"><PixelIcon name="book" size={16} /> 旅の手帳から新しい表現を {info.added} 個加えました。</p>}
+      {(info.added > 0 || info.idiomsAdded > 0) && battle.total === 0 && (
+        <p className="honest-line"><PixelIcon name="book" size={16} /> 新しく加えました：{[info.idiomsAdded > 0 && `熟語 ${info.idiomsAdded}個`, info.added > 0 && `旅の手帳の表現 ${info.added}個`].filter(Boolean).join('、')}</p>
+      )}
       {honestLine && <p className="honest-line" key={honestLine + battle.total}><PixelIcon name="star" size={16} /> {honestLine}</p>}
 
       <Steps steps={['英語で言ってみる', '聞いてまねする', '評価する']} current={revealed ? 1 : 0}
@@ -200,22 +230,24 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
         </div>
         <Floats floats={floats} />
         <section className="card flashcard win expr-card" key={`c${card.id}-${current.shownAt}`} onClick={reveal}>
-          <span className="win-title">表現</span>
+          <span className="win-title">{isIdiom(card.itemId) ? '熟語' : '旅の手帳'}</span>
           <p className="expr-ja">{item.japanese || '（意味が書かれていません）'}</p>
           {scene && <p className="expr-scene"><span className="fix-label">場面</span>{scene}</p>}
           {revealed ? (
             <div className="answer" onClick={(e) => e.stopPropagation()}>
               <p className="expr-en">{item.english}</p>
               <div className="row" style={{ justifyContent: 'center' }}>
-                <SpeakButton big text={item.english} voiceURI={settings.voiceURI} label="聞く" />
-                <SpeakButton big text={item.english} voiceURI={settings.voiceURI} rate={0.75} label="ゆっくり" />
+                <SpeakButton big text={item.english} bank={bank} voiceURI={settings.voiceURI} label="聞く" />
+                <SpeakButton big text={item.english} bank={bank} voiceURI={settings.voiceURI} rate={0.75} label="ゆっくり" />
               </div>
               {example && (
                 <div className="row phrase-ex" style={{ marginTop: 10 }}>
                   <span className="en">例：{example}</span>
-                  <SpeakButton text={example} voiceURI={settings.voiceURI} label="例文を読み上げ" />
+                  <SpeakButton text={example} bank={exBank} voiceURI={settings.voiceURI} label="例文を読み上げ" />
                 </div>
               )}
+              {exampleJa && <p className="expr-ex-ja">{exampleJa}</p>}
+              {idiom && <IdiomDetail idiom={idiom} />}
             </div>
           ) : (
             <button className="btn block" style={{ marginTop: 16 }} onClick={(e) => { e.stopPropagation(); reveal() }}>

@@ -81,7 +81,17 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
           <small className="muted">表現は1枚に時間がかかるので、単語より少なめにしています（初期値60枚）。</small>
         </label>
         <label className="field">
-          <span>1日に新しく加える表現：{settings.exprNewPerDay}個</span>
+          <span>1日に新しく加える熟語：{settings.idiomNewPerDay}個</span>
+          <input type="range" min={0} max={20} step={1} value={settings.idiomNewPerDay}
+            onChange={(e) => set({ idiomNewPerDay: Number(e.target.value) })} />
+          <small className="muted">熟語を、よく使う順にこの数ずつ表現の復習に加えます（初期値3個。0 にすると加えません）。</small>
+        </label>
+        <label className="row">
+          <input type="checkbox" checked={settings.idiomShowUnverified} onChange={(e) => set({ idiomShowUnverified: e.target.checked })} />
+          「要確認」の熟語も出題する（確認が弱いもの。初期設定では出しません）
+        </label>
+        <label className="field">
+          <span>1日に新しく加える旅の手帳の表現：{settings.exprNewPerDay}個</span>
           <input type="range" min={1} max={20} step={1} value={settings.exprNewPerDay}
             onChange={(e) => set({ exprNewPerDay: Number(e.target.value) })} />
           <small className="muted">旅の手帳の表現を、古いものからこの数ずつ表現の復習に加えます（初期値5個）。</small>
