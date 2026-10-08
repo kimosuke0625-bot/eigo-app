@@ -64,7 +64,7 @@ export function ReviewScreen({ settings, onExit, onAddCards }: {
   const fx = settings.effects
 
   useEffect(() => {
-    todaysQueue().then(setQueue)
+    todaysQueue('word').then(setQueue)
   }, [])
 
   const present = useCallback(async (q: Card[]) => {

@@ -10,13 +10,20 @@ export interface PracticeHelp {
 }
 
 export type HelpKey =
-  | 'review' | 'addCards' | 'input' | 'dictation' | 'speedRead'
+  | 'review' | 'exprReview' | 'addCards' | 'input' | 'dictation' | 'speedRead'
   | 'shadowing' | 'speech' | 'pronunciation'
   | 'output' | 'conversation' | 'assessment' | 'roleplay'
 
 export const HELP: Record<HelpKey, PracticeHelp> = {
+  exprReview: {
+    title: '表現の復習',
+    purpose: '添削で教わった表現（旅の手帳）を、日本語の意味と場面から英語で言えるようにします。単語より長いまとまりを、音ごと口に覚えさせる練習です。',
+    steps: ['日本語の意味と使う場面を見る', '英語で言ってみる（うろ覚えでも声に出す）', '「英語を見て聞く」で答えと読み上げを確かめる', '読み上げをまねして言い、言えたかを正直に選ぶ'],
+    focus: ['一語ずつではなく、ひとまとまりで言う', '聞いた調子（区切り・強弱）まで、まねして言う', '1枚に時間をかけてよい。急いで答えを見なくてよい'],
+    mistakes: ['声に出さずに答えを見てしまう', '日本語を逐語訳して、表現の形を崩してしまう', '言えなかったのに「思い出せた」を押す'],
+  },
   review: {
-    title: '復習カード',
+    title: '単語の復習',
     purpose: '覚えた単語を、忘れかけたころに思い出すことで長く記憶に残します。答えを見る前に自分で思い出そうとすること（想起練習）が、読み返すよりずっと効果的です。',
     steps: ['英語（または例文・音声）を見る', '意味を声に出して言う', '「答えを見る」で確かめる', '思い出せたかを4つから正直に選ぶ'],
     focus: ['答えを見る前に、必ず一度は声に出して答える', 'わからなくても数秒は考える。その努力が記憶を強くする', '評価は正直に。「忘れた」を押すと次は早めに出て、確実に覚えられる'],

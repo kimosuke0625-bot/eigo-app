@@ -10,6 +10,7 @@ import { FactQuizCard } from '../rewards/FactQuizCard'
 import { LevelBar } from '../rewards/XpParts'
 import { TITLES } from '../rewards/titles'
 import { PixelIcon } from '../ui/PixelIcon'
+import type { Deck } from '../srs/deck'
 import { BossNotice, ComebackBanner, QuestBoard, TeaserCard, VersusWindow } from './JourneyParts'
 import { mapPosition, TOWNS, useVocab } from '../progress/TravelMap'
 
@@ -19,7 +20,7 @@ import { mapPosition, TOWNS, useVocab } from '../progress/TravelMap'
  */
 export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnostic, onMap }: {
   settings: Settings
-  dueCount: number
+  dueCount: Record<Deck, number>
   onSettings: () => void
   onStart: (k: PracticeKind) => void
   onDiagnostic: () => void
@@ -161,7 +162,7 @@ export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnos
         </button>
         {streak && !streak.todayDone ? (
           <button className="btn secondary block" onClick={() => onStart('review')}>
-            今日は5分だけ（復習カードの最低ライン）
+            今日は5分だけ（単語の復習で最低ライン）
           </button>
         ) : (
           <p className="muted">✓ 今日の最低ライン（5分）は達成済み。</p>
@@ -192,13 +193,15 @@ export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnos
               const cleared = doneM >= m.minutes
               return (
                 <button className={`menu-item as-button${cleared ? ' cleared' : ''}`} key={m.kind} disabled={!ready(m.kind)} onClick={() => onStart(m.kind)}>
-                  <PixelIcon name={m.kind === 'review' ? 'sword' : 'scroll'} size={28} className="quest-icon" />
+                  <PixelIcon name={m.kind === 'review' ? 'sword' : m.kind === 'exprReview' ? 'book' : 'scroll'} size={28} className="quest-icon" />
                   <div className="body">
                     <div className="name">
                       {m.label}
-                      {m.kind === 'review' && dueCount > 0 && <span className="badge">{dueCount}</span>}
+                      {m.kind === 'review' && dueCount.word > 0 && <span className="badge">{dueCount.word}</span>}
+                      {m.kind === 'exprReview' && dueCount.expr > 0 && <span className="badge">{dueCount.expr}</span>}
                     </div>
-                    <div className="muted">{m.kind === 'review' ? `言葉の魔物と戦う（${m.detail}）` : m.detail}</div>
+                    <div className="muted">{m.kind === 'review' ? `単語の魔物と戦う。のこり ${dueCount.word} 枚`
+                      : m.kind === 'exprReview' ? `表現の稽古。のこり ${dueCount.expr} 枚。${m.detail}` : m.detail}</div>
                     <div style={{ marginTop: 4 }}>
                       <span className="tag">{PILLAR_LABELS[m.pillar]}</span>
                       {!ready(m.kind) && <span className="tag soon">準備中</span>}

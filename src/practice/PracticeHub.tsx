@@ -3,6 +3,7 @@ import { DEV_PHASE } from '../today/devPhase'
 import { PixelIcon } from '../ui/PixelIcon'
 import { isBossDay } from '../rewards/boss'
 import type { Pillar } from '../db/schema'
+import type { Deck } from '../srs/deck'
 
 type Extra = { kind: PracticeKind; name: string; detail: string; pillar: Pillar; icon: string }
 
@@ -14,7 +15,7 @@ const EXTRAS: Extra[] = [
 ]
 
 /** 練習の一覧（依頼の掲示板）。1日のメニューの練習と、追加の練習 */
-export function PracticeHub({ onStart, dueCount }: { onStart: (k: PracticeKind) => void; dueCount: number }) {
+export function PracticeHub({ onStart, dueCount }: { onStart: (k: PracticeKind) => void; dueCount: Record<Deck, number> }) {
   const boss = isBossDay()
   return (
     <div>
@@ -23,11 +24,12 @@ export function PracticeHub({ onStart, dueCount }: { onStart: (k: PracticeKind) 
         const ready = m.availableFrom <= DEV_PHASE
         return (
           <button key={m.kind} className="menu-item as-button" disabled={!ready} onClick={() => onStart(m.kind)}>
-            <PixelIcon name={m.kind === 'review' ? 'sword' : 'scroll'} size={28} className="quest-icon" />
+            <PixelIcon name={m.kind === 'review' ? 'sword' : m.kind === 'exprReview' ? 'book' : 'scroll'} size={28} className="quest-icon" />
             <div className="body">
               <div className="name">
                 {m.label}
-                {m.kind === 'review' && dueCount > 0 && <span className="badge">{dueCount}</span>}
+                {m.kind === 'review' && dueCount.word > 0 && <span className="badge">{dueCount.word}</span>}
+                {m.kind === 'exprReview' && dueCount.expr > 0 && <span className="badge">{dueCount.expr}</span>}
               </div>
               <div className="muted">{m.detail}</div>
               <div style={{ marginTop: 4 }}>
@@ -45,7 +47,7 @@ export function PracticeHub({ onStart, dueCount }: { onStart: (k: PracticeKind) 
         <PixelIcon name="dragon" size={28} className="quest-icon" />
         <div className="body">
           <div className="name">忘却のドラゴン{boss && <span className="tag focus-tag">出現中</span>}</div>
-          <div className="muted">週末（土・日）に現れる。その週に学んだ語の意味を選んで戦う</div>
+          <div className="muted">週末（土・日）に現れる。対象は今週学んだ単語（表現は出ない）。意味を選んで戦う</div>
         </div>
         <span className="min">▶</span>
       </button>

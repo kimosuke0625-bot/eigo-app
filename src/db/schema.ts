@@ -195,6 +195,9 @@ export interface Snapshot {
   cards: number
   /** 知っている語として登録した数 */
   known: number
+  /** 表現の束の定着したカード数と総数（mature・cards は単語だけ。2026-10-08 から） */
+  exprMature?: number
+  exprCards?: number
 }
 
 export interface Reward {
@@ -324,8 +327,14 @@ export interface Settings {
   createdAt: number
   /** 診断テストを受けた日時（0 = 未受験） */
   diagnosedAt: number
-  /** 1日に復習するカードの上限（長く休んだ後に一度に戻さないため） */
+  /** 1日に復習する単語のカードの上限（長く休んだ後に一度に戻さないため） */
   reviewCap: number
+  /** 1日に復習する表現のカードの上限 */
+  exprReviewCap: number
+  /** 1日に新しく覚える単語のカードの上限（この中で、正答率に合わせて自動で増減する） */
+  wordNewPerDay: number
+  /** 1日に表現の束へ新しく加える表現の数 */
+  exprNewPerDay: number
   /** 取り込み済みの語彙データの版 */
   contentVersion: number
   /** 「もっと知りたい」を押した雑学の分野 */

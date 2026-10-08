@@ -75,9 +75,20 @@ export const HONEST_LINES = [
   '正直に押せるのは、本物の旅人のしるしです。',
 ]
 
-export function comboStage(combo: number): number {
+/**
+ * 表現の復習のコンボの区切り（倍率と名前は単語と同じ）。
+ * 表現は1枚に時間がかかるので、少ない連続回数で段階が上がる。
+ */
+export const EXPR_COMBO_AT = [0, 2, 3, 5, 8] as const
+/** 表現の復習で「連打」とみなす時間（単語より短くして、ゆるく判定する） */
+export const EXPR_QUICK_MS = 500
+
+export type ReviewDeck = 'word' | 'expr'
+
+export function comboStage(combo: number, deck: ReviewDeck = 'word'): number {
+  const at = deck === 'expr' ? EXPR_COMBO_AT : COMBO_STEPS.map((s) => s.at)
   let stage = 0
-  COMBO_STEPS.forEach((s, i) => { if (combo >= s.at) stage = i })
+  at.forEach((a, i) => { if (combo >= a) stage = i })
   return stage
 }
 
@@ -99,11 +110,11 @@ export interface ReviewGain {
  * - 会心の一撃は、満額（10）のときだけ5%の確率で出る。2倍（4回に3回）か3倍
  * - 「忘れた」（forgot）を押したときは、満額なら正直ボーナス5を足す
  */
-export function reviewXp(opts: { attemptsToday: number; answerMs: number; combo: number; forgot?: boolean; rand?: () => number }): ReviewGain {
+export function reviewXp(opts: { attemptsToday: number; answerMs: number; combo: number; forgot?: boolean; deck?: ReviewDeck; rand?: () => number }): ReviewGain {
   const rand = opts.rand ?? Math.random
   let base = opts.attemptsToday === 0 ? REVIEW_XP : opts.attemptsToday < 3 ? REPEAT_XP : REPEAT_XP_LATE
-  if (opts.answerMs < QUICK_MS) base = Math.min(base, QUICK_XP)
-  const mult = COMBO_STEPS[comboStage(opts.combo)].mult
+  if (opts.answerMs < (opts.deck === 'expr' ? EXPR_QUICK_MS : QUICK_MS)) base = Math.min(base, QUICK_XP)
+  const mult = COMBO_STEPS[comboStage(opts.combo, opts.deck)].mult
   let crit = 1
   if (base === REVIEW_XP && rand() < CRIT_CHANCE) crit = rand() < 0.75 ? 2 : 3
   const honest = opts.forgot && base === REVIEW_XP ? HONEST_XP : 0
@@ -118,7 +129,7 @@ export function reviewXp(opts: { attemptsToday: number; answerMs: number; combo:
 export function practiceXp(kind: string, seconds: number): number {
   if (NOT_PRACTICE.has(kind)) return 0
   const bonus = seconds >= FINISH_SECONDS ? 20 : 0
-  const perMinute = kind === 'review' ? 0 : 3 * Math.min(30, Math.floor(seconds / 60))
+  const perMinute = kind === 'review' || kind === 'exprReview' ? 0 : 3 * Math.min(30, Math.floor(seconds / 60))
   return bonus + perMinute
 }
 

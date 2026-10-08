@@ -45,8 +45,8 @@ export function BossScreen({ settings, onExit }: { settings: Settings; onExit: (
           <h2 className="win-title">週のボス</h2>
           <PixelIcon name="dragon" size={72} className="boss-art idle" />
           {defeated ? <p>今週のボスはもう倒しました。また来週の週末に現れます。</p>
-            : !isBossDay() ? <p>ボスは週末（土・日）に現れます。その週に学んだ語で戦います。</p>
-              : <p>今週学んだ語がまだ少ないため、ボスが現れていません（4語以上で現れます）。</p>}
+            : !isBossDay() ? <p>ボスは週末（土・日）に現れます。その週に学んだ単語で戦います（表現は出ません）。</p>
+              : <p>今週学んだ単語がまだ少ないため、ボスが現れていません（4語以上で現れます）。</p>}
           <button className="btn block" onClick={onExit}>戻る</button>
         </section>
       </div>
@@ -120,7 +120,7 @@ export function BossScreen({ settings, onExit }: { settings: Settings; onExit: (
           <Floats floats={floats} />
           <PixelIcon key={shake} name="dragon" size={96} className={`boss-art${shake ? ' hit' : ''}`} />
         </div>
-        <p className="muted" style={{ textAlign: 'center' }}>今週学んだ語の意味を選んで攻撃しましょう。間違えた語は、あとでもう一度出てきます。</p>
+        <p className="muted" style={{ textAlign: 'center' }}>対象：今週学んだ単語。意味を選んで攻撃しましょう。間違えた語は、あとでもう一度出てきます。</p>
       </section>
       <section className="card stack" key={`${q.itemId}-${answered}`}>
         <h2 className="win-title">この語の意味は？</h2>

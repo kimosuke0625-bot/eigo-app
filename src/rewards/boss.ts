@@ -2,9 +2,10 @@ import { db, type EigoDB, type Item } from '../db/schema'
 import { addDays, dayTotals, weekStart } from '../habit/streak'
 import { dayKey } from '../today/menu'
 import { addXp } from './xp'
+import { deckOf } from '../srs/deck'
 
 /**
- * 週のボス戦（フェーズ6.5）。週末（土・日）に、その週に学んだ語をまとめて出題する。
+ * 週のボス戦（フェーズ6.5）。週末（土・日）に、その週に学んだ単語をまとめて出題する（対象は単語の束だけ。表現は出さない）。
  * 意味を4つから選ぶ形にして、復習カード（FSRS）の記録には入れない（復習の間隔を乱さない）。
  * 間違えた語は後ろに回ってもう一度出る。全部答えきるとボスを倒せる（罰はない）。
  */
@@ -49,12 +50,12 @@ function shuffle<T>(list: T[], rand: () => number): T[] {
 /** その週に学んだ語（覚え始めた語を先に。足りなければその週に復習した語、さらに足りなければ直近2週間に復習した語） */
 export async function bossItems(today = dayKey(), database: EigoDB = db): Promise<Item[]> {
   const since = new Date(`${weekStart(today)}T00:00:00`).getTime()
-  const ids: string[] = (await database.cards.where('introducedAt').aboveOrEqual(since).toArray()).map((c) => c.itemId)
+  const ids: string[] = (await database.cards.where('introducedAt').aboveOrEqual(since).toArray()).map((c) => c.itemId).filter((id) => deckOf(id) === 'word')
   for (const from of [since, since - 7 * 86_400_000]) {
     if (ids.length >= BOSS_MAX_WORDS) break
     const reviewed = await database.reviews.where('at').aboveOrEqual(from).toArray()
     const cards = await database.cards.bulkGet([...new Set(reviewed.map((r) => r.cardId))])
-    for (const c of cards) if (c && !ids.includes(c.itemId)) ids.push(c.itemId)
+    for (const c of cards) if (c && deckOf(c.itemId) === 'word' && !ids.includes(c.itemId)) ids.push(c.itemId)
   }
   const items = (await database.items.bulkGet(ids)).filter((i): i is Item => !!i && !!i.japanese && !!firstGloss(i.japanese))
   return items.slice(0, BOSS_MAX_WORDS)

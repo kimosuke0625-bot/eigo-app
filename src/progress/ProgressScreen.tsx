@@ -7,6 +7,7 @@ import { RecordingLibrary, ShadowingTable } from './SpeakingProgress'
 import { AssessmentHistory } from '../assessment/AssessmentHistory'
 import { CalendarHeat, LineChart, StackedWeekBars, StatTile } from './charts'
 import { TravelMap } from './TravelMap'
+import { deckCardIds } from '../srs/store'
 import { fillDaily, PILLARS, weeklyMetric, weeklyPillars, weeklyRecall, writeSnapshot } from './stats'
 
 const PILLAR_COLORS = { language: 'var(--series-1)', input: 'var(--series-2)', fluency: 'var(--series-3)', output: 'var(--series-4)' }
@@ -20,16 +21,18 @@ export function ProgressScreen({ settings, onAssess }: { settings: Settings; onA
   useEffect(() => { void writeSnapshot().then(() => setReady(true)) }, [])
 
   const data = useLiveQuery(async () => {
-    const [sessions, reviews, snaps, streak] = await Promise.all([
-      db.sessions.toArray(), db.reviews.toArray(), db.snapshots.toArray(), loadStreak(),
+    const [sessions, reviews, snaps, streak, exprIds] = await Promise.all([
+      db.sessions.toArray(), db.reviews.toArray(), db.snapshots.toArray(), loadStreak(), deckCardIds('expr'),
     ])
-    return { sessions, reviews, snaps, streak }
+    return { sessions, reviews, snaps, streak, exprIds }
   }, [ready])
 
   if (!data) return <p className="muted">集計中…</p>
-  const { sessions, reviews, snaps, streak } = data
+  const { sessions, reviews, snaps, streak, exprIds } = data
   const pillars = weeklyPillars(sessions, today, 6)
-  const recall = weeklyRecall(reviews, today, 8)
+  // 正答率は単語と表現で分ける（表現は数が少ないので、週に5回から出す）
+  const recall = weeklyRecall(reviews.filter((r) => !exprIds.has(r.cardId)), today, 8)
+  const exprRecall = weeklyRecall(reviews.filter((r) => exprIds.has(r.cardId)), today, 8, 5)
   const vocab = fillDaily(snaps, today, 90)
   const latest = vocab.at(-1)
   const weekMin = Math.round(Object.values(pillars.at(-1)!.minutes).reduce((s, m) => s + m, 0))
@@ -43,7 +46,7 @@ export function ProgressScreen({ settings, onAssess }: { settings: Settings; onA
       <p className="muted">ここから下は、経験値やレベルとは別の、実際の伸びの記録です。</p>
       <div className="stat-row">
         <StatTile label="連続日数" value={`${streak.current}日`} sub={`最長 ${streak.best}日`} />
-        <StatTile label="定着した語彙" value={`${latest?.mature ?? 0}語`} sub={`知っている語 ${latest?.known ?? 0}`} />
+        <StatTile label="定着した単語" value={`${latest?.mature ?? 0}語`} sub={`知っている語 ${latest?.known ?? 0}・定着した表現 ${latest?.exprMature ?? 0}`} />
         <StatTile label="今週の学習" value={`${weekMin}分`} sub={`目標 ${settings.targetMinutes * 7}分`} />
       </div>
       <p className="muted" style={{ margin: '4px 0 12px' }}>
@@ -65,17 +68,33 @@ export function ProgressScreen({ settings, onAssess }: { settings: Settings; onA
       </section>
 
       <section className="card">
-        <h2>定着した語彙数</h2>
-        <p className="muted">復習カードのうち、FSRS の安定度が21日以上になった語の数です。</p>
-        <LineChart label="定着した語彙数" format={(v) => `${Math.round(v)}`}
+        <h2>定着した単語の数</h2>
+        <p className="muted">単語の復習カードのうち、FSRS の安定度が21日以上になった語の数です（旅の地図と Phase もこの数で進みます）。</p>
+        <LineChart label="定着した単語の数" format={(v) => `${Math.round(v)}`}
           points={vocab.map((v) => ({ x: `${Number(v.day.slice(5, 7))}/${Number(v.day.slice(8))}`, y: v.mature }))} />
       </section>
 
       <section className="card">
-        <h2>復習の正答率（週ごと）</h2>
+        <h2>単語の復習の正答率（週ごと）</h2>
         <p className="muted">85%前後がちょうどよい難しさです。新しいカードの数は自動で調整されます。</p>
-        <LineChart label="正答率" yMax={1} format={pct} target={{ value: 0.85, label: '85%' }}
+        <LineChart label="単語の正答率" yMax={1} format={pct} target={{ value: 0.85, label: '85%' }}
           points={recall.map((w) => ({ x: shortWeek(w.week), y: w.rate }))} />
+      </section>
+
+      <section className="card">
+        <h2>表現の復習</h2>
+        <p className="muted">
+          表現のカード {latest?.exprCards ?? 0} 枚のうち、定着した表現 {latest?.exprMature ?? 0} 枚（安定度21日以上）。
+        </p>
+        {(latest?.exprCards ?? 0) > 0 && (
+          <LineChart label="定着した表現の数" format={(v) => `${Math.round(v)}`} color="var(--series-4)"
+            points={vocab.map((v) => ({ x: `${Number(v.day.slice(5, 7))}/${Number(v.day.slice(8))}`, y: v.exprMature }))} />
+        )}
+        <h3 className="block-title">表現の正答率（週ごと）</h3>
+        {exprRecall.some((w) => w.rate !== null)
+          ? <LineChart label="表現の正答率" yMax={1} format={pct} target={{ value: 0.85, label: '85%' }} color="var(--series-4)"
+            points={exprRecall.map((w) => ({ x: shortWeek(w.week), y: w.rate }))} />
+          : <p className="muted">表現の復習を1週間に5回以上すると表示されます（覚えたての表現は数えません）。</p>}
       </section>
 
       <section className="card">

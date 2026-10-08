@@ -48,7 +48,7 @@ describe('カードの保存と出題', () => {
     const database = await freshDb()
     const now = Date.now()
     await introduce('ngsl:w1', now, database)
-    const [c] = await todaysQueue(now, database)
+    const [c] = await todaysQueue('word', now, database)
     const updated = await recordReview(c, Rating.Good, { answerMs: 1200, mode: 'word', now }, database)
     expect(updated.due).toBeGreaterThan(now)
     const [r] = await database.reviews.toArray()

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { EigoDB } from '../db/schema'
 import { getSettings } from '../db/settings'
 import { exportAll, importAll } from '../db/backup'
+import { introducePhrases } from '../srs/store'
 import { choosePhrases, countTypes, deletePhrase, IMPORT_XP, markPhrasesUsed, phraseItemId, recordRetell, retellQueue, saveFeedback, syncPhraseItems, topWeakTypes, usedPhrase } from './store'
 
 const draft = {
@@ -23,6 +24,9 @@ describe('添削の保存と活用', () => {
     expect(await database.fixes.where('feedbackId').equals(feedbackId).count()).toBe(4)
     const itemId = phraseItemId(phraseIds[0])
     expect(await database.items.get(itemId)).toMatchObject({ english: 'catch up on ~', japanese: '〜の遅れを取り戻す', kind: 'chunk' })
+    // 保存しただけではカードにならず、表現の復習を始めたときに1日の数まで加わる
+    expect(await database.cards.where('itemId').equals(itemId).count()).toBe(0)
+    expect(await introducePhrases(Date.now(), database)).toBe(1)
     expect(await database.cards.where('itemId').equals(itemId).count()).toBe(1)
     expect((await getSettings(database)).xpTotal).toBe(IMPORT_XP)
 

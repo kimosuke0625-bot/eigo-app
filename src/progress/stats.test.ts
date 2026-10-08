@@ -58,7 +58,7 @@ describe('進捗の集計', () => {
       { itemId: 'c', due: 0, introducedAt: 0, fsrs: card(40, State.Relearning) },
     ])
     await database.knownWords.put({ itemId: 'x', source: 'self', at: 0 })
-    expect(await writeSnapshot(database, TODAY)).toEqual({ day: TODAY, mature: 1, cards: 3, known: 1 })
+    expect(await writeSnapshot(database, TODAY)).toEqual({ day: TODAY, mature: 1, cards: 3, known: 1, exprMature: 0, exprCards: 0 })
   })
 })
 

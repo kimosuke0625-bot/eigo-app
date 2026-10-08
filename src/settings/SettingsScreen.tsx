@@ -58,11 +58,31 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
             onChange={(e) => set({ retention: Number(e.target.value) / 100 })} />
           <small className="muted">高くすると復習の回数が増え、低くすると減ります（初期値90%）。</small>
         </label>
+        <h3 className="block-title">単語の復習</h3>
         <label className="field">
           <span>1日の復習の上限：{settings.reviewCap}枚</span>
           <input type="range" min={50} max={400} step={10} value={settings.reviewCap}
             onChange={(e) => set({ reviewCap: Number(e.target.value) })} />
           <small className="muted">長く休んだ後も、期日の古いカードから少しずつ戻します。</small>
+        </label>
+        <label className="field">
+          <span>1日に新しく覚える単語の上限：{settings.wordNewPerDay}枚</span>
+          <input type="range" min={3} max={30} step={1} value={settings.wordNewPerDay}
+            onChange={(e) => set({ wordNewPerDay: Number(e.target.value) })} />
+          <small className="muted">この上限の中で、正答率が85%前後になるよう自動で増減します（初期値20枚）。</small>
+        </label>
+        <h3 className="block-title">表現の復習</h3>
+        <label className="field">
+          <span>1日の復習の上限：{settings.exprReviewCap}枚</span>
+          <input type="range" min={10} max={200} step={5} value={settings.exprReviewCap}
+            onChange={(e) => set({ exprReviewCap: Number(e.target.value) })} />
+          <small className="muted">表現は1枚に時間がかかるので、単語より少なめにしています（初期値60枚）。</small>
+        </label>
+        <label className="field">
+          <span>1日に新しく加える表現：{settings.exprNewPerDay}個</span>
+          <input type="range" min={1} max={20} step={1} value={settings.exprNewPerDay}
+            onChange={(e) => set({ exprNewPerDay: Number(e.target.value) })} />
+          <small className="muted">旅の手帳の表現を、古いものからこの数ずつ表現の復習に加えます（初期値5個）。</small>
         </label>
         <label className="field">
           <span>きっかけの一文（if-thenプラン）</span>

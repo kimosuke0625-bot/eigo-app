@@ -41,6 +41,15 @@ describe('経験値', () => {
     expect(reviewXp({ attemptsToday: 1, answerMs: 3000, combo: 0, rand: () => 0 }).crit).toBe(1)
   })
 
+  it('表現の復習：コンボは少ない回数で上がり、連打の判定はゆるい', () => {
+    expect(comboStage(2, 'expr')).toBe(1)
+    expect(comboStage(8, 'expr')).toBe(4)
+    expect(comboStage(8)).toBe(2)
+    expect(reviewXp({ attemptsToday: 0, answerMs: 600, combo: 0, deck: 'expr', rand: never }).total).toBe(10)
+    expect(reviewXp({ attemptsToday: 0, answerMs: 600, combo: 0, rand: never }).total).toBe(1)
+    expect(practiceXp('exprReview', 600)).toBe(20)
+  })
+
   it('正直ボーナス：「忘れた」を押すと満額のときだけ5を足す（連打・出し直しは除く）', () => {
     expect(reviewXp({ attemptsToday: 0, answerMs: 3000, combo: 0, forgot: true, rand: never })).toMatchObject({ honest: 5, total: 15 })
     expect(reviewXp({ attemptsToday: 0, answerMs: 300, combo: 0, forgot: true, rand: never }).honest).toBe(0)

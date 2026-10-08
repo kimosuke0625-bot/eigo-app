@@ -1,7 +1,6 @@
 import { db, type EigoDB, type Feedback, type FeedbackSource, type Fix, type Item, type Phrase } from '../db/schema'
 import { dayKey } from '../today/menu'
 import { weekStart, addDays } from '../habit/streak'
-import { introduce } from '../srs/store'
 import { addXp } from '../rewards/xp'
 import { ASR_TYPE } from './errorTypes'
 import type { ParsedFix, ParsedPhrase } from './parse'
@@ -56,13 +55,13 @@ export interface FeedbackDraft {
   phrases: ParsedPhrase[]
 }
 
-/** 取り込んだ添削を保存する。表現は旅の手帳に入れ、復習カードにも加える */
+/** 取り込んだ添削を保存する。表現は旅の手帳に入れる（表現の復習には、1日に決めた数ずつ加わる） */
 export async function saveFeedback(d: FeedbackDraft, database: EigoDB = db, now = Date.now()): Promise<{ feedbackId: number; phraseIds: number[] }> {
   const day = dayKey(new Date(now))
   const trim = (s: string) => s.trim()
   const fixes = d.fixes.filter((f) => trim(f.original) || trim(f.corrected))
   const phrases = d.phrases.filter((p) => trim(p.expression))
-  const result = await database.transaction('rw', [database.feedback, database.fixes, database.phrases, database.items, database.cards], async () => {
+  const result = await database.transaction('rw', [database.feedback, database.fixes, database.phrases, database.items], async () => {
     const feedback: Feedback = { at: now, day, source: d.source, raw: d.raw }
     if (d.journalId) feedback.journalId = d.journalId
     if (d.recordingId) feedback.recordingId = d.recordingId
@@ -80,7 +79,6 @@ export async function saveFeedback(d: FeedbackDraft, database: EigoDB = db, now 
       const id = await database.phrases.add(row) as number
       phraseIds.push(id)
       await database.items.put(phraseItem({ ...row, id }))
-      await introduce(phraseItemId(id), now, database)
     }
     return { feedbackId, phraseIds }
   })

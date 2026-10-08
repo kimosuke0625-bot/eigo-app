@@ -3,6 +3,7 @@ import { getSettings, updateSettings } from '../db/settings'
 import { dayKey } from '../today/menu'
 import { startOfDay } from '../srs/queue'
 import { addXp } from './xp'
+import { deckOf } from '../srs/deck'
 
 /**
  * 今日のクエスト（フェーズ6.5）。毎日3つの小さな課題を、4つの柱のうち3つから1つずつ出す。
@@ -13,9 +14,11 @@ import { addXp } from './xp'
 
 export interface DayData {
   sessions: Session[]
-  /** 今日思い出そうとした回数（復習カード） */
+  /** 今日思い出そうとした回数（単語の復習） */
   reviews: number
-  /** 今日覚え始めたカードの数 */
+  /** 今日、表現の復習で言ってみた回数 */
+  exprReviews: number
+  /** 今日覚え始めた単語のカードの数 */
   introduced: number
   /** 今日、旅の手帳の表現を使えた数 */
   phrasesUsed: number
@@ -40,8 +43,8 @@ const minutes = (d: DayData, kind: string) => Math.floor(secondsOf(d, kind) / 60
 
 export const QUESTS: QuestDef[] = [
   // 言語の学習
-  { key: 'review-15', pillar: 'language', label: '言葉の魔物と15回戦う', goal: 15, unit: '回', start: 'review', measure: (d) => d.reviews },
-  { key: 'new-5', pillar: 'language', label: '新しいカードを5枚覚える', goal: 5, unit: '枚', start: 'addCards', measure: (d) => d.introduced },
+  { key: 'review-15', pillar: 'language', label: '単語の復習で15回戦う', goal: 15, unit: '回', start: 'review', measure: (d) => d.reviews },
+  { key: 'new-5', pillar: 'language', label: '新しい単語のカードを5枚覚える', goal: 5, unit: '枚', start: 'addCards', measure: (d) => d.introduced },
   { key: 'pron-3', pillar: 'language', label: '発音・聞き分けを3分', goal: 3, unit: '分', start: 'pronunciation', measure: (d) => minutes(d, 'pronunciation') },
   { key: 'retell-3', pillar: 'language', label: '過去の自分の文を3つ言い直す', goal: 3, unit: '文', start: 'retell', needs: 'fixes',
     measure: (d) => d.sessions.filter((s) => s.kind === 'retell').reduce((a, s) => a + (s.result?.retold ?? 0), 0) },
@@ -56,6 +59,7 @@ export const QUESTS: QuestDef[] = [
   // アウトプット
   { key: 'output-1', pillar: 'output', label: '音声日記か作文を1つ', goal: 1, unit: 'つ', start: 'output', measure: (d) => finished(d, 'output', 60) },
   { key: 'roleplay-1', pillar: 'output', label: '対話の役割練習を1本', goal: 1, unit: '本', start: 'roleplay', measure: (d) => finished(d, 'roleplay') },
+  { key: 'expr-5', pillar: 'output', label: '表現の復習で5回言ってみる', goal: 5, unit: '回', start: 'exprReview', needs: 'phrases', measure: (d) => d.exprReviews },
   { key: 'phrase-1', pillar: 'output', label: '旅の手帳の表現を1つ使う', goal: 1, unit: 'つ', start: 'output', needs: 'phrases', measure: (d) => d.phrasesUsed },
   { key: 'talk-1', pillar: 'output', label: 'Claude と会話練習をする', goal: 1, unit: '回', start: 'conversation', measure: (d) => finished(d, 'conversation', 60) },
 ]
@@ -80,13 +84,21 @@ export function chooseQuests(day: string, available: { fixes: boolean; phrases: 
 
 export async function loadDayData(day = dayKey(), database: EigoDB = db): Promise<DayData> {
   const since = startOfDay(new Date(`${day}T00:00:00`).getTime())
-  const [sessions, reviews, introduced, journal] = await Promise.all([
+  const [sessions, reviews, introduced, journal, cards] = await Promise.all([
     database.sessions.where('day').equals(day).toArray(),
-    database.reviews.where('at').aboveOrEqual(since).count(),
-    database.cards.where('introducedAt').aboveOrEqual(since).count(),
+    database.reviews.where('at').aboveOrEqual(since).toArray(),
+    database.cards.where('introducedAt').aboveOrEqual(since).toArray(),
     database.journal.where('day').equals(day).toArray(),
+    database.cards.toArray(),
   ])
-  return { sessions, reviews, introduced, phrasesUsed: journal.reduce((a, j) => a + (j.phrasesUsed?.length ?? 0), 0) }
+  const expr = new Set(cards.filter((c) => deckOf(c.itemId) === 'expr').map((c) => c.id))
+  return {
+    sessions,
+    reviews: reviews.filter((r) => !expr.has(r.cardId)).length,
+    exprReviews: reviews.filter((r) => expr.has(r.cardId)).length,
+    introduced: introduced.filter((c) => deckOf(c.itemId) === 'word').length,
+    phrasesUsed: journal.reduce((a, j) => a + (j.phrasesUsed?.length ?? 0), 0),
+  }
 }
 
 export interface QuestState { def: QuestDef; value: number; done: boolean }

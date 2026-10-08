@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useSettings } from './db/settings'
-import { db, type Settings, type ThemeMode } from './db/schema'
+import type { Settings, ThemeMode } from './db/schema'
 import { TodayScreen } from './today/TodayScreen'
 import { SettingsScreen } from './settings/SettingsScreen'
 import { Onboarding } from './settings/Onboarding'
@@ -37,6 +37,9 @@ import { RetellScreen } from './notes/RetellScreen'
 import { BagScreen, type BagSection } from './notes/BagScreen'
 import { BossScreen } from './rewards/BossScreen'
 import { syncPhraseItems } from './notes/store'
+import { ExprReviewScreen } from './practice/ExprReviewScreen'
+import { dueCounts } from './srs/store'
+import type { Deck } from './srs/deck'
 import { SpeechNotice } from './speech/SpeechNotice'
 
 export type Tab = 'today' | 'practice' | 'progress' | 'materials' | 'collection' | 'settings'
@@ -87,7 +90,7 @@ export default function App() {
     const t = window.setInterval(() => setClock(Date.now()), 60000)
     return () => window.clearInterval(t)
   }, [])
-  const dueCount = useLiveQuery(() => db.cards.where('due').belowOrEqual(clock).count(), [clock], 0)
+  const dueCount = useLiveQuery(() => dueCounts(clock), [clock], { word: 0, expr: 0 })
 
   useEffect(() => {
     loadNgsl().then(() => loadBsl()).catch((e: Error) => setContentError(e.message))
@@ -111,7 +114,7 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
   overlay: Overlay
   setOverlay: (o: Overlay) => void
   contentError: string
-  dueCount: number
+  dueCount: Record<Deck, number>
   setClock: (n: number) => void
 }) {
   const rewards = useDailyRewards(settings, overlay === null)
@@ -135,6 +138,8 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
     body = <DiagnosticScreen onDone={close} />
   } else if (overlay?.practice === 'review') {
     body = <><div className="practice-top"><HelpButton k="review" settings={settings} /></div><ReviewScreen key="review" settings={settings} onExit={close} onAddCards={() => start('addCards')} /></>
+  } else if (overlay?.practice === 'exprReview') {
+    body = <><div className="practice-top"><HelpButton k="exprReview" settings={settings} /></div><ExprReviewScreen key="expr" settings={settings} onExit={close} onImport={() => importFeedback()} /></>
   } else if (overlay?.practice === 'addCards') {
     body = <><div className="practice-top"><HelpButton k="addCards" settings={settings} /></div><NewCardsScreen key="add" settings={settings} onExit={close} onReview={() => start('review')} /></>
   } else if (overlay?.practice === 'input') {

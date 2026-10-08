@@ -1,4 +1,5 @@
 import { db, type EigoDB, type Pillar, type Review, type Session, type Snapshot } from '../db/schema'
+import { deckOf } from '../srs/deck'
 import { State } from '../srs/fsrs'
 import { addDays, weekStart } from '../habit/streak'
 import { dayKey } from '../today/menu'
@@ -67,7 +68,7 @@ export function weeklyMetric(sessions: Pick<Session, 'day' | 'result'>[], key: s
 }
 
 /** 日ごとの記録を、記録のない日は前日の値で埋めて並べる */
-export function fillDaily(snaps: Snapshot[], today: string, days = 90): { day: string; mature: number; known: number }[] {
+export function fillDaily(snaps: Snapshot[], today: string, days = 90): { day: string; mature: number; known: number; exprMature: number; exprCards: number }[] {
   const sorted = [...snaps].sort((a, b) => a.day.localeCompare(b.day))
   if (!sorted.length) return []
   const first = sorted[0].day > addDays(today, -(days - 1)) ? sorted[0].day : addDays(today, -(days - 1))
@@ -76,21 +77,24 @@ export function fillDaily(snaps: Snapshot[], today: string, days = 90): { day: s
   const out = []
   for (let d = first; d <= today; d = addDays(d, 1)) {
     last = byDay.get(d) ?? last
-    out.push({ day: d, mature: last.mature, known: last.known })
+    out.push({ day: d, mature: last.mature, known: last.known, exprMature: last.exprMature ?? 0, exprCards: last.exprCards ?? 0 })
   }
   return out
 }
 
 /** 今日の語彙の記録を書く（1日に何度呼んでも最新の値で上書き） */
 export async function writeSnapshot(database: EigoDB = db, today = dayKey()): Promise<Snapshot> {
+  // 語彙（Phase の切り替え・旅の地図）は単語の束だけで数え、表現の束は別に数える
   let mature = 0
   let cards = 0
+  let exprMature = 0
+  let exprCards = 0
   await database.cards.each((c) => {
-    cards++
-    if (c.fsrs.stability >= MATURE_DAYS && c.fsrs.state === State.Review) mature++
+    const ok = c.fsrs.stability >= MATURE_DAYS && c.fsrs.state === State.Review
+    if (deckOf(c.itemId) === 'expr') { exprCards++; if (ok) exprMature++ } else { cards++; if (ok) mature++ }
   })
   const known = await database.knownWords.count()
-  const snap = { day: today, mature, cards, known }
+  const snap = { day: today, mature, cards, known, exprMature, exprCards }
   await database.snapshots.put(snap)
   return snap
 }

@@ -131,7 +131,7 @@ export function BossNotice({ onStart }: { onStart: (k: PracticeKind) => void }) 
       <PixelIcon name="dragon" size={32} className="quest-icon" />
       <div className="body">
         <div className="name">週のボスが現れた！</div>
-        <div className="muted">今週学んだ語で戦おう。倒すと +200 XP と雑学パック</div>
+        <div className="muted">対象：今週学んだ単語。倒すと +200 XP と雑学パック</div>
       </div>
       <span className="min">▶</span>
     </button>
