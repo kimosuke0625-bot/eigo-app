@@ -124,13 +124,13 @@ export function BossNotice({ onStart }: { onStart: (k: PracticeKind) => void }) 
   const record = useLiveQuery(() => db.bosses.get(weekStart(dayKey())), [])
   if (record?.defeated) return null
   if (!isBossDay()) {
-    return <p className="muted boss-note"><PixelIcon name="dragon" size={18} /> 週のボスはあと {daysToBoss()} 日（土曜）で現れます。</p>
+    return <p className="muted boss-note"><PixelIcon name="dragon" size={18} /> 週のボス（単語）はあと {daysToBoss()} 日（土曜）で現れます。</p>
   }
   return (
     <button className="menu-item as-button boss-ready" onClick={() => onStart('boss')}>
       <PixelIcon name="dragon" size={32} className="quest-icon" />
       <div className="body">
-        <div className="name">週のボスが現れた！</div>
+        <div className="name">週のボス（単語）が現れた！</div>
         <div className="muted">対象：今週学んだ単語。倒すと +200 XP と雑学パック</div>
       </div>
       <span className="min">▶</span>

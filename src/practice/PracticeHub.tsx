@@ -46,7 +46,7 @@ export function PracticeHub({ onStart, dueCount }: { onStart: (k: PracticeKind) 
       <button className={`menu-item as-button${boss ? ' boss-ready' : ''}`} onClick={() => onStart('boss')}>
         <PixelIcon name="dragon" size={28} className="quest-icon" />
         <div className="body">
-          <div className="name">忘却のドラゴン{boss && <span className="tag focus-tag">出現中</span>}</div>
+          <div className="name">忘却のドラゴン（単語）{boss && <span className="tag focus-tag">出現中</span>}</div>
           <div className="muted">週末（土・日）に現れる。対象は今週学んだ単語（表現は出ない）。意味を選んで戦う</div>
         </div>
         <span className="min">▶</span>

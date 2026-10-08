@@ -14,12 +14,22 @@ export async function deckCardIds(deck: Deck, database: EigoDB = db): Promise<Se
   return ids
 }
 
+/**
+ * 表現の1枚を1日に出す回数の上限。
+ * FSRS は覚えたてのカードを1分後・10分後にもう一度出すので、表現の数が少ないと同じものばかり続く。表現は1日2回までにする。
+ */
+export const EXPR_MAX_PER_DAY = 2
+
 /** 今日の復習の一覧（束ごと・上限つき）。上限は単語と表現で別々 */
 export async function todaysQueue(deck: Deck = 'word', now = Date.now(), database: EigoDB = db): Promise<Card[]> {
   const s = await getSettings(database)
-  const cards = (await database.cards.where('due').belowOrEqual(now).toArray()).filter((c) => inDeck(c, deck))
   const ids = await deckCardIds(deck, database)
-  const reviewedToday = (await database.reviews.where('at').aboveOrEqual(startOfDay(now)).toArray()).filter((r) => ids.has(r.cardId)).length
+  const todays = (await database.reviews.where('at').aboveOrEqual(startOfDay(now)).toArray()).filter((r) => ids.has(r.cardId))
+  const reviewedToday = todays.length
+  const timesToday = new Map<number, number>()
+  for (const r of todays) timesToday.set(r.cardId, (timesToday.get(r.cardId) ?? 0) + 1)
+  const cards = (await database.cards.where('due').belowOrEqual(now).toArray())
+    .filter((c) => inDeck(c, deck) && (deck === 'word' || (timesToday.get(c.id!) ?? 0) < EXPR_MAX_PER_DAY))
   return buildQueue(cards, now, (deck === 'word' ? s.reviewCap : s.exprReviewCap) - reviewedToday)
 }
 

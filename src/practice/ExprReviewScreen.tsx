@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { db, type Card, type Item, type Settings } from '../db/schema'
 import { GRADES, GRADE_LABELS, formatInterval, previewIntervals, type Grade } from '../srs/fsrs'
 import { nextCard, startOfDay } from '../srs/queue'
-import { introducePhrases, recordReview, todaysQueue, waitingPhrases } from '../srs/store'
+import { EXPR_MAX_PER_DAY, introducePhrases, recordReview, todaysQueue, waitingPhrases } from '../srs/store'
 import { playText } from '../speech/audioBank'
 import { Steps } from '../ui/Steps'
 import { PixelIcon } from '../ui/PixelIcon'
@@ -128,7 +128,9 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
     result.current.reviews = (result.current.reviews ?? 0) + 1
     result.current.recalled = (result.current.recalled ?? 0) + (recalled ? 1 : 0)
     const rest = queue.filter((c) => c.id !== current.card.id)
-    setQueue(updated.due <= Date.now() + 20 * 60 * 1000 ? [...rest, updated] : rest)
+    // 同じ表現は1日2回まで。2回目が済んだら、今日はもう出さない（次は FSRS の予定どおり）
+    const again = current.attemptsToday + 1 < EXPR_MAX_PER_DAY && updated.due <= Date.now() + 20 * 60 * 1000
+    setQueue(again ? [...rest, updated] : rest)
   }, [current, queue, result, addFloat, battle.honest, startXp])
 
   if (!queue) return <p className="muted">読み込み中…</p>

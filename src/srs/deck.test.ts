@@ -38,6 +38,18 @@ describe('単語と表現の束', () => {
     expect(await todaysQueue('expr', NOW, database)).toHaveLength(1)
   })
 
+  it('表現は1日2回まで（覚えたてでも同じ表現が何度も続かない）。単語には上限なし', async () => {
+    const database = await setup('deck-3')
+    const expr = (await todaysQueue('expr', NOW, database))[0]
+    const word = (await todaysQueue('word', NOW, database))[0]
+    for (let i = 0; i < 2; i++) {
+      await database.reviews.add({ cardId: expr.id!, at: NOW - 1000, rating: 1, state: 0, answerMs: 3000, mode: 'expr' })
+      await database.reviews.add({ cardId: word.id!, at: NOW - 1000, rating: 1, state: 0, answerMs: 3000, mode: 'word' })
+    }
+    expect((await todaysQueue('expr', NOW, database)).map((c) => c.id)).not.toContain(expr.id)
+    expect((await todaysQueue('word', NOW, database)).map((c) => c.id)).toContain(word.id)
+  })
+
   it('新しく加える数も別々：表現は1日の数まで、単語は設定の上限まで', async () => {
     const database = new EigoDB('deck-2')
     for (let i = 0; i < 4; i++) {

@@ -42,7 +42,7 @@ export function BossScreen({ settings, onExit }: { settings: Settings; onExit: (
     return (
       <div className="boss">
         <section className="card stack" style={{ textAlign: 'center' }}>
-          <h2 className="win-title">週のボス</h2>
+          <h2 className="win-title">週のボス（単語）</h2>
           <PixelIcon name="dragon" size={72} className="boss-art idle" />
           {defeated ? <p>今週のボスはもう倒しました。また来週の週末に現れます。</p>
             : !isBossDay() ? <p>ボスは週末（土・日）に現れます。その週に学んだ単語で戦います（表現は出ません）。</p>
@@ -111,7 +111,7 @@ export function BossScreen({ settings, onExit }: { settings: Settings; onExit: (
   return (
     <div className="boss battle" data-fx={fx}>
       <section className="card boss-stage">
-        <h2 className="win-title">週のボス：忘却のドラゴン</h2>
+        <h2 className="win-title">週のボス（単語）：忘却のドラゴン</h2>
         <div className="boss-hp">
           <span className="num">HP {hp} / {total}</span>
           <div className="xp-track hp-track"><div className="hp-fill" style={{ width: `${(hp / total) * 100}%` }} /></div>
