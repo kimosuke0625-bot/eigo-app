@@ -2,7 +2,7 @@
 // 音声置き場のリポジトリ（../eigo-audio、GitHub Pages で公開）に、できた分から順に公開する。
 //
 // - 作る順番：利用者がこれから学ぶ順（start-rank.txt の順位から NGSL を上へ）。最初の200語のあとに雑学と名言、
-//   続けて残りの語、ビジネス語彙（BSL）、最後に開始位置より上の語（すでに知っている語）
+//   開始位置より上の語（the、be など頻度の最も高い語）、続けて残りの語、ビジネス語彙（BSL）
 // - 途中で止まっても、作成済みのファイルは飛ばすので、もう一度実行すれば続きから再開する
 // - 300ファイルごと、または20分ごとに index.json を更新して GitHub に送る（アプリはそれを見て音声を使う）
 //
@@ -52,11 +52,12 @@ function plan() {
   const quoteJobs = quotes.map((q) => ({ kind: 'quotes', key: textKey(q.en), text: q.en, bitrate: '32k', label: '名言' }))
   return [
     ...ahead.slice(0, 200).flatMap(wordJobs),
+    // 最も頻度の高い語（開始位置より上。the、be など）も、早めに作る（利用者の依頼 2026-10-08）
+    ...behind.flatMap(wordJobs),
     ...quoteJobs,
     ...factJobs,
     ...ahead.slice(200).flatMap(wordJobs),
     ...bsl.map((w) => ({ ...w, list: 'ビジネス' })).flatMap(wordJobs),
-    ...behind.flatMap(wordJobs),
   ]
 }
 

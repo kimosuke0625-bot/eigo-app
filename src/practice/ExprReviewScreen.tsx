@@ -4,6 +4,7 @@ import { GRADES, GRADE_LABELS, formatInterval, previewIntervals, type Grade } fr
 import { nextCard, startOfDay } from '../srs/queue'
 import { EXPR_MAX_PER_DAY, introducePhrases, recordReview, todaysQueue, waitingPhrases } from '../srs/store'
 import { playText } from '../speech/audioBank'
+import { prepareMine } from '../speech/myAudio'
 import { Steps } from '../ui/Steps'
 import { PixelIcon } from '../ui/PixelIcon'
 import { SpeakButton } from './WordParts'
@@ -63,6 +64,8 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
     if (!item) { setQueue(q.filter((c) => c.id !== card.id)); return }
     const since = startOfDay(Date.now())
     const attemptsToday = await db.reviews.where('cardId').equals(card.id!).filter((r) => r.at >= since).count()
+    // 答えを見た瞬間に鳴らせるよう、自分の音声を先に用意する
+    await prepareMine(item.english)
     setCurrent({ card, item, scene: await sceneOf(card.itemId), shownAt: Date.now(), attemptsToday })
     setRevealedAt(0)
   }, [])

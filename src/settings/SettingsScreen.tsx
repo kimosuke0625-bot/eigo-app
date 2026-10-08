@@ -8,6 +8,7 @@ import { Credits } from './Credits'
 import { AsrSection } from './AsrSection'
 import { AudioBankSection } from './AudioBankSection'
 import { OfflineSection } from './OfflineSection'
+import { MyAudioSection } from './MyAudioSection'
 import { LookSection } from './LookSection'
 import { playChime } from '../rewards/sound'
 import { VoiceInstallGuide } from './VoiceInstallGuide'
@@ -220,6 +221,7 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
       <LookSection settings={settings} />
 
       <OfflineSection />
+      <MyAudioSection />
       <AudioBankSection />
 
       <AsrSection settings={settings} />

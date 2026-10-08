@@ -289,6 +289,14 @@ export interface Phrase {
   lastUsedAt?: number
 }
 
+/** PC で作った自分の音声（旅の手帳の表現と例文）。key は英文の鍵（audioKey.ts の textKey） */
+export interface MyAudio {
+  key: string
+  text: string
+  audio: Blob
+  at: number
+}
+
 /** 週のボス戦（週の月曜日の日付キーごと） */
 export interface BossWeek {
   week: string
@@ -398,6 +406,7 @@ export class EigoDB extends Dexie {
   fixes!: EntityTable<Fix, 'id'>
   phrases!: EntityTable<Phrase, 'id'>
   bosses!: EntityTable<BossWeek, 'week'>
+  myAudio!: EntityTable<MyAudio, 'key'>
 
   constructor(name = 'eigo') {
     super(name)
@@ -451,6 +460,10 @@ export class EigoDB extends Dexie {
       fixes: '++id, feedbackId, day, type',
       phrases: '++id, at, day, feedbackId',
       bosses: 'week',
+    })
+    // フェーズ7.5：PC で作った自分の音声（旅の手帳）。バックアップには入れない（PC で作り直せるため）
+    this.version(10).stores({
+      myAudio: 'key',
     })
   }
 }

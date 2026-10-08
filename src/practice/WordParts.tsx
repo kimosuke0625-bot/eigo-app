@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState, type ReactNode } from 'react'
 import type { Example, Item } from '../db/schema'
 import { bankRef, playText, prepare, type BankRef } from '../speech/audioBank'
 import { hideExample, restoreExamples, saveGloss, useEdited } from '../content/edits'
+import { prepareMine } from '../speech/myAudio'
 
 export function SpeakButton({ text, voiceURI, rate = 1, label = '読み上げ', big = false, bank }: {
   text: string
@@ -14,6 +15,8 @@ export function SpeakButton({ text, voiceURI, rate = 1, label = '読み上げ', 
 }) {
   // 表示されたら音声を先に用意しておき、押した瞬間に鳴るようにする
   useEffect(() => { if (bank) void prepare(bank) }, [bank?.kind, bank?.key]) // eslint-disable-line react-hooks/exhaustive-deps
+  // 自分の音声（旅の手帳）があれば、それも用意しておく
+  useEffect(() => { void prepareMine(text) }, [text])
   return (
     <button type="button" className={big ? 'btn secondary speak-big' : 'icon-btn'} aria-label={label}
       onClick={(e) => { e.stopPropagation(); playText({ ref: bank, text, voiceURI, rate }) }}>

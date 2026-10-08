@@ -5,6 +5,7 @@
 import { headKey, textKey } from './audioKey'
 import { playUrl } from './clips'
 import { speak } from './voices'
+import { mineUrl } from './myAudio'
 
 export type BankKind = 'heads' | 'ex' | 'facts' | 'quotes'
 
@@ -78,6 +79,9 @@ export async function prepare(r: BankRef): Promise<void> {
  */
 export function playText(opts: { ref?: BankRef; text: string; voiceURI: string; rate?: number; onEnd?: () => void }): () => void {
   const rate = opts.rate ?? 1
+  // 自分の音声（旅の手帳の表現を PC の声で作ったもの）があれば、それを使う
+  const mine = mineUrl(opts.text)
+  if (mine) return playUrl(mine, rate, opts.onEnd, () => { speak(opts.text, opts.voiceURI, rate, opts.onEnd) })
   if (opts.ref && hasBank(opts.ref)) {
     const url = urlOf(opts.ref)
     const saved = ready.get(url)
