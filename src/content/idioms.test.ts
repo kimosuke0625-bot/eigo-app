@@ -59,3 +59,26 @@ describe('熟語のデータ（public/data/idioms.json）', () => {
     for (const d of data.items) expect(d.scenes.includes('ビジネス向き') && d.scenes.includes('仕事では避ける')).toBe(false)
   })
 })
+
+describe('基本のあいさつを初期設定で「知っている」扱いにする', () => {
+  const mk = (id: string, basic: boolean): Idiom => ({ ...base, id, basic })
+  const data: IdiomData = { version: 1, license: '', items: [mk('idiom-thank-you', true), mk('idiom-excuse-me--2', false), mk('idiom-set-up', false)] }
+
+  it('1つ目の意味（basic）だけを外し、戻したものは再び外さない', async () => {
+    const { applyBasicKnown } = await import('./idioms')
+    const database = new EigoDB('idioms-basic')
+    await applyBasicKnown(data, database)
+    expect([...(await hiddenIdiomIds(database))]).toEqual(['idiom-thank-you'])
+    expect((await database.hiddenItems.get('idiom-thank-you'))?.reason).toBe('basic')
+    await unhideIdiom('idiom-thank-you', database)
+    await applyBasicKnown(data, database)
+    expect((await hiddenIdiomIds(database)).size).toBe(0)
+  })
+
+  it('データでは、基本のあいさつ19個の1つ目の意味だけに印がある', () => {
+    const items = (JSON.parse(readFileSync('public/data/idioms.json', 'utf8')) as IdiomData).items
+    const basic = items.filter((d) => d.basic)
+    expect(basic.length).toBe(19)
+    expect(basic.every((d) => d.sense === 1)).toBe(true)
+  })
+})

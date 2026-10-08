@@ -3,7 +3,7 @@ import { BSL_OFFSET } from '../content/ngsl'
 import { getSettings } from '../db/settings'
 import { newFsrsCard, rate, type Grade } from './fsrs'
 import { buildQueue, newCardsToday, startOfDay } from './queue'
-import { inDeck, type Deck } from './deck'
+import { deckOf, inDeck, type Deck } from './deck'
 
 const WEEK = 7 * 24 * 60 * 60 * 1000
 
@@ -20,7 +20,10 @@ export async function deckCardIds(deck: Deck, database: EigoDB = db): Promise<Se
  */
 export const EXPR_MAX_PER_DAY = 2
 
-/** 今日の復習の一覧（束ごと・上限つき）。上限は単語と表現で別々 */
+/** 文法の問題の1日の復習の上限（1問に時間がかかるので少なめ） */
+export const GRAM_REVIEW_CAP = 30
+
+/** 今日の復習の一覧（束ごと・上限つき）。上限は束ごとに別々。表現と文法は同じカードを1日2回まで */
 export async function todaysQueue(deck: Deck = 'word', now = Date.now(), database: EigoDB = db): Promise<Card[]> {
   const s = await getSettings(database)
   const ids = await deckCardIds(deck, database)
@@ -30,13 +33,14 @@ export async function todaysQueue(deck: Deck = 'word', now = Date.now(), databas
   for (const r of todays) timesToday.set(r.cardId, (timesToday.get(r.cardId) ?? 0) + 1)
   const cards = (await database.cards.where('due').belowOrEqual(now).toArray())
     .filter((c) => inDeck(c, deck) && (deck === 'word' || (timesToday.get(c.id!) ?? 0) < EXPR_MAX_PER_DAY))
-  return buildQueue(cards, now, (deck === 'word' ? s.reviewCap : s.exprReviewCap) - reviewedToday)
+  const cap = deck === 'word' ? s.reviewCap : deck === 'expr' ? s.exprReviewCap : GRAM_REVIEW_CAP
+  return buildQueue(cards, now, cap - reviewedToday)
 }
 
 /** 期日が来ている枚数（束ごと。今日の画面の残り枚数） */
 export async function dueCounts(now = Date.now(), database: EigoDB = db): Promise<Record<Deck, number>> {
-  const out = { word: 0, expr: 0 }
-  for (const c of await database.cards.where('due').belowOrEqual(now).toArray()) out[inDeck(c, 'expr') ? 'expr' : 'word']++
+  const out = { word: 0, expr: 0, gram: 0 }
+  for (const c of await database.cards.where('due').belowOrEqual(now).toArray()) out[deckOf(c.itemId)]++
   return out
 }
 

@@ -17,6 +17,7 @@ export type PracticeKind =
   | 'retell'
   | 'importFeedback'
   | 'boss'
+  | 'grammar'
 
 export interface MenuItem {
   kind: PracticeKind
@@ -51,14 +52,16 @@ export const PILLAR_LABELS: Record<Pillar, string> = {
 export const BASE_MENU: MenuItem[] = [
   // 表現の復習（2026-10-08 利用者の依頼）はアウトプットとして数えるので、4つの柱の比率を保つため音声日記・作文の10分から回す
   // 熟語が加わった時点で 作文6・表現4（利用者の決めた配分）
-  { kind: 'review', block: 'morning', label: '単語の復習', detail: '見出し語のカード。単語・例文・聞き取りの形で声に出して答える', pillar: 'language', baseMinutes: 10, availableFrom: 2 },
+  // 文法の修行（フェーズ9）は「言語の学習」の20分から回す：単語の復習7・文法の修行5・発音5・新しいカード3（了承済みの計画）
+  { kind: 'review', block: 'morning', label: '単語の復習', detail: '見出し語のカード。単語・例文・聞き取りの形で声に出して答える', pillar: 'language', baseMinutes: 7, availableFrom: 2 },
+  { kind: 'grammar', block: 'morning', label: '文法の修行', detail: '中学レベルの文法。解説 → 練習 → 口頭で即答 → 自分のことを1文。解いた問題は復習に出る', pillar: 'language', baseMinutes: 5, availableFrom: 2 },
   { kind: 'exprReview', block: 'morning', label: '表現の復習', detail: '熟語と旅の手帳の表現。日本語の意味と場面を見て英語で言い、読み上げをまねる', pillar: 'output', baseMinutes: 4, availableFrom: 2 },
   { kind: 'pronunciation', block: 'morning', label: '発音・聞き分けドリル', detail: '似た音のペアを聞き分ける', pillar: 'language', baseMinutes: 5, availableFrom: 5 },
   { kind: 'input', block: 'noon', label: '多聴・多読', detail: '内容確認の質問2問つき', pillar: 'input', baseMinutes: 15, availableFrom: 4 },
   { kind: 'shadowing', block: 'night', label: 'シャドーイング', detail: '昼に聞いた素材を使う', pillar: 'fluency', baseMinutes: 10, availableFrom: 5 },
   { kind: 'fluency', block: 'night', label: '4/3/2スピーチ・速読', detail: '知っている英語を速く使う', pillar: 'fluency', baseMinutes: 5, availableFrom: 4 },
   { kind: 'output', block: 'night', label: '音声日記・短い作文', detail: '今日覚えた語を3つ以上使う', pillar: 'output', baseMinutes: 6, availableFrom: 6 },
-  { kind: 'addCards', block: 'night', label: '新しいカードの追加と振り返り', detail: '夜に追加したカードは翌朝に確認', pillar: 'language', baseMinutes: 5, availableFrom: 2 },
+  { kind: 'addCards', block: 'night', label: '新しいカードの追加と振り返り', detail: '夜に追加したカードは翌朝に確認', pillar: 'language', baseMinutes: 3, availableFrom: 2 },
 ]
 
 export const BASE_TOTAL = BASE_MENU.reduce((s, m) => s + m.baseMinutes, 0)

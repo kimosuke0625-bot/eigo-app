@@ -38,6 +38,7 @@ import { BagScreen, type BagSection } from './notes/BagScreen'
 import { BossScreen } from './rewards/BossScreen'
 import { syncPhraseItems } from './notes/store'
 import { ExprReviewScreen } from './practice/ExprReviewScreen'
+import { GrammarScreen } from './practice/GrammarScreen'
 import { prefetchUpcoming } from './speech/audioBank'
 import { db } from './db/schema'
 import { deckOf } from './srs/deck'
@@ -99,7 +100,7 @@ export default function App() {
     const t = window.setInterval(() => setClock(Date.now()), 60000)
     return () => window.clearInterval(t)
   }, [])
-  const dueCount = useLiveQuery(() => dueCounts(clock), [clock], { word: 0, expr: 0 })
+  const dueCount = useLiveQuery(() => dueCounts(clock), [clock], { word: 0, expr: 0, gram: 0 })
 
   useEffect(() => {
     loadNgsl().then(() => loadBsl()).catch((e: Error) => setContentError(e.message))
@@ -158,6 +159,8 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
     body = <DiagnosticScreen onDone={close} />
   } else if (overlay?.practice === 'review') {
     body = <><div className="practice-top"><HelpButton k="review" settings={settings} /></div><ReviewScreen key="review" settings={settings} onExit={close} onAddCards={() => start('addCards')} /></>
+  } else if (overlay?.practice === 'grammar') {
+    body = <><div className="practice-top"><HelpButton k="grammar" settings={settings} /></div><GrammarScreen key="grammar" settings={settings} onExit={close} /></>
   } else if (overlay?.practice === 'exprReview') {
     body = <><div className="practice-top"><HelpButton k="exprReview" settings={settings} /></div><ExprReviewScreen key="expr" settings={settings} onExit={close} onImport={() => importFeedback()} /></>
   } else if (overlay?.practice === 'addCards') {

@@ -30,6 +30,7 @@ export function PracticeHub({ onStart, dueCount }: { onStart: (k: PracticeKind) 
                 {m.label}
                 {m.kind === 'review' && dueCount.word > 0 && <span className="badge">{dueCount.word}</span>}
                 {m.kind === 'exprReview' && dueCount.expr > 0 && <span className="badge">{dueCount.expr}</span>}
+                {m.kind === 'grammar' && dueCount.gram > 0 && <span className="badge">{dueCount.gram}</span>}
               </div>
               <div className="muted">{m.detail}</div>
               <div style={{ marginTop: 4 }}>

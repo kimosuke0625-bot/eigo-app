@@ -31,7 +31,7 @@ for (const l of readFileSync(join(WORK, 'tatoeba-en.tsv'), 'utf8').split('\n')) 
 }
 
 const TYPE_LABEL = { phrasal: '句動詞', idiom: '熟語', phrase: '決まり文句' }
-// 初期設定で「知っている」扱いにする候補（基本のあいさつ・お礼など）。利用者が了承するまでアプリでは使わない（basic の印だけ付ける）
+// 初期設定で「知っている」扱いにする基本のあいさつ・お礼（利用者の決定 2026-10-09：1つ目の意味のカードだけ。2つ目以降は通常どおり出題）
 const BASIC = new Set(['thank you', 'thank you very much', 'good morning', 'good afternoon', 'good evening', 'good night', 'nice to meet you',
   'how are you', "I'm fine", 'see you', 'see you later', 'see you tomorrow', "I'm sorry", 'excuse me', "you're welcome", 'no, thanks',
   'no thank you', 'happy birthday', 'merry Christmas', 'good luck', 'me too', 'of course'])
@@ -108,7 +108,7 @@ for (const type of ['phrasal', 'idiom', 'phrase']) {
         perMillion: Math.round(freq * 10) / 10,
         stars: stars(freq),
         scenes: scenesOf(c, sense, r, j, s),
-        basic: BASIC.has(c.word),
+        basic: i === 0 && BASIC.has(c.word),
         ex: ex.slice(0, 2).map((x) => ({ en: x.en, ja: x.ja, enId: x.id, jaId: x.jaId, native: x.native })),
         needsCheck: reasons.length > 0,
         checkReasons: reasons,

@@ -21,11 +21,12 @@ describe('単語と表現の束', () => {
     expect(deckOf('idiom-3')).toBe('expr')
     expect(deckOf('decide')).toBe('word')
     expect(deckOf('bsl:agenda')).toBe('word')
+    expect(deckOf('gram-g01-3')).toBe('gram')
   })
 
   it('今日の復習と残り枚数は束ごと。上限も別々', async () => {
     const database = await setup('deck-1')
-    expect(await dueCounts(NOW, database)).toEqual({ word: 6, expr: 3 })
+    expect(await dueCounts(NOW, database)).toEqual({ word: 6, expr: 3, gram: 0 })
     expect((await todaysQueue('word', NOW, database)).every((c) => deckOf(c.itemId) === 'word')).toBe(true)
     expect(await todaysQueue('expr', NOW, database)).toHaveLength(3)
     await updateSettings({ reviewCap: 4, exprReviewCap: 2 }, database)

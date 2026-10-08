@@ -28,6 +28,8 @@ const bsl = JSON.parse(readFileSync(here('../public/data/bsl.json'), 'utf8')).wo
 const facts = JSON.parse(readFileSync(here('../public/data/facts.json'), 'utf8')).facts
 const quotes = JSON.parse(readFileSync(here('../public/data/quotes.json'), 'utf8')).quotes
 // 熟語（フェーズ8）。熟語と例文は、例文と同じ置き場（ex）に英文から作った名前で置く
+// 文法の修行（フェーズ9）：例文・正しい文・答え・手本も、例文と同じ置き場（ex）に置く
+const grammar = existsSync(here('../public/data/grammar.json')) ? JSON.parse(readFileSync(here('../public/data/grammar.json'), 'utf8')).items : []
 const idioms = existsSync(here('../public/data/idioms.json')) ? JSON.parse(readFileSync(here('../public/data/idioms.json'), 'utf8')).items : []
 
 /** 開始位置（診断テストで決まった、新しいカードを始める順位）。作成中に書き換えても次の区切りから反映する */
@@ -56,8 +58,15 @@ function plan() {
     { kind: 'ex', key: textKey(d.en), text: d.en, bitrate: '48k', label: `熟語 ${d.rank}位 ${d.en}` },
     ...d.ex.slice(0, 1).map((e) => ({ kind: 'ex', key: textKey(e.en), text: e.en, bitrate: '32k', label: `熟語 ${d.rank}位の例文` })),
   ])
+  const gramTexts = grammar.flatMap((it) => [
+    ...it.examples.map((e) => e.en),
+    ...it.mistakes.map((m) => m.right).filter((t) => !t.includes('"')),
+    ...it.exercises.flatMap((x) => (x.type === 'fill' ? [x.text.replace('___', x.answers[0])] : x.answers.slice(0, 1))),
+  ])
+  const gramJobs = [...new Set(gramTexts)].map((t) => ({ kind: 'ex', key: textKey(t), text: t, bitrate: '32k', label: '文法の文' }))
   return [
-    // 熟語（2026-10 追加）を先に作る
+    // 文法（2026-10 追加）と熟語（2026-10 追加）を先に作る
+    ...gramJobs,
     ...idiomJobs,
     ...ahead.slice(0, 200).flatMap(wordJobs),
     // 最も頻度の高い語（開始位置より上。the、be など）も、早めに作る（利用者の依頼 2026-10-08）

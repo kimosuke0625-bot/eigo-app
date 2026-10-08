@@ -92,9 +92,11 @@ export async function loadDayData(day = dayKey(), database: EigoDB = db): Promis
     database.cards.toArray(),
   ])
   const expr = new Set(cards.filter((c) => deckOf(c.itemId) === 'expr').map((c) => c.id))
+  const word = new Set(cards.filter((c) => deckOf(c.itemId) === 'word').map((c) => c.id))
   return {
     sessions,
-    reviews: reviews.filter((r) => !expr.has(r.cardId)).length,
+    // 単語の復習の数（表現と文法の問題は数えない）
+    reviews: reviews.filter((r) => word.has(r.cardId)).length,
     exprReviews: reviews.filter((r) => expr.has(r.cardId)).length,
     introduced: introduced.filter((c) => deckOf(c.itemId) === 'word').length,
     phrasesUsed: journal.reduce((a, j) => a + (j.phrasesUsed?.length ?? 0), 0),

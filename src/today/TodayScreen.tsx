@@ -199,9 +199,11 @@ export function TodayScreen({ settings, dueCount, onSettings, onStart, onDiagnos
                       {m.label}
                       {m.kind === 'review' && dueCount.word > 0 && <span className="badge">{dueCount.word}</span>}
                       {m.kind === 'exprReview' && dueCount.expr > 0 && <span className="badge">{dueCount.expr}</span>}
+                      {m.kind === 'grammar' && dueCount.gram > 0 && <span className="badge">{dueCount.gram}</span>}
                     </div>
                     <div className="muted">{m.kind === 'review' ? `単語の魔物と戦う。のこり ${dueCount.word} 枚`
-                      : m.kind === 'exprReview' ? `表現の稽古。のこり ${dueCount.expr} 枚。${m.detail}` : m.detail}</div>
+                      : m.kind === 'exprReview' ? `表現の稽古。のこり ${dueCount.expr} 枚。${m.detail}`
+                      : m.kind === 'grammar' && dueCount.gram > 0 ? `復習 ${dueCount.gram} 問。${m.detail}` : m.detail}</div>
                     <div style={{ marginTop: 4 }}>
                       <span className="tag">{PILLAR_LABELS[m.pillar]}</span>
                       {!ready(m.kind) && <span className="tag soon">準備中</span>}

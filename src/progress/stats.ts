@@ -91,7 +91,9 @@ export async function writeSnapshot(database: EigoDB = db, today = dayKey()): Pr
   let exprCards = 0
   await database.cards.each((c) => {
     const ok = c.fsrs.stability >= MATURE_DAYS && c.fsrs.state === State.Review
-    if (deckOf(c.itemId) === 'expr') { exprCards++; if (ok) exprMature++ } else { cards++; if (ok) mature++ }
+    const deck = deckOf(c.itemId)
+    // 文法の問題のカードは語彙に数えない
+    if (deck === 'expr') { exprCards++; if (ok) exprMature++ } else if (deck === 'word') { cards++; if (ok) mature++ }
   })
   const known = await database.knownWords.count()
   const snap = { day: today, mature, cards, known, exprMature, exprCards }

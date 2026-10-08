@@ -306,8 +306,8 @@ export interface ContentReport {
 /** 出題しない熟語（「もう知っている」を押したもの）。設定の「知っている熟語」から戻せる。バックアップに含める */
 export interface HiddenItem {
   itemId: string
-  /** known：利用者が「もう知っている」を押した */
-  reason: 'known'
+  /** known：利用者が「もう知っている」を押した。basic：基本のあいさつとして初期設定で外した */
+  reason: 'known' | 'basic'
   at: number
 }
 
@@ -412,6 +412,10 @@ export interface Settings {
   idiomShowUnverified: boolean
   /** 熟語の絞り込み：all＝すべて、business＝ビジネス向きだけ */
   idiomFocus: 'all' | 'business'
+  /** 基本のあいさつ・お礼を「知っている」扱いにした熟語（一度だけ行う。戻したものを再び外さないために記録する） */
+  idiomBasicApplied: string[]
+  /** 文法の「要確認」の説明も表示する（初期値 false） */
+  grammarShowUnverified: boolean
 }
 
 export class EigoDB extends Dexie {

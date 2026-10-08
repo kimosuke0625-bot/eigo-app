@@ -50,6 +50,8 @@ export function defaultSettings(now = Date.now()): Settings {
     idiomNewPerDay: 3,
     idiomShowUnverified: false,
     idiomFocus: 'all',
+    idiomBasicApplied: [],
+    grammarShowUnverified: false,
   }
 }
 

@@ -246,3 +246,39 @@ input[type="checkbox"] { width: 22px; height: 22px; vertical-align: middle; }
 .known-box .muted { font-size: 0.8rem; margin-top: 4px; }
 .expr-card .expr-sense { font-size: 0.8rem; color: var(--text2); margin-top: 2px; }
 .scene-chip.avoid { color: var(--danger, #c0392b); }
+
+/* 文法の修行（フェーズ9） */
+.gram-places { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.gram-no { display: inline-grid; place-items: center; min-width: 30px; height: 30px; border-radius: 50%; background: var(--surface2); border: 2px solid var(--border); font-weight: 800; margin-right: 8px; flex: none; }
+.gram-done { border-color: var(--success); }
+.gram-stamp { color: var(--success); border: 2px solid var(--success); border-radius: 50%; width: 30px; height: 30px; display: inline-grid; place-items: center; font-weight: 800; transform: rotate(-12deg); flex: none; }
+.gram-stamp.big { width: 64px; height: 64px; font-size: 1.8rem; margin: 8px auto; }
+.gram-head { display: flex; align-items: center; gap: 4px; }
+.gram-head h2 { margin: 0; font-size: 1.15rem; }
+.gram-points ul, .gram-examples ul, .gram-sources { padding-left: 1.1em; margin: 0; }
+.gram-points li { margin-bottom: 8px; line-height: 1.6; }
+.gram-inline { display: block; font-family: inherit; color: var(--primary); font-weight: 600; }
+.gram-examples ul { list-style: none; padding: 0; }
+.gram-examples li { border-bottom: 1px dashed var(--border); padding: 6px 0; }
+.gram-examples .en { display: block; font-weight: 600; }
+.gram-examples .ja { display: block; font-size: 0.9rem; }
+.gram-src { display: block; font-size: 0.75rem; color: var(--muted); }
+.gram-mistake { border-top: 1px dashed var(--border); padding-top: 6px; margin-top: 6px; }
+.gram-mistake p { margin: 2px 0; }
+.mark-x { color: var(--danger, #c0392b); font-weight: 800; }
+.mark-o { color: var(--success); font-weight: 800; }
+.mark-tri { color: #d68910; font-weight: 800; }
+.gram-ja { font-weight: 700; font-size: 1.05rem; }
+.gram-ja.big { font-size: 1.3rem; text-align: center; }
+.gram-sentence, .gram-built { font-size: 1.1rem; font-weight: 600; }
+.gram-built { min-height: 1.6em; border-bottom: 2px solid var(--border); padding-bottom: 4px; }
+.gram-blank { display: inline-block; min-width: 3em; border-bottom: 2px solid var(--primary); text-align: center; margin: 0 4px; color: var(--primary); }
+.gram-right { border-color: var(--success) !important; color: var(--success) !important; font-weight: 800; }
+.gram-wrong { border-color: var(--danger, #c0392b) !important; color: var(--danger, #c0392b) !important; text-decoration: line-through; }
+.gram-answers { margin: 4px 0; padding-left: 1.2em; }
+.gram-answers li { font-weight: 600; }
+.gram-label { font-weight: 800; color: var(--rpg-accent, var(--primary)); margin: 0; }
+.gram-timer { height: 8px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
+.gram-timer span { display: block; height: 100%; background: var(--primary); transition: width 1s linear; }
+.gram-count { margin: 0; }
+.gram-ex textarea { width: 100%; font-size: 1rem; }

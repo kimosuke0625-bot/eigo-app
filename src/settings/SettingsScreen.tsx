@@ -92,6 +92,10 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
           <input type="checkbox" checked={settings.idiomShowUnverified} onChange={(e) => set({ idiomShowUnverified: e.target.checked })} />
           「要確認」の熟語も出題する（確認が弱いもの。初期設定では出しません）
         </label>
+        <label className="row">
+          <input type="checkbox" checked={settings.grammarShowUnverified} onChange={(e) => set({ grammarShowUnverified: e.target.checked })} />
+          文法の「要確認」の説明も表示する（確信が持てない説明。初期設定では出しません）
+        </label>
         <div className="field">
           <span>熟語の絞り込み</span>
           <Seg value={settings.idiomFocus} onChange={(v) => set({ idiomFocus: v })}

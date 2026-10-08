@@ -70,6 +70,13 @@ describe('ディクテーションの採点', () => {
     ])
   })
 
+  it('カンマなどの記号・大文字小文字・アポストロフィの種類の違いは問わない', () => {
+    expect(diffWords("Well, I don't know — it's Tom's \"idea\".", "well i don’t know its tom`s idea").score).toBeLessThan(1)
+    expect(diffWords("Well, I don't know — it's Tom's \"idea\".", "WELL I DON’T KNOW, IT'S TOMʼS 'IDEA'").score).toBe(1)
+    expect(diffWords('a well-known place', 'a well known place').score).toBe(1)
+    expect(diffWords('Yes , sir !', 'yes sir').tokens.every((t) => t.kind === 'ok')).toBe(true)
+  })
+
   it('何も書かなければ0点', () => {
     expect(diffWords('Hello there.', '').score).toBe(0)
   })

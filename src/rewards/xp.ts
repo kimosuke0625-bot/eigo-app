@@ -83,10 +83,10 @@ export const EXPR_COMBO_AT = [0, 2, 3, 5, 8] as const
 /** 表現の復習で「連打」とみなす時間（単語より短くして、ゆるく判定する） */
 export const EXPR_QUICK_MS = 500
 
-export type ReviewDeck = 'word' | 'expr'
+export type ReviewDeck = 'word' | 'expr' | 'gram'
 
 export function comboStage(combo: number, deck: ReviewDeck = 'word'): number {
-  const at = deck === 'expr' ? EXPR_COMBO_AT : COMBO_STEPS.map((s) => s.at)
+  const at = deck !== 'word' ? EXPR_COMBO_AT : COMBO_STEPS.map((s) => s.at)
   let stage = 0
   at.forEach((a, i) => { if (combo >= a) stage = i })
   return stage
@@ -113,7 +113,7 @@ export interface ReviewGain {
 export function reviewXp(opts: { attemptsToday: number; answerMs: number; combo: number; forgot?: boolean; deck?: ReviewDeck; rand?: () => number }): ReviewGain {
   const rand = opts.rand ?? Math.random
   let base = opts.attemptsToday === 0 ? REVIEW_XP : opts.attemptsToday < 3 ? REPEAT_XP : REPEAT_XP_LATE
-  if (opts.answerMs < (opts.deck === 'expr' ? EXPR_QUICK_MS : QUICK_MS)) base = Math.min(base, QUICK_XP)
+  if (opts.answerMs < (opts.deck && opts.deck !== 'word' ? EXPR_QUICK_MS : QUICK_MS)) base = Math.min(base, QUICK_XP)
   const mult = COMBO_STEPS[comboStage(opts.combo, opts.deck)].mult
   let crit = 1
   if (base === REVIEW_XP && rand() < CRIT_CHANCE) crit = rand() < 0.75 ? 2 : 3

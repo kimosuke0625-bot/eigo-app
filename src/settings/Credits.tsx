@@ -73,7 +73,7 @@ const SOURCES: { name: string; use: string; license: string; url: string; note?:
   },
   {
     name: 'Wiktionary（英語版）',
-    use: '熟語・表現の見出し、意味、用法のラベル。機械可読版（kaikki.org）を使用。熟語の日本語の意味はこのアプリで作成',
+    use: '熟語・表現の見出し、意味、用法のラベル。文法の修行の ✕ の文を確かめる活用形。機械可読版（kaikki.org）を使用。熟語の日本語の意味はこのアプリで作成',
     license: 'CC BY-SA 4.0',
     url: 'https://en.wiktionary.org/',
     note: 'Wiktionary の執筆者のみなさん。機械可読版：Tatu Ylonen, Wiktextract（https://kaikki.org/）',
@@ -100,8 +100,21 @@ const SOURCES: { name: string; use: string; license: string; url: string; note?:
     note: 'orgtre（元データ：Google Books Ngram Corpus 第3版、Google、CC BY 3.0）',
   },
   {
+    name: '小学校・中学校学習指導要領（平成29年告示）解説 外国語編（文部科学省）',
+    use: '文法の修行の項目の並びと、解説の照らし合わせ（項目ごとに該当の頁を表示）。文章は写さず、解説と問題はこのアプリで作成',
+    license: '文部科学省ウェブサイト利用規約（出典の記載で利用可）',
+    url: 'https://www.mext.go.jp/a_menu/shotou/new-cs/1387016.htm',
+    note: '出典：文部科学省「中学校学習指導要領（平成29年告示）解説 外国語編」「小学校学習指導要領（平成29年告示）解説 外国語活動・外国語編」',
+  },
+  {
+    name: 'LanguageTool（PC の中で動かす版）',
+    use: '文法の修行の自作の文・答え・✕の文の確認にだけ利用（文法の誤りの判定）。外部のサーバーには送っていません',
+    license: 'LGPL 2.1',
+    url: 'https://languagetool.org/',
+  },
+  {
     name: '日本語訳・補いの例文',
-    use: 'NGSL・BSL 各語の短い日本語訳、Tatoeba に適した例文がない語の例文（NGSL 17語、BSL 330語）',
+    use: 'NGSL・BSL 各語の短い日本語訳、Tatoeba に適した例文がない語の例文（NGSL 17語、BSL 330語）、文法の修行の解説と問題',
     license: 'CC BY-SA 4.0',
     url: 'https://github.com/kimosuke0625-bot/eigo-app',
     note: 'このアプリ用に作成',

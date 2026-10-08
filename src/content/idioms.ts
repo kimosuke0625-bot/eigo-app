@@ -78,6 +78,7 @@ export function loadIdioms(): Promise<IdiomData> {
     .then(async (data) => {
       byId = new Map(data.items.map((d) => [d.id, d]))
       await syncIdioms(data)
+      await applyBasicKnown(data)
       return data
     })
     .catch((e) => {
@@ -120,6 +121,22 @@ export async function hiddenIdiomIds(database: EigoDB = db): Promise<Set<string>
 /** 「もう知っている」：出題から外す（カードと記録は残すので、戻せば続きから復習できる） */
 export async function hideIdiom(itemId: string, database: EigoDB = db) {
   await database.hiddenItems.put({ itemId, reason: 'known', at: Date.now() })
+}
+
+/**
+ * 基本のあいさつ・お礼（basic の印。1つ目の意味のカードだけ）を「知っている」扱いにする。
+ * 1つの熟語につき一度だけ行い、利用者が「戻す」を押したものは再び外さない。
+ */
+export async function applyBasicKnown(data: IdiomData, database: EigoDB = db) {
+  const s = await getSettings(database)
+  const done = new Set(s.idiomBasicApplied ?? [])
+  const todo = data.items.filter((d) => d.basic && !done.has(d.id))
+  if (!todo.length) return
+  const at = Date.now()
+  await database.transaction('rw', database.hiddenItems, async () => {
+    for (const d of todo) if (!(await database.hiddenItems.get(d.id))) await database.hiddenItems.put({ itemId: d.id, reason: 'basic', at })
+  })
+  await updateSettings({ idiomBasicApplied: [...done, ...todo.map((d) => d.id)] }, database)
 }
 
 export async function unhideIdiom(itemId: string, database: EigoDB = db) {
