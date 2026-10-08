@@ -1,0 +1,1556 @@
+{
+ "version": 202610081,
+ "license": "解説・問題：自作。例文：Tatoeba（CC BY 2.0 FR）",
+ "items": [
+  {
+   "id": "g01",
+   "no": 1,
+   "title": "be動詞（am・are・is）",
+   "stage": "小学校の復習",
+   "sources": [
+    {
+     "doc": "小学校学習指導要領（平成29年告示）解説 外国語活動・外国語編",
+     "where": "第2部第2章第2節 2(1)エ（ｲ）b［主語＋be動詞＋補語］",
+     "page": "96〜97"
+    },
+    {
+     "doc": "小学校学習指導要領（平成29年告示）解説 外国語活動・外国語編",
+     "where": "第2部第2章第2節 2(1)エ（ｱ）b 肯定，否定の平叙文",
+     "page": "93"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｲ）a［主語＋動詞＋補語］（小学校の例文）",
+     "page": "40"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｳ）d 前置詞（出身 I’m from Japan.）、e〈現在形〉",
+     "page": "46"
+    }
+   ],
+   "points": [
+    {
+     "text": "「AはBです」「Aは〜な状態です」は、主語のあとに be動詞を置き、その後ろに名詞や形容詞を続けます。",
+     "en": [
+      "I am a teacher.",
+      "I am busy."
+     ],
+     "check": false
+    },
+    {
+     "text": "主語で形が決まります。I は am、you と複数（we、they、2人以上・2つ以上のもの）は are、それ以外の1人・1つ（he、she、it、Tom、my father など）は is。",
+     "check": false
+    },
+    {
+     "text": "話すときは短い形をよく使います：I’m、you’re、he’s、she’s、it’s、we’re、they’re。",
+     "check": false
+    },
+    {
+     "text": "be動詞の後ろに場所を表す語句を続けると「〜にいる・ある」。出身は from を使います。",
+     "en": [
+      "I’m in Tokyo.",
+      "I’m from Japan."
+     ],
+     "check": false
+    },
+    {
+     "text": "職業など数えられる名詞が1人・1つのときは a（母音の音で始まる語の前は an）を付けます。",
+     "en": [
+      "I’m a nurse.",
+      "I’m an engineer."
+     ],
+     "check": false
+    },
+    {
+     "text": "「住んでいる」「好きだ」のような動作や気持ちは、be動詞ではなく一般動詞で表します（修行場2）。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I'm a teacher.",
+     "ja": "私は先生です。",
+     "source": "tatoeba",
+     "enId": 256929,
+     "jaId": 155469
+    },
+    {
+     "en": "I'm an engineer.",
+     "ja": "私はエンジニアです。",
+     "source": "tatoeba",
+     "enId": 397588,
+     "jaId": 3580937
+    },
+    {
+     "en": "I'm from Australia.",
+     "ja": "私はオーストラリア出身です。",
+     "source": "tatoeba",
+     "enId": 253217,
+     "jaId": 161299
+    },
+    {
+     "en": "I'm busy now.",
+     "ja": "私は今忙しい。",
+     "source": "tatoeba",
+     "enId": 241566,
+     "jaId": 156908
+    },
+    {
+     "en": "He is sick.",
+     "ja": "彼は病気です。",
+     "source": "tatoeba",
+     "enId": 371410,
+     "jaId": 100585
+    },
+    {
+     "en": "We are hungry.",
+     "ja": "私たちはお腹がすいています。",
+     "source": "tatoeba",
+     "enId": 247930,
+     "jaId": 166572
+    },
+    {
+     "en": "The station is nearby.",
+     "ja": "駅はすぐ近くです。",
+     "source": "tatoeba",
+     "enId": 26044,
+     "jaId": 188896
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "She are a teacher.",
+     "right": "She is a teacher.",
+     "note": "she（1人）には is を使う。",
+     "dict": {
+      "lemma": "be",
+      "pos": "verb",
+      "form": "is",
+      "tags": [
+       "third-person",
+       "singular",
+       "present"
+      ]
+     },
+     "proof": {
+      "languageTool": [
+       "PERS_PRONOUN_AGREEMENT：Use third-person verb with 'She'.",
+       "HE_VERB_AGR：The pronoun 'She' is usually used with a third-person or a past tense verb."
+      ],
+      "dictionary": "Wiktionary：is は be の third-person・singular・present"
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "We is hungry.",
+     "right": "We are hungry.",
+     "note": "we（複数）には are を使う。",
+     "dict": {
+      "lemma": "be",
+      "pos": "verb",
+      "form": "are",
+      "tags": [
+       "plural",
+       "present"
+      ]
+     },
+     "proof": {
+      "languageTool": [
+       "BASE_FORM：Possible agreement error — use the base form here.",
+       "PERS_PRONOUN_AGREEMENT：Use a first-person plural verb with 'we'."
+      ],
+      "dictionary": "Wiktionary：are は be の plural・present"
+     }
+    },
+    {
+     "kind": "meaning",
+     "wrong": "I'm in Tokyo.",
+     "intended": "東京に住んでいます",
+     "right": "I live in Tokyo.",
+     "note": "I’m in Tokyo. は「今、東京にいます」。住んでいることは一般動詞 live で言う。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-g01-1",
+     "type": "fill",
+     "ja": "私は学生です。",
+     "text": "I ___ a student.",
+     "choices": [
+      "am",
+      "are",
+      "is"
+     ],
+     "answers": [
+      "am"
+     ]
+    },
+    {
+     "id": "gram-g01-2",
+     "type": "fill",
+     "ja": "姉は看護師です。",
+     "text": "My sister ___ a nurse.",
+     "choices": [
+      "am",
+      "are",
+      "is"
+     ],
+     "answers": [
+      "is"
+     ]
+    },
+    {
+     "id": "gram-g01-3",
+     "type": "fill",
+     "ja": "トムと私は今日忙しい。",
+     "text": "Tom and I ___ busy today.",
+     "choices": [
+      "am",
+      "are",
+      "is"
+     ],
+     "answers": [
+      "are"
+     ]
+    },
+    {
+     "id": "gram-g01-4",
+     "type": "order",
+     "ja": "私の父は医者です。",
+     "tokens": [
+      "My",
+      "father",
+      "is",
+      "a",
+      "doctor"
+     ],
+     "answers": [
+      "My father is a doctor."
+     ]
+    },
+    {
+     "id": "gram-g01-5",
+     "type": "order",
+     "ja": "彼らは今とても忙しい。",
+     "tokens": [
+      "They",
+      "are",
+      "very",
+      "busy",
+      "now"
+     ],
+     "answers": [
+      "They are very busy now.",
+      "They are now very busy.",
+      "Now they are very busy."
+     ]
+    },
+    {
+     "id": "gram-g01-6",
+     "type": "rewrite",
+     "ja": "主語を He に変えて書き直す（語順はそのまま）。",
+     "from": "I am busy.",
+     "answers": [
+      "He is busy.",
+      "He's busy."
+     ]
+    },
+    {
+     "id": "gram-g01-7",
+     "type": "rewrite",
+     "ja": "主語を We に変えて書き直す（語順はそのまま）。",
+     "from": "I'm from Japan.",
+     "answers": [
+      "We are from Japan.",
+      "We're from Japan."
+     ]
+    },
+    {
+     "id": "gram-g01-8",
+     "type": "oral",
+     "ja": "私は会社員です。",
+     "answers": [
+      "I'm an office worker.",
+      "I'm a company employee."
+     ]
+    },
+    {
+     "id": "gram-g01-9",
+     "type": "oral",
+     "ja": "私は今、忙しいです。",
+     "answers": [
+      "I'm busy now."
+     ]
+    },
+    {
+     "id": "gram-g01-10",
+     "type": "oral",
+     "ja": "彼女はエンジニアです。",
+     "answers": [
+      "She's an engineer."
+     ]
+    },
+    {
+     "id": "gram-g01-11",
+     "type": "oral",
+     "ja": "私たちは今、大阪にいます。",
+     "answers": [
+      "We're in Osaka now."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "be動詞を使って、自分の仕事・立場か、今の状態を1文で言ってみましょう。",
+    "samples": [
+     "I'm a university student.",
+     "I'm a little tired today."
+    ],
+    "checks": [
+     "主語に合う be動詞（am・are・is）を選んだ",
+     "数えられる名詞1つには a / an を付けた"
+    ]
+   }
+  },
+  {
+   "id": "g02",
+   "no": 2,
+   "title": "一般動詞（like・live・play など）",
+   "stage": "小学校の復習",
+   "sources": [
+    {
+     "doc": "小学校学習指導要領（平成29年告示）解説 外国語活動・外国語編",
+     "where": "第2部第2章第2節 2(1)エ（ｲ）a［主語＋動詞］、c［主語＋動詞＋目的語］",
+     "page": "96〜97"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｲ）［主語＋動詞］、b［主語＋動詞＋目的語］（小学校の例文）",
+     "page": "40〜41"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｳ）e〈現在形〉",
+     "page": "46"
+    }
+   ],
+   "points": [
+    {
+     "text": "「〜する」「〜が好きだ」「〜に住んでいる」などは一般動詞で表します。語順は 主語＋動詞（＋目的語）。",
+     "en": [
+      "I like music.",
+      "I live in Tokyo."
+     ],
+     "check": false
+    },
+    {
+     "text": "日本語と語順が違います。「私は テニスを する」は I play tennis.（動詞のすぐ後ろに「〜を」が来る）。",
+     "check": false
+    },
+    {
+     "text": "現在形は、ふだんの習慣や、いつもそうであることを表します。",
+     "en": [
+      "I get up at six.",
+      "We live in Osaka."
+     ],
+     "check": false
+    },
+    {
+     "text": "always（いつも）、usually（たいてい）、often（よく）、sometimes（時々）は、ふつう一般動詞の前に置きます。",
+     "en": [
+      "I usually walk."
+     ],
+     "check": false
+    },
+    {
+     "text": "every day、on Sundays のような時を表す語句は、文の終わりに置くことが多いです。",
+     "check": false
+    },
+    {
+     "text": "好きなものの種類を言うときは、数えられる名詞は複数形にします。",
+     "en": [
+      "I like dogs."
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I live in Japan.",
+     "ja": "私は日本に住んでいます。",
+     "source": "tatoeba",
+     "enId": 259803,
+     "jaId": 154737
+    },
+    {
+     "en": "I get up at 6:30.",
+     "ja": "私は六時半に起きる。",
+     "source": "tatoeba",
+     "enId": 262302,
+     "jaId": 152248
+    },
+    {
+     "en": "I like tea.",
+     "ja": "私はお茶が好きです。",
+     "source": "tatoeba",
+     "enId": 253293,
+     "jaId": 161224
+    },
+    {
+     "en": "We like music.",
+     "ja": "私たちは、音楽が好きです。",
+     "source": "tatoeba",
+     "enId": 247741,
+     "jaId": 166761
+    },
+    {
+     "en": "I usually walk.",
+     "ja": "たいてい歩いて行きます。",
+     "source": "tatoeba",
+     "enId": 41158,
+     "jaId": 203916
+    },
+    {
+     "en": "I usually play tennis.",
+     "ja": "ふつうテニスをします。",
+     "source": "tatoeba",
+     "enId": 34349,
+     "jaId": 197167
+    },
+    {
+     "en": "You work hard.",
+     "ja": "君は商売熱心だね。",
+     "source": "tatoeba",
+     "enId": 15993,
+     "jaId": 177144
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "meaning",
+     "wrong": "I like dog.",
+     "intended": "犬が好きです",
+     "right": "I like dogs.",
+     "note": "好きな動物の種類は複数形で言う。dog を数えない形で使うと「犬の肉」の意味に取られることがある。"
+    },
+    {
+     "kind": "meaning",
+     "wrong": "I'm playing the piano.",
+     "intended": "（趣味で）ピアノを弾きます",
+     "right": "I play the piano.",
+     "note": "I’m playing は「今弾いているところ」（現在進行形。修行場11）。習慣は現在形で言う。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-g02-1",
+     "type": "fill",
+     "ja": "私は大阪に住んでいます。",
+     "text": "I ___ in Osaka.",
+     "choices": [
+      "live",
+      "am",
+      "lives"
+     ],
+     "answers": [
+      "live"
+     ]
+    },
+    {
+     "id": "gram-g02-2",
+     "type": "fill",
+     "ja": "私たちは学校で英語を勉強します。",
+     "text": "We ___ English at school.",
+     "choices": [
+      "study",
+      "studies",
+      "are"
+     ],
+     "answers": [
+      "study"
+     ]
+    },
+    {
+     "id": "gram-g02-3",
+     "type": "order",
+     "ja": "私は毎朝コーヒーを飲みます。",
+     "tokens": [
+      "I",
+      "drink",
+      "coffee",
+      "every",
+      "morning"
+     ],
+     "answers": [
+      "I drink coffee every morning.",
+      "Every morning I drink coffee."
+     ]
+    },
+    {
+     "id": "gram-g02-4",
+     "type": "order",
+     "ja": "私はたいてい7時に起きます。",
+     "tokens": [
+      "I",
+      "usually",
+      "get",
+      "up",
+      "at",
+      "seven"
+     ],
+     "answers": [
+      "I usually get up at seven.",
+      "Usually I get up at seven.",
+      "I get up at seven usually."
+     ]
+    },
+    {
+     "id": "gram-g02-5",
+     "type": "rewrite",
+     "ja": "always（いつも）を入れて書き直す。",
+     "from": "I eat breakfast.",
+     "answers": [
+      "I always eat breakfast."
+     ]
+    },
+    {
+     "id": "gram-g02-6",
+     "type": "rewrite",
+     "ja": "every Sunday（毎週日曜日に）を加えて書き直す。",
+     "from": "I play tennis.",
+     "answers": [
+      "I play tennis every Sunday.",
+      "Every Sunday I play tennis."
+     ]
+    },
+    {
+     "id": "gram-g02-7",
+     "type": "oral",
+     "ja": "私は東京に住んでいます。",
+     "answers": [
+      "I live in Tokyo."
+     ]
+    },
+    {
+     "id": "gram-g02-8",
+     "type": "oral",
+     "ja": "私は毎日英語を勉強します。",
+     "answers": [
+      "I study English every day."
+     ]
+    },
+    {
+     "id": "gram-g02-9",
+     "type": "oral",
+     "ja": "私はよく電車で通勤します。",
+     "answers": [
+      "I often go to work by train.",
+      "I often commute by train."
+     ]
+    },
+    {
+     "id": "gram-g02-10",
+     "type": "oral",
+     "ja": "私はコーヒーが好きです。",
+     "answers": [
+      "I like coffee."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "一般動詞を使って、自分がふだんしていることを1文で言ってみましょう。",
+    "samples": [
+     "I usually get up at six.",
+     "I work in sales."
+    ],
+    "checks": [
+     "動詞を主語のすぐ後ろに置いた",
+     "always などは動詞の前に置いた"
+    ]
+   }
+  },
+  {
+   "id": "g03",
+   "no": 3,
+   "title": "三人称単数（He plays.）",
+   "stage": "小学校の復習",
+   "sources": [
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｳ）e 動詞の時制及び相など〈現在形〉",
+     "page": "46"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "同 e〈過去形〉の説明（主語が三人称単数であっても -s にしない）",
+     "page": "47〜48"
+    },
+    {
+     "doc": "小学校学習指導要領（平成29年告示）解説 外国語活動・外国語編",
+     "where": "第2部第2章第2節 2(1)エ（ｱ）d 疑問文（does で始まる疑問文は小学校では扱わない）",
+     "page": "95"
+    }
+   ],
+   "points": [
+    {
+     "text": "主語が he、she、it や、1人・1つのもの（Tom、my father、the shop など）で、現在の文のとき、一般動詞に -s か -es を付けます。",
+     "en": [
+      "He plays soccer."
+     ],
+     "check": false
+    },
+    {
+     "text": "I と you には付けません。複数（we、they、Tom and Mary など）にも付けません。",
+     "check": false
+    },
+    {
+     "text": "付け方：ふつうは -s（plays、likes）。s、sh、ch、x、o で終わる語は -es（watches、goes）。「子音字＋y」で終わる語は y を i に変えて -es（studies）。",
+     "check": false
+    },
+    {
+     "text": "have は has、do は does になります。",
+     "check": false
+    },
+    {
+     "text": "過去の文（played など）では -s を付けません。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "He plays soccer.",
+     "ja": "彼はサッカーをしている。",
+     "source": "tatoeba",
+     "enId": 290024,
+     "jaId": 113649
+    },
+    {
+     "en": "He speaks English.",
+     "ja": "彼は英語を話します。",
+     "source": "tatoeba",
+     "enId": 294043,
+     "jaId": 109647
+    },
+    {
+     "en": "She works hard.",
+     "ja": "彼女はよく働く。",
+     "source": "tatoeba",
+     "enId": 312405,
+     "jaId": 91309
+    },
+    {
+     "en": "He studies Chinese.",
+     "ja": "彼は、中国語を勉強します。",
+     "source": "tatoeba",
+     "enId": 288241,
+     "jaId": 115429
+    },
+    {
+     "en": "She goes to school.",
+     "ja": "彼女は学校に通っています。",
+     "source": "tatoeba",
+     "enId": 313002,
+     "jaId": 90710
+    },
+    {
+     "en": "My brother watches television.",
+     "ja": "弟はテレビを見ます。",
+     "source": "tatoeba",
+     "enId": 278546,
+     "jaId": 125445
+    },
+    {
+     "en": "Tom likes swimming.",
+     "ja": "トムは泳ぐことが好きです。",
+     "source": "tatoeba",
+     "enId": 37185,
+     "jaId": 199984
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "He play tennis.",
+     "right": "He plays tennis.",
+     "note": "he の現在の文では -s を付ける。",
+     "dict": {
+      "lemma": "play",
+      "pos": "verb",
+      "form": "plays",
+      "tags": [
+       "third-person",
+       "singular",
+       "present"
+      ]
+     },
+     "proof": {
+      "languageTool": [
+       "HE_VERB_AGR：The pronoun 'He' is usually used with a third-person or a past tense verb."
+      ],
+      "dictionary": "Wiktionary：plays は play の third-person・singular・present"
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "She have a car.",
+     "right": "She has a car.",
+     "note": "have は has になる。",
+     "dict": {
+      "lemma": "have",
+      "pos": "verb",
+      "form": "has",
+      "tags": [
+       "third-person",
+       "singular",
+       "present"
+      ]
+     },
+     "proof": {
+      "languageTool": [
+       "HE_VERB_AGR：The pronoun 'She' is usually used with a third-person or a past tense verb."
+      ],
+      "dictionary": "Wiktionary：has は have の third-person・singular・present"
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "He studys English.",
+     "right": "He studies English.",
+     "note": "「子音字＋y」は y を i に変えて -es。",
+     "dict": {
+      "lemma": "study",
+      "pos": "verb",
+      "form": "studies",
+      "tags": [
+       "third-person",
+       "singular",
+       "present"
+      ]
+     },
+     "proof": {
+      "languageTool": [
+       "MORFOLOGIK_RULE_EN_US：Possible spelling mistake. Did you mean \"studies\", the plural form of the noun 'study'?"
+      ],
+      "dictionary": "Wiktionary：studies は study の third-person・singular・present"
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "He watchs TV every night.",
+     "right": "He watches TV every night.",
+     "note": "ch で終わる語は -es。",
+     "dict": {
+      "lemma": "watch",
+      "pos": "verb",
+      "form": "watches",
+      "tags": [
+       "third-person",
+       "singular",
+       "present"
+      ]
+     },
+     "proof": {
+      "languageTool": [
+       "MORFOLOGIK_RULE_EN_US：Possible spelling mistake. Did you mean \"watches\", the plural form of the noun 'watch'?"
+      ],
+      "dictionary": "Wiktionary：watches は watch の third-person・singular・present"
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-g03-1",
+     "type": "fill",
+     "ja": "父は電車で通勤しています。",
+     "text": "My father ___ to work by train.",
+     "choices": [
+      "go",
+      "goes",
+      "gos"
+     ],
+     "answers": [
+      "goes"
+     ]
+    },
+    {
+     "id": "gram-g03-2",
+     "type": "fill",
+     "ja": "彼女には子どもが2人います。",
+     "text": "She ___ two children.",
+     "choices": [
+      "have",
+      "has",
+      "haves"
+     ],
+     "answers": [
+      "has"
+     ]
+    },
+    {
+     "id": "gram-g03-3",
+     "type": "fill",
+     "ja": "トムとケンは日曜日にサッカーをします。",
+     "text": "Tom and Ken ___ soccer on Sundays.",
+     "choices": [
+      "play",
+      "plays"
+     ],
+     "answers": [
+      "play"
+     ]
+    },
+    {
+     "id": "gram-g03-4",
+     "type": "order",
+     "ja": "父は毎朝新聞を読みます。",
+     "tokens": [
+      "My",
+      "father",
+      "reads",
+      "the",
+      "newspaper",
+      "every",
+      "morning"
+     ],
+     "answers": [
+      "My father reads the newspaper every morning.",
+      "Every morning my father reads the newspaper."
+     ]
+    },
+    {
+     "id": "gram-g03-5",
+     "type": "rewrite",
+     "ja": "主語を My brother に変えて書き直す（語順はそのまま）。",
+     "from": "I watch TV every night.",
+     "answers": [
+      "My brother watches TV every night."
+     ]
+    },
+    {
+     "id": "gram-g03-6",
+     "type": "rewrite",
+     "ja": "主語を She に変えて書き直す（語順はそのまま）。",
+     "from": "I study English.",
+     "answers": [
+      "She studies English."
+     ]
+    },
+    {
+     "id": "gram-g03-7",
+     "type": "oral",
+     "ja": "彼は英語を話します。",
+     "answers": [
+      "He speaks English."
+     ]
+    },
+    {
+     "id": "gram-g03-8",
+     "type": "oral",
+     "ja": "私の上司は毎朝コーヒーを飲みます。",
+     "answers": [
+      "My boss drinks coffee every morning."
+     ]
+    },
+    {
+     "id": "gram-g03-9",
+     "type": "oral",
+     "ja": "彼女は大阪に住んでいます。",
+     "answers": [
+      "She lives in Osaka."
+     ]
+    },
+    {
+     "id": "gram-g03-10",
+     "type": "oral",
+     "ja": "その店は9時に開きます。",
+     "answers": [
+      "The shop opens at nine.",
+      "The store opens at nine."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "家族・同僚・友人の1人について、-s を付けた動詞で1文言ってみましょう。",
+    "samples": [
+     "My father works at a bank.",
+     "My sister lives in Osaka."
+    ],
+    "checks": [
+     "動詞に -s / -es を付けた（have は has）",
+     "主語が複数のときは付けていない"
+    ]
+   }
+  },
+  {
+   "id": "g04",
+   "no": 4,
+   "title": "否定文と疑問文（not・Do / Does）",
+   "stage": "小学校の復習",
+   "sources": [
+    {
+     "doc": "小学校学習指導要領（平成29年告示）解説 外国語活動・外国語編",
+     "where": "第2部第2章第2節 2(1)エ（ｱ）b 肯定，否定の平叙文",
+     "page": "93"
+    },
+    {
+     "doc": "小学校学習指導要領（平成29年告示）解説 外国語活動・外国語編",
+     "where": "第2部第2章第2節 2(1)エ（ｱ）d 疑問文（yes-no 疑問文）",
+     "page": "94〜95"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｱ）b 疑問文（小学校の例文と平叙文）",
+     "page": "37〜39"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｳ）e（否定文や疑問文の場合を含む）",
+     "page": "46"
+    }
+   ],
+   "points": [
+    {
+     "text": "be動詞の否定文は、be動詞の後ろに not を置きます。短い形：isn’t、aren’t、I’m not。",
+     "en": [
+      "I'm not busy.",
+      "She isn't married."
+     ],
+     "check": false
+    },
+    {
+     "text": "be動詞の疑問文は、be動詞を主語の前に出します。答えも be動詞を使います。",
+     "en": [
+      "Are you busy?",
+      "Yes, I am.",
+      "No, I'm not."
+     ],
+     "check": false
+    },
+    {
+     "text": "一般動詞の否定文は、動詞の前に don’t（主語が he、she など1人・1つなら doesn’t）。動詞は原形（-s を付けない形）のまま。",
+     "en": [
+      "I don't like coffee.",
+      "He doesn't like fish."
+     ],
+     "check": false
+    },
+    {
+     "text": "一般動詞の疑問文は、文の初めに Do（主語が1人・1つなら Does）を置き、動詞は原形。答えも do / does を使います。",
+     "en": [
+      "Do you like fish?",
+      "Yes, I do.",
+      "No, he doesn't."
+     ],
+     "check": false
+    },
+    {
+     "text": "疑問文は、文の終わりを上げて言うのがふつうです。",
+     "check": false
+    },
+    {
+     "text": "Yes / No は、答えの内容が肯定か否定かで決めます。否定の形で聞かれても同じで、日本語の「はい・いいえ」と逆になることがあります。",
+     "en": [
+      "Don't you like coffee?",
+      "No, I don't."
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I'm not busy.",
+     "ja": "私は忙しくない。",
+     "source": "tatoeba",
+     "enId": 261730,
+     "jaId": 152817
+    },
+    {
+     "en": "She isn't married.",
+     "ja": "彼女は結婚していません。",
+     "source": "tatoeba",
+     "enId": 313424,
+     "jaId": 90290
+    },
+    {
+     "en": "I don't like coffee.",
+     "ja": "僕はコーヒーが嫌いだよ。",
+     "source": "tatoeba",
+     "enId": 33536,
+     "jaId": 196359
+    },
+    {
+     "en": "Tom doesn't like cheese.",
+     "ja": "トムはチーズが好きではない。",
+     "source": "tatoeba",
+     "enId": 37243,
+     "jaId": 200042
+    },
+    {
+     "en": "Are you happy?",
+     "ja": "幸せですか？",
+     "source": "tatoeba",
+     "enId": 16164,
+     "jaId": 177315
+    },
+    {
+     "en": "Do you like fish?",
+     "ja": "魚は好きですか。",
+     "source": "tatoeba",
+     "enId": 19349,
+     "jaId": 182104
+    },
+    {
+     "en": "Does Tom know?",
+     "ja": "トムは知っているの？",
+     "source": "tatoeba",
+     "enId": 1886024,
+     "jaId": 2125055
+    },
+    {
+     "en": "I don't smoke.",
+     "ja": "タバコは吸いません。",
+     "source": "tatoeba",
+     "enId": 40662,
+     "jaId": 203424
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "He don't like fish.",
+     "right": "He doesn't like fish.",
+     "note": "he には doesn’t を使う。",
+     "dict": {
+      "lemma": "do",
+      "pos": "verb",
+      "form": "does",
+      "tags": [
+       "third-person",
+       "singular",
+       "present"
+      ]
+     },
+     "proof": {
+      "languageTool": [
+       "HE_VERB_AGR：The pronoun 'He' is usually used with a third-person or a past tense verb."
+      ],
+      "dictionary": "Wiktionary：does は do の third-person・singular・present"
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "Does she likes tea?",
+     "right": "Does she like tea?",
+     "note": "Does の文では動詞は原形（likes は -s の付いた形）。",
+     "dict": {
+      "lemma": "like",
+      "pos": "verb",
+      "form": "likes",
+      "tags": [
+       "third-person",
+       "singular",
+       "present"
+      ]
+     },
+     "proof": {
+      "languageTool": [
+       "DO_VBZ：After the auxiliary verb 'do', use the base form of the main verb. Did you mean \"like\"?",
+       "DOES_NP_VBZ：Did you mean \"like\"?",
+       "DOES_X_HAS：Did you mean \"like\"? As 'do' is already inflected, the verb cannot also be inflected."
+      ],
+      "dictionary": "Wiktionary：likes は like の third-person・singular・present"
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "Is you a student?",
+     "right": "Are you a student?",
+     "note": "you には are を使う。",
+     "dict": {
+      "lemma": "be",
+      "pos": "verb",
+      "form": "are",
+      "tags": [
+       "second-person",
+       "present"
+      ]
+     },
+     "proof": {
+      "languageTool": [
+       "NON3PRS_VERB：The pronoun 'you' must be used with \"Are\"."
+      ],
+      "dictionary": "Wiktionary：are は be の second-person・present"
+     }
+    },
+    {
+     "kind": "meaning",
+     "wrong": "\"Don't you like coffee?\" \"Yes.\"",
+     "intended": "（いいえ、）好きではありません",
+     "right": "\"Don't you like coffee?\" \"No, I don't.\"",
+     "note": "Yes と答えると「好きです」の意味になる。好きでないなら No。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-g04-1",
+     "type": "fill",
+     "ja": "あなたは今、忙しいですか。",
+     "text": "___ you busy now?",
+     "choices": [
+      "Are",
+      "Do",
+      "Is"
+     ],
+     "answers": [
+      "Are"
+     ]
+    },
+    {
+     "id": "gram-g04-2",
+     "type": "fill",
+     "ja": "あなたのお兄さんはゴルフをしますか。",
+     "text": "___ your brother play golf?",
+     "choices": [
+      "Do",
+      "Does",
+      "Is"
+     ],
+     "answers": [
+      "Does"
+     ]
+    },
+    {
+     "id": "gram-g04-3",
+     "type": "fill",
+     "ja": "私は肉を食べません。",
+     "text": "I ___ eat meat.",
+     "choices": [
+      "don't",
+      "doesn't",
+      "am not"
+     ],
+     "answers": [
+      "don't"
+     ]
+    },
+    {
+     "id": "gram-g04-4",
+     "type": "order",
+     "ja": "彼はコーヒーを飲みません。",
+     "tokens": [
+      "He",
+      "doesn't",
+      "drink",
+      "coffee"
+     ],
+     "answers": [
+      "He doesn't drink coffee."
+     ]
+    },
+    {
+     "id": "gram-g04-5",
+     "type": "order",
+     "ja": "あなたは東京に住んでいますか。",
+     "tokens": [
+      "Do",
+      "you",
+      "live",
+      "in",
+      "Tokyo"
+     ],
+     "answers": [
+      "Do you live in Tokyo?"
+     ]
+    },
+    {
+     "id": "gram-g04-6",
+     "type": "rewrite",
+     "ja": "疑問文に書き直す。",
+     "from": "She likes sushi.",
+     "answers": [
+      "Does she like sushi?"
+     ]
+    },
+    {
+     "id": "gram-g04-7",
+     "type": "rewrite",
+     "ja": "否定文に書き直す。",
+     "from": "I am hungry.",
+     "answers": [
+      "I'm not hungry.",
+      "I am not hungry."
+     ]
+    },
+    {
+     "id": "gram-g04-8",
+     "type": "rewrite",
+     "ja": "否定文に書き直す。",
+     "from": "They play baseball.",
+     "answers": [
+      "They don't play baseball.",
+      "They do not play baseball."
+     ]
+    },
+    {
+     "id": "gram-g04-9",
+     "type": "oral",
+     "ja": "お酒は飲みますか。",
+     "answers": [
+      "Do you drink?"
+     ]
+    },
+    {
+     "id": "gram-g04-10",
+     "type": "oral",
+     "ja": "（↑に答えて）いいえ、飲みません。",
+     "answers": [
+      "No, I don't."
+     ]
+    },
+    {
+     "id": "gram-g04-11",
+     "type": "oral",
+     "ja": "彼はここに住んでいません。",
+     "answers": [
+      "He doesn't live here."
+     ]
+    },
+    {
+     "id": "gram-g04-12",
+     "type": "oral",
+     "ja": "あなたは学生ですか。",
+     "answers": [
+      "Are you a student?"
+     ]
+    }
+   ],
+   "myself": {
+    "task": "否定文を使って、自分がしないこと・好きではないことを1文で言ってみましょう。",
+    "samples": [
+     "I don't drink coffee.",
+     "I'm not a morning person."
+    ],
+    "checks": [
+     "be動詞の文は be動詞＋not、一般動詞の文は don’t / doesn’t＋原形にした"
+    ]
+   }
+  },
+  {
+   "id": "g05",
+   "no": 5,
+   "title": "疑問詞（what・where・when・who・why・how）",
+   "stage": "小学校の復習",
+   "sources": [
+    {
+     "doc": "小学校学習指導要領（平成29年告示）解説 外国語活動・外国語編",
+     "where": "第2部第2章第2節 2(1)エ（ｱ）d 疑問文（疑問詞 who，what，when，where，why，how で始まるもの）",
+     "page": "94〜95"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｱ）b 疑問文（wh- 疑問文。小学校の例文）",
+     "page": "37〜39"
+    }
+   ],
+   "points": [
+    {
+     "text": "疑問詞は文の初めに置き、後ろは疑問文の語順にします：what（何）、who（誰）、where（どこ）、when（いつ）、why（なぜ）、how（どう・どのように）。",
+     "check": false
+    },
+    {
+     "text": "be動詞の文：疑問詞＋be動詞＋主語。",
+     "en": [
+      "Where is the station?",
+      "Who is she?"
+     ],
+     "check": false
+    },
+    {
+     "text": "一般動詞の文：疑問詞＋do / does＋主語＋動詞の原形。",
+     "en": [
+      "Where do you live?",
+      "Where does he live?"
+     ],
+     "check": false
+    },
+    {
+     "text": "名詞や形容詞と組み合わせて使えます：what time（何時）、how many（いくつ）、how old（何歳）。",
+     "en": [
+      "What time does school begin?",
+      "How old is Tom?"
+     ],
+     "check": false
+    },
+    {
+     "text": "Yes / No ではなく、聞かれたことを答えます。短く答えてもかまいません。",
+     "en": [
+      "Where do you live?",
+      "I live in Osaka.",
+      "In Osaka."
+     ],
+     "check": false
+    },
+    {
+     "text": "疑問詞の疑問文は、文の終わりを下げて言うのがふつうです。",
+     "check": false
+    },
+    {
+     "text": "which（どちら）と whose（誰の）は中学校の項目で扱います。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "Where do you live?",
+     "ja": "どこに住んでいますか？",
+     "source": "tatoeba",
+     "enId": 370708,
+     "jaId": 48302
+    },
+    {
+     "en": "Where do you work?",
+     "ja": "どこで働いてるの？",
+     "source": "tatoeba",
+     "enId": 38153,
+     "jaId": 200949
+    },
+    {
+     "en": "When is your birthday?",
+     "ja": "誕生日はいつですか。",
+     "source": "tatoeba",
+     "enId": 16997,
+     "jaId": 127340
+    },
+    {
+     "en": "What time does school begin?",
+     "ja": "学校は何時に始まりますか。",
+     "source": "tatoeba",
+     "enId": 21531,
+     "jaId": 184404
+    },
+    {
+     "en": "Where does he live?",
+     "ja": "彼は何処に住んでいるのですか。",
+     "source": "tatoeba",
+     "enId": 292024,
+     "jaId": 109334
+    },
+    {
+     "en": "Who is she?",
+     "ja": "彼女は誰ですか。",
+     "source": "tatoeba",
+     "enId": 315731,
+     "jaId": 87976
+    },
+    {
+     "en": "How old is Tom?",
+     "ja": "トムは何歳ですか。",
+     "source": "tatoeba",
+     "enId": 2261908,
+     "jaId": 4622541
+    },
+    {
+     "en": "Why do you ask?",
+     "ja": "なんで聞くの？",
+     "source": "tatoeba",
+     "enId": 1368,
+     "jaId": 4789
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "Where does he lives?",
+     "right": "Where does he live?",
+     "note": "does の後ろの動詞は原形。",
+     "dict": {
+      "lemma": "live",
+      "pos": "verb",
+      "form": "lives",
+      "tags": [
+       "third-person",
+       "singular",
+       "present"
+      ]
+     },
+     "proof": {
+      "languageTool": [
+       "HOW_DOES_THIS_CHANGES：It seems that the verb form is incorrect.",
+       "HOW_DO_I_VB：The base form of the verb \"live\" seems to fit better in this context.",
+       "DO_VBZ：After the auxiliary verb 'do', use the base form of the main verb. Did you mean \"live\"?",
+       "DOES_NP_VBZ：Did you mean \"live\"?",
+       "DOES_X_HAS：Did you mean \"live\"? As 'do' is already inflected, the verb cannot also be inflected."
+      ],
+      "dictionary": "Wiktionary：lives は live の third-person・singular・present"
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "Where is you from?",
+     "right": "Where are you from?",
+     "note": "you には are を使う。",
+     "dict": {
+      "lemma": "be",
+      "pos": "verb",
+      "form": "are",
+      "tags": [
+       "second-person",
+       "present"
+      ]
+     },
+     "proof": {
+      "languageTool": [
+       "NON3PRS_VERB：The pronoun 'you' must be used with \"are\"."
+      ],
+      "dictionary": "Wiktionary：are は be の second-person・present"
+     }
+    },
+    {
+     "kind": "meaning",
+     "wrong": "What are you doing?",
+     "intended": "お仕事は何ですか",
+     "right": "What do you do?",
+     "note": "What are you doing? は「今、何をしているの？」。仕事は現在形の What do you do? で聞く。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-g05-1",
+     "type": "fill",
+     "ja": "どこに住んでいますか。—京都です。",
+     "text": "___ do you live? — I live in Kyoto.",
+     "choices": [
+      "Where",
+      "What",
+      "When"
+     ],
+     "answers": [
+      "Where"
+     ]
+    },
+    {
+     "id": "gram-g05-2",
+     "type": "fill",
+     "ja": "誕生日はいつですか。—5月5日です。",
+     "text": "___ is your birthday? — It is May 5th.",
+     "choices": [
+      "When",
+      "Where",
+      "Who"
+     ],
+     "answers": [
+      "When"
+     ]
+    },
+    {
+     "id": "gram-g05-3",
+     "type": "fill",
+     "ja": "会議は何時に始まりますか。",
+     "text": "What time ___ the meeting start?",
+     "choices": [
+      "does",
+      "do",
+      "is"
+     ],
+     "answers": [
+      "does"
+     ]
+    },
+    {
+     "id": "gram-g05-4",
+     "type": "order",
+     "ja": "どこで働いていますか。",
+     "tokens": [
+      "Where",
+      "do",
+      "you",
+      "work"
+     ],
+     "answers": [
+      "Where do you work?"
+     ]
+    },
+    {
+     "id": "gram-g05-5",
+     "type": "order",
+     "ja": "会議は何時に始まりますか。",
+     "tokens": [
+      "What",
+      "time",
+      "does",
+      "the",
+      "meeting",
+      "start"
+     ],
+     "answers": [
+      "What time does the meeting start?"
+     ]
+    },
+    {
+     "id": "gram-g05-6",
+     "type": "rewrite",
+     "ja": "in Osaka（場所）をたずねる疑問文にする。",
+     "from": "He lives in Osaka.",
+     "answers": [
+      "Where does he live?"
+     ]
+    },
+    {
+     "id": "gram-g05-7",
+     "type": "rewrite",
+     "ja": "at ten（時刻）をたずねる疑問文にする。",
+     "from": "The shop opens at ten.",
+     "answers": [
+      "What time does the shop open?",
+      "When does the shop open?"
+     ]
+    },
+    {
+     "id": "gram-g05-8",
+     "type": "oral",
+     "ja": "ご出身はどちらですか。",
+     "answers": [
+      "Where are you from?",
+      "Where do you come from?"
+     ]
+    },
+    {
+     "id": "gram-g05-9",
+     "type": "oral",
+     "ja": "お仕事は何をされていますか。",
+     "answers": [
+      "What do you do?"
+     ]
+    },
+    {
+     "id": "gram-g05-10",
+     "type": "oral",
+     "ja": "会議はいつですか。",
+     "answers": [
+      "When is the meeting?"
+     ]
+    },
+    {
+     "id": "gram-g05-11",
+     "type": "oral",
+     "ja": "なぜそう思うのですか。",
+     "answers": [
+      "Why do you think so?"
+     ]
+    }
+   ],
+   "myself": {
+    "task": "初対面の人に聞かれそうな質問（Where do you work? など）を1つ選び、自分のことで1文答えてみましょう。",
+    "samples": [
+     "Where do you work? — I work in Shibuya.",
+     "What do you do? — I am a university student."
+    ],
+    "checks": [
+     "質問は 疑問詞＋do / does / be動詞＋主語 の語順にした",
+     "Yes / No ではなく、聞かれたことを答えた"
+    ]
+   }
+  }
+ ]
+}
