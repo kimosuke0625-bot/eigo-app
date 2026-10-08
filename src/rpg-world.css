@@ -215,9 +215,19 @@
 
 /* 熟語の詳しい情報（フェーズ8） */
 .idiom-detail { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border, var(--surface2)); }
-.idiom-detail .idiom-meta { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin-bottom: 8px; }
-.idiom-detail .idiom-stars { color: var(--warning); letter-spacing: 1px; margin-right: 6px; }
-.idiom-detail .btn.small { min-height: 40px; padding: 6px 12px; font-size: 0.85rem; }
+.idiom-labels { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: center; margin: -2px 0 12px; }
+.idiom-labels .idiom-stars { color: var(--warning); letter-spacing: 1px; font-size: 1rem; }
+.scene-chip { display: inline-block; font-size: 0.85rem; font-weight: 700; padding: 3px 10px; border-radius: 99px; border: 1.5px solid currentColor; background: var(--surface); }
+.scene-chip.talk { color: var(--success); }
+.scene-chip.write { color: var(--primary); }
+.scene-chip.both { color: var(--text2); }
+.scene-chip.biz { color: var(--accent); }
+.scene-chip.style { color: var(--warning); }
+.scene-chip.check { color: var(--warning); background: var(--warning-light); }
+.idiom-detail .doubt-box { margin-top: 10px; }
+.idiom-detail .doubt-hint { font-size: 0.8rem; margin-top: 4px; }
+.report-list li { padding: 8px 0; border-bottom: 1px solid var(--surface2); list-style: none; }
+.btn.small { min-height: 40px; padding: 6px 12px; font-size: 0.85rem; }
 .idiom-detail .idiom-more { margin-top: 8px; font-size: 0.85rem; word-break: break-word; }
 .idiom-detail .idiom-more textarea { width: 100%; box-sizing: border-box; }
 .tag.idiom-tag { background: var(--accent); color: var(--surface); }

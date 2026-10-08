@@ -9,6 +9,7 @@ import { AsrSection } from './AsrSection'
 import { AudioBankSection } from './AudioBankSection'
 import { OfflineSection } from './OfflineSection'
 import { MyAudioSection } from './MyAudioSection'
+import { ReportsSection } from './ReportsSection'
 import { LookSection } from './LookSection'
 import { playChime } from '../rewards/sound'
 import { VoiceInstallGuide } from './VoiceInstallGuide'
@@ -232,6 +233,7 @@ export function SettingsScreen({ settings, onDiagnostic }: { settings: Settings;
 
       <OfflineSection />
       <MyAudioSection />
+      <ReportsSection />
       <AudioBankSection />
 
       <AsrSection settings={settings} />

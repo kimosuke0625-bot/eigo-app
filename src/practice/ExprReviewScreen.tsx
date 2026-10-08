@@ -4,7 +4,9 @@ import { GRADES, GRADE_LABELS, formatInterval, previewIntervals, type Grade } fr
 import { nextCard, startOfDay } from '../srs/queue'
 import { EXPR_MAX_PER_DAY, introduceIdioms, introducePhrases, recordReview, todaysQueue, waitingIdioms, waitingPhrases } from '../srs/store'
 import { idiomInfo, isIdiom, loadIdioms } from '../content/idioms'
-import { IdiomDetail } from './IdiomDetail'
+import { IdiomDetail, IdiomLabels } from './IdiomDetail'
+import { HelpModal } from './PracticeHelp'
+import { updateSettings } from '../db/settings'
 import { bankRef, playText, prepare } from '../speech/audioBank'
 import { prepareMine } from '../speech/myAudio'
 import { Steps } from '../ui/Steps'
@@ -51,6 +53,9 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
   const floatId = useRef(0)
   const [hit, setHit] = useState({ seed: 0, strength: 0, crit: false })
   const fx = settings.effects
+  // 熟語のカードを初めて開いたときは、熟語のカードの説明（札と「疑問がある」ボタンの使い方）を出す
+  const [idiomHelp, setIdiomHelp] = useState(false)
+  const helpShown = useRef(false)
 
   useEffect(() => {
     void (async () => {
@@ -87,6 +92,11 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
     // 熟語は PC で作った音声（音声置き場の例文と同じ置き場）を先に用意する
     if (isIdiom(card.itemId)) await prepare(bankRef.example(item.english))
     setCurrent({ card, item, scene: await sceneOf(card.itemId), shownAt: Date.now(), attemptsToday })
+    if (isIdiom(card.itemId) && !helpShown.current && !settings.helpSeen.includes('idiom')) {
+      helpShown.current = true
+      setIdiomHelp(true)
+      void updateSettings({ helpSeen: [...settings.helpSeen, 'idiom'] })
+    }
     setRevealedAt(0)
   }, [])
 
@@ -220,6 +230,7 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
       )}
       {honestLine && <p className="honest-line" key={honestLine + battle.total}><PixelIcon name="star" size={16} /> {honestLine}</p>}
 
+      {idiomHelp && <HelpModal k="idiom" onClose={() => setIdiomHelp(false)} />}
       <Steps steps={['英語で言ってみる', '聞いてまねする', '評価する']} current={revealed ? 1 : 0}
         guide={revealed ? '読み上げを聞いて、同じ調子でまねして言いましょう。言えたかどうかを正直に選びます。' : '日本語の意味と場面を見て、英語で言ってみましょう。うろ覚えでも声に出すのが大事です。'} />
       <div className="card-stage">
@@ -236,6 +247,7 @@ export function ExprReviewScreen({ settings, onExit, onImport }: { settings: Set
           {revealed ? (
             <div className="answer" onClick={(e) => e.stopPropagation()}>
               <p className="expr-en">{item.english}</p>
+              {idiom && <IdiomLabels idiom={idiom} />}
               <div className="row" style={{ justifyContent: 'center' }}>
                 <SpeakButton big text={item.english} bank={bank} voiceURI={settings.voiceURI} label="聞く" />
                 <SpeakButton big text={item.english} bank={bank} voiceURI={settings.voiceURI} rate={0.75} label="ゆっくり" />

@@ -37,20 +37,22 @@ function scenesOf(c, sense, r) {
   const out = []
   if (tags.has('informal') || tags.has('colloquial')) out.push('くだけた言い方')
   if (tags.has('formal')) out.push('改まった言い方')
-  if (c.business) out.push('ビジネス')
+  if (c.business) out.push('ビジネス向き')
   // 話し言葉（映画字幕）と書き言葉（Wikipedia の取得済み分）の100万語あたりの回数を比べる。目安
   // Wikipedia の回数には文字どおりの用法も含まれるので、差がはっきりしたものだけ札を変える：
   //   Wikipedia のほうが多い → 書き言葉向き、Wikipedia でほとんど使われない（100万語あたり1回未満）→ 会話向き、ほかは両方
   //   Google Books の上位一覧（本。小説の会話も含む）に載っていれば補助に使い、本と字幕の多い少ないが逆なら「両方」にする
   if (r.subtitles !== null && r.wikipedia !== null) {
     const books = r.gbooks
-    let label = r.wikipedia >= r.subtitles ? '書き言葉向き（目安）' : r.wikipedia < 1 ? '会話向き（目安）' : '会話・書き言葉の両方（目安）'
+    let label = r.wikipedia >= r.subtitles ? '書き言葉向き' : r.wikipedia < 1 ? '会話向き' : 'どちらでも'
     if (books !== null && books !== undefined) {
-      if (label.startsWith('書き言葉') && books < r.subtitles) label = '会話・書き言葉の両方（目安）'
-      if (label.startsWith('会話向き') && books >= r.subtitles) label = '会話・書き言葉の両方（目安）'
+      if (label === '書き言葉向き' && books < r.subtitles) label = 'どちらでも'
+      if (label === '会話向き' && books >= r.subtitles) label = 'どちらでも'
     }
-    out.push(label)
+    out.unshift(label)
   }
+  // どの熟語にも必ず札を1つ以上付ける（回数で判断できないときは「どちらでも」）
+  if (!out.some((x) => ['会話向き', '書き言葉向き', 'どちらでも'].includes(x))) out.unshift('どちらでも')
   return out
 }
 
