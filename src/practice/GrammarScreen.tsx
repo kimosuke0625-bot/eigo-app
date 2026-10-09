@@ -189,14 +189,14 @@ function Explanation({ item, settings }: { item: GrammarItem; settings: Settings
       {errors.length > 0 && (
         <section className="card gram-mistakes">
           <h3><span className="mark-x">✕</span> 文法の誤り</h3>
-          <p className="muted">英語として誤りの文です。どれも、正しい形を学習指導要領解説（文部科学省）の例文・説明と辞書（Wiktionary）の両方で確かめました。</p>
+          <p className="muted">英語として誤りの文（形の誤り）です。どれも、正しい形を学習指導要領解説（文部科学省）の例文・説明、またはその範囲外の項目では CEFR-J Grammar Profile の項目の定義と、辞書（Wiktionary）の両方で確かめました。</p>
           {errors.map((m) => m.kind === 'error' && (
             <div className="gram-mistake" key={m.wrong}>
               <p><span className="mark-x">✕</span> <s lang="en">{m.wrong}</s></p>
               <p><span className="mark-o">○</span> <span lang="en">{m.right}</span></p>
               <p className="muted">{m.note}</p>
               <details><summary>確かめた方法</summary>
-                <p className="muted">解説：{m.proof.kaisetsu}</p>
+                <p className="muted">根拠：{m.proof.kaisetsu}</p>
                 <p className="muted">{m.proof.dictionary}</p>
                 <p className="muted">文法チェック（LanguageTool、参考）：{m.proof.languageTool.length ? m.proof.languageTool.join(' ／ ') : '検出なし'}</p>
               </details>
@@ -206,13 +206,14 @@ function Explanation({ item, settings }: { item: GrammarItem; settings: Settings
       )}
       {informals.length > 0 && (
         <section className="card gram-mistakes">
-          <h3><span className="mark-tri">△</span> 正式な場面では避ける</h3>
+          <h3><span className="mark-tri">△</span> くだけた言い方（正式な場面では避ける）</h3>
           <p className="muted">くだけた会話では母語話者も言うことがありますが、標準的な英語ではありません。自分で話すとき・書くときは ○ の形を使いましょう。</p>
           {informals.map((m) => m.kind === 'informal' && (
             <div className="gram-mistake" key={m.wrong}>
               <p><span className="mark-tri">△</span> <span lang="en">{m.wrong}</span></p>
               <p><span className="mark-o">○</span> <span lang="en">{m.right}</span></p>
               <p className="muted">{m.note}</p>
+              {m.work && <p className="gram-work">仕事の場面：{m.work}</p>}
               <details><summary>確かめた方法</summary>
                 <p className="muted">{m.proof.dictionary}</p>
                 <p className="muted">{m.proof.spoken}</p>
@@ -231,6 +232,7 @@ function Explanation({ item, settings }: { item: GrammarItem; settings: Settings
               <p className="muted">言いたいこと：{m.intended}</p>
               <p><span className="mark-o">○</span> <span lang="en">{m.right}</span></p>
               <p className="muted">{m.note}</p>
+              {m.work && <p className="gram-work">仕事の場面：{m.work}</p>}
             </div>
           ))}
         </section>

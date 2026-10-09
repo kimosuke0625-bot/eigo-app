@@ -13,8 +13,8 @@ export interface GrammarPoint { text: string; en?: string[]; check: boolean }
 export interface GrammarExample { en: string; ja?: string; source: 'tatoeba' | 'self'; enId?: number; jaId?: number }
 export type GrammarMistake =
   | { kind: 'error'; wrong: string; right: string; note: string; proof: { kaisetsu: string; dictionary: string; languageTool: string[] } }
-  | { kind: 'informal'; wrong: string; right: string; note: string; proof: { dictionary: string; spoken: string } }
-  | { kind: 'meaning'; wrong: string; intended: string; right: string; note: string }
+  | { kind: 'informal'; wrong: string; right: string; note: string; work?: string; proof: { dictionary: string; spoken: string } }
+  | { kind: 'meaning'; wrong: string; intended: string; right: string; note: string; work?: string }
 
 interface Base { id: string; ja: string; answers: string[] }
 export type GrammarExercise =

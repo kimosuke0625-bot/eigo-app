@@ -267,6 +267,7 @@ input[type="checkbox"] { width: 22px; height: 22px; vertical-align: middle; }
 .gram-mistake p { margin: 2px 0; }
 .mark-x { color: var(--danger, #c0392b); font-weight: 800; }
 .mark-o { color: var(--success); font-weight: 800; }
+.gram-work { font-size: 0.9em; font-weight: 700; }
 .mark-tri { color: #d68910; font-weight: 800; }
 .gram-ja { font-weight: 700; font-size: 1.05rem; }
 .gram-ja.big { font-size: 1.3rem; text-align: center; }

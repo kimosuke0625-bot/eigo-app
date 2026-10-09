@@ -59,7 +59,9 @@ describe('文法のデータ（public/data/grammar.json）', () => {
   it('✕ には解説と辞書の確かめた記録があり、△（正式な場面では避ける・意味が違う）と分けてある', () => {
     for (const it of data.items) for (const m of it.mistakes) {
       if (m.kind === 'error') {
-        expect(m.proof.kaisetsu).toMatch(/学習指導要領.*解説 .*p\.\d+「.+」/)
+        // 学習指導要領の範囲の項目は解説の頁、その先（c01〜）は CEFR-J Grammar Profile の項目番号とパターン
+        if (it.id.startsWith('c')) expect(m.proof.kaisetsu).toMatch(/^CEFR-J Grammar Profile .*項目\d+(-\d+)?「.+」（パターン：.+）$/)
+        else expect(m.proof.kaisetsu).toMatch(/学習指導要領.*解説 .*p\.\d+「.+」/)
         expect(m.proof.dictionary).toMatch(/^Wiktionary/)
       } else if (m.kind === 'informal') {
         expect(m.proof.dictionary).toMatch(/^Wiktionary/)
@@ -68,6 +70,8 @@ describe('文法のデータ（public/data/grammar.json）', () => {
         expect(m.kind).toBe('meaning')
         expect(m.intended).not.toBe('')
       }
+      // CEFR-J の項目の △ には、仕事の場面で使ってよいかの一言がある
+      if (it.id.startsWith('c') && m.kind !== 'error') expect(m.work).toBeTruthy()
     }
   })
 

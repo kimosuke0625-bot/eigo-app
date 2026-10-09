@@ -57,6 +57,19 @@ function findInKaisetsu(b) {
   return pages.some((p) => squeeze(p).includes(want) && new RegExp(`(^|[^0-9０-９])${b.page}([^0-9０-９]|$)`).test(p.replace(/[\s　]+/g, ' ')))
 }
 
+// CEFR-J Grammar Profile の項目一覧（ITEM LIST。scripts/grammar/xlsx2tsv.py で Excel から書き出した 00.tsv）。
+// 学習指導要領の範囲外の項目（フェーズ11）の ✕ は、解説の代わりに項目の定義（英語名とパターン略記）の正しい形と照らし合わせる（2026-10-10 利用者の決定：案B）
+const cefrjItems = new Map()
+for (const l of readFileSync(join(DATA, 'ref', 'cefrj', 'tsv', '00.tsv'), 'utf8').split('\n')) {
+  const c = l.split('\t')
+  if (/^\d+(-\d+)?$/.test(c[0])) cefrjItems.set(c[0], { name: c[4] ?? '', pattern: c[7] ?? '' })
+}
+// basis.item の項目の英語名かパターン略記に basis.find があるか
+function findInCefrj(b) {
+  const it = cefrjItems.get(String(b.item))
+  return it ? `${it.name} ${it.pattern}`.includes(b.find) ? it : null : null
+}
+
 // 文の正規化（並べ替えの語の比べ方。大文字小文字・文末の記号は問わない）
 const words = (s) => s.toLowerCase().replace(/[’‘]/g, "'").replace(/[.?!,]/g, ' ').split(/\s+/).filter(Boolean)
 
@@ -127,6 +140,9 @@ const outItems = items.map((it, n) => {
     return { en: t.en, ja: t.ja, source: 'tatoeba', enId: e.tatoeba, jaId: t.jaId }
   }).filter(Boolean)
 
+  // CEFR-J の項目（c01〜）の △ には、仕事の場面で使ってよいかの一言（work）を必ず付ける（2026-10-10 利用者の条件3）
+  const needWork = it.id.startsWith('c')
+  for (const m of it.mistakes) if (needWork && m.kind !== 'error' && !m.work) fail(it.id, `△ に「仕事の場面で使ってよいか」の一言（work）がない「${m.wrong}」`)
   const mistakes = it.mistakes.map((m) => {
     if (m.kind === 'meaning') return m
     if (m.kind === 'informal') {
@@ -144,13 +160,21 @@ const outItems = items.map((it, n) => {
       }
       const s = m.spoken
       if (!(s?.wrongCount > 0 && s?.rightCount > 0)) fail(it.id, `△（正式な場面では避ける）に字幕の回数がない「${m.wrong}」`)
-      return { kind: 'informal', wrong: m.wrong, right: m.right, note: m.note, proof: { dictionary, spoken: `映画字幕（OpenSubtitles 英語）：「${s.wrong}」${s.wrongCount.toLocaleString()}回、「${s.right}」${s.rightCount.toLocaleString()}回` } }
+      return { kind: 'informal', wrong: m.wrong, right: m.right, note: m.note, ...(m.work ? { work: m.work } : {}), proof: { dictionary, spoken: `映画字幕（OpenSubtitles 英語）：「${s.wrong}」${s.wrongCount.toLocaleString()}回、「${s.right}」${s.rightCount.toLocaleString()}回` } }
     }
     if (m.kind !== 'error') { fail(it.id, `まちがいの種類が不明：${m.kind}`); return m }
     // 解説の該当箇所（正しい形を示す例文・説明）
     const b = m.basis
-    if (!b || !findInKaisetsu(b)) fail(it.id, `解説で確かめられない「${m.wrong}」：${b ? `p.${b.page}に「${b.find}」がない` : 'basis がない'}`)
-    const kaisetsuNote = b ? `${b.doc} p.${b.page}「${b.find}」` : ''
+    let kaisetsuNote = ''
+    if (b?.item !== undefined) {
+      // CEFR-J Grammar Profile の項目の定義
+      const ci = findInCefrj(b)
+      if (!ci) fail(it.id, `CEFR-J の項目の定義で確かめられない「${m.wrong}」：項目${b.item}に「${b.find}」がない`)
+      else kaisetsuNote = `${b.doc} 項目${b.item}「${ci.name}」（パターン：${ci.pattern}）`
+    } else {
+      if (!b || !findInKaisetsu(b)) fail(it.id, `解説で確かめられない「${m.wrong}」：${b ? `p.${b.page}に「${b.find}」がない` : 'basis がない'}`)
+      kaisetsuNote = b ? `${b.doc} p.${b.page}「${b.find}」` : ''
+    }
     // 辞書の確かめ方は2つ：活用形（form と tags）か、語義の説明（gloss の文字列がその見出しの説明にある）
     const d = m.dict
     const entry = forms[`${d.lemma}|${d.pos}`] ?? { forms: [], glosses: [] }

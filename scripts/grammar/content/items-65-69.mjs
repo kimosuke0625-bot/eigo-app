@@ -1,6 +1,8 @@
 // 文法（フェーズ11）の中身：修行場65〜69（CEFR B1：会話でよく使う形）。書き方は items-01-05.mjs の先頭を参照。
 // 高校までの64項目にない文法を、CEFR-J Grammar Profile（教員版のレベル）の順に加える。学習指導要領の範囲外なので、
-// ✕（解説と辞書の両方で確かめる）は使わず、△「意味が違う」だけを載せる（✕ の扱いは利用者に確認中）。
+// ✕ は「形の誤り」だけ。CEFR-J Grammar Profile の項目の定義（英語名・パターン略記）の正しい形と辞書の両方で確かめる（basis.item に項目番号）。
+// 2026-10-10 利用者の決定（案B＋条件）：意味が違う文は △「意味が違う」、会話では普通に使うが正式な場面では避ける言い方は △（くだけた言い方）、
+// 英米で違う形・人によって判断が分かれる文・判断に迷う文は載せない。△ には仕事の場面で使ってよいかの一言（work）を付ける。
 // sources の page は学習指導要領解説の頁のときだけ付ける（CEFR-J は項目番号とレベルを where に書く）。
 const GP = 'CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）'
 
@@ -27,7 +29,8 @@ export default [
       { tatoeba: 39031, en: 'Shut the door, will you?' },
     ],
     mistakes: [
-      { kind: 'meaning', wrong: '"You don\'t smoke, do you?" "Yes."', intended: '「タバコは吸わないんですよね？」「はい、吸いません」', right: '"You don\'t smoke, do you?" "No, I don\'t."', note: 'Yes と答えると「いいえ、吸います」の意味になる。吸わないなら No。' },
+      { kind: 'meaning', wrong: '"You don\'t smoke, do you?" "Yes."', intended: '「タバコは吸わないんですよね？」「はい、吸いません」', right: '"You don\'t smoke, do you?" "No, I don\'t."', note: 'Yes と答えると「いいえ、吸います」の意味になる。吸わないなら No。', work: "どちらも正しい英語なので仕事で使える。答えの Yes・No を内容に合わせることが大事。" },
+      { kind: 'error', wrong: "You understand, aren't you?", right: "You understand, don't you?", note: '一般動詞の文の付加疑問は do・does・did を使う。', basis: { doc: GP, item: '193', find: 'do|does|did' }, dict: { lemma: 'do', pos: 'verb', gloss: 'A syntactic marker that refers back to an earlier verb' } },
     ],
     exercises: [
       { type: 'fill', ja: 'それは安いですよね。', text: "That's cheap, ___ it?", choices: ["isn't", "doesn't", 'is'], answers: ["isn't"] },
@@ -69,7 +72,9 @@ export default [
       { tatoeba: 11358651, en: '"I don\'t understand this." "Neither do I."' },
     ],
     mistakes: [
-      { kind: 'meaning', wrong: '"I don\'t like coffee." "Me too."', intended: '「コーヒーは好きじゃない」「私も（好きじゃない）」', right: '"I don\'t like coffee." "Neither do I."', note: 'Me too. は肯定の文への返事。否定の文に「私も〜ない」と返すときは Neither do I.（くだけて Me neither.）。' },
+      { kind: 'meaning', wrong: '"I don\'t like coffee." "Me too."', intended: '「コーヒーは好きじゃない」「私も（好きじゃない）」', right: '"I don\'t like coffee." "Neither do I."', note: 'Me too. は肯定の文への返事。否定の文に「私も〜ない」と返すときは Neither do I.（くだけて Me neither.）。', work: "Me too. 自体は仕事でも使えるが、否定の文への返事には使わない。" },
+      { kind: 'informal', wrong: `"I don't like long meetings." "Me neither."`, right: `"I don't like long meetings." "Neither do I."`, note: '会話ではとてもよく使う。正式な場面や書くときは Neither do I.。', work: '同僚との雑談ならよい。会議や目上の人・取引先には Neither do I. が無難。', dict: { lemma: 'me neither', pos: 'phrase', label: 'colloquial', gloss: 'negative-containing statement' }, spoken: { wrong: 'me neither', wrongCount: 21036, right: 'neither do i', rightCount: 13843 } },
+      { kind: 'error', wrong: '"I am a teacher." "So do I."', right: '"I am a teacher." "So am I."', note: '相手が be動詞の文なら、So の後ろも be動詞（am）。', basis: { doc: GP, item: '232', find: 'so+BE/HAVE/DO/AUX' }, dict: { lemma: 'be', pos: 'verb', form: 'am', tags: ['first-person', 'singular', 'present'] } },
     ],
     exercises: [
       { type: 'fill', ja: '「彼に賛成です」「私もです」', text: '"I agree with him." "So ___ I."', choices: ['do', 'am', 'have'], answers: ['do'] },
@@ -110,7 +115,8 @@ export default [
       { tatoeba: 2825471, en: "He didn't use to be like that." },
     ],
     mistakes: [
-      { kind: 'meaning', wrong: "I'm used to getting up early.", intended: '以前は早起きだった（今はちがう）', right: 'I used to get up early.', note: 'be used to 〜ing は「〜に慣れている」。「以前は〜していた」は used to＋動詞の原形（be動詞なし）。' },
+      { kind: 'meaning', wrong: "I'm used to getting up early.", intended: '以前は早起きだった（今はちがう）', right: 'I used to get up early.', note: 'be used to 〜ing は「〜に慣れている」。「以前は〜していた」は used to＋動詞の原形（be動詞なし）。', work: "どちらも正しい英語なので仕事で使える。意味の違いに注意。" },
+      { kind: 'error', wrong: 'I used to working here.', right: 'I used to work here.', note: 'used to の後ろは動詞の原形。', basis: { doc: GP, item: '140', find: 'used to V.' }, dict: { lemma: 'work', pos: 'verb', form: 'work', tags: ['infinitive'] } },
     ],
     exercises: [
       { type: 'fill', ja: '以前はここで働いていました。', text: 'I ___ to work here.', choices: ['used', 'use', 'was used'], answers: ['used'] },
@@ -153,7 +159,9 @@ export default [
       { tatoeba: 26401, en: "It's warm enough to swim." },
     ],
     mistakes: [
-      { kind: 'meaning', wrong: 'This bag is too heavy.', intended: 'このかばんはとても重い（けれど持てる）', right: 'This bag is very heavy.', note: 'too heavy は「重すぎる（持てない・よくない）」。ただ「とても重い」なら very。' },
+      { kind: 'meaning', wrong: 'This bag is too heavy.', intended: 'このかばんはとても重い（けれど持てる）', right: 'This bag is very heavy.', note: 'too heavy は「重すぎる（持てない・よくない）」。ただ「とても重い」なら very。', work: "どちらも正しい英語なので仕事で使える。too は「〜すぎて困る」という意味になる。" },
+      { kind: 'error', wrong: "I'm too busy to going.", right: "I'm too busy to go.", note: 'too … to の to の後ろは動詞の原形。', basis: { doc: GP, item: '44', find: 'too (JJ|RB) to_TO V.' }, dict: { lemma: 'go', pos: 'verb', form: 'go', tags: ['infinitive'] } },
+      { kind: 'error', wrong: "It's enough warm to swim.", right: "It's warm enough to swim.", note: 'enough は形容詞の後ろに置く。', basis: { doc: GP, item: '43', find: '(JJR?|RBR?) enough_RB' }, dict: { lemma: 'enough', pos: 'adv', gloss: 'Sufficiently.' } },
     ],
     exercises: [
       { type: 'fill', ja: '疲れすぎて歩けない。', text: "I'm ___ tired to walk.", choices: ['too', 'so', 'very'], answers: ['too'] },
@@ -193,7 +201,9 @@ export default [
       { tatoeba: 292815, en: 'He became more and more famous.' },
       { tatoeba: 30478, en: 'Do you have anything less expensive?' },
     ],
-    mistakes: [],
+    mistakes: [
+      { kind: 'error', wrong: 'I feel very better today.', right: 'I feel much better today.', note: '比較級を強めるときは very ではなく much・a lot・far。', basis: { doc: GP, item: '51', find: '(a lot|by far|even|far|much|still) (JJR|RBR)' }, dict: { lemma: 'good', pos: 'adj', form: 'better', tags: ['comparative'] } },
+    ],
     exercises: [
       { type: 'fill', ja: '今日はずっと気分がいい。', text: 'I feel ___ better today.', choices: ['much', 'very', 'more'], answers: ['much'] },
       { type: 'fill', ja: 'ますます寒くなってきている。', text: "It's getting colder and ___.", choices: ['colder', 'cold', 'coldest'], answers: ['colder'] },

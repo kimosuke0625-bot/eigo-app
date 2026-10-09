@@ -19,7 +19,7 @@ SPEC（設計図）第11章の開発フェーズを、決まったことに合�
 | 8 | 熟語・表現（約300個から） | 完了（見直しも確認済み） |
 | 9 | 文法（小学校・中学校の学習指導要領に沿う） | 完了（45項目と ✕ の基準の見直しを iPhone で確認済み 2026-10-09） |
 | 10 | 文法（高校の学習指導要領） | 完了（19項目を iPhone で確認済み 2026-10-10） |
-| 11 | 文法（CEFR-J Grammar Profile、高校より上） | 最初の5項目を公開、利用者の確認待ち |
+| 11 | 文法（CEFR-J Grammar Profile、高校より上） | 23項目（修行場65〜87）を公開、利用者の確認待ち |
 
 ## 決定事項（利用者の回答）
 
@@ -323,5 +323,9 @@ SPEC（設計図）第11章の開発フェーズを、決まったことに合�
   - CEFR B1：言い方を増やす：73 had better・would rather・might as well／74 関係代名詞 whose／75 強調の do（I do agree.）／76 未来完了（will have done）／77 進行形・完了形の受け身（is being done・has been done）／78 仮定法現在（suggest that he go）
   - CEFR B2：仕事で差がつく形：79 be about to・be to／80 I was told 〜（give・tell などの受け身）／81 強調構文（It is … that 〜）／82 the＋比較級, the＋比較級／83 to have done・to be done／84 Should you 〜（if 〜 should）
   - CEFR B2：かたい書き言葉：85 if it were not for・without／86 may well・might well／87 否定の倒置（Never have I 〜・Not only 〜）
-- ✕ について：学習指導要領の範囲外なので、決めた基準（解説と辞書の両方）では ✕ を確かめられない。最初の5項目は △「意味が違う」だけにした。✕ の扱いは利用者に質問中。
-- 最初の5項目（65〜69）：問題50問。△「意味が違う」4文。
+- ✕ の基準（2026-10-10 利用者の決定：案B＋条件）：✕ は「形の誤り」だけ。CEFR-J の項目の定義（英語名・パターン略記。eigo-data/ref/cefrj/tsv/00.tsv）の正しい形と辞書の両方で確かめ、項目番号を記録する（build.mjs が照合）。
+  意味が違う文は △「意味が違う」、会話では普通に使うが正式な場面では避ける言い方は △「くだけた言い方」（Wiktionary の札＋字幕で正しい形の1%以上）、
+  英米で違う形・人によって判断が分かれる文・判断に迷う文は載せない。△ には仕事の場面で使ってよいかの一言（work）を付ける。
+- 結果（2026-10-10）：23項目・問題217問（全体87項目・825問）。✕ 22文、△「意味が違う」7文、△「くだけた言い方」2文（Me neither.／You better go.）。
+- 迷って使わなかった文：6文。I use to work here.（字幕で正しい形のちょうど1%、境目）／We help each others.（所有格 each other's の書き間違いが回数に混ざる）／I suggest that he goes.（イギリス英語では使われる。英米の違い）／I decided to not go.（分割不定詞。人によって判断が分かれる）／If it was not for you, …（was と were。人によって判断が分かれる）／One is red and another is blue.（2つのうちの残りに another。判断が分かれる）。
+- 辞書で確かめる方法がなく ✕ にしなかったもの：語順の誤り（Never I have seen such a thing.／Not only he is smart, …）、強調構文・whatever など。

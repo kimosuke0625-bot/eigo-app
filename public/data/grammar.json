@@ -15235,7 +15235,19 @@
      "wrong": "\"You don't smoke, do you?\" \"Yes.\"",
      "intended": "「タバコは吸わないんですよね？」「はい、吸いません」",
      "right": "\"You don't smoke, do you?\" \"No, I don't.\"",
-     "note": "Yes と答えると「いいえ、吸います」の意味になる。吸わないなら No。"
+     "note": "Yes と答えると「いいえ、吸います」の意味になる。吸わないなら No。",
+     "work": "どちらも正しい英語なので仕事で使える。答えの Yes・No を内容に合わせることが大事。"
+    },
+    {
+     "kind": "error",
+     "wrong": "You understand, aren't you?",
+     "right": "You understand, don't you?",
+     "note": "一般動詞の文の付加疑問は do・does・did を使う。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目193「TAG QUESTION: FOLLOWING AFFIRMATIVE SENTENCE」（パターン：, (MD|V[BH][DPZ]|do|does|did) n't (PP|EX) ?）",
+      "dictionary": "Wiktionary：do（verb）の語義「A syntactic marker that refers back to an earlier verb」",
+      "languageTool": []
+     }
     }
    ],
    "exercises": [
@@ -15474,7 +15486,30 @@
      "wrong": "\"I don't like coffee.\" \"Me too.\"",
      "intended": "「コーヒーは好きじゃない」「私も（好きじゃない）」",
      "right": "\"I don't like coffee.\" \"Neither do I.\"",
-     "note": "Me too. は肯定の文への返事。否定の文に「私も〜ない」と返すときは Neither do I.（くだけて Me neither.）。"
+     "note": "Me too. は肯定の文への返事。否定の文に「私も〜ない」と返すときは Neither do I.（くだけて Me neither.）。",
+     "work": "Me too. 自体は仕事でも使えるが、否定の文への返事には使わない。"
+    },
+    {
+     "kind": "informal",
+     "wrong": "\"I don't like long meetings.\" \"Me neither.\"",
+     "right": "\"I don't like long meetings.\" \"Neither do I.\"",
+     "note": "会話ではとてもよく使う。正式な場面や書くときは Neither do I.。",
+     "work": "同僚との雑談ならよい。会議や目上の人・取引先には Neither do I. が無難。",
+     "proof": {
+      "dictionary": "Wiktionary：me neither（phrase）の語義「negative-containing statement」に札「colloquial」",
+      "spoken": "映画字幕（OpenSubtitles 英語）：「me neither」21,036回、「neither do i」13,843回"
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "\"I am a teacher.\" \"So do I.\"",
+     "right": "\"I am a teacher.\" \"So am I.\"",
+     "note": "相手が be動詞の文なら、So の後ろも be動詞（am）。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目232「INVERSION: so+BE/HAVE/DO/AUX+PERSONAL PRON」（パターン：(^|区切り位置|接続詞) so (VB[DPZ]|VH[DPZ]|(do|does|did)|MD) 名詞句・代名詞 .クギイチセツゾクシ）",
+      "dictionary": "Wiktionary：am は be の first-person・singular・present",
+      "languageTool": []
+     }
     }
    ],
    "exercises": [
@@ -15700,7 +15735,19 @@
      "wrong": "I'm used to getting up early.",
      "intended": "以前は早起きだった（今はちがう）",
      "right": "I used to get up early.",
-     "note": "be used to 〜ing は「〜に慣れている」。「以前は〜していた」は used to＋動詞の原形（be動詞なし）。"
+     "note": "be used to 〜ing は「〜に慣れている」。「以前は〜していた」は used to＋動詞の原形（be動詞なし）。",
+     "work": "どちらも正しい英語なので仕事で使える。意味の違いに注意。"
+    },
+    {
+     "kind": "error",
+     "wrong": "I used to working here.",
+     "right": "I used to work here.",
+     "note": "used to の後ろは動詞の原形。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目140「MODAL/AUX: used to」（パターン：(?<!{be})(?<!{not}) used to V.）",
+      "dictionary": "Wiktionary：work は work の infinitive",
+      "languageTool": []
+     }
     }
    ],
    "exercises": [
@@ -15926,7 +15973,30 @@
      "wrong": "This bag is too heavy.",
      "intended": "このかばんはとても重い（けれど持てる）",
      "right": "This bag is very heavy.",
-     "note": "too heavy は「重すぎる（持てない・よくない）」。ただ「とても重い」なら very。"
+     "note": "too heavy は「重すぎる（持てない・よくない）」。ただ「とても重い」なら very。",
+     "work": "どちらも正しい英語なので仕事で使える。too は「〜すぎて困る」という意味になる。"
+    },
+    {
+     "kind": "error",
+     "wrong": "I'm too busy to going.",
+     "right": "I'm too busy to go.",
+     "note": "too … to の to の後ろは動詞の原形。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目44「too ADJ/ADV to+INFINITIVE」（パターン：too (JJ|RB) to_TO V.）",
+      "dictionary": "Wiktionary：go は go の infinitive",
+      "languageTool": []
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "It's enough warm to swim.",
+     "right": "It's warm enough to swim.",
+     "note": "enough は形容詞の後ろに置く。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目43「ADJ/ADV enough (except for 'not enough')」（パターン：(?!{not})(JJR?|RBR?) enough_RB）",
+      "dictionary": "Wiktionary：enough（adv）の語義「Sufficiently.」",
+      "languageTool": []
+     }
     }
    ],
    "exercises": [
@@ -16162,7 +16232,19 @@
      "jaId": 193312
     }
    ],
-   "mistakes": [],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "I feel very better today.",
+     "right": "I feel much better today.",
+     "note": "比較級を強めるときは very ではなく much・a lot・far。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目51「INTENSIFIED COMPARATIVES: a lot/by far/even/far/much/still」（パターン：(a lot|by far|even|far|much|still) (JJR|RBR)）",
+      "dictionary": "Wiktionary：better は good の comparative",
+      "languageTool": []
+     }
+    }
+   ],
    "exercises": [
     {
      "id": "gram-c05-1",
@@ -16294,6 +16376,3998 @@
     ],
     "checks": [
      "比較級を強めるとき very ではなく much・a lot を使った"
+    ]
+   }
+  },
+  {
+   "id": "c06",
+   "no": 70,
+   "title": "「お互いに」「もう一方」「ほかの人たち」（each other・the other・others）",
+   "stage": "CEFR B1：会話でよく使う形",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 27 each other（B1.1）・28 one another（B1.2）・29 others（B1.1）・30 the other / the others（B1.2）"
+    }
+   ],
+   "points": [
+    {
+     "text": "each other は「お互い（に・を）」。動詞や前置詞の後ろに置きます。",
+     "en": [
+      "Let's help each other."
+     ],
+     "check": false
+    },
+    {
+     "text": "2つ（2人）のうち、1つ目は one、残りのもう一方は the other。",
+     "en": [
+      "One stayed, and the other went away."
+     ],
+     "check": false
+    },
+    {
+     "text": "Some 〜, others … は「〜な人（物）もいれば、…な人（物）もいる」。others は「（決まっていない）ほかの人たち」。",
+     "en": [
+      "Some like tea, others prefer coffee."
+     ],
+     "check": false
+    },
+    {
+     "text": "the others は「残り全部」。the が付くと、残りがすべて決まっていることを表します。",
+     "en": [
+      "Where are all the others?"
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "Let's help each other.",
+     "ja": "お互いに助け合いましょう。",
+     "source": "tatoeba",
+     "enId": 240202,
+     "jaId": 174267
+    },
+    {
+     "en": "They helped each other.",
+     "ja": "彼らはお互いに助け合いました。",
+     "source": "tatoeba",
+     "enId": 305561,
+     "jaId": 98141
+    },
+    {
+     "en": "One stayed and the other went away.",
+     "ja": "一人はとどまり、もう一人は出て行った。",
+     "source": "tatoeba",
+     "enId": 27615,
+     "jaId": 190454
+    },
+    {
+     "en": "Some like tea, others prefer coffee.",
+     "ja": "紅茶が好きな人がいれば、コーヒーのほうが好きな人もいる。",
+     "source": "tatoeba",
+     "enId": 240965,
+     "jaId": 173505
+    },
+    {
+     "en": "Some people like sports, and others don't.",
+     "ja": "スポーツが好きな人もいれば、嫌いな人もいる。",
+     "source": "tatoeba",
+     "enId": 51646,
+     "jaId": 214354
+    },
+    {
+     "en": "Where are all the others?",
+     "ja": "他の人はどこにいるのですか。",
+     "source": "tatoeba",
+     "enId": 274644,
+     "jaId": 138591
+    },
+    {
+     "en": "Did you ask the others?",
+     "ja": "他の人にも聞いてみたの？",
+     "source": "tatoeba",
+     "enId": 3394014,
+     "jaId": 9257702
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "meaning",
+     "wrong": "Some like tea, the others prefer coffee.",
+     "intended": "紅茶が好きな人もいれば、コーヒーが好きな人もいる",
+     "right": "Some like tea, others prefer coffee.",
+     "note": "the others は「残り全員」。紅茶好き以外が全員コーヒー好き、という意味になる。",
+     "work": "どちらも正しい英語なので仕事で使える。the の有無で意味が変わる。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c06-1",
+     "type": "fill",
+     "ja": "お互いに助け合いましょう。",
+     "text": "Let's help ___.",
+     "choices": [
+      "each other",
+      "the other",
+      "others"
+     ],
+     "answers": [
+      "each other"
+     ]
+    },
+    {
+     "id": "gram-c06-2",
+     "type": "fill",
+     "ja": "1人は残り、もう1人は出て行った。",
+     "text": "One stayed, and ___ went away.",
+     "choices": [
+      "the other",
+      "another",
+      "others"
+     ],
+     "answers": [
+      "the other"
+     ]
+    },
+    {
+     "id": "gram-c06-3",
+     "type": "fill",
+     "ja": "スポーツが好きな人もいれば、そうでない人もいる。",
+     "text": "Some people like sports, and ___ don't.",
+     "choices": [
+      "others",
+      "other",
+      "another"
+     ],
+     "answers": [
+      "others"
+     ]
+    },
+    {
+     "id": "gram-c06-4",
+     "type": "order",
+     "ja": "彼らはお互いに助け合った。",
+     "tokens": [
+      "They",
+      "helped",
+      "each",
+      "other"
+     ],
+     "answers": [
+      "They helped each other."
+     ]
+    },
+    {
+     "id": "gram-c06-5",
+     "type": "order",
+     "ja": "ほかの人たちには聞いてみた？",
+     "tokens": [
+      "Did",
+      "you",
+      "ask",
+      "the",
+      "others"
+     ],
+     "answers": [
+      "Did you ask the others?"
+     ]
+    },
+    {
+     "id": "gram-c06-6",
+     "type": "rewrite",
+     "ja": "each other を使って1文にする。",
+     "from": "I know him. He knows me.",
+     "answers": [
+      "We know each other."
+     ]
+    },
+    {
+     "id": "gram-c06-7",
+     "type": "rewrite",
+     "ja": "Some 〜, others … の形で1文にする。",
+     "from": "Some students like math. Some students don't.",
+     "answers": [
+      "Some students like math, and others don't.",
+      "Some students like math, others don't."
+     ]
+    },
+    {
+     "id": "gram-c06-8",
+     "type": "oral",
+     "ja": "私たちは10年前から知り合いです。",
+     "answers": [
+      "We've known each other for ten years.",
+      "We have known each other for ten years."
+     ]
+    },
+    {
+     "id": "gram-c06-9",
+     "type": "oral",
+     "ja": "残りの人たちはどこにいますか。",
+     "answers": [
+      "Where are the others?",
+      "Where are all the others?"
+     ]
+    },
+    {
+     "id": "gram-c06-10",
+     "type": "oral",
+     "ja": "チームのメンバーはお互いに協力すべきだ。",
+     "answers": [
+      "Team members should help each other.",
+      "Team members should work with each other.",
+      "Team members should cooperate with each other."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "each other か Some 〜, others … で、職場や学校の人たちのことを1文で言ってみましょう。",
+    "samples": [
+     "My colleagues and I help each other a lot.",
+     "Some people work from home, and others come to the office."
+    ],
+    "checks": [
+     "「残り全員」のときだけ the others にした"
+    ]
+   }
+  },
+  {
+   "id": "c07",
+   "no": 71,
+   "title": "目的と「〜しないように」（in order to・so as to・not to 〜）",
+   "stage": "CEFR B1：会話でよく使う形",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 95 in order to（B1.1〜B2.1）・97 so as to（B2.2）・89 not to 不定詞（B1.2）・102 動詞＋not to（B1.1）・104 動詞＋目的語＋not to（B2.1）"
+    }
+   ],
+   "points": [
+    {
+     "text": "in order to 〜 は「〜するために」。to 〜 だけより、目的をはっきり言う言い方です。",
+     "en": [
+      "He worked hard in order to succeed."
+     ],
+     "check": false
+    },
+    {
+     "text": "「〜しないように」は so as not to 〜 か in order not to 〜。not は to の前に置きます。",
+     "en": [
+      "I left early so as not to be late."
+     ],
+     "check": false
+    },
+    {
+     "text": "decide・try・promise＋not to 〜 は「〜しないことにする・しないようにする・しないと約束する」。",
+     "en": [
+      "I decided not to go."
+     ],
+     "check": false
+    },
+    {
+     "text": "tell・ask・warn＋人＋not to 〜 は「人に〜しないように言う・頼む・注意する」。",
+     "en": [
+      "He told me not to smoke."
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "He worked hard in order to succeed.",
+     "ja": "彼は成功するために一生懸命に働いた。",
+     "source": "tatoeba",
+     "enId": 300311,
+     "jaId": 103382
+    },
+    {
+     "en": "We use words in order to communicate.",
+     "ja": "意志を伝え合うために、私たちは言葉を使うのです。",
+     "source": "tatoeba",
+     "enId": 28215,
+     "jaId": 191055
+    },
+    {
+     "en": "I left early so as not to be late.",
+     "ja": "遅れないよう早く出発した。",
+     "source": "tatoeba",
+     "enId": 277391,
+     "jaId": 126699
+    },
+    {
+     "en": "I hurried so as not to miss the train.",
+     "ja": "その列車に乗り遅れないように急いだ。",
+     "source": "tatoeba",
+     "enId": 43449,
+     "jaId": 206203
+    },
+    {
+     "en": "I decided not to go.",
+     "ja": "行くまいと決めた。",
+     "source": "tatoeba",
+     "enId": 241095,
+     "jaId": 173376
+    },
+    {
+     "en": "I tried not to laugh.",
+     "ja": "私は笑わないように努めた。",
+     "source": "tatoeba",
+     "enId": 258716,
+     "jaId": 155821
+    },
+    {
+     "en": "He told me not to smoke.",
+     "ja": "彼は私に禁煙を命じた。",
+     "source": "tatoeba",
+     "enId": 297596,
+     "jaId": 106090
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "I study hard in order to passing the exam.",
+     "right": "I study hard in order to pass the exam.",
+     "note": "in order to の後ろは動詞の原形。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目95「in order to DO」（パターン：in order to V.）",
+      "dictionary": "Wiktionary：pass は pass の infinitive",
+      "languageTool": [
+       "TO_NON_BASE：The verb after \"to\" should be in the base form as part of the to-infinitive. A verb can take many forms, but the base form is always used in the to-infinitive."
+      ]
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c07-1",
+     "type": "fill",
+     "ja": "彼は成功するために一生懸命働いた。",
+     "text": "He worked hard in order ___ succeed.",
+     "choices": [
+      "to",
+      "for",
+      "that"
+     ],
+     "answers": [
+      "to"
+     ]
+    },
+    {
+     "id": "gram-c07-2",
+     "type": "fill",
+     "ja": "遅れないように早く出た。",
+     "text": "I left early so as ___ to be late.",
+     "choices": [
+      "not",
+      "no",
+      "don't"
+     ],
+     "answers": [
+      "not"
+     ]
+    },
+    {
+     "id": "gram-c07-3",
+     "type": "fill",
+     "ja": "彼は私にタバコを吸わないように言った。",
+     "text": "He told me ___ to smoke.",
+     "choices": [
+      "not",
+      "don't",
+      "no"
+     ],
+     "answers": [
+      "not"
+     ]
+    },
+    {
+     "id": "gram-c07-4",
+     "type": "order",
+     "ja": "電車に乗り遅れないように急いだ。",
+     "tokens": [
+      "I",
+      "hurried",
+      "so",
+      "as",
+      "not",
+      "to",
+      "miss",
+      "the",
+      "train"
+     ],
+     "answers": [
+      "I hurried so as not to miss the train."
+     ]
+    },
+    {
+     "id": "gram-c07-5",
+     "type": "order",
+     "ja": "行かないことにした。",
+     "tokens": [
+      "I",
+      "decided",
+      "not",
+      "to",
+      "go"
+     ],
+     "answers": [
+      "I decided not to go."
+     ]
+    },
+    {
+     "id": "gram-c07-6",
+     "type": "rewrite",
+     "ja": "in order to を使って1文にする。",
+     "from": "She worked hard. She wanted to save money.",
+     "answers": [
+      "She worked hard in order to save money."
+     ]
+    },
+    {
+     "id": "gram-c07-7",
+     "type": "rewrite",
+     "ja": "told her not to を使って書き直す。",
+     "from": "I said to her, \"Don't be late.\"",
+     "answers": [
+      "I told her not to be late."
+     ]
+    },
+    {
+     "id": "gram-c07-8",
+     "type": "oral",
+     "ja": "間違えないように、二度確認しました。",
+     "answers": [
+      "I checked it twice so as not to make a mistake.",
+      "I checked it twice in order not to make a mistake.",
+      "I checked twice so as not to make mistakes."
+     ]
+    },
+    {
+     "id": "gram-c07-9",
+     "type": "oral",
+     "ja": "上司に心配しないように言われた。",
+     "answers": [
+      "My boss told me not to worry."
+     ]
+    },
+    {
+     "id": "gram-c07-10",
+     "type": "oral",
+     "ja": "時間を節約するために、オンラインで会議をした。",
+     "answers": [
+      "We had an online meeting in order to save time.",
+      "We met online in order to save time.",
+      "We had the meeting online in order to save time."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "in order to 〜 か so as not to 〜 で、自分が気をつけていることを1文で言ってみましょう。",
+    "samples": [
+     "I take notes in order to remember new words.",
+     "I set two alarms so as not to oversleep."
+    ],
+    "checks": [
+     "「〜しないように」は not を to の前に置いた"
+    ]
+   }
+  },
+  {
+   "id": "c08",
+   "no": 72,
+   "title": "「何を〜しても」「いつ〜しても」（whatever・whenever・however など）",
+   "stage": "CEFR B1：会話でよく使う形",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 188 whatever / whoever / wherever / however など　CEFR-J レベル B1.1〜B2.1"
+    }
+   ],
+   "points": [
+    {
+     "text": "whatever は「何を〜しても」「〜するものは何でも」。",
+     "en": [
+      "Whatever happens, keep calm.",
+      "Whatever you like."
+     ],
+     "check": false
+    },
+    {
+     "text": "whenever は「〜するときはいつでも」、wherever は「どこへ（で）〜しても」。",
+     "en": [
+      "Whenever you come, I'm ready."
+     ],
+     "check": false
+    },
+    {
+     "text": "whoever は「〜する人は誰でも」。",
+     "check": false
+    },
+    {
+     "text": "however＋形容詞・副詞は「どんなに〜でも」。",
+     "en": [
+      "However hard I try, I can't do it."
+     ],
+     "check": false
+    },
+    {
+     "text": "答えとして一言で Whatever. と言うと「どうでもいい」と突き放す感じになるので、仕事では使いません。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "Whatever happens, keep calm.",
+     "ja": "何が起こっても冷静にしていなさい。",
+     "source": "tatoeba",
+     "enId": 25150,
+     "jaId": 188011
+    },
+    {
+     "en": "Whatever you like.",
+     "ja": "お好きなようにしなさい。",
+     "source": "tatoeba",
+     "enId": 64501,
+     "jaId": 227151
+    },
+    {
+     "en": "Whatever you pick is fine.",
+     "ja": "選んでいただいたものなら何でも結構です。",
+     "source": "tatoeba",
+     "enId": 273527,
+     "jaId": 141045
+    },
+    {
+     "en": "Whatever he says is true.",
+     "ja": "彼が言うことは何でも正しい。",
+     "source": "tatoeba",
+     "enId": 283592,
+     "jaId": 120417
+    },
+    {
+     "en": "Whenever you come, I'm ready.",
+     "ja": "君がいつ来ても、私は用意ができている。",
+     "source": "tatoeba",
+     "enId": 18056,
+     "jaId": 179200
+    },
+    {
+     "en": "Whenever they meet, they quarrel.",
+     "ja": "彼らは会えば必ずけんかする。",
+     "source": "tatoeba",
+     "enId": 22584,
+     "jaId": 97424
+    },
+    {
+     "en": "Wherever you say.",
+     "ja": "どこでもおっしゃる通りでいいですよ。",
+     "source": "tatoeba",
+     "enId": 38187,
+     "jaId": 200982
+    }
+   ],
+   "mistakes": [],
+   "exercises": [
+    {
+     "id": "gram-c08-1",
+     "type": "fill",
+     "ja": "何が起きても、落ち着いていなさい。",
+     "text": "___ happens, keep calm.",
+     "choices": [
+      "Whatever",
+      "However",
+      "Whenever"
+     ],
+     "answers": [
+      "Whatever"
+     ]
+    },
+    {
+     "id": "gram-c08-2",
+     "type": "fill",
+     "ja": "いつ来てくれても、準備はできています。",
+     "text": "___ you come, I'm ready.",
+     "choices": [
+      "Whenever",
+      "Whatever",
+      "Whoever"
+     ],
+     "answers": [
+      "Whenever"
+     ]
+    },
+    {
+     "id": "gram-c08-3",
+     "type": "fill",
+     "ja": "どんなに頑張っても、できない。",
+     "text": "___ hard I try, I can't do it.",
+     "choices": [
+      "However",
+      "Whatever",
+      "Wherever"
+     ],
+     "answers": [
+      "However"
+     ]
+    },
+    {
+     "id": "gram-c08-4",
+     "type": "order",
+     "ja": "選んでいただいたものなら何でも結構です。",
+     "tokens": [
+      "Whatever",
+      "you",
+      "pick",
+      "is",
+      "fine"
+     ],
+     "answers": [
+      "Whatever you pick is fine."
+     ]
+    },
+    {
+     "id": "gram-c08-5",
+     "type": "order",
+     "ja": "彼らは会うといつもけんかする。",
+     "tokens": [
+      "Whenever",
+      "they",
+      "meet",
+      "they",
+      "quarrel"
+     ],
+     "answers": [
+      "Whenever they meet, they quarrel.",
+      "They quarrel whenever they meet."
+     ]
+    },
+    {
+     "id": "gram-c08-6",
+     "type": "rewrite",
+     "ja": "Whatever で始めて書き直す。",
+     "from": "It doesn't matter what happens. I will finish it.",
+     "answers": [
+      "Whatever happens, I will finish it.",
+      "Whatever happens, I'll finish it."
+     ]
+    },
+    {
+     "id": "gram-c08-7",
+     "type": "rewrite",
+     "ja": "whenever を使って1文にする。",
+     "from": "Call me at any time you need help.",
+     "answers": [
+      "Call me whenever you need help.",
+      "Whenever you need help, call me."
+     ]
+    },
+    {
+     "id": "gram-c08-8",
+     "type": "oral",
+     "ja": "困ったときはいつでも聞いてください。",
+     "answers": [
+      "Ask me whenever you have a problem.",
+      "Please ask me whenever you need help.",
+      "Feel free to ask me whenever you need help."
+     ]
+    },
+    {
+     "id": "gram-c08-9",
+     "type": "oral",
+     "ja": "何が起きても、締め切りは守ります。",
+     "answers": [
+      "Whatever happens, I will meet the deadline.",
+      "Whatever happens, I'll meet the deadline."
+     ]
+    },
+    {
+     "id": "gram-c08-10",
+     "type": "oral",
+     "ja": "どんなに忙しくても、毎日英語を勉強しています。",
+     "answers": [
+      "However busy I am, I study English every day."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "whenever か however で、自分の習慣を1文で言ってみましょう。",
+    "samples": [
+     "Whenever I have free time, I listen to English podcasts.",
+     "However tired I am, I read a little before bed."
+    ],
+    "checks": [
+     "however の後ろに形容詞・副詞を置いた（However busy I am）"
+    ]
+   }
+  },
+  {
+   "id": "c09",
+   "no": 73,
+   "title": "「〜したほうがいい」「むしろ〜したい」（had better・would rather・might as well）",
+   "stage": "CEFR B1：言い方を増やす",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 126 had better（B1.2）・143 would rather（B1.2）・133 might as well（B1.2）"
+    }
+   ],
+   "points": [
+    {
+     "text": "had better＋動詞の原形は「〜したほうがいい（しないとまずいことになる）」。強い言い方です。短い形は ’d better。",
+     "en": [
+      "You'd better go.",
+      "You'd better not go."
+     ],
+     "check": false
+    },
+    {
+     "text": "否定は had better not 〜（not は better の後ろ）。",
+     "check": false
+    },
+    {
+     "text": "would rather＋動詞の原形は「（どちらかといえば）むしろ〜したい」。than で比べるものを続けられます。",
+     "en": [
+      "I'd rather stay home.",
+      "I'd rather not."
+     ],
+     "check": false
+    },
+    {
+     "text": "might as well＋動詞の原形は「〜してもいいかもしれない（ほかにすることもないし）」。",
+     "en": [
+      "I might as well leave today."
+     ],
+     "check": false
+    },
+    {
+     "text": "目上の人や取引先への助言には、had better より You might want to 〜 や I’d suggest 〜 のほうが丁寧です。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "You'd better go.",
+     "ja": "あなたは行ったほうがいい。",
+     "source": "tatoeba",
+     "enId": 518555,
+     "jaId": 232073
+    },
+    {
+     "en": "You'd better not go.",
+     "ja": "君は行かないほうがよい。",
+     "source": "tatoeba",
+     "enId": 16161,
+     "jaId": 177312
+    },
+    {
+     "en": "We'd better hurry then.",
+     "ja": "では、急いだほうがいいですね。",
+     "source": "tatoeba",
+     "enId": 39366,
+     "jaId": 202155
+    },
+    {
+     "en": "I'd rather stay home.",
+     "ja": "どっちかっていうと、家にいたいな。",
+     "source": "tatoeba",
+     "enId": 4499897,
+     "jaId": 8850419
+    },
+    {
+     "en": "I'd rather not.",
+     "ja": "ご遠慮させてください。",
+     "source": "tatoeba",
+     "enId": 54511,
+     "jaId": 217203
+    },
+    {
+     "en": "I would rather not go.",
+     "ja": "どちらかと言うと行きたくない。",
+     "source": "tatoeba",
+     "enId": 38011,
+     "jaId": 200815
+    },
+    {
+     "en": "I might as well leave today.",
+     "ja": "今日出発したほうがいいかもしれませんね。",
+     "source": "tatoeba",
+     "enId": 243041,
+     "jaId": 171435
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "You had better to go.",
+     "right": "You had better go.",
+     "note": "had better の後ろは to を付けずに動詞の原形。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目126「MODAL/AUX: had better」（パターン：(had|'d) better V.）",
+      "dictionary": "Wiktionary：go は go の infinitive",
+      "languageTool": []
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "I would rather to stay home.",
+     "right": "I would rather stay home.",
+     "note": "would rather の後ろも to を付けずに動詞の原形。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目143「MODAL/AUX: would rather」（パターン：{would}_MD rather V.）",
+      "dictionary": "Wiktionary：stay は stay の infinitive",
+      "languageTool": []
+     }
+    },
+    {
+     "kind": "informal",
+     "wrong": "You better go.",
+     "right": "You'd better go.",
+     "note": "会話では had を省いて You better 〜 と言うことがとても多い。書くときや正式な場面では You’d better 〜。",
+     "work": "仕事では使わない。had better 自体も強く聞こえるので、目上の人や取引先には You might want to 〜 が無難。",
+     "proof": {
+      "dictionary": "Wiktionary：better（verb）の語義「Had better.」に札「colloquial」",
+      "spoken": "映画字幕（OpenSubtitles 英語）：「you better」172,532回、「you'd better」78,370回"
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c09-1",
+     "type": "fill",
+     "ja": "あなたは行ったほうがいい。",
+     "text": "You'd ___ go.",
+     "choices": [
+      "better",
+      "rather",
+      "well"
+     ],
+     "answers": [
+      "better"
+     ]
+    },
+    {
+     "id": "gram-c09-2",
+     "type": "fill",
+     "ja": "どちらかといえば家にいたい。",
+     "text": "I'd ___ stay home.",
+     "choices": [
+      "rather",
+      "better",
+      "like"
+     ],
+     "answers": [
+      "rather"
+     ]
+    },
+    {
+     "id": "gram-c09-3",
+     "type": "fill",
+     "ja": "行かないほうがいい。",
+     "text": "You'd better ___ go.",
+     "choices": [
+      "not",
+      "don't",
+      "no"
+     ],
+     "answers": [
+      "not"
+     ]
+    },
+    {
+     "id": "gram-c09-4",
+     "type": "order",
+     "ja": "では急いだほうがいいですね。",
+     "tokens": [
+      "We'd",
+      "better",
+      "hurry",
+      "then"
+     ],
+     "answers": [
+      "We'd better hurry then."
+     ]
+    },
+    {
+     "id": "gram-c09-5",
+     "type": "order",
+     "ja": "どちらかといえば行きたくない。",
+     "tokens": [
+      "I",
+      "would",
+      "rather",
+      "not",
+      "go"
+     ],
+     "answers": [
+      "I would rather not go."
+     ]
+    },
+    {
+     "id": "gram-c09-6",
+     "type": "rewrite",
+     "ja": "had better を使って書き直す（You’d で始める）。",
+     "from": "You should see a doctor.",
+     "answers": [
+      "You'd better see a doctor.",
+      "You had better see a doctor."
+     ]
+    },
+    {
+     "id": "gram-c09-7",
+     "type": "rewrite",
+     "ja": "would rather を使って書き直す（I’d で始める）。",
+     "from": "I prefer to work from home.",
+     "answers": [
+      "I'd rather work from home.",
+      "I would rather work from home."
+     ]
+    },
+    {
+     "id": "gram-c09-8",
+     "type": "oral",
+     "ja": "今出発したほうがいいですよ。（強く）",
+     "answers": [
+      "You'd better leave now.",
+      "You'd better start now.",
+      "You had better leave now."
+     ]
+    },
+    {
+     "id": "gram-c09-9",
+     "type": "oral",
+     "ja": "どちらかといえば電話よりメールがいいです。",
+     "answers": [
+      "I'd rather send an email than call.",
+      "I'd rather email than call.",
+      "I would rather send an email than call."
+     ]
+    },
+    {
+     "id": "gram-c09-10",
+     "type": "oral",
+     "ja": "待っていても仕方ないので、先に始めてもいいかもしれない。",
+     "answers": [
+      "We might as well start now.",
+      "We might as well start without them."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "I’d rather 〜 で、どちらかといえばしたいことを1文で言ってみましょう。",
+    "samples": [
+     "I'd rather work in the morning than at night.",
+     "I'd rather not work overtime today."
+    ],
+    "checks": [
+     "had better・would rather の後ろは to を付けずに原形にした"
+    ]
+   }
+  },
+  {
+   "id": "c10",
+   "no": 74,
+   "title": "関係代名詞 whose（父親が医者である友人）",
+   "stage": "CEFR B1：言い方を増やす",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 180 関係代名詞 所有格（whose）　CEFR-J レベル B1.2"
+    }
+   ],
+   "points": [
+    {
+     "text": "名詞＋whose＋名詞で「（その人・物の）〜が…である名詞」。whose の後ろには必ず名詞が来ます。",
+     "en": [
+      "I have a friend whose father is a teacher."
+     ],
+     "check": false
+    },
+    {
+     "text": "人にも物にも使えます。",
+     "check": false
+    },
+    {
+     "text": "発音が同じ who’s（＝who is）と書き間違えないようにします。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I have a friend whose father is a teacher.",
+     "ja": "私には父親が先生をしている友達がいる。",
+     "source": "tatoeba",
+     "enId": 250003,
+     "jaId": 164505
+    },
+    {
+     "en": "I have a friend whose wife is a pianist.",
+     "ja": "私には奥さんがピアニストである友人がいる。",
+     "source": "tatoeba",
+     "enId": 249873,
+     "jaId": 164634
+    },
+    {
+     "en": "I know a girl whose father is a lawyer.",
+     "ja": "私はお父さんが弁護士である女の子を知っています。",
+     "source": "tatoeba",
+     "enId": 253298,
+     "jaId": 161220
+    },
+    {
+     "en": "Kumi is the girl whose father likes dogs.",
+     "ja": "クミはお父さんが犬好きな少女です。",
+     "source": "tatoeba",
+     "enId": 62975,
+     "jaId": 225639
+    },
+    {
+     "en": "The girl whose mother is ill is absent today.",
+     "ja": "母親が病気のその少女は今日欠席している。",
+     "source": "tatoeba",
+     "enId": 320893,
+     "jaId": 82823
+    },
+    {
+     "en": "Are there people whose mother tongue is Esperanto?",
+     "ja": "エスペラントを母語としている人はいますか。",
+     "source": "tatoeba",
+     "enId": 1779284,
+     "jaId": 1779350
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "I have a friend who's father is a doctor.",
+     "right": "I have a friend whose father is a doctor.",
+     "note": "「〜の」を表すのは whose。who’s は who is の短い形。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目180「GENITIVE RELATIVE PRONOUN」（パターン：NNS? whose）",
+      "dictionary": "Wiktionary：whose（pron）の語義「belonging to whom」",
+      "languageTool": [
+       "WHOS：Did you mean \"whose\"?"
+      ]
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c10-1",
+     "type": "fill",
+     "ja": "私には父親が先生をしている友達がいる。",
+     "text": "I have a friend ___ father is a teacher.",
+     "choices": [
+      "whose",
+      "who's",
+      "who"
+     ],
+     "answers": [
+      "whose"
+     ]
+    },
+    {
+     "id": "gram-c10-2",
+     "type": "fill",
+     "ja": "母親が病気のその少女は、今日は欠席している。",
+     "text": "The girl ___ mother is ill is absent today.",
+     "choices": [
+      "whose",
+      "which",
+      "who"
+     ],
+     "answers": [
+      "whose"
+     ]
+    },
+    {
+     "id": "gram-c10-3",
+     "type": "order",
+     "ja": "私は父親が弁護士の女の子を知っている。",
+     "tokens": [
+      "I",
+      "know",
+      "a",
+      "girl",
+      "whose",
+      "father",
+      "is",
+      "a",
+      "lawyer"
+     ],
+     "answers": [
+      "I know a girl whose father is a lawyer."
+     ]
+    },
+    {
+     "id": "gram-c10-4",
+     "type": "order",
+     "ja": "奥さんがピアニストの友人がいる。",
+     "tokens": [
+      "I",
+      "have",
+      "a",
+      "friend",
+      "whose",
+      "wife",
+      "is",
+      "a",
+      "pianist"
+     ],
+     "answers": [
+      "I have a friend whose wife is a pianist."
+     ]
+    },
+    {
+     "id": "gram-c10-5",
+     "type": "rewrite",
+     "ja": "whose を使って1文にする。",
+     "from": "I met a man. His son works at our company.",
+     "answers": [
+      "I met a man whose son works at our company."
+     ]
+    },
+    {
+     "id": "gram-c10-6",
+     "type": "rewrite",
+     "ja": "whose を使って1文にする。",
+     "from": "This is the company. Its products are popular.",
+     "answers": [
+      "This is the company whose products are popular."
+     ]
+    },
+    {
+     "id": "gram-c10-7",
+     "type": "oral",
+     "ja": "社長が元エンジニアの会社で働いています。",
+     "answers": [
+      "I work for a company whose president used to be an engineer.",
+      "I work for a company whose president was an engineer."
+     ]
+    },
+    {
+     "id": "gram-c10-8",
+     "type": "oral",
+     "ja": "名前を思い出せない人に会った。",
+     "answers": [
+      "I met someone whose name I can't remember.",
+      "I met a person whose name I can't remember."
+     ]
+    },
+    {
+     "id": "gram-c10-9",
+     "type": "oral",
+     "ja": "父親が医者の友達がいます。",
+     "answers": [
+      "I have a friend whose father is a doctor."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "whose を使って、知り合いのことを1文で言ってみましょう。",
+    "samples": [
+     "I have a colleague whose English is excellent.",
+     "I know a man whose daughter lives in Canada."
+    ],
+    "checks": [
+     "whose の後ろに名詞を置いた",
+     "who’s と書き間違えなかった"
+    ]
+   }
+  },
+  {
+   "id": "c11",
+   "no": 75,
+   "title": "強調の do（I do agree.・本当に〜する）",
+   "stage": "CEFR B1：言い方を増やす",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 53 do / does＋動詞の原形・54 did＋動詞の原形　CEFR-J レベル B1.2"
+    }
+   ],
+   "points": [
+    {
+     "text": "ふつうの文の動詞の前に do・does・did を置くと、「本当に〜する」「確かに〜した」と強める言い方になります。",
+     "en": [
+      "I do hope so.",
+      "I do like ice cream."
+     ],
+     "check": false
+    },
+    {
+     "text": "do・does・did の後ろの動詞は原形です。主語が he・she なら does、過去なら did。",
+     "en": [
+      "She does know it."
+     ],
+     "check": false
+    },
+    {
+     "text": "話すときは do を強く言います。「〜ではない」と思われていそうなときに、それを打ち消すのに使います。",
+     "check": false
+    },
+    {
+     "text": "仕事では I do apologize.（本当に申し訳ありません）、We do appreciate 〜（〜に心から感謝しています）のように使います。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I do hope so.",
+     "ja": "全くそうなってほしものですよ。",
+     "source": "tatoeba",
+     "enId": 273665,
+     "jaId": 140907
+    },
+    {
+     "en": "I do think so.",
+     "ja": "本当にそう思います。",
+     "source": "tatoeba",
+     "enId": 322172,
+     "jaId": 81543
+    },
+    {
+     "en": "I do like ice cream.",
+     "ja": "私はほんとうにアイスクリームが好きです。",
+     "source": "tatoeba",
+     "enId": 255617,
+     "jaId": 158910
+    },
+    {
+     "en": "We do need your advice.",
+     "ja": "あなたの助言が是非とも必要だ。",
+     "source": "tatoeba",
+     "enId": 70560,
+     "jaId": 233190
+    },
+    {
+     "en": "She does know it.",
+     "ja": "彼女は確かにそのことを知っているんです。",
+     "source": "tatoeba",
+     "enId": 312992,
+     "jaId": 90720
+    },
+    {
+     "en": "I do hope you'll succeed.",
+     "ja": "ご成功を心からお祈りいたします。",
+     "source": "tatoeba",
+     "enId": 54396,
+     "jaId": 217089
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "He does works hard.",
+     "right": "He does work hard.",
+     "note": "does の後ろの動詞は原形。-s は does の方に付いている。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目53「do/does DO」（パターン：名詞句・代名詞 \\K do(es) V.）",
+      "dictionary": "Wiktionary：work は work の infinitive",
+      "languageTool": [
+       "DID_BASEFORM：The auxiliary verb 'do' requires the base form of the verb."
+      ]
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c11-1",
+     "type": "fill",
+     "ja": "本当にそう思います。",
+     "text": "I ___ think so.",
+     "choices": [
+      "do",
+      "am",
+      "does"
+     ],
+     "answers": [
+      "do"
+     ]
+    },
+    {
+     "id": "gram-c11-2",
+     "type": "fill",
+     "ja": "彼女は確かにそのことを知っているんです。",
+     "text": "She does ___ it.",
+     "choices": [
+      "know",
+      "knows",
+      "knew"
+     ],
+     "answers": [
+      "know"
+     ]
+    },
+    {
+     "id": "gram-c11-3",
+     "type": "order",
+     "ja": "あなたの助言がぜひとも必要です。",
+     "tokens": [
+      "We",
+      "do",
+      "need",
+      "your",
+      "advice"
+     ],
+     "answers": [
+      "We do need your advice."
+     ]
+    },
+    {
+     "id": "gram-c11-4",
+     "type": "order",
+     "ja": "ご成功を心からお祈りしています。",
+     "tokens": [
+      "I",
+      "do",
+      "hope",
+      "you'll",
+      "succeed"
+     ],
+     "answers": [
+      "I do hope you'll succeed."
+     ]
+    },
+    {
+     "id": "gram-c11-5",
+     "type": "rewrite",
+     "ja": "do を使って強める。",
+     "from": "I want to go.",
+     "answers": [
+      "I do want to go."
+     ]
+    },
+    {
+     "id": "gram-c11-6",
+     "type": "rewrite",
+     "ja": "did を使って強める（「確かに送りました」）。",
+     "from": "I sent the email.",
+     "answers": [
+      "I did send the email."
+     ]
+    },
+    {
+     "id": "gram-c11-7",
+     "type": "oral",
+     "ja": "本当に申し訳ありません。",
+     "answers": [
+      "I do apologize."
+     ]
+    },
+    {
+     "id": "gram-c11-8",
+     "type": "oral",
+     "ja": "ご協力に心から感謝しています。",
+     "answers": [
+      "We do appreciate your help.",
+      "We do appreciate your cooperation.",
+      "I do appreciate your help."
+     ]
+    },
+    {
+     "id": "gram-c11-9",
+     "type": "oral",
+     "ja": "確かに昨日電話しましたよ。",
+     "answers": [
+      "I did call you yesterday.",
+      "I did call yesterday."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "強調の do を使って、本当にそう思っていることを1文で言ってみましょう。",
+    "samples": [
+     "I do want to improve my English.",
+     "I do appreciate your support."
+    ],
+    "checks": [
+     "do・does・did の後ろは動詞の原形にした"
+    ]
+   }
+  },
+  {
+   "id": "c12",
+   "no": 76,
+   "title": "未来完了（will have done：〜までに…しているだろう）",
+   "stage": "CEFR B1：言い方を増やす",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 71 未来完了形（will have＋過去分詞）　CEFR-J レベル B1.2〜B2.1"
+    }
+   ],
+   "points": [
+    {
+     "text": "will have＋過去分詞で、未来のある時までに「〜し終えているだろう」を表します。",
+     "en": [
+      "I will have finished the work by noon."
+     ],
+     "check": false
+    },
+    {
+     "text": "「いつまでに」は by 〜（〜までに）や before 〜 で示すことが多いです。",
+     "check": false
+    },
+    {
+     "text": "現在完了（修行場36〜38）の「今」を、未来のある時にずらした形です。",
+     "check": false
+    },
+    {
+     "text": "仕事の予定や見通しを伝えるときに便利です（By Friday, we will have completed 〜）。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I will have finished the work by noon.",
+     "ja": "その仕事は昼までに終わっているでしょう。",
+     "source": "tatoeba",
+     "enId": 47623,
+     "jaId": 210354
+    },
+    {
+     "en": "I will have finished my homework by Tuesday.",
+     "ja": "火曜日までには宿題をおえてしまっているだろう。",
+     "source": "tatoeba",
+     "enId": 23777,
+     "jaId": 186641
+    },
+    {
+     "en": "I will have finished the work by eight o'clock.",
+     "ja": "私は８時までにその仕事をすませているでしょう。",
+     "source": "tatoeba",
+     "enId": 252630,
+     "jaId": 161886
+    },
+    {
+     "en": "He will have done his homework by tomorrow.",
+     "ja": "彼は明日までには宿題を終えているだろう。",
+     "source": "tatoeba",
+     "enId": 304097,
+     "jaId": 99600
+    },
+    {
+     "en": "I will have left here before you return.",
+     "ja": "君が戻るまえに私は出かけてしまっているだろう。",
+     "source": "tatoeba",
+     "enId": 17712,
+     "jaId": 178858
+    },
+    {
+     "en": "The album will have been completed by next July.",
+     "ja": "そのアルバムは次の７月までには完成されているだろう。",
+     "source": "tatoeba",
+     "enId": 50686,
+     "jaId": 213400
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "I will have finish the work by noon.",
+     "right": "I will have finished the work by noon.",
+     "note": "will have の後ろは過去分詞。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目71「TENSE/ASPECT: FUTURE PERFECT」（パターン：{will}_MD have V.N）",
+      "dictionary": "Wiktionary：finished は finish の participle・past",
+      "languageTool": [
+       "PRP_HAVE_VB：The inflection of the verb \"finish\" seems to be incorrect here.",
+       "HAVE_PART_AGREEMENT：It appears that the past participle should be used here."
+      ]
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c12-1",
+     "type": "fill",
+     "ja": "昼までにはその仕事を終えているでしょう。",
+     "text": "I will have ___ the work by noon.",
+     "choices": [
+      "finished",
+      "finish",
+      "finishing"
+     ],
+     "answers": [
+      "finished"
+     ]
+    },
+    {
+     "id": "gram-c12-2",
+     "type": "fill",
+     "ja": "彼は明日までには宿題を終えているだろう。",
+     "text": "He will ___ done his homework by tomorrow.",
+     "choices": [
+      "have",
+      "has",
+      "had"
+     ],
+     "answers": [
+      "have"
+     ]
+    },
+    {
+     "id": "gram-c12-3",
+     "type": "order",
+     "ja": "火曜日までには宿題を終えているでしょう。",
+     "tokens": [
+      "I",
+      "will",
+      "have",
+      "finished",
+      "my",
+      "homework",
+      "by",
+      "Tuesday"
+     ],
+     "answers": [
+      "I will have finished my homework by Tuesday.",
+      "By Tuesday, I will have finished my homework."
+     ]
+    },
+    {
+     "id": "gram-c12-4",
+     "type": "order",
+     "ja": "あなたが戻る前に、私はここを出ているでしょう。",
+     "tokens": [
+      "I",
+      "will",
+      "have",
+      "left",
+      "here",
+      "before",
+      "you",
+      "return"
+     ],
+     "answers": [
+      "I will have left here before you return.",
+      "Before you return, I will have left here."
+     ]
+    },
+    {
+     "id": "gram-c12-5",
+     "type": "rewrite",
+     "ja": "will have を使って「〜までに終えているだろう」にする。",
+     "from": "I will finish the report by Friday.",
+     "answers": [
+      "I will have finished the report by Friday.",
+      "I'll have finished the report by Friday."
+     ]
+    },
+    {
+     "id": "gram-c12-6",
+     "type": "rewrite",
+     "ja": "will have を使って「〜までに着いているだろう」にする。",
+     "from": "They will arrive there before you start.",
+     "answers": [
+      "They will have arrived there before you start."
+     ]
+    },
+    {
+     "id": "gram-c12-7",
+     "type": "oral",
+     "ja": "金曜日までには資料を送っているでしょう。",
+     "answers": [
+      "I will have sent the documents by Friday.",
+      "I'll have sent the documents by Friday.",
+      "I will have sent the materials by Friday."
+     ]
+    },
+    {
+     "id": "gram-c12-8",
+     "type": "oral",
+     "ja": "来年の今ごろには、ここで5年働いたことになる。",
+     "answers": [
+      "By this time next year, I will have worked here for five years.",
+      "By this time next year, I'll have worked here for five years.",
+      "I will have worked here for five years by this time next year."
+     ]
+    },
+    {
+     "id": "gram-c12-9",
+     "type": "oral",
+     "ja": "会議が始まるまでには準備を終えているでしょう。",
+     "answers": [
+      "I will have finished preparing before the meeting starts.",
+      "I'll have finished preparing before the meeting starts.",
+      "I will have finished preparing by the time the meeting starts."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "未来完了で、ある時までに終えている予定のことを1文で言ってみましょう。",
+    "samples": [
+     "By the end of this year, I will have read ten English books.",
+     "I will have finished this project by March."
+    ],
+    "checks": [
+     "will have の後ろは過去分詞にした",
+     "「いつまでに」を by などで示した"
+    ]
+   }
+  },
+  {
+   "id": "c13",
+   "no": 77,
+   "title": "進行形・完了形の受け身（is being done・has been done）",
+   "stage": "CEFR B1：言い方を増やす",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 74 受動態（現在進行形）is being＋過去分詞（B1.2〜B2.1）・75 受動態（現在完了形）have been＋過去分詞（B2.1）"
+    }
+   ],
+   "points": [
+    {
+     "text": "is / are being＋過去分詞は「（今）〜されているところだ」。",
+     "en": [
+      "My car is being repaired."
+     ],
+     "check": false
+    },
+    {
+     "text": "has / have been＋過去分詞は「〜されてしまった・もう〜された」。",
+     "en": [
+      "Today's meeting has been canceled."
+     ],
+     "check": false
+    },
+    {
+     "text": "仕事の連絡でとてもよく使います（The system is being updated. / The order has been shipped.）。",
+     "check": false
+    },
+    {
+     "text": "受け身の be の部分を進行形（being）や完了形（have been）にした形です（修行場35・56と同じ考え方）。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "My car is being repaired.",
+     "ja": "私の自動車は修理中です。",
+     "source": "tatoeba",
+     "enId": 251055,
+     "jaId": 163457
+    },
+    {
+     "en": "The bridge is being repaired.",
+     "ja": "橋は修理中です。",
+     "source": "tatoeba",
+     "enId": 18979,
+     "jaId": 180119
+    },
+    {
+     "en": "The house is being built now.",
+     "ja": "その家は今建築中である。",
+     "source": "tatoeba",
+     "enId": 49387,
+     "jaId": 212108
+    },
+    {
+     "en": "The fitting room is being used now.",
+     "ja": "試着室は今使用中だ。",
+     "source": "tatoeba",
+     "enId": 263553,
+     "jaId": 151003
+    },
+    {
+     "en": "Today's meeting has been canceled.",
+     "ja": "今日予定の会合は中止になりました。",
+     "source": "tatoeba",
+     "enId": 243061,
+     "jaId": 171414
+    },
+    {
+     "en": "The house has been sold.",
+     "ja": "その家は売られてしまった。",
+     "source": "tatoeba",
+     "enId": 49330,
+     "jaId": 212053
+    },
+    {
+     "en": "My wallet has been stolen.",
+     "ja": "財布が盗まれた。",
+     "source": "tatoeba",
+     "enId": 1739711,
+     "jaId": 7989452
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "The system is being update.",
+     "right": "The system is being updated.",
+     "note": "being の後ろは過去分詞。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目74「PASSIVE: PRESENT PROGRESSIVE」（パターン：VB[PZ] being V.N）",
+      "dictionary": "Wiktionary：updated は update の participle・past",
+      "languageTool": [
+       "BEEN_PART_AGREEMENT：Consider using either the past participle \"updated\" or the present participle \"updating\" here."
+      ]
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "The plan has been approve.",
+     "right": "The plan has been approved.",
+     "note": "has been の後ろは過去分詞。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目75「PASSIVE: PRESENT PERFECT」（パターン：VH[PZ] been V.N）",
+      "dictionary": "Wiktionary：approved は approve の participle・past",
+      "languageTool": [
+       "BEEN_PART_AGREEMENT：Consider using either the past participle \"approved\" or the present participle \"approving\" here."
+      ]
+     }
+    },
+    {
+     "kind": "meaning",
+     "wrong": "The room is cleaned.",
+     "intended": "部屋は今、掃除されているところだ",
+     "right": "The room is being cleaned.",
+     "note": "is cleaned は「（ふだん）掃除される」「掃除してある」。今まさに掃除中なら is being cleaned。",
+     "work": "どちらも正しい英語なので仕事で使える。「今〜中」と伝えたいときは being を入れる。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c13-1",
+     "type": "fill",
+     "ja": "私の車は修理中です。",
+     "text": "My car is being ___.",
+     "choices": [
+      "repaired",
+      "repair",
+      "repairing"
+     ],
+     "answers": [
+      "repaired"
+     ]
+    },
+    {
+     "id": "gram-c13-2",
+     "type": "fill",
+     "ja": "今日の会議は中止になりました。",
+     "text": "Today's meeting has ___ canceled.",
+     "choices": [
+      "been",
+      "being",
+      "be"
+     ],
+     "answers": [
+      "been"
+     ]
+    },
+    {
+     "id": "gram-c13-3",
+     "type": "fill",
+     "ja": "その家は今建築中だ。",
+     "text": "The house is ___ built now.",
+     "choices": [
+      "being",
+      "been",
+      "be"
+     ],
+     "answers": [
+      "being"
+     ]
+    },
+    {
+     "id": "gram-c13-4",
+     "type": "order",
+     "ja": "財布が盗まれた。",
+     "tokens": [
+      "My",
+      "wallet",
+      "has",
+      "been",
+      "stolen"
+     ],
+     "answers": [
+      "My wallet has been stolen."
+     ]
+    },
+    {
+     "id": "gram-c13-5",
+     "type": "order",
+     "ja": "試着室は今使用中だ。",
+     "tokens": [
+      "The",
+      "fitting",
+      "room",
+      "is",
+      "being",
+      "used",
+      "now"
+     ],
+     "answers": [
+      "The fitting room is being used now."
+     ]
+    },
+    {
+     "id": "gram-c13-6",
+     "type": "rewrite",
+     "ja": "受け身にする（The bridge で始める）。",
+     "from": "They are repairing the bridge.",
+     "answers": [
+      "The bridge is being repaired."
+     ]
+    },
+    {
+     "id": "gram-c13-7",
+     "type": "rewrite",
+     "ja": "受け身にする（The house で始める）。",
+     "from": "Someone has sold the house.",
+     "answers": [
+      "The house has been sold."
+     ]
+    },
+    {
+     "id": "gram-c13-8",
+     "type": "oral",
+     "ja": "システムは今、更新中です。",
+     "answers": [
+      "The system is being updated.",
+      "The system is being updated now."
+     ]
+    },
+    {
+     "id": "gram-c13-9",
+     "type": "oral",
+     "ja": "ご注文の品は発送されました。",
+     "answers": [
+      "Your order has been shipped.",
+      "Your order has been sent."
+     ]
+    },
+    {
+     "id": "gram-c13-10",
+     "type": "oral",
+     "ja": "その問題はもう解決されました。",
+     "answers": [
+      "The problem has been solved.",
+      "The problem has already been solved.",
+      "The issue has been resolved."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "is being 〜 か has been 〜 で、職場や身の回りの状況を1文で言ってみましょう。",
+    "samples": [
+     "A new office is being built near my house.",
+     "Our project has been approved."
+    ],
+    "checks": [
+     "being・been の後ろは過去分詞にした"
+    ]
+   }
+  },
+  {
+   "id": "c14",
+   "no": 78,
+   "title": "提案・要求の that 節（I suggest that he go.）",
+   "stage": "CEFR B1：言い方を増やす",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 217 demand / insist / propose / recommend / suggest など＋that 節（動詞の原形）　CEFR-J レベル B1.2〜B2.2"
+    }
+   ],
+   "points": [
+    {
+     "text": "suggest・recommend・demand・insist・propose の後ろの that 節では、動詞を原形にします（主語が he・she でも -s を付けない）。",
+     "en": [
+      "I suggested that she go alone."
+     ],
+     "check": false
+    },
+    {
+     "text": "be動詞も原形の be になります。",
+     "en": [
+      "I demanded that they be allowed to leave."
+     ],
+     "check": false
+    },
+    {
+     "text": "that は省くこともあります。",
+     "en": [
+      "I suggested she go there alone."
+     ],
+     "check": false
+    },
+    {
+     "text": "イギリス英語では that 節に should を入れる言い方（I suggest that he should go.）もよく使います。",
+     "check": false
+    },
+    {
+     "text": "仕事の提案や推薦で使います（I recommend that we start early.）。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I suggested that we go fishing.",
+     "ja": "私は釣りに行こうと提案した。",
+     "source": "tatoeba",
+     "enId": 259558,
+     "jaId": 154981
+    },
+    {
+     "en": "I suggested that she go alone.",
+     "ja": "私は彼女が一人で行った方が良いといいました。",
+     "source": "tatoeba",
+     "enId": 260997,
+     "jaId": 153516
+    },
+    {
+     "en": "I suggested that he go there at once.",
+     "ja": "彼がすぐそこへ行ってはどうかと私は提案した。",
+     "source": "tatoeba",
+     "enId": 283045,
+     "jaId": 120963
+    },
+    {
+     "en": "The doctor insisted that he stay in bed.",
+     "ja": "医者は、彼が寝ているようにと強く言った。",
+     "source": "tatoeba",
+     "enId": 28021,
+     "jaId": 190861
+    },
+    {
+     "en": "He demanded that we leave at once.",
+     "ja": "彼は私達にすぐ出かけるように要求した。",
+     "source": "tatoeba",
+     "enId": 297344,
+     "jaId": 105512
+    },
+    {
+     "en": "He proposed that we take a small break.",
+     "ja": "彼はちょっと小休止しようと提案した。",
+     "source": "tatoeba",
+     "enId": 975499,
+     "jaId": 971372
+    },
+    {
+     "en": "I demanded that they be allowed to leave.",
+     "ja": "私は彼らの釈放を要求した。",
+     "source": "tatoeba",
+     "enId": 260650,
+     "jaId": 153894
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "I suggest him to go there.",
+     "right": "I suggest that he go there.",
+     "note": "suggest は「人＋to 〜」の形をとらない。that＋主語＋動詞の原形にする。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目217「DEMAND/INSIST/ORDER/PROPOSE/RECOMMEND/REQUIRE/SUGGEST+NP+INFINITIVE」（パターン：({demand}|{insist}|{order}|{propose}|{recommend}|{require}|{suggest}) (that)? 名詞句・代名詞 V.P?）",
+      "dictionary": "Wiktionary：go は go の present・subjunctive",
+      "languageTool": []
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c14-1",
+     "type": "fill",
+     "ja": "彼女が一人で行くよう提案した。",
+     "text": "I suggested that she ___ alone.",
+     "choices": [
+      "go",
+      "goes",
+      "to go"
+     ],
+     "answers": [
+      "go"
+     ]
+    },
+    {
+     "id": "gram-c14-2",
+     "type": "fill",
+     "ja": "医者は彼が寝ているようにと強く言った。",
+     "text": "The doctor insisted that he ___ in bed.",
+     "choices": [
+      "stay",
+      "stays",
+      "to stay"
+     ],
+     "answers": [
+      "stay"
+     ]
+    },
+    {
+     "id": "gram-c14-3",
+     "type": "order",
+     "ja": "彼は小休止しようと提案した。",
+     "tokens": [
+      "He",
+      "proposed",
+      "that",
+      "we",
+      "take",
+      "a",
+      "small",
+      "break"
+     ],
+     "answers": [
+      "He proposed that we take a small break."
+     ]
+    },
+    {
+     "id": "gram-c14-4",
+     "type": "order",
+     "ja": "父はキャンプに行こうと提案した。",
+     "tokens": [
+      "My",
+      "father",
+      "suggested",
+      "that",
+      "we",
+      "go",
+      "camping"
+     ],
+     "answers": [
+      "My father suggested that we go camping."
+     ]
+    },
+    {
+     "id": "gram-c14-5",
+     "type": "rewrite",
+     "ja": "I suggest that で始めて書き直す。",
+     "from": "Let's start the meeting early.",
+     "answers": [
+      "I suggest that we start the meeting early."
+     ]
+    },
+    {
+     "id": "gram-c14-6",
+     "type": "rewrite",
+     "ja": "I recommend that で始めて書き直す。",
+     "from": "He should see a doctor.",
+     "answers": [
+      "I recommend that he see a doctor."
+     ]
+    },
+    {
+     "id": "gram-c14-7",
+     "type": "oral",
+     "ja": "先にデータを確認することを提案します。",
+     "answers": [
+      "I suggest that we check the data first.",
+      "I suggest we check the data first."
+     ]
+    },
+    {
+     "id": "gram-c14-8",
+     "type": "oral",
+     "ja": "彼女がその会議に出ることを勧めます。",
+     "answers": [
+      "I recommend that she attend the meeting.",
+      "I recommend that she go to the meeting."
+     ]
+    },
+    {
+     "id": "gram-c14-9",
+     "type": "oral",
+     "ja": "部長は報告書を明日までに出すよう求めた。",
+     "answers": [
+      "The manager demanded that the report be submitted by tomorrow.",
+      "The manager demanded that we submit the report by tomorrow."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "I suggest that we 〜 で、仕事や勉強の提案を1文で言ってみましょう。",
+    "samples": [
+     "I suggest that we meet once a week.",
+     "I recommend that you read the manual first."
+    ],
+    "checks": [
+     "that の後ろの動詞は原形にした（主語が he・she でも -s なし）"
+    ]
+   }
+  },
+  {
+   "id": "c15",
+   "no": 79,
+   "title": "「まさに〜しようとしている」「〜する予定だ」（be about to・be to）",
+   "stage": "CEFR B2：仕事で差がつく形",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 100 be about to（B2.1）・99 be to 不定詞（B1.2）"
+    }
+   ],
+   "points": [
+    {
+     "text": "be about to＋動詞の原形は「まさに〜しようとしている（すぐに〜する）」。",
+     "en": [
+      "She is about to leave.",
+      "Class is about to start."
+     ],
+     "check": false
+    },
+    {
+     "text": "be to＋動詞の原形は「〜することになっている（予定）」。かたい言い方で、ニュースや公式の予定でよく使います。",
+     "en": [
+      "We are to meet at noon."
+     ],
+     "check": false
+    },
+    {
+     "text": "be to は「〜すべきだ」（指示・規則）の意味にもなります。",
+     "en": [
+      "Rules are to be observed."
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "She is about to leave.",
+     "ja": "彼女は出発しようとしている。",
+     "source": "tatoeba",
+     "enId": 314958,
+     "jaId": 88749
+    },
+    {
+     "en": "Class is about to begin.",
+     "ja": "授業が始まるぞ。",
+     "source": "tatoeba",
+     "enId": 10911464,
+     "jaId": 10911461
+    },
+    {
+     "en": "He was about to speak.",
+     "ja": "彼は話そうとするところだった。",
+     "source": "tatoeba",
+     "enId": 304850,
+     "jaId": 98850
+    },
+    {
+     "en": "We are to meet at noon.",
+     "ja": "我々は正午に会うことになっている。",
+     "source": "tatoeba",
+     "enId": 22864,
+     "jaId": 185732
+    },
+    {
+     "en": "He is to start tomorrow.",
+     "ja": "彼は明日出発する予定だ。",
+     "source": "tatoeba",
+     "enId": 304111,
+     "jaId": 99586
+    },
+    {
+     "en": "Rules are to be observed.",
+     "ja": "法律は守られるべきである。",
+     "source": "tatoeba",
+     "enId": 20223,
+     "jaId": 82659
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "She is about to leaving.",
+     "right": "She is about to leave.",
+     "note": "be about to の後ろは動詞の原形。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目100「be about to DO」（パターン：名詞句・代名詞 \\K {be} (副詞)? about to V.）",
+      "dictionary": "Wiktionary：leave は leave の infinitive",
+      "languageTool": []
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c15-1",
+     "type": "fill",
+     "ja": "授業がもうすぐ始まる。",
+     "text": "Class is about ___ begin.",
+     "choices": [
+      "to",
+      "for",
+      "of"
+     ],
+     "answers": [
+      "to"
+     ]
+    },
+    {
+     "id": "gram-c15-2",
+     "type": "fill",
+     "ja": "彼はまさに話そうとしていた。",
+     "text": "He was about to ___.",
+     "choices": [
+      "speak",
+      "speaking",
+      "spoke"
+     ],
+     "answers": [
+      "speak"
+     ]
+    },
+    {
+     "id": "gram-c15-3",
+     "type": "order",
+     "ja": "私たちは正午に会うことになっている。",
+     "tokens": [
+      "We",
+      "are",
+      "to",
+      "meet",
+      "at",
+      "noon"
+     ],
+     "answers": [
+      "We are to meet at noon."
+     ]
+    },
+    {
+     "id": "gram-c15-4",
+     "type": "order",
+     "ja": "彼女はちょうど出かけるところだ。",
+     "tokens": [
+      "She",
+      "is",
+      "about",
+      "to",
+      "leave"
+     ],
+     "answers": [
+      "She is about to leave."
+     ]
+    },
+    {
+     "id": "gram-c15-5",
+     "type": "rewrite",
+     "ja": "be about to を使って「今にも〜しそう」にする。",
+     "from": "The meeting will start very soon.",
+     "answers": [
+      "The meeting is about to start."
+     ]
+    },
+    {
+     "id": "gram-c15-6",
+     "type": "rewrite",
+     "ja": "be to を使って「〜することになっている」にする。",
+     "from": "The president plans to visit Japan next week.",
+     "answers": [
+      "The president is to visit Japan next week."
+     ]
+    },
+    {
+     "id": "gram-c15-7",
+     "type": "oral",
+     "ja": "ちょうどお電話しようとしていたところです。",
+     "answers": [
+      "I was about to call you.",
+      "I was just about to call you."
+     ]
+    },
+    {
+     "id": "gram-c15-8",
+     "type": "oral",
+     "ja": "会議がもうすぐ始まります。",
+     "answers": [
+      "The meeting is about to start.",
+      "The meeting is about to begin."
+     ]
+    },
+    {
+     "id": "gram-c15-9",
+     "type": "oral",
+     "ja": "新しい社長は来月就任することになっている。",
+     "answers": [
+      "The new president is to take office next month.",
+      "The new president is to start next month."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "I was about to 〜 で、「ちょうど〜しようとしていた」ことを1文で言ってみましょう。",
+    "samples": [
+     "I was about to leave when my boss called me.",
+     "I was about to email you."
+    ],
+    "checks": [
+     "about to・be to の後ろは動詞の原形にした"
+    ]
+   }
+  },
+  {
+   "id": "c16",
+   "no": 80,
+   "title": "「〜と言われた」「〜をもらった」（I was told 〜・I was given 〜）",
+   "stage": "CEFR B2：仕事で差がつく形",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 85 間接目的語を主語にした受け身（is given / sent / shown / taught / told＋直接目的語）・86 直接目的語を主語にした受け身（… to＋間接目的語）　CEFR-J レベル B2.1"
+    }
+   ],
+   "points": [
+    {
+     "text": "give・tell・show・send・teach は目的語を2つとる動詞（修行場19）。「人」を主語にした受け身にできます。",
+     "en": [
+      "I was given a new jacket."
+     ],
+     "check": false
+    },
+    {
+     "text": "I was told 〜 は「〜と言われた・聞いた」。I was told to 〜 は「〜するように言われた」。",
+     "en": [
+      "That's what I was told.",
+      "She was told to accompany me."
+     ],
+     "check": false
+    },
+    {
+     "text": "「物」を主語にするときは、人の前に to を置きます（The letter was sent to me.）。",
+     "check": false
+    },
+    {
+     "text": "誰が言ったか・くれたかを言わずにすむので、仕事の連絡でよく使います。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I was given a new jacket.",
+     "ja": "新しい上着をもらった。",
+     "source": "tatoeba",
+     "enId": 269187,
+     "jaId": 145376
+    },
+    {
+     "en": "He was given an important mission.",
+     "ja": "彼は重大な使命を任された。",
+     "source": "tatoeba",
+     "enId": 299356,
+     "jaId": 104335
+    },
+    {
+     "en": "That's what I was told.",
+     "ja": "私はそのように教えられた。",
+     "source": "tatoeba",
+     "enId": 3199957,
+     "jaId": 6849888
+    },
+    {
+     "en": "She was told to accompany me.",
+     "ja": "彼女は私のお供をするように言われた。",
+     "source": "tatoeba",
+     "enId": 314279,
+     "jaId": 89432
+    },
+    {
+     "en": "I was asked to wait here.",
+     "ja": "私はここで待っているように頼まれました。",
+     "source": "tatoeba",
+     "enId": 253458,
+     "jaId": 161059
+    },
+    {
+     "en": "I was taught to respect my elders.",
+     "ja": "私は、年上の人を敬うように教えられた。",
+     "source": "tatoeba",
+     "enId": 252314,
+     "jaId": 162200
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "I was teached English by him.",
+     "right": "I was taught English by him.",
+     "note": "teach の過去分詞は taught。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目85「PASSIVE: INDIRECT OBJECTS OF GIVE/PASS/SEND/SHOW/TEACH/TELL AS SUBJECTS」（パターン：(?<!{not}) VB.? (given|passed|sent|shown|taught|told) 名詞句・代名詞）",
+      "dictionary": "Wiktionary：taught は teach の participle・past",
+      "languageTool": [
+       "MORFOLOGIK_RULE_EN_US：Possible spelling mistake. Did you mean \"taught\", the past tense form of the verb 'teach'?"
+      ]
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c16-1",
+     "type": "fill",
+     "ja": "新しい上着をもらった。",
+     "text": "I was ___ a new jacket.",
+     "choices": [
+      "given",
+      "gave",
+      "give"
+     ],
+     "answers": [
+      "given"
+     ]
+    },
+    {
+     "id": "gram-c16-2",
+     "type": "fill",
+     "ja": "ここで待つように頼まれた。",
+     "text": "I was asked ___ wait here.",
+     "choices": [
+      "to",
+      "for",
+      "that"
+     ],
+     "answers": [
+      "to"
+     ]
+    },
+    {
+     "id": "gram-c16-3",
+     "type": "order",
+     "ja": "私はそう聞きました。",
+     "tokens": [
+      "That's",
+      "what",
+      "I",
+      "was",
+      "told"
+     ],
+     "answers": [
+      "That's what I was told."
+     ]
+    },
+    {
+     "id": "gram-c16-4",
+     "type": "order",
+     "ja": "彼は重要な任務を任された。",
+     "tokens": [
+      "He",
+      "was",
+      "given",
+      "an",
+      "important",
+      "mission"
+     ],
+     "answers": [
+      "He was given an important mission."
+     ]
+    },
+    {
+     "id": "gram-c16-5",
+     "type": "rewrite",
+     "ja": "I で始めて受け身にする。",
+     "from": "My boss told me to finish it today.",
+     "answers": [
+      "I was told to finish it today.",
+      "I was told by my boss to finish it today."
+     ]
+    },
+    {
+     "id": "gram-c16-6",
+     "type": "rewrite",
+     "ja": "I で始めて受け身にする。",
+     "from": "They showed me the new office.",
+     "answers": [
+      "I was shown the new office."
+     ]
+    },
+    {
+     "id": "gram-c16-7",
+     "type": "oral",
+     "ja": "会議は中止だと聞きました。",
+     "answers": [
+      "I was told that the meeting was canceled.",
+      "I was told the meeting was canceled.",
+      "I was told that the meeting had been canceled."
+     ]
+    },
+    {
+     "id": "gram-c16-8",
+     "type": "oral",
+     "ja": "そのデータを送るよう頼まれました。",
+     "answers": [
+      "I was asked to send the data."
+     ]
+    },
+    {
+     "id": "gram-c16-9",
+     "type": "oral",
+     "ja": "新しいプロジェクトを任されました。",
+     "answers": [
+      "I was given a new project."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "I was told 〜 か I was given 〜 で、最近言われたこと・もらったものを1文で言ってみましょう。",
+    "samples": [
+     "I was told to prepare a presentation for next week.",
+     "I was given a chance to work abroad."
+    ],
+    "checks": [
+     "was の後ろは過去分詞（told・given・taught など）にした"
+    ]
+   }
+  },
+  {
+   "id": "c17",
+   "no": 81,
+   "title": "強調構文（It is … that 〜：〜のは…だ）",
+   "stage": "CEFR B2：仕事で差がつく形",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 204 強調構文（前置詞句・副詞を強調）　CEFR-J レベル B2.1"
+    }
+   ],
+   "points": [
+    {
+     "text": "It is（was）＋強めたい語句＋that 〜 で、「〜のは…だ」とその語句を目立たせます。",
+     "en": [
+      "It was yesterday that I met her."
+     ],
+     "check": false
+    },
+    {
+     "text": "時・場所・人・物など、いろいろな語句を強められます。",
+     "en": [
+      "It was here that I saw her."
+     ],
+     "check": false
+    },
+    {
+     "text": "強めたい語句を It is と that の間から外すと、ふつうの文に戻ります（I met her yesterday.）。",
+     "check": false
+    },
+    {
+     "text": "仕事では、誤解を正すときに便利です（It was the client that changed the schedule, not us.）。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "It was yesterday that I met her.",
+     "ja": "私が彼女に会ったのは昨日のことでした。",
+     "source": "tatoeba",
+     "enId": 247033,
+     "jaId": 167468
+    },
+    {
+     "en": "It was yesterday that I saw him.",
+     "ja": "私が彼に会ったのは昨日でした。",
+     "source": "tatoeba",
+     "enId": 247007,
+     "jaId": 167494
+    },
+    {
+     "en": "It was here that I saw her.",
+     "ja": "私が彼女を見たのはここでした。",
+     "source": "tatoeba",
+     "enId": 247047,
+     "jaId": 167454
+    },
+    {
+     "en": "It was yesterday that he died.",
+     "ja": "彼が死んだのは昨日でした。",
+     "source": "tatoeba",
+     "enId": 283701,
+     "jaId": 120307
+    },
+    {
+     "en": "It was yesterday that he went there.",
+     "ja": "彼がそこへ行ったのは昨日だった。",
+     "source": "tatoeba",
+     "enId": 283075,
+     "jaId": 120933
+    }
+   ],
+   "mistakes": [],
+   "exercises": [
+    {
+     "id": "gram-c17-1",
+     "type": "fill",
+     "ja": "私が彼女に会ったのは昨日だった。",
+     "text": "It was yesterday ___ I met her.",
+     "choices": [
+      "that",
+      "what",
+      "when"
+     ],
+     "answers": [
+      "that"
+     ]
+    },
+    {
+     "id": "gram-c17-2",
+     "type": "fill",
+     "ja": "私が彼女を見たのはここだった。",
+     "text": "___ was here that I saw her.",
+     "choices": [
+      "It",
+      "This",
+      "There"
+     ],
+     "answers": [
+      "It"
+     ]
+    },
+    {
+     "id": "gram-c17-3",
+     "type": "order",
+     "ja": "彼がそこへ行ったのは昨日だった。",
+     "tokens": [
+      "It",
+      "was",
+      "yesterday",
+      "that",
+      "he",
+      "went",
+      "there"
+     ],
+     "answers": [
+      "It was yesterday that he went there."
+     ]
+    },
+    {
+     "id": "gram-c17-4",
+     "type": "order",
+     "ja": "予定を変えたのはお客さんだった。",
+     "tokens": [
+      "It",
+      "was",
+      "the",
+      "client",
+      "that",
+      "changed",
+      "the",
+      "schedule"
+     ],
+     "answers": [
+      "It was the client that changed the schedule."
+     ]
+    },
+    {
+     "id": "gram-c17-5",
+     "type": "rewrite",
+     "ja": "It was … that で「彼に会ったのは駅だった」を強める。",
+     "from": "I met him at the station.",
+     "answers": [
+      "It was at the station that I met him."
+     ]
+    },
+    {
+     "id": "gram-c17-6",
+     "type": "rewrite",
+     "ja": "It was … that で「私が知りたかったのは値段だった」を強める。",
+     "from": "I wanted to know the price.",
+     "answers": [
+      "It was the price that I wanted to know."
+     ]
+    },
+    {
+     "id": "gram-c17-7",
+     "type": "oral",
+     "ja": "問題を見つけたのはトムだった。",
+     "answers": [
+      "It was Tom that found the problem.",
+      "It was Tom who found the problem."
+     ]
+    },
+    {
+     "id": "gram-c17-8",
+     "type": "oral",
+     "ja": "私が英語を勉強し始めたのは去年だった。",
+     "answers": [
+      "It was last year that I started studying English.",
+      "It was last year that I started to study English."
+     ]
+    },
+    {
+     "id": "gram-c17-9",
+     "type": "oral",
+     "ja": "大事なのは結果ではなく、過程です。",
+     "answers": [
+      "It is the process, not the result, that matters.",
+      "It's the process, not the result, that matters.",
+      "It is not the result but the process that matters."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "It was … that 〜 で、自分の経験の「いつ・どこ」を強めて1文で言ってみましょう。",
+    "samples": [
+     "It was in London that I first spoke English with a native speaker.",
+     "It was my teacher that encouraged me to study abroad."
+    ],
+    "checks": [
+     "強めたい語句を It was と that の間に置いた"
+    ]
+   }
+  },
+  {
+   "id": "c18",
+   "no": 82,
+   "title": "「〜すればするほど…」（the＋比較級, the＋比較級）",
+   "stage": "CEFR B2：仕事で差がつく形",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 50 the＋比較級 (...), the＋比較級　CEFR-J レベル B2.1"
+    }
+   ],
+   "points": [
+    {
+     "text": "The＋比較級＋主語＋動詞, the＋比較級＋主語＋動詞で「〜すればするほど、ますます…」。",
+     "en": [
+      "The more I get, the more I want."
+     ],
+     "check": false
+    },
+    {
+     "text": "両方の比較級に the を付けます。",
+     "check": false
+    },
+    {
+     "text": "短い決まり文句もあります：The sooner, the better.（早ければ早いほどよい）",
+     "en": [
+      "The sooner, the better.",
+      "The more, the better."
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "The sooner, the better.",
+     "ja": "早ければ早いほどいい。",
+     "source": "tatoeba",
+     "enId": 2308,
+     "jaId": 139697
+    },
+    {
+     "en": "The more, the better.",
+     "ja": "多ければ多い程よい。",
+     "source": "tatoeba",
+     "enId": 274947,
+     "jaId": 138288
+    },
+    {
+     "en": "The more I get, the more I want.",
+     "ja": "持てば持つほどもっと欲しくなる。",
+     "source": "tatoeba",
+     "enId": 263851,
+     "jaId": 150706
+    },
+    {
+     "en": "The more you earn, the more you spend.",
+     "ja": "収入が増えれば増えるほど、消費もいっそう多くなる。",
+     "source": "tatoeba",
+     "enId": 266271,
+     "jaId": 148288
+    },
+    {
+     "en": "The older we grow, the less we dream.",
+     "ja": "私たちは年をとればとるほど夢を見なくなる。",
+     "source": "tatoeba",
+     "enId": 249151,
+     "jaId": 165354
+    },
+    {
+     "en": "The more data we have, the better.",
+     "ja": "データはあればあるほどいい。",
+     "source": "tatoeba",
+     "enId": 11045595,
+     "jaId": 11045144
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "The more you practice, more you improve.",
+     "right": "The more you practice, the more you improve.",
+     "note": "後ろの比較級にも the を付ける。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目50「the COMPARATIVE (...), the COMPARATIVE」（パターン：the (JJR|RBR) (任意の語)*? , the (JJR|RBR)）",
+      "dictionary": "Wiktionary：more は much の comparative",
+      "languageTool": []
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c18-1",
+     "type": "fill",
+     "ja": "早ければ早いほどよい。",
+     "text": "The sooner, ___ better.",
+     "choices": [
+      "the",
+      "more",
+      "a"
+     ],
+     "answers": [
+      "the"
+     ]
+    },
+    {
+     "id": "gram-c18-2",
+     "type": "fill",
+     "ja": "稼げば稼ぐほど使う。",
+     "text": "The more you earn, the ___ you spend.",
+     "choices": [
+      "more",
+      "much",
+      "most"
+     ],
+     "answers": [
+      "more"
+     ]
+    },
+    {
+     "id": "gram-c18-3",
+     "type": "order",
+     "ja": "持てば持つほど欲しくなる。",
+     "tokens": [
+      "The",
+      "more",
+      "I",
+      "get",
+      "the",
+      "more",
+      "I",
+      "want"
+     ],
+     "answers": [
+      "The more I get, the more I want."
+     ]
+    },
+    {
+     "id": "gram-c18-4",
+     "type": "order",
+     "ja": "データは多ければ多いほどいい。",
+     "tokens": [
+      "The",
+      "more",
+      "data",
+      "we",
+      "have",
+      "the",
+      "better"
+     ],
+     "answers": [
+      "The more data we have, the better."
+     ]
+    },
+    {
+     "id": "gram-c18-5",
+     "type": "rewrite",
+     "ja": "The＋比較級, the＋比較級で1文にする。",
+     "from": "If you practice more, you will improve more.",
+     "answers": [
+      "The more you practice, the more you will improve.",
+      "The more you practice, the more you improve."
+     ]
+    },
+    {
+     "id": "gram-c18-6",
+     "type": "rewrite",
+     "ja": "The＋比較級, the＋比較級で1文にする。",
+     "from": "If we start earlier, we will finish earlier.",
+     "answers": [
+      "The earlier we start, the earlier we will finish.",
+      "The earlier we start, the earlier we finish.",
+      "The sooner we start, the sooner we will finish.",
+      "The sooner we start, the sooner we finish."
+     ]
+    },
+    {
+     "id": "gram-c18-7",
+     "type": "oral",
+     "ja": "お返事は早ければ早いほど助かります。",
+     "answers": [
+      "The sooner you reply, the better.",
+      "The sooner, the better."
+     ]
+    },
+    {
+     "id": "gram-c18-8",
+     "type": "oral",
+     "ja": "英語を話せば話すほど、自信がつく。",
+     "answers": [
+      "The more I speak English, the more confident I become.",
+      "The more you speak English, the more confident you become.",
+      "The more I speak English, the more confident I get."
+     ]
+    },
+    {
+     "id": "gram-c18-9",
+     "type": "oral",
+     "ja": "準備すればするほど、うまくいく。",
+     "answers": [
+      "The more you prepare, the better it goes.",
+      "The more we prepare, the better it goes.",
+      "The more you prepare, the better the result."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "The＋比較級, the＋比較級で、自分の経験から言えることを1文で言ってみましょう。",
+    "samples": [
+     "The more I read in English, the faster I can read.",
+     "The earlier I get up, the more I can do."
+    ],
+    "checks": [
+     "両方の比較級に the を付けた"
+    ]
+   }
+  },
+  {
+   "id": "c19",
+   "no": 83,
+   "title": "「〜したようだ」「〜されたい」（to have done・to be done）",
+   "stage": "CEFR B2：仕事で差がつく形",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 90 to have＋過去分詞・91 to be＋過去分詞　CEFR-J レベル B2.1"
+    }
+   ],
+   "points": [
+    {
+     "text": "seem to have＋過去分詞は「（以前に）〜したようだ・〜だったようだ」。seem to 〜（修行場49）より前の時のことを表します。",
+     "en": [
+      "He seems to have been ill."
+     ],
+     "check": false
+    },
+    {
+     "text": "to be＋過去分詞は「〜されること」。want・like・need などの後ろで使います。",
+     "en": [
+      "I don't want to be seen with him.",
+      "Tom needs to be told the truth."
+     ],
+     "check": false
+    },
+    {
+     "text": "仕事では What would you like to be called?（何とお呼びすればいいですか）のように使います。",
+     "en": [
+      "What would you like to be called?"
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "He seemed to have been ill.",
+     "ja": "彼は病気をしていたようだった。",
+     "source": "tatoeba",
+     "enId": 303159,
+     "jaId": 100539
+    },
+    {
+     "en": "He seems to have been rich.",
+     "ja": "彼は金持ちであったように見える。",
+     "source": "tatoeba",
+     "enId": 295494,
+     "jaId": 108184
+    },
+    {
+     "en": "She seems to have been ill.",
+     "ja": "彼女は病気だったと思われる。",
+     "source": "tatoeba",
+     "enId": 316669,
+     "jaId": 87040
+    },
+    {
+     "en": "What would you like to be called?",
+     "ja": "どのようにお呼びしたらよろしいでしょうか。",
+     "source": "tatoeba",
+     "enId": 37567,
+     "jaId": 200366
+    },
+    {
+     "en": "Tom needs to be told the truth.",
+     "ja": "トムに真実を言う必要がある。",
+     "source": "tatoeba",
+     "enId": 6736298,
+     "jaId": 10059358
+    },
+    {
+     "en": "I don't want to be seen with him.",
+     "ja": "彼と一緒にいるところを見られたくない。",
+     "source": "tatoeba",
+     "enId": 550272,
+     "jaId": 119216
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "He seems to have know it.",
+     "right": "He seems to have known it.",
+     "note": "to have の後ろは過去分詞。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目90「TO-INFINITIVE: to have DONE」（パターン：to have V.N）",
+      "dictionary": "Wiktionary：known は know の participle・past",
+      "languageTool": [
+       "HAVE_PART_AGREEMENT：It appears that the past participle should be used here."
+      ]
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "What would you like to be call?",
+     "right": "What would you like to be called?",
+     "note": "to be の後ろは過去分詞（「呼ばれる」）。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目91「TO-INFINITIVE: to be DONE」（パターン：to be V.N）",
+      "dictionary": "Wiktionary：called は call の participle・past",
+      "languageTool": []
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c19-1",
+     "type": "fill",
+     "ja": "彼は病気だったようだ。",
+     "text": "He seems to have ___ ill.",
+     "choices": [
+      "been",
+      "be",
+      "was"
+     ],
+     "answers": [
+      "been"
+     ]
+    },
+    {
+     "id": "gram-c19-2",
+     "type": "fill",
+     "ja": "何とお呼びすればいいですか。",
+     "text": "What would you like to be ___?",
+     "choices": [
+      "called",
+      "call",
+      "calling"
+     ],
+     "answers": [
+      "called"
+     ]
+    },
+    {
+     "id": "gram-c19-3",
+     "type": "order",
+     "ja": "彼女は病気だったと思われる。",
+     "tokens": [
+      "She",
+      "seems",
+      "to",
+      "have",
+      "been",
+      "ill"
+     ],
+     "answers": [
+      "She seems to have been ill."
+     ]
+    },
+    {
+     "id": "gram-c19-4",
+     "type": "order",
+     "ja": "トムには本当のことを伝える必要がある。",
+     "tokens": [
+      "Tom",
+      "needs",
+      "to",
+      "be",
+      "told",
+      "the",
+      "truth"
+     ],
+     "answers": [
+      "Tom needs to be told the truth."
+     ]
+    },
+    {
+     "id": "gram-c19-5",
+     "type": "rewrite",
+     "ja": "He seems to have で始めて書き直す。",
+     "from": "It seems that he left early.",
+     "answers": [
+      "He seems to have left early."
+     ]
+    },
+    {
+     "id": "gram-c19-6",
+     "type": "rewrite",
+     "ja": "to be＋過去分詞を使って書き直す。",
+     "from": "I don't want people to see me with him.",
+     "answers": [
+      "I don't want to be seen with him."
+     ]
+    },
+    {
+     "id": "gram-c19-7",
+     "type": "oral",
+     "ja": "彼は会議のことを忘れていたようだ。",
+     "answers": [
+      "He seems to have forgotten about the meeting.",
+      "He seems to have forgotten the meeting."
+     ]
+    },
+    {
+     "id": "gram-c19-8",
+     "type": "oral",
+     "ja": "この書類は今日中に署名される必要がある。",
+     "answers": [
+      "This document needs to be signed today."
+     ]
+    },
+    {
+     "id": "gram-c19-9",
+     "type": "oral",
+     "ja": "誰でも認められたいものだ。",
+     "answers": [
+      "Everyone wants to be recognized.",
+      "Everyone wants to be appreciated.",
+      "Everybody wants to be recognized."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "need to be＋過去分詞で、仕事で「〜される必要がある」ことを1文で言ってみましょう。",
+    "samples": [
+     "This report needs to be checked by my manager.",
+     "The meeting room needs to be booked in advance."
+    ],
+    "checks": [
+     "to have・to be の後ろは過去分詞にした"
+    ]
+   }
+  },
+  {
+   "id": "c20",
+   "no": 84,
+   "title": "「万一〜なら」（If you should 〜・Should you 〜）",
+   "stage": "CEFR B2：仕事で差がつく形",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 224 if 節の中の should（if it should rain tomorrow など）　CEFR-J レベル B2.1"
+    }
+   ],
+   "points": [
+    {
+     "text": "If＋主語＋should＋動詞の原形は「万一〜なら」。起こる可能性が低いと考えていることを表します。",
+     "en": [
+      "If you should change your mind, let me know."
+     ],
+     "check": false
+    },
+    {
+     "text": "If を省いて Should＋主語＋動詞の原形で始めることもできます。かたい言い方で、ビジネスメールの決まり文句です。",
+     "en": [
+      "Should you change your mind, let me know."
+     ],
+     "check": false
+    },
+    {
+     "text": "後ろの文は、命令文（let me know など）や will などのふつうの形にします。",
+     "check": false
+    },
+    {
+     "text": "メールの結びの Should you have any questions, please feel free to contact me.（ご不明な点がございましたら、お気軽にご連絡ください）はよく使います。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "If you should change your mind, let me know.",
+     "ja": "万一気が変わったら、知らせて下さい。",
+     "source": "tatoeba",
+     "enId": 322513,
+     "jaId": 81163
+    },
+    {
+     "en": "Should you change your mind, let me know.",
+     "ja": "万一考えを変えることがあったら、私に知らせて下さい。",
+     "source": "tatoeba",
+     "enId": 30905,
+     "jaId": 81157
+    },
+    {
+     "en": "If you should need any help, just let me know.",
+     "ja": "もし万一手伝いが必要なら、ぜひお知らせください。",
+     "source": "tatoeba",
+     "enId": 30607,
+     "jaId": 193441
+    },
+    {
+     "en": "If she should come late, give her this message.",
+     "ja": "万一彼女が遅れてきたら、このメッセージを伝言して下さい。",
+     "source": "tatoeba",
+     "enId": 322589,
+     "jaId": 81126
+    },
+    {
+     "en": "If I should fail, what would my parents say?",
+     "ja": "もし万が一私が失敗したら両親は何と言うだろう。",
+     "source": "tatoeba",
+     "enId": 30615,
+     "jaId": 193449
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "If you should needed any help, let me know.",
+     "right": "If you should need any help, let me know.",
+     "note": "should の後ろは動詞の原形。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目224「IF+SHOULD (e.g. if it should rain tomorrow)」（パターン：(^|動詞以外の語または記号) \\K if 名詞句・代名詞 should V.ドウシイガイゴキゴウ）",
+      "dictionary": "Wiktionary：need は need の infinitive",
+      "languageTool": [
+       "MD_BASEFORM：The modal verb 'should' requires the verb's base form."
+      ]
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c20-1",
+     "type": "fill",
+     "ja": "万一気が変わったら、知らせてください。",
+     "text": "If you ___ change your mind, let me know.",
+     "choices": [
+      "should",
+      "would",
+      "shall"
+     ],
+     "answers": [
+      "should"
+     ]
+    },
+    {
+     "id": "gram-c20-2",
+     "type": "fill",
+     "ja": "万一気が変わったら、知らせてください。（If を使わずに）",
+     "text": "___ you change your mind, let me know.",
+     "choices": [
+      "Should",
+      "Would",
+      "Do"
+     ],
+     "answers": [
+      "Should"
+     ]
+    },
+    {
+     "id": "gram-c20-3",
+     "type": "order",
+     "ja": "もし手伝いが必要なら、知らせてください。",
+     "tokens": [
+      "If",
+      "you",
+      "should",
+      "need",
+      "any",
+      "help",
+      "just",
+      "let",
+      "me",
+      "know"
+     ],
+     "answers": [
+      "If you should need any help, just let me know."
+     ]
+    },
+    {
+     "id": "gram-c20-4",
+     "type": "order",
+     "ja": "万一彼女が遅れて来たら、この伝言を渡してください。",
+     "tokens": [
+      "If",
+      "she",
+      "should",
+      "come",
+      "late",
+      "give",
+      "her",
+      "this",
+      "message"
+     ],
+     "answers": [
+      "If she should come late, give her this message."
+     ]
+    },
+    {
+     "id": "gram-c20-5",
+     "type": "rewrite",
+     "ja": "Should で始めて書き直す。",
+     "from": "If you have any questions, please contact me.",
+     "answers": [
+      "Should you have any questions, please contact me.",
+      "Should you have any questions, please feel free to contact me."
+     ]
+    },
+    {
+     "id": "gram-c20-6",
+     "type": "rewrite",
+     "ja": "If 〜 should を使って「万一〜なら」にする。",
+     "from": "If it rains tomorrow, we will cancel the event.",
+     "answers": [
+      "If it should rain tomorrow, we will cancel the event."
+     ]
+    },
+    {
+     "id": "gram-c20-7",
+     "type": "oral",
+     "ja": "ご不明な点がございましたら、お気軽にご連絡ください。",
+     "answers": [
+      "Should you have any questions, please feel free to contact me.",
+      "Should you have any questions, please contact me.",
+      "If you should have any questions, please feel free to contact me."
+     ]
+    },
+    {
+     "id": "gram-c20-8",
+     "type": "oral",
+     "ja": "万一遅れる場合は、お電話ください。",
+     "answers": [
+      "Should you be late, please call me.",
+      "If you should be late, please call me.",
+      "Should you be late, please give me a call."
+     ]
+    },
+    {
+     "id": "gram-c20-9",
+     "type": "oral",
+     "ja": "万一その件で問題があれば、お知らせください。",
+     "answers": [
+      "Should there be any problems, please let me know.",
+      "If there should be any problems, please let me know.",
+      "Should there be any problem, please let me know."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "Should you 〜, please … で、ビジネスメールの結びの1文を作ってみましょう。",
+    "samples": [
+     "Should you need more information, please let me know.",
+     "Should you have any concerns, please feel free to contact me."
+    ],
+    "checks": [
+     "Should の後ろは「主語＋動詞の原形」にした"
+    ]
+   }
+  },
+  {
+   "id": "c21",
+   "no": 85,
+   "title": "「〜がなければ」（if it were not for・without）",
+   "stage": "CEFR B2：かたい書き言葉",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 228 if it were not for …・230 if it hadn’t been for …　CEFR-J レベル B2.2"
+    }
+   ],
+   "points": [
+    {
+     "text": "if it were not for 〜 は「（今）〜がなければ」。後ろは would＋原形（仮定法過去。修行場44）。",
+     "en": [
+      "What do you think would happen if it were not for books?"
+     ],
+     "check": false
+    },
+    {
+     "text": "if it had not been for 〜 は「（あの時）〜がなかったら」。後ろは would have＋過去分詞（仮定法過去完了。修行場61）。",
+     "check": false
+    },
+    {
+     "text": "話すときは without 〜 のほうがよく使われます。without は今のことにも過去のことにも使えます。",
+     "en": [
+      "I couldn't have done it without your help."
+     ],
+     "check": false
+    },
+    {
+     "text": "感謝を伝えるときに便利です（Without your support, this project would not have succeeded.）。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "What do you think would happen if it were not for books?",
+     "ja": "もし書物がなければどうなると思いますか。",
+     "source": "tatoeba",
+     "enId": 30761,
+     "jaId": 193594
+    },
+    {
+     "en": "Would you still be studying Japanese if it weren't for anime?",
+     "ja": "日本語を学ぶ動機にやっぱりアニメは欠かせないよな？",
+     "source": "tatoeba",
+     "enId": 9987553,
+     "jaId": 9641479
+    },
+    {
+     "en": "I couldn't have done it without your help.",
+     "ja": "あなたの助けが無ければそれはできなかったでしょう。",
+     "source": "tatoeba",
+     "enId": 4772510,
+     "jaId": 193906
+    },
+    {
+     "en": "I don't think I could've done it without your help.",
+     "ja": "手伝ってくれなかったら、できなかったと思う。",
+     "source": "tatoeba",
+     "enId": 10290195,
+     "jaId": 10290201
+    },
+    {
+     "en": "I don't think I can do this without your help.",
+     "ja": "手伝ってもらえないとできないと思う。",
+     "source": "tatoeba",
+     "enId": 3241557,
+     "jaId": 12049504
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "meaning",
+     "wrong": "If it were not for your help, I would fail.",
+     "intended": "（あの時）あなたの助けがなかったら、失敗していた",
+     "right": "If it had not been for your help, I would have failed.",
+     "note": "if it were not for は「今〜がなければ」。過去のことは if it had not been for 〜, would have＋過去分詞。",
+     "work": "どちらも正しい英語。かたい言い方なので、話すときは Without your help, I would have failed. が自然。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c21-1",
+     "type": "fill",
+     "ja": "本がなければ、どうなると思いますか。",
+     "text": "What do you think would happen if it ___ not for books?",
+     "choices": [
+      "were",
+      "is",
+      "had"
+     ],
+     "answers": [
+      "were"
+     ]
+    },
+    {
+     "id": "gram-c21-2",
+     "type": "fill",
+     "ja": "あなたの助けがなければ、それはできなかったでしょう。",
+     "text": "I couldn't have done it ___ your help.",
+     "choices": [
+      "without",
+      "except",
+      "unless"
+     ],
+     "answers": [
+      "without"
+     ]
+    },
+    {
+     "id": "gram-c21-3",
+     "type": "order",
+     "ja": "あなたの助けがなかったら、失敗していただろう。",
+     "tokens": [
+      "If",
+      "it",
+      "had",
+      "not",
+      "been",
+      "for",
+      "your",
+      "help",
+      "I",
+      "would",
+      "have",
+      "failed"
+     ],
+     "answers": [
+      "If it had not been for your help, I would have failed.",
+      "I would have failed if it had not been for your help."
+     ]
+    },
+    {
+     "id": "gram-c21-4",
+     "type": "order",
+     "ja": "水がなければ、何も生きられない。",
+     "tokens": [
+      "If",
+      "it",
+      "were",
+      "not",
+      "for",
+      "water",
+      "nothing",
+      "could",
+      "live"
+     ],
+     "answers": [
+      "If it were not for water, nothing could live.",
+      "Nothing could live if it were not for water."
+     ]
+    },
+    {
+     "id": "gram-c21-5",
+     "type": "rewrite",
+     "ja": "without を使って書き直す。",
+     "from": "If it had not been for your support, I would have given up.",
+     "answers": [
+      "Without your support, I would have given up.",
+      "I would have given up without your support."
+     ]
+    },
+    {
+     "id": "gram-c21-6",
+     "type": "rewrite",
+     "ja": "If it were not for で始めて書き直す。",
+     "from": "Without the internet, our work would be difficult.",
+     "answers": [
+      "If it were not for the internet, our work would be difficult."
+     ]
+    },
+    {
+     "id": "gram-c21-7",
+     "type": "oral",
+     "ja": "皆さんの協力がなければ、このプロジェクトは成功しなかったでしょう。",
+     "answers": [
+      "Without your cooperation, this project would not have succeeded.",
+      "Without your cooperation, this project wouldn't have succeeded.",
+      "Without your help, this project would not have succeeded."
+     ]
+    },
+    {
+     "id": "gram-c21-8",
+     "type": "oral",
+     "ja": "あなたがいなかったら、できなかったと思う。",
+     "answers": [
+      "I don't think I could have done it without you.",
+      "I couldn't have done it without you."
+     ]
+    },
+    {
+     "id": "gram-c21-9",
+     "type": "oral",
+     "ja": "スマホがなければ、生活はもっと不便だろう。",
+     "answers": [
+      "Without smartphones, life would be more inconvenient.",
+      "If it were not for smartphones, life would be more inconvenient.",
+      "Without smartphones, our lives would be more inconvenient."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "Without 〜, I would (not) have … で、助けてくれた人やものへの感謝を1文で言ってみましょう。",
+    "samples": [
+     "Without my teacher, I would not have passed the exam.",
+     "Without my family's support, I couldn't have continued studying."
+    ],
+    "checks": [
+     "今のことは would＋原形、過去のことは would have＋過去分詞にした"
+    ]
+   }
+  },
+  {
+   "id": "c22",
+   "no": 86,
+   "title": "「たぶん〜だろう」「〜するのももっともだ」（may well・might well）",
+   "stage": "CEFR B2：かたい書き言葉",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 131 may well（B2.2）・134 might well（B2.1）"
+    }
+   ],
+   "points": [
+    {
+     "text": "may well＋動詞の原形は「たぶん〜だろう」。may だけより、そうなる見込みが高いと考えていることを表します。",
+     "en": [
+      "It may well be true.",
+      "It may well rain before tonight."
+     ],
+     "check": false
+    },
+    {
+     "text": "「〜するのももっともだ」の意味にもなります。どちらの意味かは前後の内容で判断します。",
+     "en": [
+      "He may well be proud of his daughter."
+     ],
+     "check": false
+    },
+    {
+     "text": "might well も同じように使えます（少し控えめ）。",
+     "check": false
+    },
+    {
+     "text": "仕事では、見通しを控えめに、でも根拠を持って伝えるときに使います（Sales may well increase next year.）。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "It may well be true.",
+     "ja": "それは多分本当だろう。",
+     "source": "tatoeba",
+     "enId": 42251,
+     "jaId": 205010
+    },
+    {
+     "en": "He may well be right.",
+     "ja": "たぶん彼の言うことはただしいだろう。",
+     "source": "tatoeba",
+     "enId": 40580,
+     "jaId": 203343
+    },
+    {
+     "en": "The news may well be true.",
+     "ja": "そのニュースは多分本当だろう。",
+     "source": "tatoeba",
+     "enId": 50104,
+     "jaId": 212818
+    },
+    {
+     "en": "It may well rain before tonight.",
+     "ja": "夜になる前に雨になりそうだ。",
+     "source": "tatoeba",
+     "enId": 282824,
+     "jaId": 79742
+    },
+    {
+     "en": "This book may well be useful to you.",
+     "ja": "この本は多分君の役に立つだろう。",
+     "source": "tatoeba",
+     "enId": 56903,
+     "jaId": 219583
+    },
+    {
+     "en": "He may well be proud of his daughter.",
+     "ja": "彼が娘を自慢するのはもっともだ。",
+     "source": "tatoeba",
+     "enId": 283799,
+     "jaId": 119452
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "It may well to be true.",
+     "right": "It may well be true.",
+     "note": "may well の後ろは to を付けずに動詞の原形。",
+     "proof": {
+      "kaisetsu": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室） 項目131「MODAL/AUX: may well」（パターン：may_MD well V.）",
+      "dictionary": "Wiktionary：be は be の infinitive",
+      "languageTool": []
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c22-1",
+     "type": "fill",
+     "ja": "それはたぶん本当だろう。",
+     "text": "It may ___ be true.",
+     "choices": [
+      "well",
+      "good",
+      "better"
+     ],
+     "answers": [
+      "well"
+     ]
+    },
+    {
+     "id": "gram-c22-2",
+     "type": "fill",
+     "ja": "夜になる前に雨になりそうだ。",
+     "text": "It may well ___ before tonight.",
+     "choices": [
+      "rain",
+      "to rain",
+      "rains"
+     ],
+     "answers": [
+      "rain"
+     ]
+    },
+    {
+     "id": "gram-c22-3",
+     "type": "order",
+     "ja": "たぶん彼の言うことは正しいだろう。",
+     "tokens": [
+      "He",
+      "may",
+      "well",
+      "be",
+      "right"
+     ],
+     "answers": [
+      "He may well be right."
+     ]
+    },
+    {
+     "id": "gram-c22-4",
+     "type": "order",
+     "ja": "この本はたぶん君の役に立つだろう。",
+     "tokens": [
+      "This",
+      "book",
+      "may",
+      "well",
+      "be",
+      "useful",
+      "to",
+      "you"
+     ],
+     "answers": [
+      "This book may well be useful to you."
+     ]
+    },
+    {
+     "id": "gram-c22-5",
+     "type": "rewrite",
+     "ja": "may well を使って書き直す。",
+     "from": "The rumor is probably true.",
+     "answers": [
+      "The rumor may well be true."
+     ]
+    },
+    {
+     "id": "gram-c22-6",
+     "type": "rewrite",
+     "ja": "may well を使って「〜するのももっともだ」にする。",
+     "from": "It is natural that he is angry.",
+     "answers": [
+      "He may well be angry."
+     ]
+    },
+    {
+     "id": "gram-c22-7",
+     "type": "oral",
+     "ja": "来年は売り上げがたぶん伸びるでしょう。",
+     "answers": [
+      "Sales may well increase next year.",
+      "Sales may well go up next year."
+     ]
+    },
+    {
+     "id": "gram-c22-8",
+     "type": "oral",
+     "ja": "彼の言う通りかもしれない（たぶんそうだ）。",
+     "answers": [
+      "He may well be right.",
+      "He might well be right."
+     ]
+    },
+    {
+     "id": "gram-c22-9",
+     "type": "oral",
+     "ja": "その会議はたぶん長引くでしょう。",
+     "answers": [
+      "The meeting may well run long.",
+      "The meeting may well take a long time.",
+      "The meeting may well go on for a long time."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "may well で、仕事や世の中の見通しを1文で言ってみましょう。",
+    "samples": [
+     "Remote work may well become even more common.",
+     "Prices may well go up next year."
+    ],
+    "checks": [
+     "may well の後ろは to を付けずに原形にした"
+    ]
+   }
+  },
+  {
+   "id": "c23",
+   "no": 87,
+   "title": "否定の語で始める倒置（Never have I 〜・Rarely do I 〜）",
+   "stage": "CEFR B2：かたい書き言葉",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 234 倒置（Never / No sooner / Hardly / Little / Scarcely / Seldom …）　CEFR-J レベル B1.1〜B2.2"
+    }
+   ],
+   "points": [
+    {
+     "text": "never・rarely・seldom・little などの否定の語を文の始めに置くと、その後ろは疑問文と同じ語順になります（倒置）。",
+     "en": [
+      "Never have I heard such beautiful music."
+     ],
+     "check": false
+    },
+    {
+     "text": "一般動詞の文では do・does・did を使います。",
+     "en": [
+      "Rarely do I listen to the radio.",
+      "Never did I dream of meeting you here."
+     ],
+     "check": false
+    },
+    {
+     "text": "強い感情や驚きを表す、かたい言い方です。ふつうの会話では I have never 〜 のような語順を使います。",
+     "check": false
+    },
+    {
+     "text": "スピーチや文章で印象を強めたいときに使います（Never have we seen such strong results.）。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "Never have I heard such beautiful music.",
+     "ja": "今までに一度もそのような美しい音楽を聴いたことがない。",
+     "source": "tatoeba",
+     "enId": 241870,
+     "jaId": 172605
+    },
+    {
+     "en": "Never have I dreamed of marrying you.",
+     "ja": "あなたと結婚するなんて夢にも思ったことはない。",
+     "source": "tatoeba",
+     "enId": 71221,
+     "jaId": 233847
+    },
+    {
+     "en": "Never will I see her again.",
+     "ja": "二度と彼女に会うことはないだろう。",
+     "source": "tatoeba",
+     "enId": 280972,
+     "jaId": 123021
+    },
+    {
+     "en": "Never did I dream of such a thing.",
+     "ja": "そのようなことは決して夢にも思わなかった。",
+     "source": "tatoeba",
+     "enId": 49827,
+     "jaId": 212543
+    },
+    {
+     "en": "Rarely does he go out on Sunday.",
+     "ja": "めったに彼は日曜日に外出しない。",
+     "source": "tatoeba",
+     "enId": 31792,
+     "jaId": 194619
+    },
+    {
+     "en": "Rarely do I listen to the radio.",
+     "ja": "私はめったにラジオを聴きません。",
+     "source": "tatoeba",
+     "enId": 255726,
+     "jaId": 158801
+    }
+   ],
+   "mistakes": [],
+   "exercises": [
+    {
+     "id": "gram-c23-1",
+     "type": "fill",
+     "ja": "今までにそんな美しい音楽を聞いたことがない。",
+     "text": "Never ___ I heard such beautiful music.",
+     "choices": [
+      "have",
+      "I",
+      "did"
+     ],
+     "answers": [
+      "have"
+     ]
+    },
+    {
+     "id": "gram-c23-2",
+     "type": "fill",
+     "ja": "私はめったにラジオを聞かない。",
+     "text": "Rarely ___ I listen to the radio.",
+     "choices": [
+      "do",
+      "am",
+      "have"
+     ],
+     "answers": [
+      "do"
+     ]
+    },
+    {
+     "id": "gram-c23-3",
+     "type": "order",
+     "ja": "彼女には二度と会わないだろう。",
+     "tokens": [
+      "Never",
+      "will",
+      "I",
+      "see",
+      "her",
+      "again"
+     ],
+     "answers": [
+      "Never will I see her again."
+     ]
+    },
+    {
+     "id": "gram-c23-4",
+     "type": "order",
+     "ja": "彼はめったに日曜日に外出しない。",
+     "tokens": [
+      "Rarely",
+      "does",
+      "he",
+      "go",
+      "out",
+      "on",
+      "Sunday"
+     ],
+     "answers": [
+      "Rarely does he go out on Sunday."
+     ]
+    },
+    {
+     "id": "gram-c23-5",
+     "type": "rewrite",
+     "ja": "Never で始めて倒置にする。",
+     "from": "I have never seen such a big city.",
+     "answers": [
+      "Never have I seen such a big city."
+     ]
+    },
+    {
+     "id": "gram-c23-6",
+     "type": "rewrite",
+     "ja": "Rarely で始めて倒置にする。",
+     "from": "He rarely makes mistakes.",
+     "answers": [
+      "Rarely does he make mistakes."
+     ]
+    },
+    {
+     "id": "gram-c23-7",
+     "type": "oral",
+     "ja": "こんなに良い結果は見たことがありません。（強く）",
+     "answers": [
+      "Never have I seen such good results.",
+      "Never have we seen such good results.",
+      "Never have I seen such great results."
+     ]
+    },
+    {
+     "id": "gram-c23-8",
+     "type": "oral",
+     "ja": "ここで会うとは夢にも思わなかった。（強く）",
+     "answers": [
+      "Never did I dream of meeting you here.",
+      "Never did I think I would meet you here."
+     ]
+    },
+    {
+     "id": "gram-c23-9",
+     "type": "oral",
+     "ja": "彼はめったに遅刻しない。（強く）",
+     "answers": [
+      "Rarely is he late.",
+      "Rarely does he come late.",
+      "Seldom is he late."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "Never have I 〜 で、強く印象に残った経験を1文で書いてみましょう（スピーチや文章の練習）。",
+    "samples": [
+     "Never have I worked with such a great team.",
+     "Never have I been so nervous as on my first day at work."
+    ],
+    "checks": [
+     "否定の語の後ろを疑問文と同じ語順にした（Never have I …）"
     ]
    }
   }

@@ -7,7 +7,7 @@ import { homedir } from 'node:os'
 import { join } from 'node:path'
 
 const OUT = join(homedir(), 'eigo-data', 'work', 'grammar-forms.json')
-const POS = ['verb', 'noun', 'pron', 'det', 'article', 'prep', 'adj', 'adv', 'conj', 'num', 'contraction']
+const POS = ['verb', 'noun', 'pron', 'det', 'article', 'prep', 'adj', 'adv', 'conj', 'num', 'contraction', 'phrase', 'intj']
 const LABELS = ['colloquial', 'informal', 'nonstandard', 'dialectal', 'proscribed']
 const want = new Set(process.argv.slice(2))
 const out = {}
