@@ -1,5 +1,5 @@
 {
- "version": 202610081,
+ "version": 202610091,
  "license": "解説・問題：自作。例文：Tatoeba（CC BY 2.0 FR）",
  "items": [
   {
@@ -124,22 +124,13 @@
      "wrong": "She are a teacher.",
      "right": "She is a teacher.",
      "note": "she（1人）には is を使う。",
-     "dict": {
-      "lemma": "be",
-      "pos": "verb",
-      "form": "is",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.44「She is cool.」",
+      "dictionary": "Wiktionary：is は be の third-person・singular・present",
       "languageTool": [
        "PERS_PRONOUN_AGREEMENT：Use third-person verb with 'She'.",
        "HE_VERB_AGR：The pronoun 'She' is usually used with a third-person or a past tense verb."
-      ],
-      "dictionary": "Wiktionary：is は be の third-person・singular・present"
+      ]
      }
     },
     {
@@ -147,21 +138,13 @@
      "wrong": "We is hungry.",
      "right": "We are hungry.",
      "note": "we（複数）には are を使う。",
-     "dict": {
-      "lemma": "be",
-      "pos": "verb",
-      "form": "are",
-      "tags": [
-       "plural",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.46「We are tired and sleepy.」",
+      "dictionary": "Wiktionary：are は be の plural・present",
       "languageTool": [
        "BASE_FORM：Possible agreement error — use the base form here.",
        "PERS_PRONOUN_AGREEMENT：Use a first-person plural verb with 'we'."
-      ],
-      "dictionary": "Wiktionary：are は be の plural・present"
+      ]
      }
     },
     {
@@ -674,21 +657,12 @@
      "wrong": "He play tennis.",
      "right": "He plays tennis.",
      "note": "he の現在の文では -s を付ける。",
-     "dict": {
-      "lemma": "play",
-      "pos": "verb",
-      "form": "plays",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.46「On Tuesdays he goes to a swimming club.」",
+      "dictionary": "Wiktionary：plays は play の third-person・singular・present",
       "languageTool": [
        "HE_VERB_AGR：The pronoun 'He' is usually used with a third-person or a past tense verb."
-      ],
-      "dictionary": "Wiktionary：plays は play の third-person・singular・present"
+      ]
      }
     },
     {
@@ -696,21 +670,12 @@
      "wrong": "She have a car.",
      "right": "She has a car.",
      "note": "have は has になる。",
-     "dict": {
-      "lemma": "have",
-      "pos": "verb",
-      "form": "has",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.37「Bill has a lot of CDs」",
+      "dictionary": "Wiktionary：has は have の third-person・singular・present",
       "languageTool": [
        "HE_VERB_AGR：The pronoun 'She' is usually used with a third-person or a past tense verb."
-      ],
-      "dictionary": "Wiktionary：has は have の third-person・singular・present"
+      ]
      }
     },
     {
@@ -718,43 +683,23 @@
      "wrong": "He studys English.",
      "right": "He studies English.",
      "note": "「子音字＋y」は y を i に変えて -es。",
-     "dict": {
-      "lemma": "study",
-      "pos": "verb",
-      "form": "studies",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.49「My sister studies hard to enter college.」",
+      "dictionary": "Wiktionary：studies は study の third-person・singular・present",
       "languageTool": [
        "MORFOLOGIK_RULE_EN_US：Possible spelling mistake. Did you mean \"studies\", the plural form of the noun 'study'?"
-      ],
-      "dictionary": "Wiktionary：studies は study の third-person・singular・present"
+      ]
      }
     },
     {
      "kind": "error",
-     "wrong": "He watchs TV every night.",
-     "right": "He watches TV every night.",
-     "note": "ch で終わる語は -es。",
-     "dict": {
-      "lemma": "watch",
-      "pos": "verb",
-      "form": "watches",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
+     "wrong": "My father go to work by train.",
+     "right": "My father goes to work by train.",
+     "note": "my father（1人）の現在の文では、go に -es を付けて goes。",
      "proof": {
-      "languageTool": [
-       "MORFOLOGIK_RULE_EN_US：Possible spelling mistake. Did you mean \"watches\", the plural form of the noun 'watch'?"
-      ],
-      "dictionary": "Wiktionary：watches は watch の third-person・singular・present"
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.46「On Tuesdays he goes to a swimming club.」",
+      "dictionary": "Wiktionary：goes は go の third-person・singular・present",
+      "languageTool": []
      }
     }
    ],
@@ -1017,25 +962,13 @@
    ],
    "mistakes": [
     {
-     "kind": "error",
+     "kind": "informal",
      "wrong": "He don't like fish.",
      "right": "He doesn't like fish.",
-     "note": "he には doesn’t を使う。",
-     "dict": {
-      "lemma": "do",
-      "pos": "verb",
-      "form": "does",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
+     "note": "主語が he・she などのとき、くだけた会話で don’t と言う母語話者もいるが、標準的な英語では doesn’t。正式な場面や書くときは doesn’t を使う。",
      "proof": {
-      "languageTool": [
-       "HE_VERB_AGR：The pronoun 'He' is usually used with a third-person or a past tense verb."
-      ],
-      "dictionary": "Wiktionary：does は do の third-person・singular・present"
+      "dictionary": "Wiktionary：don't（verb）の語義「Does not.」に札「nonstandard」",
+      "spoken": "映画字幕（OpenSubtitles 英語）：「he don't」27,341回、「he doesn't」257,198回"
      }
     },
     {
@@ -1043,23 +976,14 @@
      "wrong": "Does she likes tea?",
      "right": "Does she like tea?",
      "note": "Does の文では動詞は原形（likes は -s の付いた形）。",
-     "dict": {
-      "lemma": "like",
-      "pos": "verb",
-      "form": "likes",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.38「Does she like Japanese food or Chinese food?」",
+      "dictionary": "Wiktionary：likes は like の third-person・singular・present",
       "languageTool": [
        "DO_VBZ：After the auxiliary verb 'do', use the base form of the main verb. Did you mean \"like\"?",
        "DOES_NP_VBZ：Did you mean \"like\"?",
        "DOES_X_HAS：Did you mean \"like\"? As 'do' is already inflected, the verb cannot also be inflected."
-      ],
-      "dictionary": "Wiktionary：likes は like の third-person・singular・present"
+      ]
      }
     },
     {
@@ -1067,21 +991,20 @@
      "wrong": "Is you a student?",
      "right": "Are you a student?",
      "note": "you には are を使う。",
-     "dict": {
-      "lemma": "be",
-      "pos": "verb",
-      "form": "are",
-      "tags": [
-       "second-person",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.38「Are you from Canada?」",
+      "dictionary": "Wiktionary：are は be の second-person・present",
       "languageTool": [
        "NON3PRS_VERB：The pronoun 'you' must be used with \"Are\"."
-      ],
-      "dictionary": "Wiktionary：are は be の second-person・present"
+      ]
      }
+    },
+    {
+     "kind": "meaning",
+     "wrong": "Are you like coffee?",
+     "intended": "コーヒーは好きですか",
+     "right": "Do you like coffee?",
+     "note": "Are you like 〜? は「あなたは〜に似ていますか」という意味になる（この like は「〜のような」）。「好き」の like は一般動詞なので Do you like 〜? と聞く。"
     },
     {
      "kind": "meaning",
@@ -1364,25 +1287,16 @@
      "wrong": "Where does he lives?",
      "right": "Where does he live?",
      "note": "does の後ろの動詞は原形。",
-     "dict": {
-      "lemma": "live",
-      "pos": "verb",
-      "form": "lives",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.38「Does she like Japanese food or Chinese food?」",
+      "dictionary": "Wiktionary：lives は live の third-person・singular・present",
       "languageTool": [
        "HOW_DOES_THIS_CHANGES：It seems that the verb form is incorrect.",
        "HOW_DO_I_VB：The base form of the verb \"live\" seems to fit better in this context.",
        "DO_VBZ：After the auxiliary verb 'do', use the base form of the main verb. Did you mean \"live\"?",
        "DOES_NP_VBZ：Did you mean \"live\"?",
        "DOES_X_HAS：Did you mean \"live\"? As 'do' is already inflected, the verb cannot also be inflected."
-      ],
-      "dictionary": "Wiktionary：lives は live の third-person・singular・present"
+      ]
      }
     },
     {
@@ -1390,20 +1304,34 @@
      "wrong": "Where is you from?",
      "right": "Where are you from?",
      "note": "you には are を使う。",
-     "dict": {
-      "lemma": "be",
-      "pos": "verb",
-      "form": "are",
-      "tags": [
-       "second-person",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.38「Are you from Canada?」",
+      "dictionary": "Wiktionary：are は be の second-person・present",
       "languageTool": [
        "NON3PRS_VERB：The pronoun 'you' must be used with \"are\"."
-      ],
-      "dictionary": "Wiktionary：are は be の second-person・present"
+      ]
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "Where you live?",
+     "right": "Where do you live?",
+     "note": "一般動詞の疑問文は、疑問詞の後ろに do / does を置く。",
+     "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.44「Where do you want to go?」",
+      "dictionary": "Wiktionary：do（verb）の語義「A syntactic marker in a question whose main verb is not another auxiliary verb or be.」",
+      "languageTool": []
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "What time you get up?",
+     "right": "What time do you get up?",
+     "note": "What time の後ろも、do を置いて疑問文の語順にする。",
+     "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.38「What time do you get up?」",
+      "dictionary": "Wiktionary：do（verb）の語義「A syntactic marker in a question whose main verb is not another auxiliary verb or be.」",
+      "languageTool": []
      }
     },
     {
@@ -1653,21 +1581,12 @@
      "wrong": "She can swims.",
      "right": "She can swim.",
      "note": "can の後ろは動詞の原形（swims は -s の付いた形）。",
-     "dict": {
-      "lemma": "swim",
-      "pos": "verb",
-      "form": "swims",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.39「She can swim fast.」",
+      "dictionary": "Wiktionary：swims は swim の third-person・singular・present",
       "languageTool": [
        "MD_BASEFORM：The modal verb 'can' requires the verb's base form."
-      ],
-      "dictionary": "Wiktionary：swims は swim の third-person・singular・present"
+      ]
      }
     },
     {
@@ -1675,21 +1594,12 @@
      "wrong": "He can speaks English.",
      "right": "He can speak English.",
      "note": "can の後ろは動詞の原形。",
-     "dict": {
-      "lemma": "speak",
-      "pos": "verb",
-      "form": "speaks",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.37「She can play baseball well.」",
+      "dictionary": "Wiktionary：speaks は speak の third-person・singular・present",
       "languageTool": [
        "MD_BASEFORM：The modal verb 'can' requires the verb's base form."
-      ],
-      "dictionary": "Wiktionary：speaks は speak の third-person・singular・present"
+      ]
      }
     },
     {
@@ -2163,16 +2073,12 @@
      "wrong": "Him is my brother.",
      "right": "He is my brother.",
      "note": "主語（〜は）には he を使う。him は「彼を・彼に」。",
-     "dict": {
-      "lemma": "him",
-      "pos": "pron",
-      "gloss": "he as a grammatical object"
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.44「She is cool.」",
+      "dictionary": "Wiktionary：him（pron）の語義「he as a grammatical object」",
       "languageTool": [
        "WRONG_PRP_AT_SENT_START：The subject form of the pronoun may be required here."
-      ],
-      "dictionary": "Wiktionary：him（pron）の語義「he as a grammatical object」"
+      ]
      }
     },
     {
@@ -2180,16 +2086,12 @@
      "wrong": "Its my car.",
      "right": "It's my car.",
      "note": "「それは〜です」は it’s（it is）。its は「それの」。",
-     "dict": {
-      "lemma": "its",
-      "pos": "det",
-      "gloss": "Belonging to it."
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.38「Itʼs my idea.」",
+      "dictionary": "Wiktionary：its（det）の語義「Belonging to it.」",
       "languageTool": [
        "IT_IS：Did you mean \"it's\" (short for 'it is') instead of 'its' (possessive pronoun)?"
-      ],
-      "dictionary": "Wiktionary：its（det）の語義「Belonging to it.」"
+      ]
      }
     },
     {
@@ -2197,21 +2099,13 @@
      "wrong": "These is my books.",
      "right": "These are my books.",
      "note": "these（複数）には are を使う。",
-     "dict": {
-      "lemma": "be",
-      "pos": "verb",
-      "form": "are",
-      "tags": [
-       "plural",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.45「These are the pictures that Masaki painted in the country.」",
+      "dictionary": "Wiktionary：are は be の plural・present",
       "languageTool": [
        "SINGULAR_VERB_AFTER_THESE_OR_THOSE：The verb 'is' is singular. Did you mean: \"this is\" or \"These are\"?",
        "THIS_NNS：The plural demonstrative pronoun 'these' does not agree with the singular verb 'is'. Did you mean \"this\"?"
-      ],
-      "dictionary": "Wiktionary：are は be の plural・present"
+      ]
      }
     }
    ],
@@ -2454,19 +2348,12 @@
      "wrong": "I have two brother.",
      "right": "I have two brothers.",
      "note": "2人以上は複数形にする。",
-     "dict": {
-      "lemma": "brother",
-      "pos": "noun",
-      "form": "brothers",
-      "tags": [
-       "plural"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.46「There are seven days in a week.」",
+      "dictionary": "Wiktionary：brothers は brother の plural",
       "languageTool": [
        "CD_NN：Possible agreement error. The noun 'brother' seems to be countable."
-      ],
-      "dictionary": "Wiktionary：brothers は brother の plural"
+      ]
      }
     },
     {
@@ -2474,16 +2361,12 @@
      "wrong": "I want an book.",
      "right": "I want a book.",
      "note": "an は母音の音で始まる語の前だけ。",
-     "dict": {
-      "lemma": "an",
-      "pos": "article",
-      "gloss": "Used before a vowel sound."
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.37「I want a new ball.」",
+      "dictionary": "Wiktionary：an（article）の語義「Used before a vowel sound.」",
       "languageTool": [
        "EN_A_VS_AN：Use \"a\" instead of 'an' if the following word doesn't start with a vowel sound, e.g. 'a sentence', 'a university'."
-      ],
-      "dictionary": "Wiktionary：an（article）の語義「Used before a vowel sound.」"
+      ]
      }
     },
     {
@@ -2491,16 +2374,12 @@
      "wrong": "I have a apple.",
      "right": "I have an apple.",
      "note": "apple は母音の音で始まるので an。",
-     "dict": {
-      "lemma": "an",
-      "pos": "article",
-      "gloss": "Used before a vowel sound."
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.43「There is an old tree in front of my house.」",
+      "dictionary": "Wiktionary：an（article）の語義「Used before a vowel sound.」",
       "languageTool": [
        "EN_A_VS_AN：Use \"an\" instead of 'a' if the following word starts with a vowel sound, e.g. 'an article', 'an hour'."
-      ],
-      "dictionary": "Wiktionary：an（article）の語義「Used before a vowel sound.」"
+      ]
      }
     }
    ],
@@ -2737,16 +2616,12 @@
      "wrong": "See you in Monday.",
      "right": "See you on Monday.",
      "note": "曜日には on を使う。",
-     "dict": {
-      "lemma": "on",
-      "pos": "prep",
-      "gloss": "At or during the date or day of."
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.46「On Tuesdays he goes to a swimming club.」",
+      "dictionary": "Wiktionary：on（prep）の語義「At or during the date or day of.」",
       "languageTool": [
        "IN_WEEKDAY：The correct preposition in this context is \"on\"."
-      ],
-      "dictionary": "Wiktionary：on（prep）の語義「At or during the date or day of.」"
+      ]
      }
     },
     {
@@ -2754,16 +2629,12 @@
      "wrong": "We met in Monday.",
      "right": "We met on Monday.",
      "note": "曜日には on を使う。",
-     "dict": {
-      "lemma": "on",
-      "pos": "prep",
-      "gloss": "At or during the date or day of."
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.46「On Tuesdays he goes to a swimming club.」",
+      "dictionary": "Wiktionary：on（prep）の語義「At or during the date or day of.」",
       "languageTool": [
        "IN_WEEKDAY：The correct preposition in this context is \"on\"."
-      ],
-      "dictionary": "Wiktionary：on（prep）の語義「At or during the date or day of.」"
+      ]
      }
     },
     {
@@ -2994,20 +2865,12 @@
      "wrong": "I am study English.",
      "right": "I am studying English.",
      "note": "be動詞の後ろは -ing 形にする。",
-     "dict": {
-      "lemma": "study",
-      "pos": "verb",
-      "form": "studying",
-      "tags": [
-       "participle",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.47「My mother is talking on the phone.」",
+      "dictionary": "Wiktionary：studying は study の participle・present",
       "languageTool": [
        "I_AM_VB：The base form of a verb does not usually follow 'am'. Double-check that the verb is in the correct form."
-      ],
-      "dictionary": "Wiktionary：studying は study の participle・present"
+      ]
      }
     },
     {
@@ -3240,19 +3103,12 @@
      "wrong": "I goed to Tokyo.",
      "right": "I went to Tokyo.",
      "note": "go の過去形は went（不規則）。",
-     "dict": {
-      "lemma": "go",
-      "pos": "verb",
-      "form": "went",
-      "tags": [
-       "past"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.39「I went to Okinawa.」",
+      "dictionary": "Wiktionary：went は go の past",
       "languageTool": [
        "MORFOLOGIK_RULE_EN_US：Possible spelling mistake. Did you mean \"went\", the past tense form of the verb 'go'?"
-      ],
-      "dictionary": "Wiktionary：went は go の past"
+      ]
      }
     },
     {
@@ -3260,19 +3116,12 @@
      "wrong": "He buyed a car.",
      "right": "He bought a car.",
      "note": "buy の過去形は bought（不規則）。",
-     "dict": {
-      "lemma": "buy",
-      "pos": "verb",
-      "form": "bought",
-      "tags": [
-       "past"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.44「Yuki bought a doll that had large beautiful eyes.」",
+      "dictionary": "Wiktionary：bought は buy の past",
       "languageTool": [
        "MORFOLOGIK_RULE_EN_US：Possible spelling mistake. Did you mean \"bought\", the past tense form of the verb 'buy'?"
-      ],
-      "dictionary": "Wiktionary：bought は buy の past"
+      ]
      }
     },
     {
@@ -3280,20 +3129,13 @@
      "wrong": "I didn't went there.",
      "right": "I didn't go there.",
      "note": "didn’t の後ろは原形（went は過去形）。",
-     "dict": {
-      "lemma": "go",
-      "pos": "verb",
-      "form": "went",
-      "tags": [
-       "past"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.37「I didnʼt go out because it was raining.」",
+      "dictionary": "Wiktionary：went は go の past",
       "languageTool": [
        "DID_BASEFORM：The auxiliary verb 'do' requires the base form of the verb.",
        "AUXILIARY_DO_WITH_INCORRECT_VERB_FORM：After the auxiliary verb 'do', use the base form of a verb. Did you mean \"go\"?"
-      ],
-      "dictionary": "Wiktionary：went は go の past"
+      ]
      }
     },
     {
@@ -3301,21 +3143,14 @@
      "wrong": "Did you saw him?",
      "right": "Did you see him?",
      "note": "Did の文では動詞は原形（saw は過去形）。",
-     "dict": {
-      "lemma": "see",
-      "pos": "verb",
-      "form": "saw",
-      "tags": [
-       "past"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.37「I didnʼt go out because it was raining.」",
+      "dictionary": "Wiktionary：saw は see の past",
       "languageTool": [
        "DO_VBZ：After the auxiliary verb 'do', use the base form of the main verb. Did you mean \"see\"?",
        "DO_VBZ_AMBIGUOUS_VERB：Make sure that the ambiguous verb form 'saw' is correct. (It can either be the base form 'saw', or the past tense of a different verb.)",
        "DID_PAST：The past tense is already inflected in the auxiliary verb \"did\", so the infinitive (base) form of the verb should be used here."
-      ],
-      "dictionary": "Wiktionary：saw は see の past"
+      ]
      }
     },
     {
@@ -3520,24 +3355,13 @@
    ],
    "mistakes": [
     {
-     "kind": "error",
+     "kind": "informal",
      "wrong": "They was working.",
      "right": "They were working.",
-     "note": "they（複数）には were を使う。",
-     "dict": {
-      "lemma": "be",
-      "pos": "verb",
-      "form": "were",
-      "tags": [
-       "past",
-       "plural"
-      ]
-     },
+     "note": "地域によっては、くだけた会話で they was と言う母語話者もいるが、標準的な英語では were。正式な場面や書くときは were を使う。",
      "proof": {
-      "languageTool": [
-       "PERS_PRONOUN_AGREEMENT：Use a third-person plural verb with 'they'."
-      ],
-      "dictionary": "Wiktionary：were は be の past・plural"
+      "dictionary": "Wiktionary：was は be の dialectal・past・plural",
+      "spoken": "映画字幕（OpenSubtitles 英語）：「they was」10,431回、「they were」497,822回"
      }
     },
     {
@@ -3739,21 +3563,12 @@
      "wrong": "It will rains tomorrow.",
      "right": "It will rain tomorrow.",
      "note": "will の後ろは動詞の原形。",
-     "dict": {
-      "lemma": "rain",
-      "pos": "verb",
-      "form": "rains",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.47「I will take that yellow shirt.」",
+      "dictionary": "Wiktionary：rains は rain の third-person・singular・present",
       "languageTool": [
        "MD_BASEFORM：The modal verb 'will' requires the verb's base form."
-      ],
-      "dictionary": "Wiktionary：rains は rain の third-person・singular・present"
+      ]
      }
     },
     {
@@ -3761,20 +3576,13 @@
      "wrong": "I'm going to went.",
      "right": "I'm going to go.",
      "note": "going to の後ろは原形（went は過去形）。",
-     "dict": {
-      "lemma": "go",
-      "pos": "verb",
-      "form": "went",
-      "tags": [
-       "past"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.47「We are going to play basketball after school.」",
+      "dictionary": "Wiktionary：went は go の past",
       "languageTool": [
        "GOING_TO_VBD：The verb after 'going to' requires the base form.",
        "TO_NON_BASE：The verb after \"to\" should be in the base form as part of the to-infinitive. A verb can take many forms, but the base form is always used in the to-infinitive."
-      ],
-      "dictionary": "Wiktionary：went は go の past"
+      ]
      }
     }
    ],
@@ -4028,19 +3836,12 @@
      "wrong": "You should went.",
      "right": "You should go.",
      "note": "助動詞の後ろは動詞の原形（went は過去形）。",
-     "dict": {
-      "lemma": "go",
-      "pos": "verb",
-      "form": "went",
-      "tags": [
-       "past"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.43「You should keep this room clean.」",
+      "dictionary": "Wiktionary：went は go の past",
       "languageTool": [
        "MD_BASEFORM：The modal verb 'should' requires the verb's base form."
-      ],
-      "dictionary": "Wiktionary：went は go の past"
+      ]
      }
     },
     {
@@ -4048,43 +3849,22 @@
      "wrong": "He have to work.",
      "right": "He has to work.",
      "note": "he には has to を使う。",
-     "dict": {
-      "lemma": "have",
-      "pos": "verb",
-      "form": "has",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.37「Bill has a lot of CDs」",
+      "dictionary": "Wiktionary：has は have の third-person・singular・present",
       "languageTool": [
        "HE_VERB_AGR：The pronoun 'He' is usually used with a third-person or a past tense verb."
-      ],
-      "dictionary": "Wiktionary：has は have の third-person・singular・present"
+      ]
      }
     },
     {
-     "kind": "error",
+     "kind": "informal",
      "wrong": "She don't have to go.",
      "right": "She doesn't have to go.",
-     "note": "she には doesn’t を使う。",
-     "dict": {
-      "lemma": "do",
-      "pos": "verb",
-      "form": "does",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
+     "note": "主語が he・she などのとき、くだけた会話で don’t と言う母語話者もいるが、標準的な英語では doesn’t。正式な場面や書くときは doesn’t を使う。",
      "proof": {
-      "languageTool": [
-       "HE_VERB_AGR：The pronoun 'She' is usually used with a third-person or a past tense verb."
-      ],
-      "dictionary": "Wiktionary：does は do の third-person・singular・present"
+      "dictionary": "Wiktionary：don't（verb）の語義「Does not.」に札「nonstandard」",
+      "spoken": "映画字幕（OpenSubtitles 英語）：「she don't」14,045回、「she doesn't」138,595回"
      }
     },
     {
@@ -4339,16 +4119,12 @@
      "wrong": "Who's bag is this?",
      "right": "Whose bag is this?",
      "note": "「誰の」は whose。who’s は who is。",
-     "dict": {
-      "lemma": "whose",
-      "pos": "det",
-      "gloss": "Of whom, belonging to whom"
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.38「Whose idea is this?」",
+      "dictionary": "Wiktionary：whose（det）の語義「Of whom, belonging to whom」",
       "languageTool": [
        "WHO_S_NN_VB：It appears that the correct determiner here is \"whose\"."
-      ],
-      "dictionary": "Wiktionary：whose（det）の語義「Of whom, belonging to whom」"
+      ]
      }
     },
     {
@@ -4567,24 +4343,13 @@
    ],
    "mistakes": [
     {
-     "kind": "error",
-     "wrong": "There is two books on the desk.",
+     "kind": "informal",
+     "wrong": "There's two books on the desk.",
      "right": "There are two books on the desk.",
-     "note": "2つ以上なら are。",
-     "dict": {
-      "lemma": "be",
-      "pos": "verb",
-      "form": "are",
-      "tags": [
-       "plural",
-       "present"
-      ]
-     },
+     "note": "会話では、後ろが複数でも There’s と言うことがとても多い（短い形のときだけ。There is two … とはあまり言わない）。正式な場面や書くときは There are を使う。",
      "proof": {
-      "languageTool": [
-       "THERE_S_MANY：Did you mean \"There are two books\"?"
-      ],
-      "dictionary": "Wiktionary：are は be の plural・present"
+      "dictionary": "Wiktionary：is（verb）の語義「existential there」に札「colloquial」",
+      "spoken": "映画字幕（OpenSubtitles 英語）：「there's two」15,383回、「there are two」24,029回"
      }
     },
     {
@@ -4592,21 +4357,12 @@
      "wrong": "There are a cat under the table.",
      "right": "There is a cat under the table.",
      "note": "1つなら is。",
-     "dict": {
-      "lemma": "be",
-      "pos": "verb",
-      "form": "is",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.43「There is an old tree in front of my house.」",
+      "dictionary": "Wiktionary：is は be の third-person・singular・present",
       "languageTool": [
        "THERE_VBP_NN：Possible agreement error. Did you mean \"is\"?"
-      ],
-      "dictionary": "Wiktionary：is は be の third-person・singular・present"
+      ]
      }
     },
     {
@@ -5455,16 +5211,12 @@
      "wrong": "Let me to try.",
      "right": "Let me try.",
      "note": "let の後ろの動詞には to を付けない。",
-     "dict": {
-      "lemma": "let",
-      "pos": "verb",
-      "gloss": "usually without to"
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.43「Will you let me try?」",
+      "dictionary": "Wiktionary：let（verb）の語義「usually without to」",
       "languageTool": [
        "LET_IT_INFINITIVE：Using the to-infinitive may not be correct in this context. Consider using the bare infinitive (without \"to\") instead."
-      ],
-      "dictionary": "Wiktionary：let（verb）の語義「usually without to」"
+      ]
      }
     },
     {
@@ -5677,21 +5429,12 @@
      "wrong": "I like coffee but she like tea.",
      "right": "I like coffee but she likes tea.",
      "note": "つないだ後の文も、主語に合わせて動詞の形を決める。",
-     "dict": {
-      "lemma": "like",
-      "pos": "verb",
-      "form": "likes",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.38「She likes Chinese food.」",
+      "dictionary": "Wiktionary：likes は like の third-person・singular・present",
       "languageTool": [
        "HE_LIKE：The pronoun 'she' requires a third-person verb or a past tense. Or did you forget to add a verb?"
-      ],
-      "dictionary": "Wiktionary：likes は like の third-person・singular・present"
+      ]
      }
     },
     {
@@ -5914,21 +5657,12 @@
      "wrong": "If it will rain tomorrow, I will stay home.",
      "right": "If it rains tomorrow, I will stay home.",
      "note": "if のまとまりの中は、これからのことでも現在形。",
-     "dict": {
-      "lemma": "rain",
-      "pos": "verb",
-      "form": "rains",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.42「If you want water, I will give you some.」",
+      "dictionary": "Wiktionary：rains は rain の third-person・singular・present",
       "languageTool": [
        "CONDITIONAL_CLAUSE：Consider removing 'will'. (Usually, 'will' does not occur in a conditional clause, unless in the sense 'want to' or 'be willing to'.)"
-      ],
-      "dictionary": "Wiktionary：rains は rain の third-person・singular・present"
+      ]
      }
     },
     {
@@ -6168,25 +5902,13 @@
    ],
    "mistakes": [
     {
-     "kind": "error",
+     "kind": "informal",
      "wrong": "I think he don't know.",
      "right": "I think he doesn't know.",
-     "note": "that のまとまりの中も、主語に合わせて形を決める。",
-     "dict": {
-      "lemma": "do",
-      "pos": "verb",
-      "form": "does",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
+     "note": "主語が he・she などのとき、くだけた会話で don’t と言う母語話者もいるが、標準的な英語では doesn’t。正式な場面や書くときは doesn’t を使う。",
      "proof": {
-      "languageTool": [
-       "HE_VERB_AGR：The pronoun 'he' is usually used with a third-person or a past tense verb."
-      ],
-      "dictionary": "Wiktionary：does は do の third-person・singular・present"
+      "dictionary": "Wiktionary：don't（verb）の語義「Does not.」に札「nonstandard」",
+      "spoken": "映画字幕（OpenSubtitles 英語）：「he don't」27,341回、「he doesn't」257,198回"
      }
     }
    ],
@@ -6578,21 +6300,12 @@
      "wrong": "I'm sure he come.",
      "right": "I'm sure he comes.",
      "note": "that のまとまりの中も、主語に合わせて形を決める。",
-     "dict": {
-      "lemma": "come",
-      "pos": "verb",
-      "form": "comes",
-      "tags": [
-       "third-person",
-       "singular",
-       "present"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.37「Mary will have lunch before she comes.」",
+      "dictionary": "Wiktionary：comes は come の third-person・singular・present",
       "languageTool": [
        "HE_VERB_AGR：The pronoun 'he' is usually used with a third-person or a past tense verb."
-      ],
-      "dictionary": "Wiktionary：comes は come の third-person・singular・present"
+      ]
      }
     }
    ],
@@ -8053,19 +7766,12 @@
      "wrong": "He is more taller than his brother.",
      "right": "He is taller than his brother.",
      "note": "taller だけで比較級。more は付けない。",
-     "dict": {
-      "lemma": "tall",
-      "pos": "adj",
-      "form": "taller",
-      "tags": [
-       "comparative"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.48「tall - taller - tallest」",
+      "dictionary": "Wiktionary：taller は tall の comparative",
       "languageTool": [
        "MOST_COMPARATIVE：Use only \"taller\" (without 'more') when you use the comparative."
-      ],
-      "dictionary": "Wiktionary：taller は tall の comparative"
+      ]
      }
     },
     {
@@ -8073,19 +7779,12 @@
      "wrong": "This is the most biggest.",
      "right": "This is the biggest.",
      "note": "biggest だけで最上級。most は付けない。",
-     "dict": {
-      "lemma": "big",
-      "pos": "adj",
-      "form": "biggest",
-      "tags": [
-       "superlative"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.48「Satoshi is the fastest runner in his class.」",
+      "dictionary": "Wiktionary：biggest は big の superlative",
       "languageTool": [
        "MOST_SUPERLATIVE：Only \"biggest\" (without 'most') is used to write the superlative."
-      ],
-      "dictionary": "Wiktionary：biggest は big の superlative"
+      ]
      }
     },
     {
@@ -8093,19 +7792,12 @@
      "wrong": "She is tall than her sister.",
      "right": "She is taller than her sister.",
      "note": "than の前は比較級にする。",
-     "dict": {
-      "lemma": "tall",
-      "pos": "adj",
-      "form": "taller",
-      "tags": [
-       "comparative"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.48「Masashi is two years younger than David.」",
+      "dictionary": "Wiktionary：taller は tall の comparative",
       "languageTool": [
        "SUPERLATIVE_THAN：Use \"taller than\" to make a comparison with this adjective."
-      ],
-      "dictionary": "Wiktionary：taller は tall の comparative"
+      ]
      }
     }
    ],
@@ -8542,20 +8234,12 @@
      "wrong": "English is speak in Canada.",
      "right": "English is spoken in Canada.",
      "note": "受け身は be動詞＋過去分詞。",
-     "dict": {
-      "lemma": "speak",
-      "pos": "verb",
-      "form": "spoken",
-      "tags": [
-       "participle",
-       "past"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.51「Judo is enjoyed by many people in the world.」",
+      "dictionary": "Wiktionary：spoken は speak の participle・past",
       "languageTool": [
        "BEEN_PART_AGREEMENT：Consider using either the past participle \"spoken\" or the present participle \"speaking\" here."
-      ],
-      "dictionary": "Wiktionary：spoken は speak の participle・past"
+      ]
      }
     },
     {
@@ -8563,20 +8247,12 @@
      "wrong": "The book was wrote by him.",
      "right": "The book was written by him.",
      "note": "write の過去分詞は written（wrote は過去形）。",
-     "dict": {
-      "lemma": "write",
-      "pos": "verb",
-      "form": "written",
-      "tags": [
-       "participle",
-       "past"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.50「This is a book written by Soseki.」",
+      "dictionary": "Wiktionary：written は write の participle・past",
       "languageTool": [
        "BEEN_PART_AGREEMENT：Consider using either the past participle \"written\" or the present participle \"writing\" here."
-      ],
-      "dictionary": "Wiktionary：written は write の participle・past"
+      ]
      }
     },
     {
@@ -8584,20 +8260,12 @@
      "wrong": "He was invite to the party.",
      "right": "He was invited to the party.",
      "note": "be動詞の後ろは過去分詞。",
-     "dict": {
-      "lemma": "invite",
-      "pos": "verb",
-      "form": "invited",
-      "tags": [
-       "participle",
-       "past"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.51「This machine was made in France.」",
+      "dictionary": "Wiktionary：invited は invite の participle・past",
       "languageTool": [
        "BEEN_PART_AGREEMENT：Consider using either the past participle \"invited\" or the present participle \"inviting\" here."
-      ],
-      "dictionary": "Wiktionary：invited は invite の participle・past"
+      ]
      }
     },
     {
@@ -8605,20 +8273,12 @@
      "wrong": "I'm interesting in music.",
      "right": "I'm interested in music.",
      "note": "「（人が）興味がある」は interested。interesting は「（物事が）おもしろい」。",
-     "dict": {
-      "lemma": "interest",
-      "pos": "verb",
-      "form": "interested",
-      "tags": [
-       "participle",
-       "past"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.49「We are excited to meet you again.」",
+      "dictionary": "Wiktionary：interested は interest の participle・past",
       "languageTool": [
        "BE_INTEREST_IN：Did you mean \"interested\"?"
-      ],
-      "dictionary": "Wiktionary：interested は interest の participle・past"
+      ]
      }
     }
    ],
@@ -8830,16 +8490,12 @@
      "wrong": "I have lived here since ten years.",
      "right": "I have lived here for ten years.",
      "note": "期間には for を使う。since は始まった時。",
-     "dict": {
-      "lemma": "for",
-      "pos": "prep",
-      "gloss": "Over (a period of time)."
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.47「He has lived in London for two years.」",
+      "dictionary": "Wiktionary：for（prep）の語義「Over (a period of time).」",
       "languageTool": [
        "SINCE_FOR：Did you mean \"for\"? ('since' refers to a point in time, whereas 'for' refers to a period)"
-      ],
-      "dictionary": "Wiktionary：for（prep）の語義「Over (a period of time).」"
+      ]
      }
     },
     {
@@ -9063,21 +8719,13 @@
      "wrong": "I have saw that movie.",
      "right": "I have seen that movie.",
      "note": "have の後ろは過去分詞（saw は過去形）。",
-     "dict": {
-      "lemma": "see",
-      "pos": "verb",
-      "form": "seen",
-      "tags": [
-       "participle",
-       "past"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.47「I have played this game more than twenty times.」",
+      "dictionary": "Wiktionary：seen は see の participle・past",
       "languageTool": [
        "PRP_HAVE_VB：The inflection of the verb \"saw\" seems to be incorrect here.",
        "HAVE_PART_AGREEMENT：It appears that the past participle should be used here."
-      ],
-      "dictionary": "Wiktionary：seen は see の participle・past"
+      ]
      }
     },
     {
@@ -9085,20 +8733,12 @@
      "wrong": "Have you ever eat sushi?",
      "right": "Have you ever eaten sushi?",
      "note": "have の後ろは過去分詞。",
-     "dict": {
-      "lemma": "eat",
-      "pos": "verb",
-      "form": "eaten",
-      "tags": [
-       "participle",
-       "past"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.47「I have played this game more than twenty times.」",
+      "dictionary": "Wiktionary：eaten は eat の participle・past",
       "languageTool": [
        "BE_PART_AGREEMENT_2：Possible tense error detected. The past participle may be more appropriate in this context."
-      ],
-      "dictionary": "Wiktionary：eaten は eat の participle・past"
+      ]
      }
     },
     {
@@ -9317,20 +8957,12 @@
      "wrong": "He has went home.",
      "right": "He has gone home.",
      "note": "have / has の後ろは過去分詞（went は過去形）。",
-     "dict": {
-      "lemma": "go",
-      "pos": "verb",
-      "form": "gone",
-      "tags": [
-       "participle",
-       "past"
-      ]
-     },
      "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.47「He has lived in London for two years.」",
+      "dictionary": "Wiktionary：gone は go の participle・past",
       "languageTool": [
        "HAVE_PART_AGREEMENT：It appears that the past participle should be used here."
-      ],
-      "dictionary": "Wiktionary：gone は go の participle・past"
+      ]
      }
     },
     {
@@ -9927,7 +9559,19 @@
      "jaId": 80803
     }
    ],
-   "mistakes": [],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "I have a friend who live in Osaka.",
+     "right": "I have a friend who lives in Osaka.",
+     "note": "who の後ろの動詞は、前の名詞（a friend＝1人）に合わせる。現在の文なので lives。",
+     "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.45「The animal which runs the fastest is the cheetah.」",
+      "dictionary": "Wiktionary：lives は live の third-person・singular・present",
+      "languageTool": []
+     }
+    }
+   ],
    "exercises": [
     {
      "id": "gram-g41-1",
@@ -10335,43 +9979,6 @@
     }
    ],
    "mistakes": [
-    {
-     "kind": "error",
-     "wrong": "I have a few money.",
-     "right": "I have a little money.",
-     "note": "money は数えない名詞なので a little。",
-     "dict": {
-      "lemma": "little",
-      "pos": "det",
-      "gloss": "only a small amount (of)"
-     },
-     "proof": {
-      "languageTool": [
-       "A_UNCOUNTABLE：Uncountable nouns are usually not used with an indefinite article. Use simply \"few money\".",
-       "MANY_FEW_UNCOUNTABLE：Use \"much\" or \"little\" with uncountable nouns.",
-       "MANY_NN_U：Possible agreement error. The noun money seems to be uncountable; consider using: \"little money\"."
-      ],
-      "dictionary": "Wiktionary：little（det）の語義「only a small amount (of)」"
-     }
-    },
-    {
-     "kind": "error",
-     "wrong": "Every students has a computer.",
-     "right": "Every student has a computer.",
-     "note": "every の後ろは単数形。",
-     "dict": {
-      "lemma": "every",
-      "pos": "det",
-      "gloss": "All of a countable group (considered individually)"
-     },
-     "proof": {
-      "languageTool": [
-       "EACH_EVERY_NNS：Use a singular noun after the quantifier 'Every', or change it to \"all\".",
-       "EVERY_EACH_SINGULAR：The noun should probably be in the singular form."
-      ],
-      "dictionary": "Wiktionary：every（det）の語義「All of a countable group (considered individually)」"
-     }
-    },
     {
      "kind": "meaning",
      "wrong": "I have little time.",
