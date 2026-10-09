@@ -1,5 +1,8 @@
 # 開発計画（PLAN）
 
+最終版（2026-10-10、版 v1.0.0）：当初の計画（フェーズ1〜11）はすべて完了し、利用者の iPhone で確認済み。
+2026-10-10 から約2週間、利用者が実際に使って気づいた点をまとめる。その間は新しい機能を作らない。今後の候補は最後の「保留中」にある。
+
 SPEC（設計図）第11章の開発フェーズを、決まったことに合わせて具体化したもの。
 各フェーズの終わりに GitHub Pages に公開し、利用者が確認してから次へ進む。
 
@@ -19,7 +22,7 @@ SPEC（設計図）第11章の開発フェーズを、決まったことに合�
 | 8 | 熟語・表現（約300個から） | 完了（見直しも確認済み） |
 | 9 | 文法（小学校・中学校の学習指導要領に沿う） | 完了（45項目と ✕ の基準の見直しを iPhone で確認済み 2026-10-09） |
 | 10 | 文法（高校の学習指導要領） | 完了（19項目を iPhone で確認済み 2026-10-10） |
-| 11 | 文法（CEFR-J Grammar Profile、高校より上） | 23項目（修行場65〜87）を公開、利用者の確認待ち |
+| 11 | 文法（CEFR-J Grammar Profile、高校より上） | 完了（23項目を iPhone で確認済み 2026-10-10） |
 
 ## 決定事項（利用者の回答）
 
@@ -329,3 +332,32 @@ SPEC（設計図）第11章の開発フェーズを、決まったことに合�
 - 結果（2026-10-10）：23項目・問題217問（全体87項目・825問）。✕ 22文、△「意味が違う」7文、△「くだけた言い方」2文（Me neither.／You better go.）。
 - 迷って使わなかった文：6文。I use to work here.（字幕で正しい形のちょうど1%、境目）／We help each others.（所有格 each other's の書き間違いが回数に混ざる）／I suggest that he goes.（イギリス英語では使われる。英米の違い）／I decided to not go.（分割不定詞。人によって判断が分かれる）／If it was not for you, …（was と were。人によって判断が分かれる）／One is red and another is blue.（2つのうちの残りに another。判断が分かれる）。
 - 辞書で確かめる方法がなく ✕ にしなかったもの：語順の誤り（Never I have seen such a thing.／Not only he is smart, …）、強調構文・whatever など。
+
+## 版（いつでもこの状態に戻せるように）
+
+- v1.0.0（2026-10-10）：当初の計画（フェーズ1〜11）がすべて完了した状態。
+  - アプリ：リポジトリ kimosuke0625-bot/eigo-app のタグ v1.0.0（package.json の version も 1.0.0）。
+  - 音声置き場：リポジトリ kimosuke0625-bot/eigo-audio のタグ v1.0.0。
+  - 文法・熟語のデータ（public/data/*.json）は作り終えた形でリポジトリに入っているので、戻すときに PC の eigo-data（辞書・コーパス）は要らない。
+- 戻し方（公開中のアプリをこの版にする）：
+  1. eigo-app で git switch --detach v1.0.0（音声置き場を戻すときは eigo-audio でも同じ）
+  2. npm ci → npm run deploy（テスト→ビルド→公開）
+  3. 終わったら git switch main で元に戻る
+- 端末の学習記録はアプリの外（iPhone の中）にあるので、版を戻しても消えない。念のため、戻す前に設定から書き出しておく。
+
+## 保留中（今後の候補。2026-10-10 時点。利用者の了承まで作らない）
+
+1. **熟語を300個から増やす**
+   - いまは句動詞・熟語・決まり文句を100個ずつ（意味ごとに分けて424枚）。
+   - 同じ基準（Wiktionary に見出し、映画字幕で100万語あたり1回以上、Tatoeba に実在の文、意味は実在の文15文で判定）で、次の100個ずつを頻度順に選ぶ。候補の一覧（ranking.json）は PC の eigo-data/work にある。
+2. **PC とスマホの自動同期**
+   - いまは手動の書き出し・読み込み（2026-10-08 決定）。自動同期は案だけ報告済み。
+   - 外部のサービスにデータを送ることになるので、方式と送る先は利用者が決める。
+3. **貼り付けた文章を PC で音声にする**
+   - いまは端末の声で読む。2026-10-07 に利用者が「後回し」と判断。
+   - 旅の手帳の音声（フェーズ7.5）と同じ形（バックアップ → PC で作る → ファイルで取り込む。公開の置き場には置かない）にできる。
+4. **文法で ✕ にできなかった項目**
+   - 辞書で確かめる方法がない誤り：語順の誤り（I wonder if is it true.／Never I have seen such a thing.／Not only he is smart, …／I don't know what is his name.）、do の付け忘れ以外の疑問文の形、強調構文・whatever など。
+   - 解説に根拠がなかったもの：I have finished it yesterday.（現在完了と過去の時の語）、He watchs TV.（-es の付け方）、a few money・Every students（few・every の使い方）。
+   - 判断に迷って使わなかったもの：I look forward to see you.（字幕で約3.6%）、I suggest that he goes.（英米の違い）、I decided to not go.（判断が分かれる）、If it was not for you（was と were）、One is red and another is blue.、I use to work here.（字幕で約1%）、We help each others.（所有格の書き間違いと区別できない）、I enjoy to swim.・I want go home.・I am live in Tokyo.（辞書の語義で確かめられない）。
+   - 確かめ方を増やす案（未決定）：語順は複数の辞書の用例や文法書の公開資料と照合する、など。基準を変えるときは利用者が決める。
