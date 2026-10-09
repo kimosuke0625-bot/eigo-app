@@ -11776,6 +11776,3361 @@
      "to を付けずに動詞の原形にした"
     ]
    }
+  },
+  {
+   "id": "h06",
+   "no": 51,
+   "title": "関係代名詞 what（〜すること・〜するもの）",
+   "stage": "高校：関係詞",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（イ）b 関係代名詞の用法（先行詞をとらない関係代名詞 what）",
+     "page": "38"
+    }
+   ],
+   "points": [
+    {
+     "text": "what は「〜すること」「〜するもの」（the thing that 〜）。前に名詞（先行詞）を置きません。",
+     "en": [
+      "What he says is true.",
+      "This is what I wanted."
+     ],
+     "check": false
+    },
+    {
+     "text": "「what＋主語＋動詞」のまとまり全体が、文の主語や目的語になります。主語のときは、まとまり全体を1つのものとして is・was で受けます。",
+     "en": [
+      "What you said surprised me."
+     ],
+     "check": false
+    },
+    {
+     "text": "疑問詞の what（何を〜か。修行場24）と形は同じです。I know what you mean. はどちらの意味でも読めます。",
+     "check": false
+    },
+    {
+     "text": "仕事では What we need is 〜（必要なのは〜です）のように、大事なことを後ろに回して強調する言い方がよく使われます。",
+     "en": [
+      "What we need is more time."
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "What you said surprised me.",
+     "ja": "君が言ったことで、僕はびっくりした。",
+     "source": "tatoeba",
+     "enId": 17871,
+     "jaId": 179016
+    },
+    {
+     "en": "What he says is true.",
+     "ja": "彼の言うことは本当です。",
+     "source": "tatoeba",
+     "enId": 286052,
+     "jaId": 117611
+    },
+    {
+     "en": "What you said is not true.",
+     "ja": "あなたの言ったことは正しくない。",
+     "source": "tatoeba",
+     "enId": 70697,
+     "jaId": 233326
+    },
+    {
+     "en": "This is what I wanted.",
+     "ja": "これは私が欲しいと思った物です。",
+     "source": "tatoeba",
+     "enId": 55642,
+     "jaId": 218331
+    },
+    {
+     "en": "That's just what I wanted.",
+     "ja": "丁度欲しかった物です。",
+     "source": "tatoeba",
+     "enId": 56128,
+     "jaId": 126274
+    },
+    {
+     "en": "I understand what you mean.",
+     "ja": "あなたの言うことは分かります。",
+     "source": "tatoeba",
+     "enId": 70712,
+     "jaId": 233342
+    },
+    {
+     "en": "I meant what I said.",
+     "ja": "私は本気でそういったのだ。",
+     "source": "tatoeba",
+     "enId": 261757,
+     "jaId": 152792
+    }
+   ],
+   "mistakes": [],
+   "exercises": [
+    {
+     "id": "gram-h06-1",
+     "type": "fill",
+     "ja": "彼が言ったことは本当だ。",
+     "text": "___ he said is true.",
+     "choices": [
+      "What",
+      "That",
+      "Which"
+     ],
+     "answers": [
+      "What"
+     ]
+    },
+    {
+     "id": "gram-h06-2",
+     "type": "fill",
+     "ja": "これがまさに私の欲しかったものです。",
+     "text": "This is just ___ I wanted.",
+     "choices": [
+      "what",
+      "which",
+      "who"
+     ],
+     "answers": [
+      "what"
+     ]
+    },
+    {
+     "id": "gram-h06-3",
+     "type": "order",
+     "ja": "あなたの言いたいことは分かります。",
+     "tokens": [
+      "I",
+      "understand",
+      "what",
+      "you",
+      "mean"
+     ],
+     "answers": [
+      "I understand what you mean."
+     ]
+    },
+    {
+     "id": "gram-h06-4",
+     "type": "order",
+     "ja": "君が言ったことに驚いた。",
+     "tokens": [
+      "What",
+      "you",
+      "said",
+      "surprised",
+      "me"
+     ],
+     "answers": [
+      "What you said surprised me."
+     ]
+    },
+    {
+     "id": "gram-h06-5",
+     "type": "rewrite",
+     "ja": "the thing that を what 1語にして書き直す。",
+     "from": "The thing that he said was not true.",
+     "answers": [
+      "What he said was not true."
+     ]
+    },
+    {
+     "id": "gram-h06-6",
+     "type": "rewrite",
+     "ja": "the thing that を what 1語にして書き直す。",
+     "from": "Time is the thing that I need.",
+     "answers": [
+      "Time is what I need."
+     ]
+    },
+    {
+     "id": "gram-h06-7",
+     "type": "oral",
+     "ja": "私が言いたいのはそういうことです。",
+     "answers": [
+      "That's what I mean.",
+      "That is what I mean.",
+      "That's what I want to say."
+     ]
+    },
+    {
+     "id": "gram-h06-8",
+     "type": "oral",
+     "ja": "必要なのはもっと時間です。",
+     "answers": [
+      "What we need is more time.",
+      "What I need is more time."
+     ]
+    },
+    {
+     "id": "gram-h06-9",
+     "type": "oral",
+     "ja": "彼の言うことは本当だ。",
+     "answers": [
+      "What he says is true."
+     ]
+    },
+    {
+     "id": "gram-h06-10",
+     "type": "oral",
+     "ja": "言ったことは本気です。",
+     "answers": [
+      "I meant what I said.",
+      "I mean what I said."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "What I need is 〜 か What I want to do is 〜 で、今の自分に必要なこと・したいことを1文で言ってみましょう。",
+    "samples": [
+     "What I need is more practice.",
+     "What I want to do is speak English at work."
+    ],
+    "checks": [
+     "what の前に名詞を置かなかった",
+     "What 〜 が主語のとき、動詞は is にした"
+    ]
+   }
+  },
+  {
+   "id": "h07",
+   "no": 52,
+   "title": "関係代名詞の非制限用法（, who・, which で付け足す）",
+   "stage": "高校：関係詞",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（イ）b 関係代名詞の用法（非制限的用法）",
+     "page": "38"
+    }
+   ],
+   "points": [
+    {
+     "text": "関係代名詞の前にコンマを置くと、名詞にあとから説明を付け足す言い方になります（非制限用法）。",
+     "en": [
+      "My uncle, who lives in Osaka, visited us yesterday."
+     ],
+     "check": false
+    },
+    {
+     "text": "コンマのない文（修行場41・42）は「どの〜か」を絞り込みます。コンマのある文は、相手がもう分かっている人・物に情報を足します。",
+     "check": false
+    },
+    {
+     "text": "人には who、物には which を使います。コンマの後ろに that は使いません。",
+     "check": false
+    },
+    {
+     "text": ", which は前の文の内容全体を受けて「そして、そのことが〜」とも使えます。",
+     "en": [
+      "I said nothing, which made him angry."
+     ],
+     "check": false
+    },
+    {
+     "text": "話すときは、コンマのところで少し間を置きます。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "My uncle, who lives in Osaka, visited us yesterday.",
+     "ja": "私の叔父は大阪に住んでいるが、昨日訪ねてきた。",
+     "source": "tatoeba",
+     "enId": 251186,
+     "jaId": 163326
+    },
+    {
+     "en": "My aunt, who lives in Tokyo, sent me a beautiful blouse.",
+     "ja": "東京にいる叔母は、私にきれいなブラウスを送ってくれました。",
+     "source": "tatoeba",
+     "enId": 279735,
+     "jaId": 124259
+    },
+    {
+     "en": "Mike visited Mr Ogaki, who is our principal.",
+     "ja": "マイクは校長先生である大垣先生を訪ねました。",
+     "source": "tatoeba",
+     "enId": 32923,
+     "jaId": 195748
+    },
+    {
+     "en": "This desk, which I bought yesterday, is very big.",
+     "ja": "私が昨日買ったこの机はとても大きい。",
+     "source": "tatoeba",
+     "enId": 246787,
+     "jaId": 167712
+    },
+    {
+     "en": "I said nothing, which made him angry.",
+     "ja": "私は何も言わなかったが、それが彼を怒らせてしまった。",
+     "source": "tatoeba",
+     "enId": 256400,
+     "jaId": 158130
+    },
+    {
+     "en": "He broke his promise, which was a big mistake.",
+     "ja": "彼は約束を破ったが、それは大きな誤りだった。",
+     "source": "tatoeba",
+     "enId": 304319,
+     "jaId": 99379
+    },
+    {
+     "en": "Tom said he was ill, which was a lie.",
+     "ja": "トムは病気だと言ったが、それは嘘だった。",
+     "source": "tatoeba",
+     "enId": 37026,
+     "jaId": 199825
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "meaning",
+     "wrong": "My sister who lives in Tokyo is a nurse.",
+     "intended": "（姉は1人で）その姉は東京に住んでいて、看護師です",
+     "right": "My sister, who lives in Tokyo, is a nurse.",
+     "note": "コンマがないと「（何人かいる姉のうち）東京に住んでいる姉」と絞り込む意味になり、姉が何人もいるように聞こえる。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h07-1",
+     "type": "fill",
+     "ja": "東京に住んでいるおばが、ブラウスを送ってくれた。",
+     "text": "My aunt, ___ lives in Tokyo, sent me a blouse.",
+     "choices": [
+      "who",
+      "which",
+      "what"
+     ],
+     "answers": [
+      "who"
+     ]
+    },
+    {
+     "id": "gram-h07-2",
+     "type": "fill",
+     "ja": "私は何も言わなかったが、それが彼を怒らせた。",
+     "text": "I said nothing, ___ made him angry.",
+     "choices": [
+      "which",
+      "who",
+      "what"
+     ],
+     "answers": [
+      "which"
+     ]
+    },
+    {
+     "id": "gram-h07-3",
+     "type": "order",
+     "ja": "昨日買ったこの机は、とても大きい。（コンマは打たなくてよい）",
+     "tokens": [
+      "This",
+      "desk",
+      "which",
+      "I",
+      "bought",
+      "yesterday",
+      "is",
+      "very",
+      "big"
+     ],
+     "answers": [
+      "This desk, which I bought yesterday, is very big."
+     ]
+    },
+    {
+     "id": "gram-h07-4",
+     "type": "order",
+     "ja": "彼は約束を破ったが、それは大きな誤りだった。（コンマは打たなくてよい）",
+     "tokens": [
+      "He",
+      "broke",
+      "his",
+      "promise",
+      "which",
+      "was",
+      "a",
+      "big",
+      "mistake"
+     ],
+     "answers": [
+      "He broke his promise, which was a big mistake."
+     ]
+    },
+    {
+     "id": "gram-h07-5",
+     "type": "rewrite",
+     "ja": ", who を使って1文にする。",
+     "from": "My uncle lives in Osaka. He visited us yesterday.",
+     "answers": [
+      "My uncle, who lives in Osaka, visited us yesterday."
+     ]
+    },
+    {
+     "id": "gram-h07-6",
+     "type": "rewrite",
+     "ja": ", which を使って1文にする。",
+     "from": "Tom said he was ill. That was a lie.",
+     "answers": [
+      "Tom said he was ill, which was a lie."
+     ]
+    },
+    {
+     "id": "gram-h07-7",
+     "type": "oral",
+     "ja": "私の上司は、ロンドン出身なのですが、とても親切です。",
+     "answers": [
+      "My boss, who is from London, is very kind."
+     ]
+    },
+    {
+     "id": "gram-h07-8",
+     "type": "oral",
+     "ja": "彼は会議に遅れたが、それは珍しいことだった。",
+     "answers": [
+      "He was late for the meeting, which was unusual."
+     ]
+    },
+    {
+     "id": "gram-h07-9",
+     "type": "oral",
+     "ja": "新しいシステムを入れたが、それで時間が節約できた。",
+     "answers": [
+      "We introduced a new system, which saved us time.",
+      "We introduced a new system, which saved time."
+     ]
+    }
+   ],
+   "myself": {
+    "task": ", who か , which で、身近な人や物に説明を付け足して1文で言ってみましょう。",
+    "samples": [
+     "My father, who is sixty, still plays tennis.",
+     "I use a laptop, which my company gave me."
+    ],
+    "checks": [
+     "付け足す説明の前後にコンマを置いた",
+     "コンマの後ろに that を使わなかった"
+    ]
+   }
+  },
+  {
+   "id": "h08",
+   "no": 53,
+   "title": "関係副詞（where・when・why・how）",
+   "stage": "高校：関係詞",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（イ）c 関係副詞の用法（関係副詞及びその先行詞は省略されることが多い）",
+     "page": "38"
+    }
+   ],
+   "points": [
+    {
+     "text": "where・when・why は、場所・時・理由を表す名詞を後ろから説明します。",
+     "en": [
+      "This is the house where I live.",
+      "I remember the day when we first met."
+     ],
+     "check": false
+    },
+    {
+     "text": "where は「その場所で」、when は「その時に」、why は「その理由で」（the reason why）。",
+     "check": false
+    },
+    {
+     "text": "関係副詞や、その前の名詞はよく省かれます。That’s why 〜（だから〜）、That’s where 〜（そこが〜なところ）はよく使う形です。",
+     "en": [
+      "That's why I was late.",
+      "That's where you're wrong."
+     ],
+     "check": false
+    },
+    {
+     "text": "how は「〜するやり方」。the way と how は一緒に使わず、どちらか一方にします。",
+     "en": [
+      "This is how it happened."
+     ],
+     "check": false
+    },
+    {
+     "text": "where の代わりに in which も使えます。かたい言い方です（修行場58）。",
+     "en": [
+      "The town in which I live is rather small."
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "This is the house where I live.",
+     "ja": "これが私の住んでいる家だ。",
+     "source": "tatoeba",
+     "enId": 56203,
+     "jaId": 218888
+    },
+    {
+     "en": "This is the town where I was born.",
+     "ja": "ここは私が生まれた町です。",
+     "source": "tatoeba",
+     "enId": 61649,
+     "jaId": 224314
+    },
+    {
+     "en": "Is this the place where the accident happened?",
+     "ja": "ここが事故の起こった場所ですか？",
+     "source": "tatoeba",
+     "enId": 61636,
+     "jaId": 224301
+    },
+    {
+     "en": "I remember the day when we first met.",
+     "ja": "私たちが最初に会った日の事を私は覚えています。",
+     "source": "tatoeba",
+     "enId": 247253,
+     "jaId": 167248
+    },
+    {
+     "en": "This is the reason why I came here.",
+     "ja": "こういうわけで私はここへ来ました。",
+     "source": "tatoeba",
+     "enId": 62398,
+     "jaId": 225063
+    },
+    {
+     "en": "That's why I was late.",
+     "ja": "そういうわけで遅くなったのです。",
+     "source": "tatoeba",
+     "enId": 51230,
+     "jaId": 213942
+    },
+    {
+     "en": "This is how it happened.",
+     "ja": "事の起こりはこうなんです。",
+     "source": "tatoeba",
+     "enId": 62324,
+     "jaId": 150910
+    }
+   ],
+   "mistakes": [],
+   "exercises": [
+    {
+     "id": "gram-h08-1",
+     "type": "fill",
+     "ja": "ここが私の生まれた町です。",
+     "text": "This is the town ___ I was born.",
+     "choices": [
+      "where",
+      "which",
+      "when"
+     ],
+     "answers": [
+      "where"
+     ]
+    },
+    {
+     "id": "gram-h08-2",
+     "type": "fill",
+     "ja": "私たちが初めて会った日を覚えています。",
+     "text": "I remember the day ___ we first met.",
+     "choices": [
+      "when",
+      "where",
+      "what"
+     ],
+     "answers": [
+      "when"
+     ]
+    },
+    {
+     "id": "gram-h08-3",
+     "type": "fill",
+     "ja": "そういうわけで遅れました。",
+     "text": "That's ___ I was late.",
+     "choices": [
+      "why",
+      "how",
+      "where"
+     ],
+     "answers": [
+      "why"
+     ]
+    },
+    {
+     "id": "gram-h08-4",
+     "type": "order",
+     "ja": "ここが事故の起きた場所ですか。",
+     "tokens": [
+      "Is",
+      "this",
+      "the",
+      "place",
+      "where",
+      "the",
+      "accident",
+      "happened"
+     ],
+     "answers": [
+      "Is this the place where the accident happened?"
+     ]
+    },
+    {
+     "id": "gram-h08-5",
+     "type": "order",
+     "ja": "こうしてそれは起きたのです。",
+     "tokens": [
+      "This",
+      "is",
+      "how",
+      "it",
+      "happened"
+     ],
+     "answers": [
+      "This is how it happened."
+     ]
+    },
+    {
+     "id": "gram-h08-6",
+     "type": "rewrite",
+     "ja": "where を使って1文にする。",
+     "from": "This is the house. I live in it.",
+     "answers": [
+      "This is the house where I live."
+     ]
+    },
+    {
+     "id": "gram-h08-7",
+     "type": "rewrite",
+     "ja": "2文目を That’s why で始めて書き直す。",
+     "from": "I was sick. So I stayed home.",
+     "answers": [
+      "I was sick. That's why I stayed home.",
+      "I was sick. That is why I stayed home."
+     ]
+    },
+    {
+     "id": "gram-h08-8",
+     "type": "oral",
+     "ja": "そういうわけで、ここに来ました。",
+     "answers": [
+      "That's why I came here.",
+      "That is why I came here.",
+      "This is why I came here."
+     ]
+    },
+    {
+     "id": "gram-h08-9",
+     "type": "oral",
+     "ja": "ここが私の働いている事務所です。",
+     "answers": [
+      "This is the office where I work."
+     ]
+    },
+    {
+     "id": "gram-h08-10",
+     "type": "oral",
+     "ja": "彼が辞めた理由を教えてください。",
+     "answers": [
+      "Tell me the reason why he quit.",
+      "Please tell me the reason why he quit.",
+      "Tell me why he quit.",
+      "Please tell me why he quit."
+     ]
+    },
+    {
+     "id": "gram-h08-11",
+     "type": "oral",
+     "ja": "そこがあなたの間違っているところです。",
+     "answers": [
+      "That's where you're wrong.",
+      "That is where you are wrong.",
+      "That's where you're mistaken."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "where か That’s why で、自分のことを1文で言ってみましょう。",
+    "samples": [
+     "This is the city where I was born.",
+     "I want to work abroad. That's why I study English."
+    ],
+    "checks": [
+     "場所のあとは where、理由は why にした"
+    ]
+   }
+  },
+  {
+   "id": "h09",
+   "no": 54,
+   "title": "接続詞（although・while・unless・as soon as・so that）",
+   "stage": "高校：つなぎ方と助動詞",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（イ）d 接続詞の用法",
+     "page": "38"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｳ）b 接続詞",
+     "page": "45"
+    }
+   ],
+   "points": [
+    {
+     "text": "although・though は「〜だけれども」。",
+     "en": [
+      "Though it was raining, she went out."
+     ],
+     "check": false
+    },
+    {
+     "text": "even though は「（実際に）〜なのに」、even if は「（たとえ）〜だとしても」。",
+     "check": false
+    },
+    {
+     "text": "while は「〜している間に」。",
+     "en": [
+      "She called while I was out."
+     ],
+     "check": false
+    },
+    {
+     "text": "unless は「〜しない限り」（if 〜 not に近い意味）。",
+     "en": [
+      "You'll never know unless you try."
+     ],
+     "check": false
+    },
+    {
+     "text": "as soon as は「〜するとすぐに」。先のことでも、as soon as・unless の後ろは現在形にします（修行場23の if・when と同じ）。",
+     "en": [
+      "I will call you as soon as I get home."
+     ],
+     "check": false
+    },
+    {
+     "text": "so that 〜 can は「〜できるように」。",
+     "en": [
+      "Speak more slowly so that we can understand you."
+     ],
+     "check": false
+    },
+    {
+     "text": "although と but は一緒に使いません。どちらか一方にします。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "Though it was raining, she went out.",
+     "ja": "雨が降っていたけれども彼女は外出した。",
+     "source": "tatoeba",
+     "enId": 26936,
+     "jaId": 189781
+    },
+    {
+     "en": "Although it is snowing, I must go.",
+     "ja": "雪が降っているけれど私はいかねばならぬ。",
+     "source": "tatoeba",
+     "enId": 272543,
+     "jaId": 142027
+    },
+    {
+     "en": "Even though he apologized, I'm still furious.",
+     "ja": "謝罪はあったにせよ、私はまだ彼に腹を立てている。",
+     "source": "tatoeba",
+     "enId": 1399,
+     "jaId": 4818
+    },
+    {
+     "en": "She called while I was out.",
+     "ja": "私の外出中に彼女は来た。",
+     "source": "tatoeba",
+     "enId": 250601,
+     "jaId": 163909
+    },
+    {
+     "en": "You'll never know unless you try.",
+     "ja": "物は試し。",
+     "source": "tatoeba",
+     "enId": 30341,
+     "jaId": 83829
+    },
+    {
+     "en": "You'll fail unless you study harder.",
+     "ja": "もっと勉強しない限り落第しますよ。",
+     "source": "tatoeba",
+     "enId": 8983599,
+     "jaId": 193204
+    },
+    {
+     "en": "Speak more slowly so that we can understand you.",
+     "ja": "私たちが理解できるように、もっとゆっくり話しなさい。",
+     "source": "tatoeba",
+     "enId": 247311,
+     "jaId": 167190
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "meaning",
+     "wrong": "Even if it is raining, I must go.",
+     "intended": "（実際に）雨が降っているけれど、行かなければならない",
+     "right": "Even though it is raining, I must go.",
+     "note": "even if は「たとえ〜だとしても」で、実際に降っているかどうかは分からないときの言い方。実際に降っているなら even though。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h09-1",
+     "type": "fill",
+     "ja": "雨が降っていたけれど、私たちはサッカーをした。",
+     "text": "___ it was raining, we played football.",
+     "choices": [
+      "Though",
+      "Unless",
+      "So"
+     ],
+     "answers": [
+      "Though"
+     ]
+    },
+    {
+     "id": "gram-h09-2",
+     "type": "fill",
+     "ja": "もっと勉強しない限り、落第しますよ。",
+     "text": "You'll fail ___ you study harder.",
+     "choices": [
+      "unless",
+      "if",
+      "though"
+     ],
+     "answers": [
+      "unless"
+     ]
+    },
+    {
+     "id": "gram-h09-3",
+     "type": "fill",
+     "ja": "私の外出中に、彼女から電話があった。",
+     "text": "She called ___ I was out.",
+     "choices": [
+      "while",
+      "during",
+      "unless"
+     ],
+     "answers": [
+      "while"
+     ]
+    },
+    {
+     "id": "gram-h09-4",
+     "type": "order",
+     "ja": "家に着いたらすぐに電話します。",
+     "tokens": [
+      "I",
+      "will",
+      "call",
+      "you",
+      "as",
+      "soon",
+      "as",
+      "I",
+      "get",
+      "home"
+     ],
+     "answers": [
+      "I will call you as soon as I get home.",
+      "As soon as I get home, I will call you."
+     ]
+    },
+    {
+     "id": "gram-h09-5",
+     "type": "order",
+     "ja": "バスに間に合うように急ごう。",
+     "tokens": [
+      "Let's",
+      "hurry",
+      "so",
+      "that",
+      "we",
+      "can",
+      "catch",
+      "the",
+      "bus"
+     ],
+     "answers": [
+      "Let's hurry so that we can catch the bus."
+     ]
+    },
+    {
+     "id": "gram-h09-6",
+     "type": "rewrite",
+     "ja": "Although で始めて1文にする。",
+     "from": "He is rich. But he is not happy.",
+     "answers": [
+      "Although he is rich, he is not happy.",
+      "Although he's rich, he's not happy.",
+      "Although he is rich, he isn't happy."
+     ]
+    },
+    {
+     "id": "gram-h09-7",
+     "type": "rewrite",
+     "ja": "unless を使って書き直す。",
+     "from": "If you don't try, you'll never know.",
+     "answers": [
+      "You'll never know unless you try.",
+      "Unless you try, you'll never know."
+     ]
+    },
+    {
+     "id": "gram-h09-8",
+     "type": "oral",
+     "ja": "疲れていたけれど、働き続けた。",
+     "answers": [
+      "Although I was tired, I kept working.",
+      "Though I was tired, I kept working.",
+      "Although I was tired, I kept on working."
+     ]
+    },
+    {
+     "id": "gram-h09-9",
+     "type": "oral",
+     "ja": "終わったらすぐにお知らせします。",
+     "answers": [
+      "I'll let you know as soon as I finish.",
+      "I'll tell you as soon as I finish.",
+      "I'll let you know as soon as it's finished."
+     ]
+    },
+    {
+     "id": "gram-h09-10",
+     "type": "oral",
+     "ja": "皆に聞こえるように、大きな声で話してください。",
+     "answers": [
+      "Please speak loudly so that everyone can hear you.",
+      "Please speak up so that everyone can hear you.",
+      "Speak loudly so that everyone can hear you."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "although か unless を使って、仕事や勉強のことを1文で言ってみましょう。",
+    "samples": [
+     "Although I was busy, I studied English for an hour.",
+     "I can't improve unless I practice every day."
+    ],
+    "checks": [
+     "although と but を一緒に使わなかった",
+     "as soon as・unless の後ろは、先のことでも現在形にした"
+    ]
+   }
+  },
+  {
+   "id": "h10",
+   "no": 55,
+   "title": "助動詞の過去形（could・would・might）",
+   "stage": "高校：つなぎ方と助動詞",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（イ）e 助動詞の用法（助動詞の過去形）",
+     "page": "38"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｳ）c 助動詞（Can you open the window?）",
+     "page": "45"
+    }
+   ],
+   "points": [
+    {
+     "text": "Could you 〜? / Would you 〜? は、Can you 〜? / Will you 〜? より丁寧な頼み方です。",
+     "en": [
+      "Could you help me?",
+      "Would you close the window?"
+     ],
+     "check": false
+    },
+    {
+     "text": "might・could は「〜かもしれない」。may より控えめな言い方です。",
+     "en": [
+      "I might be wrong.",
+      "You could be right."
+     ],
+     "check": false
+    },
+    {
+     "text": "Would you like 〜? は「〜はいかがですか」、I would like to 〜 は「〜したいのですが」（丁寧）。",
+     "check": false
+    },
+    {
+     "text": "助動詞の後ろの動詞は、過去形の助動詞でもいつも原形です。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "Could you help me?",
+     "ja": "お手伝いいただけますか。",
+     "source": "tatoeba",
+     "enId": 64405,
+     "jaId": 227057
+    },
+    {
+     "en": "Could you please repeat that?",
+     "ja": "もう一度言ってくださいますか。",
+     "source": "tatoeba",
+     "enId": 2242,
+     "jaId": 194302
+    },
+    {
+     "en": "Would you close the window?",
+     "ja": "窓を閉めていただけませんか？",
+     "source": "tatoeba",
+     "enId": 274198,
+     "jaId": 993933
+    },
+    {
+     "en": "I might be wrong.",
+     "ja": "私は間違っているかもしれない。",
+     "source": "tatoeba",
+     "enId": 256737,
+     "jaId": 157794
+    },
+    {
+     "en": "You could be right.",
+     "ja": "あなたの言う通りかもね。",
+     "source": "tatoeba",
+     "enId": 2647758,
+     "jaId": 233335
+    },
+    {
+     "en": "I might be late.",
+     "ja": "もしかしたら遅れるかも。",
+     "source": "tatoeba",
+     "enId": 6196187,
+     "jaId": 8724570
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "Could you helped me?",
+     "right": "Could you help me?",
+     "note": "could の後ろの動詞は原形。過去の話でなくても、丁寧に頼むときは could を使う。",
+     "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.51「I could get some information」",
+      "dictionary": "Wiktionary：help は help の infinitive",
+      "languageTool": [
+       "CAN_I_VBD：The correct verb form after the modal verb \"Could\" is \"help\"."
+      ]
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h10-1",
+     "type": "fill",
+     "ja": "手伝っていただけますか。",
+     "text": "___ you help me?",
+     "choices": [
+      "Could",
+      "Did",
+      "Are"
+     ],
+     "answers": [
+      "Could"
+     ]
+    },
+    {
+     "id": "gram-h10-2",
+     "type": "fill",
+     "ja": "私が間違っているかもしれない。",
+     "text": "I ___ be wrong.",
+     "choices": [
+      "might",
+      "must",
+      "did"
+     ],
+     "answers": [
+      "might"
+     ]
+    },
+    {
+     "id": "gram-h10-3",
+     "type": "fill",
+     "ja": "窓を閉めていただけませんか。",
+     "text": "___ you close the window?",
+     "choices": [
+      "Would",
+      "Are",
+      "Did"
+     ],
+     "answers": [
+      "Would"
+     ]
+    },
+    {
+     "id": "gram-h10-4",
+     "type": "order",
+     "ja": "もう一度言っていただけますか。",
+     "tokens": [
+      "Could",
+      "you",
+      "please",
+      "repeat",
+      "that"
+     ],
+     "answers": [
+      "Could you please repeat that?",
+      "Could you repeat that, please?"
+     ]
+    },
+    {
+     "id": "gram-h10-5",
+     "type": "order",
+     "ja": "遅れるかもしれません。",
+     "tokens": [
+      "I",
+      "might",
+      "be",
+      "late"
+     ],
+     "answers": [
+      "I might be late."
+     ]
+    },
+    {
+     "id": "gram-h10-6",
+     "type": "rewrite",
+     "ja": "Could you で始めて、丁寧な頼み方にする。",
+     "from": "Send me the file.",
+     "answers": [
+      "Could you send me the file?",
+      "Could you please send me the file?"
+     ]
+    },
+    {
+     "id": "gram-h10-7",
+     "type": "rewrite",
+     "ja": "might を使って「〜かもしれない」にする。",
+     "from": "Maybe he is busy.",
+     "answers": [
+      "He might be busy."
+     ]
+    },
+    {
+     "id": "gram-h10-8",
+     "type": "oral",
+     "ja": "資料を送っていただけますか。",
+     "answers": [
+      "Could you send me the documents?",
+      "Could you please send me the documents?",
+      "Could you send me the materials?"
+     ]
+    },
+    {
+     "id": "gram-h10-9",
+     "type": "oral",
+     "ja": "あなたの言う通りかもしれません。",
+     "answers": [
+      "You might be right.",
+      "You could be right.",
+      "You may be right."
+     ]
+    },
+    {
+     "id": "gram-h10-10",
+     "type": "oral",
+     "ja": "コーヒーはいかがですか。",
+     "answers": [
+      "Would you like some coffee?",
+      "Would you like a coffee?",
+      "Would you like coffee?"
+     ]
+    },
+    {
+     "id": "gram-h10-11",
+     "type": "oral",
+     "ja": "少しお時間をいただけますか。",
+     "answers": [
+      "Could I have a minute?",
+      "Could I have a moment?",
+      "Could you give me a minute?"
+     ]
+    }
+   ],
+   "myself": {
+    "task": "Could you 〜? で、仕事で人に頼みたいことを1文で言ってみましょう。",
+    "samples": [
+     "Could you check this report by Friday?",
+     "Could you call me back later?"
+    ],
+    "checks": [
+     "Could の後ろは動詞の原形にした"
+    ]
+   }
+  },
+  {
+   "id": "h11",
+   "no": 56,
+   "title": "助動詞を含む受け身（can be done・must be done）",
+   "stage": "高校：つなぎ方と助動詞",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（イ）e 助動詞の用法（助動詞を含む受け身）",
+     "page": "38"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｳ）j 受け身（A new gym will be built here.）",
+     "page": "51"
+    }
+   ],
+   "points": [
+    {
+     "text": "助動詞＋be＋過去分詞で、「〜されうる」「〜されなければならない」などを表します。",
+     "en": [
+      "These problems can be solved.",
+      "Something must be done."
+     ],
+     "check": false
+    },
+    {
+     "text": "can be 〜「〜できる・〜されうる」、must be 〜「〜されなければならない」、should be 〜「〜されるべきだ」、will be 〜「〜されるだろう」。",
+     "check": false
+    },
+    {
+     "text": "否定は can’t be 〜 などです。",
+     "en": [
+      "It can't be repaired."
+     ],
+     "check": false
+    },
+    {
+     "text": "仕事の文書やルールの説明でよく使います。",
+     "en": [
+      "The report must be submitted by Friday."
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "These problems can be solved.",
+     "ja": "これらの問題は解決できる。",
+     "source": "tatoeba",
+     "enId": 3820710,
+     "jaId": 8402926
+    },
+    {
+     "en": "Something must be done.",
+     "ja": "何かしなければ。",
+     "source": "tatoeba",
+     "enId": 3733225,
+     "jaId": 188099
+    },
+    {
+     "en": "It can't be repaired.",
+     "ja": "直せない。",
+     "source": "tatoeba",
+     "enId": 10091493,
+     "jaId": 10109311
+    },
+    {
+     "en": "Stars can be seen at night.",
+     "ja": "夜には星が見える。",
+     "source": "tatoeba",
+     "enId": 271531,
+     "jaId": 79740
+    },
+    {
+     "en": "This telescope must be used carefully.",
+     "ja": "この望遠鏡は注意して使わなければいけない。",
+     "source": "tatoeba",
+     "enId": 57113,
+     "jaId": 219793
+    },
+    {
+     "en": "Your prayer will be answered.",
+     "ja": "あなたの祈りはかなえられるでしょう。",
+     "source": "tatoeba",
+     "enId": 70762,
+     "jaId": 233392
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "This problem can be solve.",
+     "right": "This problem can be solved.",
+     "note": "助動詞を含む受け身は、助動詞＋be＋過去分詞。",
+     "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.51「A new gym will be built here.」",
+      "dictionary": "Wiktionary：solved は solve の participle・past",
+      "languageTool": [
+       "MD_BE_NON_VBP：There may an error in the verb form 'be solve'.",
+       "BE_VBP_IN：The past participle is required after \"can be\", alternatively you could omit the \"be\".",
+       "MUST_BE_DO：Did you mean \"solved\"?",
+       "BEEN_PART_AGREEMENT：Consider using either the past participle \"solved\" or the present participle \"solving\" here."
+      ]
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h11-1",
+     "type": "fill",
+     "ja": "これらの問題は解決できる。",
+     "text": "These problems can be ___.",
+     "choices": [
+      "solved",
+      "solve",
+      "solving"
+     ],
+     "answers": [
+      "solved"
+     ]
+    },
+    {
+     "id": "gram-h11-2",
+     "type": "fill",
+     "ja": "何か手を打たなければならない。",
+     "text": "Something must ___ done.",
+     "choices": [
+      "be",
+      "is",
+      "been"
+     ],
+     "answers": [
+      "be"
+     ]
+    },
+    {
+     "id": "gram-h11-3",
+     "type": "fill",
+     "ja": "それは修理できない。",
+     "text": "It can't be ___.",
+     "choices": [
+      "repaired",
+      "repair",
+      "repairing"
+     ],
+     "answers": [
+      "repaired"
+     ]
+    },
+    {
+     "id": "gram-h11-4",
+     "type": "order",
+     "ja": "報告書は金曜日までに提出しなければならない。",
+     "tokens": [
+      "The",
+      "report",
+      "must",
+      "be",
+      "submitted",
+      "by",
+      "Friday"
+     ],
+     "answers": [
+      "The report must be submitted by Friday."
+     ]
+    },
+    {
+     "id": "gram-h11-5",
+     "type": "order",
+     "ja": "夜には星が見える。",
+     "tokens": [
+      "Stars",
+      "can",
+      "be",
+      "seen",
+      "at",
+      "night"
+     ],
+     "answers": [
+      "Stars can be seen at night.",
+      "At night stars can be seen."
+     ]
+    },
+    {
+     "id": "gram-h11-6",
+     "type": "rewrite",
+     "ja": "The meeting で始めて受け身にする。",
+     "from": "We will hold the meeting next week.",
+     "answers": [
+      "The meeting will be held next week."
+     ]
+    },
+    {
+     "id": "gram-h11-7",
+     "type": "rewrite",
+     "ja": "This machine で始めて受け身にする。",
+     "from": "You must use this machine carefully.",
+     "answers": [
+      "This machine must be used carefully."
+     ]
+    },
+    {
+     "id": "gram-h11-8",
+     "type": "oral",
+     "ja": "この問題はすぐに解決できます。",
+     "answers": [
+      "This problem can be solved quickly.",
+      "This problem can be solved soon.",
+      "This problem can be solved right away."
+     ]
+    },
+    {
+     "id": "gram-h11-9",
+     "type": "oral",
+     "ja": "会議は来週開かれます。",
+     "answers": [
+      "The meeting will be held next week."
+     ]
+    },
+    {
+     "id": "gram-h11-10",
+     "type": "oral",
+     "ja": "その書類は今日中に送らなければならない。",
+     "answers": [
+      "The documents must be sent today.",
+      "The document must be sent today."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "職場や学校のルールを、must be / should be＋過去分詞で1文で言ってみましょう。",
+    "samples": [
+     "Expenses must be reported by the end of the month.",
+     "Phones should be turned off during meetings."
+    ],
+    "checks": [
+     "助動詞の後ろは be＋過去分詞にした"
+    ]
+   }
+  },
+  {
+   "id": "h12",
+   "no": 57,
+   "title": "助動詞＋完了形（must have done・should have done）",
+   "stage": "高校：つなぎ方と助動詞",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（イ）e 助動詞の用法（助動詞と完了形を用いた過去に関する推測の表現）",
+     "page": "38"
+    }
+   ],
+   "points": [
+    {
+     "text": "助動詞＋have＋過去分詞で、過去のことを推測したり、振り返ったりします。",
+     "check": false
+    },
+    {
+     "text": "must have 〜 は「〜したに違いない」。",
+     "en": [
+      "He must have seen it."
+     ],
+     "check": false
+    },
+    {
+     "text": "may have・might have 〜 は「〜したかもしれない」。",
+     "en": [
+      "He may have seen it."
+     ],
+     "check": false
+    },
+    {
+     "text": "should have 〜 は「〜すべきだった（のに、しなかった）」。後悔や、相手への軽い不満を表します。",
+     "en": [
+      "I should have left earlier."
+     ],
+     "check": false
+    },
+    {
+     "text": "can’t have 〜 は「〜したはずがない」。",
+     "en": [
+      "He can't have said that."
+     ],
+     "check": false
+    },
+    {
+     "text": "話すときは must’ve・should’ve のように短くなります。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "He must have seen it.",
+     "ja": "彼はそれを見たに違いない。",
+     "source": "tatoeba",
+     "enId": 291492,
+     "jaId": 112187
+    },
+    {
+     "en": "He may have seen it.",
+     "ja": "彼はそれを見たかもしれない。",
+     "source": "tatoeba",
+     "enId": 291491,
+     "jaId": 112186
+    },
+    {
+     "en": "I must have lost it.",
+     "ja": "落としてしまったに違いない。",
+     "source": "tatoeba",
+     "enId": 325194,
+     "jaId": 78522
+    },
+    {
+     "en": "That might have been true.",
+     "ja": "それは本当だったかもしれない。",
+     "source": "tatoeba",
+     "enId": 42092,
+     "jaId": 204851
+    },
+    {
+     "en": "I should have left earlier.",
+     "ja": "もっと早く出発すれば良かったのに。",
+     "source": "tatoeba",
+     "enId": 30410,
+     "jaId": 177511
+    },
+    {
+     "en": "I should have said that.",
+     "ja": "私は言うべきだった。",
+     "source": "tatoeba",
+     "enId": 4352415,
+     "jaId": 3957409
+    },
+    {
+     "en": "I should not have said that.",
+     "ja": "言わずもがなのことを言ってしまった。",
+     "source": "tatoeba",
+     "enId": 327534,
+     "jaId": 76184
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "He must have see it.",
+     "right": "He must have seen it.",
+     "note": "must have の後ろは過去分詞。",
+     "proof": {
+      "kaisetsu": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編 p.38「助動詞と完了形を用いた過去に関する推測の表現」",
+      "dictionary": "Wiktionary：seen は see の participle・past",
+      "languageTool": [
+       "PRP_HAVE_VB：The inflection of the verb \"see\" seems to be incorrect here.",
+       "HAVE_PART_AGREEMENT：It appears that the past participle should be used here."
+      ]
+     }
+    },
+    {
+     "kind": "meaning",
+     "wrong": "He must be sick.",
+     "intended": "（昨日）彼は病気だったに違いない",
+     "right": "He must have been sick.",
+     "note": "must be は「今〜に違いない」。過去のことの推測は must have＋過去分詞。"
+    },
+    {
+     "kind": "meaning",
+     "wrong": "I should study harder.",
+     "intended": "もっと勉強すべきだった（のに、しなかった）",
+     "right": "I should have studied harder.",
+     "note": "should＋動詞の原形は「これから〜すべきだ」。過去の後悔は should have＋過去分詞。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h12-1",
+     "type": "fill",
+     "ja": "彼はそれを見たに違いない。",
+     "text": "He must have ___ it.",
+     "choices": [
+      "seen",
+      "saw",
+      "see"
+     ],
+     "answers": [
+      "seen"
+     ]
+    },
+    {
+     "id": "gram-h12-2",
+     "type": "fill",
+     "ja": "もっと早く出発すべきだった。",
+     "text": "I should ___ left earlier.",
+     "choices": [
+      "have",
+      "had",
+      "has"
+     ],
+     "answers": [
+      "have"
+     ]
+    },
+    {
+     "id": "gram-h12-3",
+     "type": "fill",
+     "ja": "彼は病気だったのかもしれない。",
+     "text": "He may have ___ sick.",
+     "choices": [
+      "been",
+      "be",
+      "was"
+     ],
+     "answers": [
+      "been"
+     ]
+    },
+    {
+     "id": "gram-h12-4",
+     "type": "order",
+     "ja": "鍵をなくしてしまったに違いない。",
+     "tokens": [
+      "I",
+      "must",
+      "have",
+      "lost",
+      "my",
+      "key"
+     ],
+     "answers": [
+      "I must have lost my key."
+     ]
+    },
+    {
+     "id": "gram-h12-5",
+     "type": "order",
+     "ja": "そんなことを言うべきではなかった。",
+     "tokens": [
+      "I",
+      "should",
+      "not",
+      "have",
+      "said",
+      "that"
+     ],
+     "answers": [
+      "I should not have said that."
+     ]
+    },
+    {
+     "id": "gram-h12-6",
+     "type": "rewrite",
+     "ja": "must have を使って書き直す。",
+     "from": "I'm sure she went out.",
+     "answers": [
+      "She must have gone out."
+     ]
+    },
+    {
+     "id": "gram-h12-7",
+     "type": "rewrite",
+     "ja": "should have を使って「〜すべきだった」にする。",
+     "from": "I didn't ask him. That was a mistake.",
+     "answers": [
+      "I should have asked him."
+     ]
+    },
+    {
+     "id": "gram-h12-8",
+     "type": "oral",
+     "ja": "彼は会議のことを忘れたに違いない。",
+     "answers": [
+      "He must have forgotten about the meeting.",
+      "He must have forgotten the meeting."
+     ]
+    },
+    {
+     "id": "gram-h12-9",
+     "type": "oral",
+     "ja": "もっと早く言ってくれればよかったのに。",
+     "answers": [
+      "You should have told me earlier.",
+      "You should have told me sooner."
+     ]
+    },
+    {
+     "id": "gram-h12-10",
+     "type": "oral",
+     "ja": "私が間違えたのかもしれません。",
+     "answers": [
+      "I may have made a mistake.",
+      "I might have made a mistake."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "should have＋過去分詞で、最近の小さな後悔を1文で言ってみましょう。",
+    "samples": [
+     "I should have prepared more for the meeting.",
+     "I should have gone to bed earlier last night."
+    ],
+    "checks": [
+     "should の後ろは have＋過去分詞にした"
+    ]
+   }
+  },
+  {
+   "id": "h13",
+   "no": 58,
+   "title": "前置詞（前置詞＋-ing・the discovery of・in which）",
+   "stage": "高校：つなぎ方と助動詞",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（イ）f 前置詞の用法（名詞化した動詞＋前置詞、前置詞＋動名詞や関係詞、動詞＋前置詞、前置詞を含む慣用表現）",
+     "page": "39"
+    }
+   ],
+   "points": [
+    {
+     "text": "前置詞の後ろに動詞を続けるときは -ing（動名詞）にします。",
+     "en": [
+      "Knock before entering.",
+      "He hesitated before answering."
+     ],
+     "check": false
+    },
+    {
+     "text": "look forward to 〜（〜を楽しみにする）の to も前置詞なので、後ろは名詞か -ing です。",
+     "en": [
+      "I look forward to seeing you."
+     ],
+     "check": false
+    },
+    {
+     "text": "動詞から作った名詞＋of（the discovery of 〜：〜の発見）を使うと、内容を短くまとめられます。",
+     "en": [
+      "Chance led to the discovery of the new island."
+     ],
+     "check": false
+    },
+    {
+     "text": "前置詞＋関係代名詞（in which など）は、where などと同じ働きをする、かたい言い方です。",
+     "en": [
+      "The town in which I live is rather small."
+     ],
+     "check": false
+    },
+    {
+     "text": "get over（乗り越える）、in addition（さらに）、at least（少なくとも）のような、前置詞を含む決まった言い方も覚えましょう。",
+     "en": [
+      "I look forward to it."
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "Knock before entering.",
+     "ja": "入る前にノックして。",
+     "source": "tatoeba",
+     "enId": 2267499,
+     "jaId": 6956277
+    },
+    {
+     "en": "He hesitated before answering.",
+     "ja": "彼は答える前にためらった。",
+     "source": "tatoeba",
+     "enId": 301972,
+     "jaId": 101720
+    },
+    {
+     "en": "We learn by teaching.",
+     "ja": "人は教える事によって学ぶ。",
+     "source": "tatoeba",
+     "enId": 270056,
+     "jaId": 144509
+    },
+    {
+     "en": "I look forward to it.",
+     "ja": "楽しみにしています。",
+     "source": "tatoeba",
+     "enId": 1565471,
+     "jaId": 2041004
+    },
+    {
+     "en": "We must get over many difficulties.",
+     "ja": "我々は多くの困難を克服しなければならない。",
+     "source": "tatoeba",
+     "enId": 22834,
+     "jaId": 185702
+    },
+    {
+     "en": "Chance led to the discovery of the new island.",
+     "ja": "ふとしたことでその新しい島の発見となった。",
+     "source": "tatoeba",
+     "enId": 34311,
+     "jaId": 197129
+    },
+    {
+     "en": "The town in which I live is rather small.",
+     "ja": "私の住んでいる町は割と小さいです。",
+     "source": "tatoeba",
+     "enId": 806629,
+     "jaId": 1483533
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "Thank you for come.",
+     "right": "Thank you for coming.",
+     "note": "for は前置詞なので、後ろの動詞は -ing にする。",
+     "proof": {
+      "kaisetsu": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編 p.39「前置詞＋動名詞や関係詞」",
+      "dictionary": "Wiktionary：coming は come の participle・present",
+      "languageTool": []
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h13-1",
+     "type": "fill",
+     "ja": "入る前にノックしてください。",
+     "text": "Please knock before ___.",
+     "choices": [
+      "entering",
+      "enter",
+      "to enter"
+     ],
+     "answers": [
+      "entering"
+     ]
+    },
+    {
+     "id": "gram-h13-2",
+     "type": "fill",
+     "ja": "お会いできるのを楽しみにしています。",
+     "text": "I look forward to ___ you.",
+     "choices": [
+      "seeing",
+      "see",
+      "saw"
+     ],
+     "answers": [
+      "seeing"
+     ]
+    },
+    {
+     "id": "gram-h13-3",
+     "type": "fill",
+     "ja": "少なくとも10冊の本を持っている。",
+     "text": "I have ___ least ten books.",
+     "choices": [
+      "at",
+      "in",
+      "on"
+     ],
+     "answers": [
+      "at"
+     ]
+    },
+    {
+     "id": "gram-h13-4",
+     "type": "order",
+     "ja": "来てくれてありがとう。",
+     "tokens": [
+      "Thank",
+      "you",
+      "for",
+      "coming"
+     ],
+     "answers": [
+      "Thank you for coming."
+     ]
+    },
+    {
+     "id": "gram-h13-5",
+     "type": "order",
+     "ja": "私の住んでいる町は割と小さい。",
+     "tokens": [
+      "The",
+      "town",
+      "in",
+      "which",
+      "I",
+      "live",
+      "is",
+      "rather",
+      "small"
+     ],
+     "answers": [
+      "The town in which I live is rather small."
+     ]
+    },
+    {
+     "id": "gram-h13-6",
+     "type": "rewrite",
+     "ja": "without＋-ing を使って1文にする。",
+     "from": "He left. He didn't say goodbye.",
+     "answers": [
+      "He left without saying goodbye."
+     ]
+    },
+    {
+     "id": "gram-h13-7",
+     "type": "rewrite",
+     "ja": "look forward to を使って「会えるのを楽しみにしている」にする。",
+     "from": "I can't wait to see you.",
+     "answers": [
+      "I look forward to seeing you.",
+      "I'm looking forward to seeing you."
+     ]
+    },
+    {
+     "id": "gram-h13-8",
+     "type": "oral",
+     "ja": "お返事をお待ちしております。",
+     "answers": [
+      "I look forward to hearing from you.",
+      "I'm looking forward to hearing from you."
+     ]
+    },
+    {
+     "id": "gram-h13-9",
+     "type": "oral",
+     "ja": "ご参加ありがとうございます。",
+     "answers": [
+      "Thank you for joining us.",
+      "Thank you for coming.",
+      "Thank you for joining."
+     ]
+    },
+    {
+     "id": "gram-h13-10",
+     "type": "oral",
+     "ja": "彼は何も言わずに出て行った。",
+     "answers": [
+      "He left without saying anything.",
+      "He went out without saying anything.",
+      "He left without a word."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "look forward to＋-ing で、楽しみにしていることを1文で言ってみましょう。",
+    "samples": [
+     "I look forward to working with you.",
+     "I'm looking forward to visiting London next year."
+    ],
+    "checks": [
+     "前置詞の後ろの動詞は -ing にした"
+    ]
+   }
+  },
+  {
+   "id": "h14",
+   "no": 59,
+   "title": "過去完了（had＋過去分詞）",
+   "stage": "高校：時と仮定",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（イ）g 動詞の時制及び相など（過去完了形）",
+     "page": "39"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｳ）e〈現在完了形〉",
+     "page": "47"
+    }
+   ],
+   "points": [
+    {
+     "text": "had＋過去分詞で、過去のある時より前に起きていたこと（もう〜していた・〜したことがあった・ずっと〜していた）を表します。",
+     "en": [
+      "The train had already left when I got to the station."
+     ],
+     "check": false
+    },
+    {
+     "text": "基準になる「過去のある時」は、when 〜 や by the time 〜（〜する時までに）で示すことが多いです。",
+     "check": false
+    },
+    {
+     "text": "経験は「その時までに一度も〜したことがなかった」のように使います。",
+     "en": [
+      "I had never seen her."
+     ],
+     "check": false
+    },
+    {
+     "text": "現在完了（修行場36〜38）の「今」を、過去のある時にずらした形と考えると分かりやすいです。",
+     "check": false
+    },
+    {
+     "text": "話すときは I’d・he’d のように短くなります。I’d は I would の短い形と同じなので、後ろの動詞の形（過去分詞か原形か）で区別します。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "The train had already left when I got to the station.",
+     "ja": "私が駅に着いたときには汽車はもう出てしまっていた。",
+     "source": "tatoeba",
+     "enId": 246609,
+     "jaId": 167886
+    },
+    {
+     "en": "When we arrived at the stadium, the game had already started.",
+     "ja": "スタジアムについた時には、試合はもう始まっていた。",
+     "source": "tatoeba",
+     "enId": 51977,
+     "jaId": 214684
+    },
+    {
+     "en": "The bus had left by the time my wife finished dressing.",
+     "ja": "妻が服を着終わるまでには、バスは出てしまっていた。",
+     "source": "tatoeba",
+     "enId": 244110,
+     "jaId": 170373
+    },
+    {
+     "en": "I had never seen her.",
+     "ja": "彼女に会ったことがなかった。",
+     "source": "tatoeba",
+     "enId": 308852,
+     "jaId": 94853
+    },
+    {
+     "en": "I had never seen so much money.",
+     "ja": "僕はその時まで、そんな大金を見たことがなかった。",
+     "source": "tatoeba",
+     "enId": 321648,
+     "jaId": 82067
+    },
+    {
+     "en": "He arrived after I had left.",
+     "ja": "私が出かけたあとで彼がついた。",
+     "source": "tatoeba",
+     "enId": 246815,
+     "jaId": 167685
+    },
+    {
+     "en": "She had left the front door unlocked.",
+     "ja": "彼女は玄関の鍵をかけないままにしていた。",
+     "source": "tatoeba",
+     "enId": 313499,
+     "jaId": 90215
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "When I got to the station, the train has already left.",
+     "right": "When I got to the station, the train had already left.",
+     "note": "過去のある時（駅に着いた時）より前のことは、has ではなく had＋過去分詞。",
+     "proof": {
+      "kaisetsu": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編 p.39「過去完了形，過去完了進行形を加えて指導する」",
+      "dictionary": "Wiktionary：had は have の past",
+      "languageTool": []
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h14-1",
+     "type": "fill",
+     "ja": "駅に着いた時には、電車はもう出ていた。",
+     "text": "When I got to the station, the train ___ already left.",
+     "choices": [
+      "had",
+      "has",
+      "have"
+     ],
+     "answers": [
+      "had"
+     ]
+    },
+    {
+     "id": "gram-h14-2",
+     "type": "fill",
+     "ja": "その時まで、彼女に会ったことがなかった。",
+     "text": "I ___ never seen her before then.",
+     "choices": [
+      "had",
+      "have",
+      "was"
+     ],
+     "answers": [
+      "had"
+     ]
+    },
+    {
+     "id": "gram-h14-3",
+     "type": "order",
+     "ja": "私たちが着いた時には、試合はもう始まっていた。",
+     "tokens": [
+      "When",
+      "we",
+      "arrived",
+      "the",
+      "game",
+      "had",
+      "already",
+      "started"
+     ],
+     "answers": [
+      "When we arrived, the game had already started.",
+      "The game had already started when we arrived."
+     ]
+    },
+    {
+     "id": "gram-h14-4",
+     "type": "order",
+     "ja": "私が出かけたあとで、彼が着いた。",
+     "tokens": [
+      "He",
+      "arrived",
+      "after",
+      "I",
+      "had",
+      "left"
+     ],
+     "answers": [
+      "He arrived after I had left.",
+      "After I had left, he arrived."
+     ]
+    },
+    {
+     "id": "gram-h14-5",
+     "type": "rewrite",
+     "ja": "過去完了と when を使って1文にする。",
+     "from": "The meeting started. Then I arrived.",
+     "answers": [
+      "The meeting had already started when I arrived.",
+      "When I arrived, the meeting had already started.",
+      "The meeting had started when I arrived.",
+      "When I arrived, the meeting had started."
+     ]
+    },
+    {
+     "id": "gram-h14-6",
+     "type": "rewrite",
+     "ja": "I noticed で始め、過去完了を使って1文にする。",
+     "from": "I lost my wallet. I noticed it later.",
+     "answers": [
+      "I noticed that I had lost my wallet.",
+      "I noticed I had lost my wallet."
+     ]
+    },
+    {
+     "id": "gram-h14-7",
+     "type": "oral",
+     "ja": "私が電話した時には、彼はもう帰っていた。",
+     "answers": [
+      "He had already left when I called.",
+      "When I called, he had already left.",
+      "He had already gone home when I called.",
+      "When I called, he had already gone home."
+     ]
+    },
+    {
+     "id": "gram-h14-8",
+     "type": "oral",
+     "ja": "それまで一度も海外に行ったことがなかった。",
+     "answers": [
+      "I had never been abroad before.",
+      "I had never been abroad until then.",
+      "I had never been overseas before."
+     ]
+    },
+    {
+     "id": "gram-h14-9",
+     "type": "oral",
+     "ja": "会議が始まる前に、資料を読み終えていた。",
+     "answers": [
+      "I had finished reading the materials before the meeting started.",
+      "I had read the materials before the meeting started.",
+      "I had finished reading the documents before the meeting started."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "過去完了で、「〜した時には、もう…していた」という経験を1文で言ってみましょう。",
+    "samples": [
+     "When I got to the office, the meeting had already started.",
+     "I had never used English at work until last year."
+    ],
+    "checks": [
+     "先に起きたことを had＋過去分詞にした"
+    ]
+   }
+  },
+  {
+   "id": "h15",
+   "no": 60,
+   "title": "過去完了進行形（had been＋-ing）",
+   "stage": "高校：時と仮定",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（イ）g 動詞の時制及び相など（過去完了進行形）",
+     "page": "39"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｳ）e〈現在完了進行形〉",
+     "page": "47"
+    }
+   ],
+   "points": [
+    {
+     "text": "had been＋-ing で、過去のある時までずっと続いていた動作を表します。",
+     "en": [
+      "It had been snowing for a week."
+     ],
+     "check": false
+    },
+    {
+     "text": "「ずっと〜していたら、…した」のように、続いていた動作の途中で別のことが起きた場面でよく使います。",
+     "en": [
+      "I had been waiting an hour when he appeared."
+     ],
+     "check": false
+    },
+    {
+     "text": "現在完了進行形（修行場39、have been＋-ing）の「今」を、過去のある時にずらした形です。",
+     "check": false
+    },
+    {
+     "text": "know・like などの状態を表す動詞は、ふつう進行形にしません。had＋過去分詞（修行場59）を使います。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "He had been walking for hours.",
+     "ja": "何時間も歩き続けてきたのだ。",
+     "source": "tatoeba",
+     "enId": 24548,
+     "jaId": 187411
+    },
+    {
+     "en": "It had been snowing for a week.",
+     "ja": "１週間雪が降り続いていた。",
+     "source": "tatoeba",
+     "enId": 73127,
+     "jaId": 235747
+    },
+    {
+     "en": "I had been waiting an hour when he appeared.",
+     "ja": "私が一時間待っていると、彼が現れた。",
+     "source": "tatoeba",
+     "enId": 246604,
+     "jaId": 167894
+    },
+    {
+     "en": "I had been writing letters all that morning.",
+     "ja": "私はその午前中ずっと手紙を書いていました。",
+     "source": "tatoeba",
+     "enId": 254331,
+     "jaId": 160190
+    },
+    {
+     "en": "He asked me what I had been doing.",
+     "ja": "彼は私が何をしていたのか尋ねた。",
+     "source": "tatoeba",
+     "enId": 36443,
+     "jaId": 1160504
+    },
+    {
+     "en": "The man driving the car had been drinking.",
+     "ja": "車を運転していた人は酒を飲んでいた。",
+     "source": "tatoeba",
+     "enId": 265579,
+     "jaId": 148979
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "I had been wait for an hour.",
+     "right": "I had been waiting for an hour.",
+     "note": "過去完了進行形は had been＋-ing。",
+     "proof": {
+      "kaisetsu": "中学校学習指導要領（平成29年告示）解説 外国語編 p.47「Masashi and Yukio have been playing soccer for two hours.」",
+      "dictionary": "Wiktionary：waiting は wait の participle・present",
+      "languageTool": []
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h15-1",
+     "type": "fill",
+     "ja": "1週間ずっと雪が降り続いていた。",
+     "text": "It had been ___ for a week.",
+     "choices": [
+      "snowing",
+      "snow",
+      "snowed"
+     ],
+     "answers": [
+      "snowing"
+     ]
+    },
+    {
+     "id": "gram-h15-2",
+     "type": "fill",
+     "ja": "彼が現れた時、私は1時間待っていた。",
+     "text": "I had ___ waiting an hour when he appeared.",
+     "choices": [
+      "been",
+      "be",
+      "being"
+     ],
+     "answers": [
+      "been"
+     ]
+    },
+    {
+     "id": "gram-h15-3",
+     "type": "order",
+     "ja": "彼は何時間も歩き続けていた。",
+     "tokens": [
+      "He",
+      "had",
+      "been",
+      "walking",
+      "for",
+      "hours"
+     ],
+     "answers": [
+      "He had been walking for hours."
+     ]
+    },
+    {
+     "id": "gram-h15-4",
+     "type": "order",
+     "ja": "彼は、私が何をしていたのかを尋ねた。",
+     "tokens": [
+      "He",
+      "asked",
+      "me",
+      "what",
+      "I",
+      "had",
+      "been",
+      "doing"
+     ],
+     "answers": [
+      "He asked me what I had been doing."
+     ]
+    },
+    {
+     "id": "gram-h15-5",
+     "type": "rewrite",
+     "ja": "過去完了進行形と when を使って1文にする（3時から待ち始め、5時に彼が来た）。",
+     "from": "I started waiting at three. He came at five.",
+     "answers": [
+      "I had been waiting for two hours when he came.",
+      "When he came, I had been waiting for two hours."
+     ]
+    },
+    {
+     "id": "gram-h15-6",
+     "type": "rewrite",
+     "ja": "「引っ越す前に10年間ここで働いていた」となるよう、had been を使って書き直す（before I moved は文の終わりに付ける）。",
+     "from": "I have been working here for ten years.",
+     "answers": [
+      "I had been working here for ten years before I moved."
+     ]
+    },
+    {
+     "id": "gram-h15-7",
+     "type": "oral",
+     "ja": "彼女はその朝ずっと手紙を書いていた。",
+     "answers": [
+      "She had been writing letters all morning.",
+      "She had been writing letters all that morning."
+     ]
+    },
+    {
+     "id": "gram-h15-8",
+     "type": "oral",
+     "ja": "電話が鳴った時、私は2時間勉強していた。",
+     "answers": [
+      "I had been studying for two hours when the phone rang.",
+      "When the phone rang, I had been studying for two hours."
+     ]
+    },
+    {
+     "id": "gram-h15-9",
+     "type": "oral",
+     "ja": "私たちは何か月もその計画に取り組んでいた。",
+     "answers": [
+      "We had been working on the project for months.",
+      "We had been working on the plan for months."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "過去完了進行形で、「…した時には、〜をずっと続けていた」ことを1文で言ってみましょう。",
+    "samples": [
+     "I had been studying English for three years when I got this job.",
+     "We had been waiting for an hour when the train finally came."
+    ],
+    "checks": [
+     "had been＋-ing にした"
+    ]
+   }
+  },
+  {
+   "id": "h16",
+   "no": 61,
+   "title": "仮定法過去完了（If I had known 〜, I would have 〜）",
+   "stage": "高校：時と仮定",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（イ）h 仮定法（中学校の基本的な仮定法を含め、必要なものを精選して指導する）",
+     "page": "39"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｳ）k 仮定法のうち基本的なもの",
+     "page": "51"
+    }
+   ],
+   "points": [
+    {
+     "text": "過去の事実と違うことを想像して「もし（あの時）〜していたら、…しただろう」は、If＋主語＋had＋過去分詞, 主語＋would / could / might＋have＋過去分詞。",
+     "en": [
+      "If I had known that, I wouldn't have come."
+     ],
+     "check": false
+    },
+    {
+     "text": "would have は「〜しただろう」、could have は「〜できただろう」、might have は「〜したかもしれない」。",
+     "check": false
+    },
+    {
+     "text": "今の事実と違うこと（修行場44）は If＋過去形, would＋原形。いつの事実と違うのかで形を選びます。",
+     "check": false
+    },
+    {
+     "text": "過去の条件で今の結果を言うときは、後ろを would＋原形にします。",
+     "en": [
+      "If I had taken that plane, I'd be dead now."
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "If I had known that, I wouldn't have come.",
+     "ja": "もしそれを知っていたとしたら来なかったんですけど。",
+     "source": "tatoeba",
+     "enId": 8249766,
+     "jaId": 1172672
+    },
+    {
+     "en": "If he had known about it, he would have come.",
+     "ja": "彼は知っていたら来ただろう。",
+     "source": "tatoeba",
+     "enId": 301441,
+     "jaId": 102253
+    },
+    {
+     "en": "If you had studied harder, you would have passed the examination.",
+     "ja": "もっと一生懸命勉強していたら君は試験に合格していただろうに。",
+     "source": "tatoeba",
+     "enId": 30468,
+     "jaId": 193303
+    },
+    {
+     "en": "If I had known her address, I could have visited her.",
+     "ja": "もし彼女の住所がわかっていたなら、彼女を訪問できたのに。",
+     "source": "tatoeba",
+     "enId": 30639,
+     "jaId": 193473
+    },
+    {
+     "en": "If I had had enough money, I could have bought it.",
+     "ja": "お金が十分あったら、それを買えたのだが。",
+     "source": "tatoeba",
+     "enId": 30790,
+     "jaId": 193623
+    },
+    {
+     "en": "If he had known, he might have come earlier.",
+     "ja": "知っていたら、彼はもっと早く来たかもしれない。",
+     "source": "tatoeba",
+     "enId": 276977,
+     "jaId": 127113
+    },
+    {
+     "en": "If I had taken that plane, I'd be dead now.",
+     "ja": "あの飛行機に乗っていたら、今生きていないでしょうね。",
+     "source": "tatoeba",
+     "enId": 11184126,
+     "jaId": 230485
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "meaning",
+     "wrong": "If I knew his address, I would write to him.",
+     "intended": "（あの時）彼の住所を知っていたら、手紙を書いたのに",
+     "right": "If I had known his address, I would have written to him.",
+     "note": "If＋過去形は「今〜なら」。過去のことは If＋had＋過去分詞, would have＋過去分詞。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h16-1",
+     "type": "fill",
+     "ja": "それを知っていたら、来なかったのに。",
+     "text": "If I had ___ that, I wouldn't have come.",
+     "choices": [
+      "known",
+      "knew",
+      "know"
+     ],
+     "answers": [
+      "known"
+     ]
+    },
+    {
+     "id": "gram-h16-2",
+     "type": "fill",
+     "ja": "もっと勉強していたら、合格していただろう。",
+     "text": "If you had studied harder, you would ___ passed.",
+     "choices": [
+      "have",
+      "had",
+      "has"
+     ],
+     "answers": [
+      "have"
+     ]
+    },
+    {
+     "id": "gram-h16-3",
+     "type": "order",
+     "ja": "お金が十分あったら、それを買えたのに。",
+     "tokens": [
+      "If",
+      "I",
+      "had",
+      "had",
+      "enough",
+      "money",
+      "I",
+      "could",
+      "have",
+      "bought",
+      "it"
+     ],
+     "answers": [
+      "If I had had enough money, I could have bought it.",
+      "I could have bought it if I had had enough money."
+     ]
+    },
+    {
+     "id": "gram-h16-4",
+     "type": "order",
+     "ja": "彼は知っていたら、来ただろう。",
+     "tokens": [
+      "If",
+      "he",
+      "had",
+      "known",
+      "he",
+      "would",
+      "have",
+      "come"
+     ],
+     "answers": [
+      "If he had known, he would have come.",
+      "He would have come if he had known."
+     ]
+    },
+    {
+     "id": "gram-h16-5",
+     "type": "rewrite",
+     "ja": "If I had で始めて、仮定法の文にする。",
+     "from": "I didn't know her address, so I couldn't visit her.",
+     "answers": [
+      "If I had known her address, I could have visited her."
+     ]
+    },
+    {
+     "id": "gram-h16-6",
+     "type": "rewrite",
+     "ja": "If で始めて、仮定法の文にする。",
+     "from": "It rained, so we didn't go out.",
+     "answers": [
+      "If it hadn't rained, we would have gone out.",
+      "If it had not rained, we would have gone out."
+     ]
+    },
+    {
+     "id": "gram-h16-7",
+     "type": "oral",
+     "ja": "もっと早く知っていたら、手伝ったのに。",
+     "answers": [
+      "If I had known earlier, I would have helped.",
+      "If I had known sooner, I would have helped.",
+      "If I'd known earlier, I would have helped."
+     ]
+    },
+    {
+     "id": "gram-h16-8",
+     "type": "oral",
+     "ja": "電車に乗り遅れていなければ、間に合っていたのに。",
+     "answers": [
+      "If I hadn't missed the train, I would have been on time.",
+      "If I had not missed the train, I would have been on time."
+     ]
+    },
+    {
+     "id": "gram-h16-9",
+     "type": "oral",
+     "ja": "もっと準備していたら、うまくいっていたかもしれない。",
+     "answers": [
+      "If I had prepared more, it might have gone better.",
+      "If I had prepared more, it might have gone well.",
+      "If we had prepared more, it might have gone better."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "仮定法過去完了で、過去を振り返って1文で言ってみましょう。",
+    "samples": [
+     "If I had started English earlier, I would have studied abroad.",
+     "If I hadn't joined this company, I wouldn't have met my best friend."
+    ],
+    "checks": [
+     "if の中は had＋過去分詞、後ろは would / could have＋過去分詞にした"
+    ]
+   }
+  },
+  {
+   "id": "h17",
+   "no": 62,
+   "title": "仮定法（I wish I had 〜・as if 〜）",
+   "stage": "高校：時と仮定",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（イ）h 仮定法（中学校の例 I wish I knew my cat’s feelings.）",
+     "page": "39"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｳ）k 仮定法のうち基本的なもの",
+     "page": "51"
+    }
+   ],
+   "points": [
+    {
+     "text": "I wish＋過去完了で「（あの時）〜していたらよかったのに」。",
+     "en": [
+      "I wish I had bought a concert ticket."
+     ],
+     "check": false
+    },
+    {
+     "text": "I wish＋過去形（修行場44）は今のことの願い、I wish＋過去完了は過去のことの後悔です。",
+     "check": false
+    },
+    {
+     "text": "「〜してくれればよかったのに」は I wish you had＋過去分詞。",
+     "en": [
+      "I wish you had told me the truth."
+     ],
+     "check": false
+    },
+    {
+     "text": "as if＋過去形で「まるで〜であるかのように」。",
+     "en": [
+      "He talks as if he knew everything."
+     ],
+     "check": false
+    },
+    {
+     "text": "as if の中の be動詞は were が基本です（話し言葉では was も使われます）。",
+     "en": [
+      "I feel as if I were dreaming."
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I wish I had seen her.",
+     "ja": "彼女に会えたらよかったのに。",
+     "source": "tatoeba",
+     "enId": 308847,
+     "jaId": 94860
+    },
+    {
+     "en": "I wish I had bought a concert ticket.",
+     "ja": "コンサートのチケットを買っておけば良かった。",
+     "source": "tatoeba",
+     "enId": 54834,
+     "jaId": 217525
+    },
+    {
+     "en": "I wish you had told me that.",
+     "ja": "それ、言ってくれればよかったのに。",
+     "source": "tatoeba",
+     "enId": 41837,
+     "jaId": 204596
+    },
+    {
+     "en": "I wish you had been there.",
+     "ja": "あなたも来たら良かったのに。",
+     "source": "tatoeba",
+     "enId": 68830,
+     "jaId": 231463
+    },
+    {
+     "en": "He talks as if he knew everything.",
+     "ja": "彼は何でも知っているように話す。",
+     "source": "tatoeba",
+     "enId": 284711,
+     "jaId": 109426
+    },
+    {
+     "en": "I feel as if I were dreaming.",
+     "ja": "私はまるで夢を見ているような気がする。",
+     "source": "tatoeba",
+     "enId": 255684,
+     "jaId": 158842
+    },
+    {
+     "en": "She looks as if she were drunk.",
+     "ja": "まるで酔っているようだ。",
+     "source": "tatoeba",
+     "enId": 32319,
+     "jaId": 195145
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "meaning",
+     "wrong": "I wish I knew.",
+     "intended": "（あの時）知っていたらよかったのに",
+     "right": "I wish I had known.",
+     "note": "I wish I knew. は「今知っていればいいのに」。過去のことは I wish I had＋過去分詞。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h17-1",
+     "type": "fill",
+     "ja": "チケットを買っておけばよかった。",
+     "text": "I wish I ___ bought a ticket.",
+     "choices": [
+      "had",
+      "have",
+      "would"
+     ],
+     "answers": [
+      "had"
+     ]
+    },
+    {
+     "id": "gram-h17-2",
+     "type": "fill",
+     "ja": "彼は何でも知っているかのように話す。",
+     "text": "He talks as ___ he knew everything.",
+     "choices": [
+      "if",
+      "well",
+      "so"
+     ],
+     "answers": [
+      "if"
+     ]
+    },
+    {
+     "id": "gram-h17-3",
+     "type": "fill",
+     "ja": "それを言ってくれればよかったのに。",
+     "text": "I wish you had ___ me that.",
+     "choices": [
+      "told",
+      "tell",
+      "telling"
+     ],
+     "answers": [
+      "told"
+     ]
+    },
+    {
+     "id": "gram-h17-4",
+     "type": "order",
+     "ja": "あの時、君と一緒にいたらよかったのに。",
+     "tokens": [
+      "I",
+      "wish",
+      "I",
+      "had",
+      "been",
+      "with",
+      "you",
+      "then"
+     ],
+     "answers": [
+      "I wish I had been with you then."
+     ]
+    },
+    {
+     "id": "gram-h17-5",
+     "type": "order",
+     "ja": "まるで夢を見ているような気がする。",
+     "tokens": [
+      "I",
+      "feel",
+      "as",
+      "if",
+      "I",
+      "were",
+      "dreaming"
+     ],
+     "answers": [
+      "I feel as if I were dreaming."
+     ]
+    },
+    {
+     "id": "gram-h17-6",
+     "type": "rewrite",
+     "ja": "I wish で始めて書き直す。",
+     "from": "I'm sorry I didn't study harder.",
+     "answers": [
+      "I wish I had studied harder."
+     ]
+    },
+    {
+     "id": "gram-h17-7",
+     "type": "rewrite",
+     "ja": "as if を使って1文にする。",
+     "from": "He talks like the boss, but he isn't the boss.",
+     "answers": [
+      "He talks as if he were the boss.",
+      "He talks as if he was the boss."
+     ]
+    },
+    {
+     "id": "gram-h17-8",
+     "type": "oral",
+     "ja": "もっと早く始めていればよかった。",
+     "answers": [
+      "I wish I had started earlier.",
+      "I wish I had started sooner."
+     ]
+    },
+    {
+     "id": "gram-h17-9",
+     "type": "oral",
+     "ja": "会議に出ていればよかった。",
+     "answers": [
+      "I wish I had attended the meeting.",
+      "I wish I had gone to the meeting.",
+      "I wish I had been at the meeting."
+     ]
+    },
+    {
+     "id": "gram-h17-10",
+     "type": "oral",
+     "ja": "彼女は、まるで何も起きなかったかのように振る舞った。",
+     "answers": [
+      "She acted as if nothing had happened.",
+      "She behaved as if nothing had happened."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "I wish I had＋過去分詞で、過去の後悔を1文で言ってみましょう。",
+    "samples": [
+     "I wish I had studied English harder in school.",
+     "I wish I had taken more photos on my trip."
+    ],
+    "checks": [
+     "過去のことは had＋過去分詞にした"
+    ]
+   }
+  },
+  {
+   "id": "h18",
+   "no": 63,
+   "title": "it で中身をあとに回す（find it 〜 to・It is 〜 that）",
+   "stage": "高校：必要に応じて扱うもの",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（代名詞のうち、it が名詞用法の句及び節を指すもの：必要に応じて扱う）",
+     "page": "35"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｲ）e（b）It＋be動詞＋〜（＋for 〜）＋to 不定詞",
+     "page": "43"
+    }
+   ],
+   "points": [
+    {
+     "text": "It is 〜 to …（修行場31）と同じように、it を先に置き、本当の中身（to 〜・that 〜）をあとに回す言い方です。この it は「それ」と訳しません。",
+     "check": false
+    },
+    {
+     "text": "find it＋形容詞＋to 〜 は「〜するのは…だと分かる・感じる」。",
+     "en": [
+      "I found it easy to speak English."
+     ],
+     "check": false
+    },
+    {
+     "text": "make it clear that 〜 は「〜ということをはっきりさせる」。",
+     "en": [
+      "She made it clear that she disagreed."
+     ],
+     "check": false
+    },
+    {
+     "text": "It is＋形容詞・名詞＋that 〜 は「〜ということは…だ」。",
+     "en": [
+      "It's true that he's ill.",
+      "It's a pity that you can't come."
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I found it easy to speak English.",
+     "ja": "英語を話すのはやさしいとわかった。",
+     "source": "tatoeba",
+     "enId": 26177,
+     "jaId": 189030
+    },
+    {
+     "en": "He found it hard to make friends.",
+     "ja": "彼は友達を作るのが難しいとわかった。",
+     "source": "tatoeba",
+     "enId": 304421,
+     "jaId": 99278
+    },
+    {
+     "en": "I found it difficult to solve the problem.",
+     "ja": "その問題を解くのは難しいとわかった。",
+     "source": "tatoeba",
+     "enId": 43621,
+     "jaId": 206373
+    },
+    {
+     "en": "I found it necessary to get assistance.",
+     "ja": "助けを得る必要があると思った。",
+     "source": "tatoeba",
+     "enId": 953454,
+     "jaId": 1627124
+    },
+    {
+     "en": "It's true that he's ill.",
+     "ja": "彼が病気であることは本当だ。",
+     "source": "tatoeba",
+     "enId": 284133,
+     "jaId": 119530
+    },
+    {
+     "en": "It's a pity that you can't come.",
+     "ja": "君が来られないのが残念だ。",
+     "source": "tatoeba",
+     "enId": 17704,
+     "jaId": 178850
+    },
+    {
+     "en": "It's strange that Tom hasn't come yet.",
+     "ja": "トムがまだ来ていないなんて奇妙だな。",
+     "source": "tatoeba",
+     "enId": 6379548,
+     "jaId": 9041991
+    }
+   ],
+   "mistakes": [],
+   "exercises": [
+    {
+     "id": "gram-h18-1",
+     "type": "fill",
+     "ja": "英語を話すのはやさしいと分かった。",
+     "text": "I found ___ easy to speak English.",
+     "choices": [
+      "it",
+      "that",
+      "this"
+     ],
+     "answers": [
+      "it"
+     ]
+    },
+    {
+     "id": "gram-h18-2",
+     "type": "fill",
+     "ja": "君が来られないのは残念だ。",
+     "text": "It's a pity ___ you can't come.",
+     "choices": [
+      "that",
+      "to",
+      "it"
+     ],
+     "answers": [
+      "that"
+     ]
+    },
+    {
+     "id": "gram-h18-3",
+     "type": "order",
+     "ja": "その問題を解くのは難しいと分かった。",
+     "tokens": [
+      "I",
+      "found",
+      "it",
+      "difficult",
+      "to",
+      "solve",
+      "the",
+      "problem"
+     ],
+     "answers": [
+      "I found it difficult to solve the problem."
+     ]
+    },
+    {
+     "id": "gram-h18-4",
+     "type": "order",
+     "ja": "彼は友達を作るのが難しいと感じた。",
+     "tokens": [
+      "He",
+      "found",
+      "it",
+      "hard",
+      "to",
+      "make",
+      "friends"
+     ],
+     "answers": [
+      "He found it hard to make friends."
+     ]
+    },
+    {
+     "id": "gram-h18-5",
+     "type": "rewrite",
+     "ja": "I found it で始めて書き直す。",
+     "from": "Working from home was easy for me.",
+     "answers": [
+      "I found it easy to work from home."
+     ]
+    },
+    {
+     "id": "gram-h18-6",
+     "type": "rewrite",
+     "ja": "It is で始めて書き直す。",
+     "from": "That he is ill is true.",
+     "answers": [
+      "It is true that he is ill.",
+      "It's true that he is ill.",
+      "It's true that he's ill."
+     ]
+    },
+    {
+     "id": "gram-h18-7",
+     "type": "oral",
+     "ja": "彼の英語を理解するのは難しいと感じた。",
+     "answers": [
+      "I found it difficult to understand his English.",
+      "I found it hard to understand his English."
+     ]
+    },
+    {
+     "id": "gram-h18-8",
+     "type": "oral",
+     "ja": "締め切りは金曜日だとはっきり伝えました。",
+     "answers": [
+      "I made it clear that the deadline is Friday.",
+      "I made it clear that the deadline was Friday."
+     ]
+    },
+    {
+     "id": "gram-h18-9",
+     "type": "oral",
+     "ja": "彼がまだ来ていないのは変だ。",
+     "answers": [
+      "It's strange that he hasn't come yet.",
+      "It is strange that he has not come yet."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "I find it 〜 to … で、自分にとって簡単なこと・難しいことを1文で言ってみましょう。",
+    "samples": [
+     "I find it difficult to speak English on the phone.",
+     "I find it easy to read emails in English."
+    ],
+    "checks": [
+     "find の後ろに it を置き、to 〜 をあとに回した"
+    ]
+   }
+  },
+  {
+   "id": "h19",
+   "no": 64,
+   "title": "分詞構文（Feeling sick, 〜・Having finished 〜）",
+   "stage": "高校：必要に応じて扱うもの",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（分詞構文：必要に応じて扱う）",
+     "page": "35"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｳ）i 現在分詞や過去分詞の形容詞としての用法",
+     "page": "50"
+    }
+   ],
+   "points": [
+    {
+     "text": "-ing や過去分詞で始まるまとまりで、「〜して」「〜なので」「〜すると」などを短く表します。",
+     "en": [
+      "Feeling sick, he stayed in bed."
+     ],
+     "check": false
+    },
+    {
+     "text": "分詞が表す動作をするのは、後ろの文の主語と同じ人・物です。",
+     "en": [
+      "Hearing his voice, I turned around."
+     ],
+     "check": false
+    },
+    {
+     "text": "先に済ませたことは Having＋過去分詞で表します。",
+     "en": [
+      "Having finished lunch, we went skating."
+     ],
+     "check": false
+    },
+    {
+     "text": "「〜されて」は過去分詞で始めます。",
+     "en": [
+      "Left alone, she felt very tired."
+     ],
+     "check": false
+    },
+    {
+     "text": "主に書き言葉の形です。話すときは because・when・after などを使った文（修行場23・54）がふつうです。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "Feeling sick, he stayed in bed.",
+     "ja": "体の具合がよくなかったので、彼は寝ていた。",
+     "source": "tatoeba",
+     "enId": 275225,
+     "jaId": 138010
+    },
+    {
+     "en": "Feeling sleepy, I went to bed.",
+     "ja": "眠くなったので、私は寝た。",
+     "source": "tatoeba",
+     "enId": 322718,
+     "jaId": 80997
+    },
+    {
+     "en": "Hearing his voice, I turned around.",
+     "ja": "彼の声が聞こえたので、私はふりむいた。",
+     "source": "tatoeba",
+     "enId": 286977,
+     "jaId": 116691
+    },
+    {
+     "en": "Seeing a policeman, he ran away.",
+     "ja": "警官を見て逃げ出した。",
+     "source": "tatoeba",
+     "enId": 238156,
+     "jaId": 176308
+    },
+    {
+     "en": "Having finished lunch, we went skating.",
+     "ja": "昼食をすませて、私達はスケートをしに行った。",
+     "source": "tatoeba",
+     "enId": 277603,
+     "jaId": 126387
+    },
+    {
+     "en": "Left alone, she felt very tired.",
+     "ja": "独りにされて、彼女はひどく疲れたと思った。",
+     "source": "tatoeba",
+     "enId": 280567,
+     "jaId": 123430
+    },
+    {
+     "en": "Being very tired, I fell asleep soon.",
+     "ja": "とても疲れていたので私はすぐに眠り込んだ。",
+     "source": "tatoeba",
+     "enId": 37763,
+     "jaId": 200562
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "Felt sick, he stayed in bed.",
+     "right": "Feeling sick, he stayed in bed.",
+     "note": "「〜なので」の意味で文の始めに置くときは、-ing の形（分詞構文）にする。",
+     "proof": {
+      "kaisetsu": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編 p.35「「分詞構文」については必要に応じて扱う」",
+      "dictionary": "Wiktionary：feeling は feel の participle・present",
+      "languageTool": []
+     }
+    },
+    {
+     "kind": "meaning",
+     "wrong": "Walking in the park, a dog bit me.",
+     "intended": "公園を歩いていたら、犬にかまれた",
+     "right": "While I was walking in the park, a dog bit me.",
+     "note": "分詞の動作をするのは後ろの文の主語なので、「犬が公園を歩いていて、私をかんだ」と読めてしまう。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h19-1",
+     "type": "fill",
+     "ja": "眠くなったので、私は寝た。",
+     "text": "___ sleepy, I went to bed.",
+     "choices": [
+      "Feeling",
+      "Felt",
+      "Feel"
+     ],
+     "answers": [
+      "Feeling"
+     ]
+    },
+    {
+     "id": "gram-h19-2",
+     "type": "fill",
+     "ja": "昼食を済ませて、私たちはスケートに行った。",
+     "text": "Having ___ lunch, we went skating.",
+     "choices": [
+      "finished",
+      "finish",
+      "finishing"
+     ],
+     "answers": [
+      "finished"
+     ]
+    },
+    {
+     "id": "gram-h19-3",
+     "type": "order",
+     "ja": "彼の声が聞こえたので、私は振り向いた。",
+     "tokens": [
+      "Hearing",
+      "his",
+      "voice",
+      "I",
+      "turned",
+      "around"
+     ],
+     "answers": [
+      "Hearing his voice, I turned around."
+     ]
+    },
+    {
+     "id": "gram-h19-4",
+     "type": "order",
+     "ja": "警官を見て、彼は逃げ出した。",
+     "tokens": [
+      "Seeing",
+      "a",
+      "policeman",
+      "he",
+      "ran",
+      "away"
+     ],
+     "answers": [
+      "Seeing a policeman, he ran away."
+     ]
+    },
+    {
+     "id": "gram-h19-5",
+     "type": "rewrite",
+     "ja": "Being で始めて、分詞構文に書き直す。",
+     "from": "Because I was very tired, I fell asleep soon.",
+     "answers": [
+      "Being very tired, I fell asleep soon."
+     ]
+    },
+    {
+     "id": "gram-h19-6",
+     "type": "rewrite",
+     "ja": "Because で始めて、接続詞を使った文に書き直す。",
+     "from": "Feeling sick, he stayed in bed.",
+     "answers": [
+      "Because he felt sick, he stayed in bed.",
+      "Because he was feeling sick, he stayed in bed."
+     ]
+    },
+    {
+     "id": "gram-h19-7",
+     "type": "oral",
+     "ja": "疲れていたので、早く寝た。（分詞構文で）",
+     "answers": [
+      "Feeling tired, I went to bed early.",
+      "Being tired, I went to bed early."
+     ]
+    },
+    {
+     "id": "gram-h19-8",
+     "type": "oral",
+     "ja": "仕事を終えて、彼は家に帰った。（分詞構文で）",
+     "answers": [
+      "Having finished his work, he went home.",
+      "Having finished work, he went home.",
+      "Finishing his work, he went home."
+     ]
+    },
+    {
+     "id": "gram-h19-9",
+     "type": "oral",
+     "ja": "メールを読んで、彼女はすぐに返事をした。（分詞構文で）",
+     "answers": [
+      "Having read the email, she replied immediately.",
+      "Reading the email, she replied immediately."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "分詞構文で、今日したことを1文で書いてみましょう（書き言葉の練習）。",
+    "samples": [
+     "Having finished my report, I left the office.",
+     "Feeling hungry, I went out for lunch."
+    ],
+    "checks": [
+     "分詞の動作をするのが、後ろの文の主語と同じ人になった"
+    ]
+   }
   }
  ]
 }
