@@ -54,8 +54,8 @@ function GrammarMap({ data, onOpen, onReview, onExit }: { data: GrammarData; onO
   return (
     <div className="stack gram-map">
       <section className="card">
-        <h2 className="win-title"><PixelIcon name="scroll" size={20} /> 修行の地図（中学・高校）</h2>
-        <p className="muted">項目の並びは学習指導要領（小学校・中学校・高等学校の外国語）の文法事項に沿っています。全部で{data.items.length}項目です。</p>
+        <h2 className="win-title"><PixelIcon name="scroll" size={20} /> 修行の地図（中学・高校・その先）</h2>
+        <p className="muted">項目の並びは学習指導要領（小学校・中学校・高等学校の外国語）の文法事項に沿い、その先は CEFR-J Grammar Profile のレベル順です。全部で{data.items.length}項目です。</p>
         <button className="btn block" disabled={due === 0} onClick={onReview}>文法の復習 {due > 0 ? `（${due}問）` : '（今日の分はありません）'}</button>
       </section>
       {stages.map((st) => (
@@ -237,9 +237,9 @@ function Explanation({ item, settings }: { item: GrammarItem; settings: Settings
       )}
       <section className="card">
         <details>
-          <summary>出典（学習指導要領解説の該当箇所）</summary>
+          <summary>出典（学習指導要領解説・CEFR-J の該当箇所）</summary>
           <ul className="gram-sources">
-            {item.sources.map((s, i) => <li key={i}>{s.doc}　{s.where}　p.{s.page}</li>)}
+            {item.sources.map((s, i) => <li key={i}>{s.doc}　{s.where}{s.page ? `　p.${s.page}` : ''}</li>)}
           </ul>
           <p className="muted">解説と問題は、この箇所と照らし合わせて自作しました（文章は写していません）。例文は Tatoeba（CC BY 2.0 FR）の実在の文です。</p>
         </details>

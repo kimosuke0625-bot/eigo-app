@@ -15131,6 +15131,1171 @@
      "分詞の動作をするのが、後ろの文の主語と同じ人になった"
     ]
    }
+  },
+  {
+   "id": "c01",
+   "no": 65,
+   "title": "付加疑問（〜ですよね？：…, isn’t it?・…, don’t you?）",
+   "stage": "CEFR B1：会話でよく使う形",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 193 付加疑問（肯定文に続くもの）・193-1（否定文に続くもの）　CEFR-J レベル B1.1"
+    }
+   ],
+   "points": [
+    {
+     "text": "文の終わりに短い疑問を付けて「〜ですよね？」と確かめたり、同意を求めたりします。",
+     "en": [
+      "It's cheap, isn't it?"
+     ],
+     "check": false
+    },
+    {
+     "text": "肯定の文には否定の付加疑問、否定の文には肯定の付加疑問を付けます。",
+     "en": [
+      "You understand, don't you?",
+      "You aren't busy, are you?"
+     ],
+     "check": false
+    },
+    {
+     "text": "付加疑問の動詞は、前の文に合わせます。be動詞なら be動詞、一般動詞なら do・does・did、助動詞ならその助動詞。主語は代名詞にします。",
+     "en": [
+      "You lost, didn't you?"
+     ],
+     "check": false
+    },
+    {
+     "text": "答え方は、内容が肯定なら Yes、否定なら No（修行場4と同じ）。「好きじゃないよね？」に「好きじゃない」と答えるなら No です。",
+     "check": false
+    },
+    {
+     "text": "命令文の後ろの , will you? は「〜してくれる？」という頼み方になります。",
+     "en": [
+      "Shut the door, will you?"
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "That's cheap, isn't it?",
+     "ja": "それは安いですね。",
+     "source": "tatoeba",
+     "enId": 645084,
+     "jaId": 205343
+    },
+    {
+     "en": "Beautiful day, isn't it?",
+     "ja": "すばらしい天気ですね。",
+     "source": "tatoeba",
+     "enId": 51844,
+     "jaId": 214552
+    },
+    {
+     "en": "You understand, don't you?",
+     "ja": "分かったでしょう？",
+     "source": "tatoeba",
+     "enId": 433503,
+     "jaId": 83729
+    },
+    {
+     "en": "You lost, didn't you?",
+     "ja": "君の負けだね。",
+     "source": "tatoeba",
+     "enId": 1014803,
+     "jaId": 1013502
+    },
+    {
+     "en": "You aren't busy, are you?",
+     "ja": "あなたは忙しくありませんね。",
+     "source": "tatoeba",
+     "enId": 68947,
+     "jaId": 231580
+    },
+    {
+     "en": "You don't smoke, do you?",
+     "ja": "タバコを吸わないんですね。",
+     "source": "tatoeba",
+     "enId": 69897,
+     "jaId": 232527
+    },
+    {
+     "en": "Shut the door, will you?",
+     "ja": "ドアをお閉めくださいね。",
+     "source": "tatoeba",
+     "enId": 39031,
+     "jaId": 201821
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "meaning",
+     "wrong": "\"You don't smoke, do you?\" \"Yes.\"",
+     "intended": "「タバコは吸わないんですよね？」「はい、吸いません」",
+     "right": "\"You don't smoke, do you?\" \"No, I don't.\"",
+     "note": "Yes と答えると「いいえ、吸います」の意味になる。吸わないなら No。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c01-1",
+     "type": "fill",
+     "ja": "それは安いですよね。",
+     "text": "That's cheap, ___ it?",
+     "choices": [
+      "isn't",
+      "doesn't",
+      "is"
+     ],
+     "answers": [
+      "isn't"
+     ]
+    },
+    {
+     "id": "gram-c01-2",
+     "type": "fill",
+     "ja": "分かりますよね。",
+     "text": "You understand, ___ you?",
+     "choices": [
+      "don't",
+      "aren't",
+      "do"
+     ],
+     "answers": [
+      "don't"
+     ]
+    },
+    {
+     "id": "gram-c01-3",
+     "type": "fill",
+     "ja": "お忙しくないですよね。",
+     "text": "You aren't busy, ___ you?",
+     "choices": [
+      "are",
+      "aren't",
+      "do"
+     ],
+     "answers": [
+      "are"
+     ]
+    },
+    {
+     "id": "gram-c01-4",
+     "type": "order",
+     "ja": "あなたは負けたんですよね。",
+     "tokens": [
+      "You",
+      "lost",
+      "didn't",
+      "you"
+     ],
+     "answers": [
+      "You lost, didn't you?"
+     ]
+    },
+    {
+     "id": "gram-c01-5",
+     "type": "order",
+     "ja": "ドアを閉めてくれる？",
+     "tokens": [
+      "Shut",
+      "the",
+      "door",
+      "will",
+      "you"
+     ],
+     "answers": [
+      "Shut the door, will you?"
+     ]
+    },
+    {
+     "id": "gram-c01-6",
+     "type": "rewrite",
+     "ja": "付加疑問を付けて「〜ですよね？」にする。",
+     "from": "He is your boss.",
+     "answers": [
+      "He is your boss, isn't he?",
+      "He's your boss, isn't he?"
+     ]
+    },
+    {
+     "id": "gram-c01-7",
+     "type": "rewrite",
+     "ja": "付加疑問を付けて「〜ですよね？」にする。",
+     "from": "She can't come.",
+     "answers": [
+      "She can't come, can she?"
+     ]
+    },
+    {
+     "id": "gram-c01-8",
+     "type": "oral",
+     "ja": "会議は3時からですよね。",
+     "answers": [
+      "The meeting starts at three, doesn't it?",
+      "The meeting is at three, isn't it?"
+     ]
+    },
+    {
+     "id": "gram-c01-9",
+     "type": "oral",
+     "ja": "いい天気ですね。",
+     "answers": [
+      "It's a beautiful day, isn't it?",
+      "It's a nice day, isn't it?",
+      "Beautiful day, isn't it?",
+      "Nice weather, isn't it?"
+     ]
+    },
+    {
+     "id": "gram-c01-10",
+     "type": "oral",
+     "ja": "あなたは昨日来なかったですよね。",
+     "answers": [
+      "You didn't come yesterday, did you?"
+     ]
+    },
+    {
+     "id": "gram-c01-11",
+     "type": "oral",
+     "ja": "彼はまだ報告書を送っていないですよね。",
+     "answers": [
+      "He hasn't sent the report yet, has he?"
+     ]
+    }
+   ],
+   "myself": {
+    "task": "付加疑問を使って、相手に確かめたいことを1文で言ってみましょう。",
+    "samples": [
+     "You're coming to the meeting, aren't you?",
+     "We don't need to finish it today, do we?"
+    ],
+    "checks": [
+     "肯定の文には否定の、否定の文には肯定の付加疑問を付けた",
+     "付加疑問の動詞を前の文に合わせた（be動詞・do・助動詞）"
+    ]
+   }
+  },
+  {
+   "id": "c02",
+   "no": 66,
+   "title": "「私もです」（So do I.・Neither do I.）",
+   "stage": "CEFR B1：会話でよく使う形",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 232 倒置（so＋be/have/do/助動詞＋人称代名詞）・233（neither/nor＋…）　CEFR-J レベル B1.1〜B2.2"
+    }
+   ],
+   "points": [
+    {
+     "text": "相手の肯定の文に「私もです」は So＋動詞＋I。",
+     "en": [
+      "\"I agree with him.\" \"So do I.\""
+     ],
+     "check": false
+    },
+    {
+     "text": "相手の否定の文に「私も（〜ない）です」は Neither＋動詞＋I。",
+     "en": [
+      "\"I don't like carrots.\" \"Neither do I.\""
+     ],
+     "check": false
+    },
+    {
+     "text": "動詞は相手の文に合わせます。be動詞なら am・was、一般動詞なら do・does・did、現在完了なら have、助動詞ならその助動詞。",
+     "en": [
+      "\"I am a teacher.\" \"So am I.\"",
+      "\"I've seen that play.\" \"So have I.\""
+     ],
+     "check": false
+    },
+    {
+     "text": "くだけた会話では Me too.（肯定に）・Me neither.（否定に）とも言います。否定の文に Me too. と返すと、話がかみ合わなくなります。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "\"I agree with him.\" \"So do I.\"",
+     "ja": "「私は彼に賛成です」「私もです」",
+     "source": "tatoeba",
+     "enId": 73658,
+     "jaId": 236293
+    },
+    {
+     "en": "\"She likes music.\" \"So do I.\"",
+     "ja": "「彼女は音楽が好きだ」「私もそうだ」",
+     "source": "tatoeba",
+     "enId": 1520,
+     "jaId": 4931
+    },
+    {
+     "en": "\"I am a teacher.\" \"So am I.\"",
+     "ja": "私は教師です。私もそうです。",
+     "source": "tatoeba",
+     "enId": 256930,
+     "jaId": 157601
+    },
+    {
+     "en": "\"I've seen that play.\" \"So have I.\"",
+     "ja": "「私はその劇を見たことがあります」「私もあります」",
+     "source": "tatoeba",
+     "enId": 73667,
+     "jaId": 236302
+    },
+    {
+     "en": "\"I don't like carrots.\" \"Neither do I.\"",
+     "ja": "「私ニンジンは嫌いよ」「私も嫌い」",
+     "source": "tatoeba",
+     "enId": 73681,
+     "jaId": 236316
+    },
+    {
+     "en": "\"I am not tired.\" \"Neither am I.\"",
+     "ja": "「私は疲れていない」「私もそうです」",
+     "source": "tatoeba",
+     "enId": 261407,
+     "jaId": 153136
+    },
+    {
+     "en": "\"I don't understand this.\" \"Neither do I.\"",
+     "ja": "「これが理解できないんです」「私もです」",
+     "source": "tatoeba",
+     "enId": 11358651,
+     "jaId": 2112264
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "meaning",
+     "wrong": "\"I don't like coffee.\" \"Me too.\"",
+     "intended": "「コーヒーは好きじゃない」「私も（好きじゃない）」",
+     "right": "\"I don't like coffee.\" \"Neither do I.\"",
+     "note": "Me too. は肯定の文への返事。否定の文に「私も〜ない」と返すときは Neither do I.（くだけて Me neither.）。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c02-1",
+     "type": "fill",
+     "ja": "「彼に賛成です」「私もです」",
+     "text": "\"I agree with him.\" \"So ___ I.\"",
+     "choices": [
+      "do",
+      "am",
+      "have"
+     ],
+     "answers": [
+      "do"
+     ]
+    },
+    {
+     "id": "gram-c02-2",
+     "type": "fill",
+     "ja": "「私は疲れていません」「私もです」",
+     "text": "\"I am not tired.\" \"___ am I.\"",
+     "choices": [
+      "Neither",
+      "So",
+      "Too"
+     ],
+     "answers": [
+      "Neither"
+     ]
+    },
+    {
+     "id": "gram-c02-3",
+     "type": "fill",
+     "ja": "「その劇を見たことがあります」「私もあります」",
+     "text": "\"I've seen that play.\" \"So ___ I.\"",
+     "choices": [
+      "have",
+      "do",
+      "am"
+     ],
+     "answers": [
+      "have"
+     ]
+    },
+    {
+     "id": "gram-c02-4",
+     "type": "order",
+     "ja": "「これが分かりません」への返事：「私もです」",
+     "tokens": [
+      "Neither",
+      "do",
+      "I"
+     ],
+     "answers": [
+      "Neither do I."
+     ]
+    },
+    {
+     "id": "gram-c02-5",
+     "type": "order",
+     "ja": "「私は教師です」への返事：「私もです」",
+     "tokens": [
+      "So",
+      "am",
+      "I"
+     ],
+     "answers": [
+      "So am I."
+     ]
+    },
+    {
+     "id": "gram-c02-6",
+     "type": "rewrite",
+     "ja": "「私もです」を So か Neither で返す。",
+     "from": "I can swim.",
+     "answers": [
+      "So can I."
+     ]
+    },
+    {
+     "id": "gram-c02-7",
+     "type": "rewrite",
+     "ja": "「私もです」を So か Neither で返す。",
+     "from": "I didn't go to the party.",
+     "answers": [
+      "Neither did I.",
+      "Nor did I."
+     ]
+    },
+    {
+     "id": "gram-c02-8",
+     "type": "oral",
+     "ja": "「その案はいいと思います」「私もです」の「私もです」",
+     "answers": [
+      "So do I.",
+      "Me too."
+     ]
+    },
+    {
+     "id": "gram-c02-9",
+     "type": "oral",
+     "ja": "「まだ終わっていません」「私もです」の「私もです」",
+     "answers": [
+      "Neither have I.",
+      "Me neither.",
+      "Nor have I."
+     ]
+    },
+    {
+     "id": "gram-c02-10",
+     "type": "oral",
+     "ja": "「昨日は忙しかった」「私もです」の「私もです」",
+     "answers": [
+      "So was I.",
+      "Me too."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "同僚の発言「I want to take a vacation.」か「I don’t like long meetings.」に、So か Neither で返してみましょう。",
+    "samples": [
+     "So do I.",
+     "Neither do I."
+    ],
+    "checks": [
+     "肯定の文には So、否定の文には Neither を使った",
+     "動詞を相手の文に合わせた"
+    ]
+   }
+  },
+  {
+   "id": "c03",
+   "no": 67,
+   "title": "「以前は〜だった」（used to 〜）",
+   "stage": "CEFR B1：会話でよく使う形",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 140 助動詞：used to　CEFR-J レベル B1.1"
+    }
+   ],
+   "points": [
+    {
+     "text": "used to＋動詞の原形で「以前は〜していた（今はしていない）」「以前は〜だった」。",
+     "en": [
+      "I used to work here.",
+      "I used to be a teacher."
+     ],
+     "check": false
+    },
+    {
+     "text": "今と比べて「昔はそうだった」ということを表します。過去形（I worked here.）は、今どうかには触れません。",
+     "check": false
+    },
+    {
+     "text": "否定は didn’t use to 〜、疑問は Did you use to 〜?（did の後ろは use）。",
+     "en": [
+      "I didn't use to smoke.",
+      "Did you use to live here?"
+     ],
+     "check": false
+    },
+    {
+     "text": "be used to 〜ing（〜に慣れている）とは別の言い方です。be動詞があるかどうかで区別します。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I used to work here.",
+     "ja": "ここで働いてたなぁ。",
+     "source": "tatoeba",
+     "enId": 5958281,
+     "jaId": 11052437
+    },
+    {
+     "en": "I used to be a teacher.",
+     "ja": "昔は先生してたんだ。",
+     "source": "tatoeba",
+     "enId": 2546806,
+     "jaId": 12146649
+    },
+    {
+     "en": "I used to live in this house.",
+     "ja": "昔、この家に住んでたんだ。",
+     "source": "tatoeba",
+     "enId": 11188098,
+     "jaId": 11178872
+    },
+    {
+     "en": "I used to go skiing a lot.",
+     "ja": "よくスキーに行ってたよ。",
+     "source": "tatoeba",
+     "enId": 10970940,
+     "jaId": 10970943
+    },
+    {
+     "en": "I didn't use to smoke.",
+     "ja": "以前はタバコを吸わなかった。",
+     "source": "tatoeba",
+     "enId": 28339,
+     "jaId": 191179
+    },
+    {
+     "en": "Did you use to live here?",
+     "ja": "ここにかつて住んでいたのですか。",
+     "source": "tatoeba",
+     "enId": 61826,
+     "jaId": 224491
+    },
+    {
+     "en": "He didn't use to be like that.",
+     "ja": "昔はあんな人ではなかった。",
+     "source": "tatoeba",
+     "enId": 2825471,
+     "jaId": 142412
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "meaning",
+     "wrong": "I'm used to getting up early.",
+     "intended": "以前は早起きだった（今はちがう）",
+     "right": "I used to get up early.",
+     "note": "be used to 〜ing は「〜に慣れている」。「以前は〜していた」は used to＋動詞の原形（be動詞なし）。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c03-1",
+     "type": "fill",
+     "ja": "以前はここで働いていました。",
+     "text": "I ___ to work here.",
+     "choices": [
+      "used",
+      "use",
+      "was used"
+     ],
+     "answers": [
+      "used"
+     ]
+    },
+    {
+     "id": "gram-c03-2",
+     "type": "fill",
+     "ja": "以前はタバコを吸わなかった。",
+     "text": "I didn't ___ to smoke.",
+     "choices": [
+      "use",
+      "used",
+      "using"
+     ],
+     "answers": [
+      "use"
+     ]
+    },
+    {
+     "id": "gram-c03-3",
+     "type": "order",
+     "ja": "以前は教師でした。",
+     "tokens": [
+      "I",
+      "used",
+      "to",
+      "be",
+      "a",
+      "teacher"
+     ],
+     "answers": [
+      "I used to be a teacher."
+     ]
+    },
+    {
+     "id": "gram-c03-4",
+     "type": "order",
+     "ja": "以前ここに住んでいたのですか。",
+     "tokens": [
+      "Did",
+      "you",
+      "use",
+      "to",
+      "live",
+      "here"
+     ],
+     "answers": [
+      "Did you use to live here?"
+     ]
+    },
+    {
+     "id": "gram-c03-5",
+     "type": "rewrite",
+     "ja": "used to を使って1文にする。",
+     "from": "I played tennis a lot. I don't play now.",
+     "answers": [
+      "I used to play tennis a lot."
+     ]
+    },
+    {
+     "id": "gram-c03-6",
+     "type": "rewrite",
+     "ja": "used to を使って1文にする。",
+     "from": "He was shy before. He isn't shy now.",
+     "answers": [
+      "He used to be shy."
+     ]
+    },
+    {
+     "id": "gram-c03-7",
+     "type": "oral",
+     "ja": "以前は大阪に住んでいました。",
+     "answers": [
+      "I used to live in Osaka."
+     ]
+    },
+    {
+     "id": "gram-c03-8",
+     "type": "oral",
+     "ja": "以前は英語が苦手でした。",
+     "answers": [
+      "I used to be bad at English.",
+      "I used to be poor at English.",
+      "I used to be weak in English."
+     ]
+    },
+    {
+     "id": "gram-c03-9",
+     "type": "oral",
+     "ja": "この店は以前、もっと混んでいた。",
+     "answers": [
+      "This shop used to be more crowded.",
+      "This store used to be more crowded.",
+      "This shop used to be busier.",
+      "This store used to be busier."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "used to で、昔の自分と今の自分の違いを1文で言ってみましょう。",
+    "samples": [
+     "I used to hate speaking English.",
+     "I used to play soccer, but now I don't have time."
+    ],
+    "checks": [
+     "used to の後ろは動詞の原形にした",
+     "be動詞を付けなかった（be used to 〜ing と区別した）"
+    ]
+   }
+  },
+  {
+   "id": "c04",
+   "no": 68,
+   "title": "「…すぎて〜できない」「とても…なので〜」（too … to・so … that・enough）",
+   "stage": "CEFR B1：会話でよく使う形",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 44 too＋形容詞・副詞＋to 不定詞（B1.1）・45 so＋形容詞・副詞＋(that) 節（B1.1）・46 such (a/an)＋形容詞＋名詞（B1.2）・43 形容詞・副詞＋enough（B1.2）"
+    }
+   ],
+   "points": [
+    {
+     "text": "too＋形容詞＋to 〜 は「…すぎて〜できない」。",
+     "en": [
+      "I'm too tired to walk."
+     ],
+     "check": false
+    },
+    {
+     "text": "so＋形容詞＋that 〜 は「とても…なので〜」。that の後ろは「主語＋動詞」。",
+     "en": [
+      "It was so cold that I couldn't sleep."
+     ],
+     "check": false
+    },
+    {
+     "text": "名詞が入るときは such a＋形容詞＋名詞＋that 〜。",
+     "en": [
+      "It was such a hot day that we went swimming."
+     ],
+     "check": false
+    },
+    {
+     "text": "形容詞＋enough to 〜 は「〜できるほど十分…」。enough は形容詞の後ろに置きます。",
+     "en": [
+      "It's warm enough to swim."
+     ],
+     "check": false
+    },
+    {
+     "text": "too には「…すぎる（よくない）」という意味があります。ただ「とても」と言いたいときは very を使います。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I'm too tired to walk.",
+     "ja": "疲れすぎて歩けない。",
+     "source": "tatoeba",
+     "enId": 252981,
+     "jaId": 153151
+    },
+    {
+     "en": "I'm too busy to go.",
+     "ja": "私は忙しくて行けない。",
+     "source": "tatoeba",
+     "enId": 508781,
+     "jaId": 152820
+    },
+    {
+     "en": "It's too dark to see.",
+     "ja": "暗くて見えません。",
+     "source": "tatoeba",
+     "enId": 6553420,
+     "jaId": 11633887
+    },
+    {
+     "en": "It was so cold that I couldn't sleep.",
+     "ja": "とても寒かったので、私は眠れなかった。",
+     "source": "tatoeba",
+     "enId": 37816,
+     "jaId": 200615
+    },
+    {
+     "en": "The movie was so sad that everybody cried.",
+     "ja": "映画はとても悲しくて、だれもが泣いた。",
+     "source": "tatoeba",
+     "enId": 26461,
+     "jaId": 189313
+    },
+    {
+     "en": "It was such a hot day that we went swimming.",
+     "ja": "とても暑い日だったので僕たちは泳ぎに行った。",
+     "source": "tatoeba",
+     "enId": 37795,
+     "jaId": 200594
+    },
+    {
+     "en": "It's warm enough to swim.",
+     "ja": "泳ぐのには十分暖かい。",
+     "source": "tatoeba",
+     "enId": 26401,
+     "jaId": 189254
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "meaning",
+     "wrong": "This bag is too heavy.",
+     "intended": "このかばんはとても重い（けれど持てる）",
+     "right": "This bag is very heavy.",
+     "note": "too heavy は「重すぎる（持てない・よくない）」。ただ「とても重い」なら very。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-c04-1",
+     "type": "fill",
+     "ja": "疲れすぎて歩けない。",
+     "text": "I'm ___ tired to walk.",
+     "choices": [
+      "too",
+      "so",
+      "very"
+     ],
+     "answers": [
+      "too"
+     ]
+    },
+    {
+     "id": "gram-c04-2",
+     "type": "fill",
+     "ja": "とても寒かったので眠れなかった。",
+     "text": "It was ___ cold that I couldn't sleep.",
+     "choices": [
+      "so",
+      "too",
+      "such"
+     ],
+     "answers": [
+      "so"
+     ]
+    },
+    {
+     "id": "gram-c04-3",
+     "type": "fill",
+     "ja": "泳げるほど暖かい。",
+     "text": "It's warm ___ to swim.",
+     "choices": [
+      "enough",
+      "too",
+      "so"
+     ],
+     "answers": [
+      "enough"
+     ]
+    },
+    {
+     "id": "gram-c04-4",
+     "type": "order",
+     "ja": "忙しすぎて行けない。",
+     "tokens": [
+      "I'm",
+      "too",
+      "busy",
+      "to",
+      "go"
+     ],
+     "answers": [
+      "I'm too busy to go."
+     ]
+    },
+    {
+     "id": "gram-c04-5",
+     "type": "order",
+     "ja": "とても暑い日だったので、泳ぎに行った。",
+     "tokens": [
+      "It",
+      "was",
+      "such",
+      "a",
+      "hot",
+      "day",
+      "that",
+      "we",
+      "went",
+      "swimming"
+     ],
+     "answers": [
+      "It was such a hot day that we went swimming."
+     ]
+    },
+    {
+     "id": "gram-c04-6",
+     "type": "rewrite",
+     "ja": "too … to を使って1文にする。",
+     "from": "It's very dark. I can't see.",
+     "answers": [
+      "It's too dark to see.",
+      "It is too dark to see.",
+      "It's too dark for me to see."
+     ]
+    },
+    {
+     "id": "gram-c04-7",
+     "type": "rewrite",
+     "ja": "so … that を使って1文にする。",
+     "from": "The movie was very sad. Everybody cried.",
+     "answers": [
+      "The movie was so sad that everybody cried."
+     ]
+    },
+    {
+     "id": "gram-c04-8",
+     "type": "oral",
+     "ja": "忙しすぎてお昼を食べられなかった。",
+     "answers": [
+      "I was too busy to eat lunch.",
+      "I was too busy to have lunch."
+     ]
+    },
+    {
+     "id": "gram-c04-9",
+     "type": "oral",
+     "ja": "とても疲れていたので、すぐに寝た。",
+     "answers": [
+      "I was so tired that I went to bed soon.",
+      "I was so tired that I went to bed early.",
+      "I was so tired that I went to sleep right away."
+     ]
+    },
+    {
+     "id": "gram-c04-10",
+     "type": "oral",
+     "ja": "この部屋は会議ができるほど広い。",
+     "answers": [
+      "This room is big enough for a meeting.",
+      "This room is large enough for a meeting.",
+      "This room is big enough to have a meeting in."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "too … to か so … that で、最近の自分のことを1文で言ってみましょう。",
+    "samples": [
+     "I was too sleepy to study last night.",
+     "The meeting was so long that I got tired."
+    ],
+    "checks": [
+     "「…すぎて〜できない」は too … to にした",
+     "so … that の後ろは「主語＋動詞」にした"
+    ]
+   }
+  },
+  {
+   "id": "c05",
+   "no": 69,
+   "title": "比較の強調と変化（much better・more and more・less）",
+   "stage": "CEFR B1：会話でよく使う形",
+   "sources": [
+    {
+     "doc": "CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）",
+     "where": "項目 51 比較級の強調（much/far/even/a lot＋比較級）・49 比較級 and 比較級・42 less＋形容詞・副詞　CEFR-J レベル B1.1"
+    }
+   ],
+   "points": [
+    {
+     "text": "比較級を強めて「ずっと〜」は much・a lot・far＋比較級。very は使いません。",
+     "en": [
+      "I feel much better today."
+     ],
+     "check": false
+    },
+    {
+     "text": "even＋比較級は「さらに〜」。",
+     "en": [
+      "She is even more beautiful."
+     ],
+     "check": false
+    },
+    {
+     "text": "比較級 and 比較級で「ますます〜」。more を使う語は more and more＋形容詞。",
+     "en": [
+      "It's getting colder and colder.",
+      "He became more and more famous."
+     ],
+     "check": false
+    },
+    {
+     "text": "less＋形容詞は「より〜でない」。店で「もっと安いもの」を頼むときにも使えます。",
+     "en": [
+      "Do you have anything less expensive?"
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I feel much better today.",
+     "ja": "今日はずっと具合がいい。",
+     "source": "tatoeba",
+     "enId": 242702,
+     "jaId": 171772
+    },
+    {
+     "en": "You look much better.",
+     "ja": "前よりもずっと良さそうですね。",
+     "source": "tatoeba",
+     "enId": 273618,
+     "jaId": 140954
+    },
+    {
+     "en": "She's a lot better today.",
+     "ja": "彼女は今日はずっと具合がいい。",
+     "source": "tatoeba",
+     "enId": 1442227,
+     "jaId": 89988
+    },
+    {
+     "en": "She is even more beautiful.",
+     "ja": "彼女はさらにもっと美しい。",
+     "source": "tatoeba",
+     "enId": 310885,
+     "jaId": 92823
+    },
+    {
+     "en": "It's getting colder and colder.",
+     "ja": "だんだん寒くなってきている。",
+     "source": "tatoeba",
+     "enId": 40299,
+     "jaId": 203064
+    },
+    {
+     "en": "He became more and more famous.",
+     "ja": "彼はますます有名になった。",
+     "source": "tatoeba",
+     "enId": 292815,
+     "jaId": 110871
+    },
+    {
+     "en": "Do you have anything less expensive?",
+     "ja": "もっと安いものはありますか。",
+     "source": "tatoeba",
+     "enId": 30478,
+     "jaId": 193312
+    }
+   ],
+   "mistakes": [],
+   "exercises": [
+    {
+     "id": "gram-c05-1",
+     "type": "fill",
+     "ja": "今日はずっと気分がいい。",
+     "text": "I feel ___ better today.",
+     "choices": [
+      "much",
+      "very",
+      "more"
+     ],
+     "answers": [
+      "much"
+     ]
+    },
+    {
+     "id": "gram-c05-2",
+     "type": "fill",
+     "ja": "ますます寒くなってきている。",
+     "text": "It's getting colder and ___.",
+     "choices": [
+      "colder",
+      "cold",
+      "coldest"
+     ],
+     "answers": [
+      "colder"
+     ]
+    },
+    {
+     "id": "gram-c05-3",
+     "type": "fill",
+     "ja": "もっと安いものはありますか。",
+     "text": "Do you have anything ___ expensive?",
+     "choices": [
+      "less",
+      "least",
+      "fewer"
+     ],
+     "answers": [
+      "less"
+     ]
+    },
+    {
+     "id": "gram-c05-4",
+     "type": "order",
+     "ja": "彼はますます有名になった。",
+     "tokens": [
+      "He",
+      "became",
+      "more",
+      "and",
+      "more",
+      "famous"
+     ],
+     "answers": [
+      "He became more and more famous."
+     ]
+    },
+    {
+     "id": "gram-c05-5",
+     "type": "order",
+     "ja": "彼女はさらに美しい。",
+     "tokens": [
+      "She",
+      "is",
+      "even",
+      "more",
+      "beautiful"
+     ],
+     "answers": [
+      "She is even more beautiful."
+     ]
+    },
+    {
+     "id": "gram-c05-6",
+     "type": "rewrite",
+     "ja": "much を加えて「ずっと〜」にする。",
+     "from": "This plan is better.",
+     "answers": [
+      "This plan is much better."
+     ]
+    },
+    {
+     "id": "gram-c05-7",
+     "type": "rewrite",
+     "ja": "比較級 and 比較級で「ますます〜」にする。",
+     "from": "English is getting important.",
+     "answers": [
+      "English is getting more and more important."
+     ]
+    },
+    {
+     "id": "gram-c05-8",
+     "type": "oral",
+     "ja": "新しいやり方のほうがずっと速い。",
+     "answers": [
+      "The new way is much faster.",
+      "The new method is much faster.",
+      "The new way is a lot faster."
+     ]
+    },
+    {
+     "id": "gram-c05-9",
+     "type": "oral",
+     "ja": "仕事がますます忙しくなっている。",
+     "answers": [
+      "Work is getting busier and busier.",
+      "My work is getting busier and busier.",
+      "I'm getting busier and busier at work."
+     ]
+    },
+    {
+     "id": "gram-c05-10",
+     "type": "oral",
+     "ja": "この問題は思ったより、ずっと簡単だった。",
+     "answers": [
+      "This problem was much easier than I thought.",
+      "This problem was a lot easier than I thought.",
+      "This problem was much easier than I expected."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "much＋比較級か「比較級 and 比較級」で、自分の変化を1文で言ってみましょう。",
+    "samples": [
+     "My English is getting better and better.",
+     "I feel much more confident now."
+    ],
+    "checks": [
+     "比較級を強めるとき very ではなく much・a lot を使った"
+    ]
+   }
   }
  ]
 }

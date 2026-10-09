@@ -28,10 +28,11 @@ describe('文法の答え合わせ', () => {
 describe('文法のデータ（public/data/grammar.json）', () => {
   const data = JSON.parse(readFileSync('public/data/grammar.json', 'utf8')) as GrammarData
 
-  it('中学レベルの45項目（g01〜g45）のあとに高校の項目（h01〜）が続く。どの項目も4種類の問題があり、最後は口頭で即答、自分のことを1文の課題がある', () => {
+  it('中学レベルの45項目（g01〜g45）、高校の19項目（h01〜h19）、CEFR-J の項目（c01〜）の順。どの項目も4種類の問題があり、最後は口頭で即答、自分のことを1文の課題がある', () => {
     const ids = data.items.map((x) => x.id)
     expect(ids.slice(0, 45)).toEqual(Array.from({ length: 45 }, (_, i) => `g${String(i + 1).padStart(2, '0')}`))
-    expect(ids.slice(45)).toEqual(Array.from({ length: ids.length - 45 }, (_, i) => `h${String(i + 1).padStart(2, '0')}`))
+    expect(ids.slice(45, 64)).toEqual(Array.from({ length: 19 }, (_, i) => `h${String(i + 1).padStart(2, '0')}`))
+    expect(ids.slice(64)).toEqual(Array.from({ length: ids.length - 64 }, (_, i) => `c${String(i + 1).padStart(2, '0')}`))
     expect(data.items.map((x) => x.no)).toEqual(ids.map((_, i) => i + 1))
     for (const it of data.items) {
       expect(new Set(it.exercises.map((x) => x.type))).toEqual(new Set(['fill', 'order', 'rewrite', 'oral']))

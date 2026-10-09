@@ -114,6 +114,13 @@ const SOURCES: { name: string; use: string; license: string; url: string; note?:
     note: '出典：文部科学省「高等学校学習指導要領（平成30年告示）解説 外国語編 英語編」',
   },
   {
+    name: 'CEFR-J Grammar Profile 2025（東京外国語大学 投野由紀夫研究室）',
+    use: '文法の修行（高校より上の項目）の選び方と並び（項目ごとに CEFR-J のレベルと項目番号を表示）。文章は写さず、解説と問題はこのアプリで作成',
+    license: '配布元の条件：データを使う場合は出典を記載（誤りの保証はなし）',
+    url: 'https://www.cefr-j.org/download.html',
+    note: '出典：CEFR-J Grammar Profile 2025. 東京外国語大学 投野由紀夫研究室.',
+  },
+  {
     name: 'LanguageTool（PC の中で動かす版）',
     use: '文法の修行の自作の文・答え・✕の文の確認にだけ利用（文法の誤りの判定）。外部のサーバーには送っていません',
     license: 'LGPL 2.1',

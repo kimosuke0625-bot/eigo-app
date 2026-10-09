@@ -7,7 +7,8 @@ import { GRAM_PREFIX } from '../srs/deck'
  * 例文は Tatoeba の実在の文（英語を母語とする投稿者・日本語訳つき）。自作の文と答えは LanguageTool に通してある。
  * 問題は1問ずつ復習カードになる（語の id は gram-<項目>-<番号>。文法の束）。
  */
-export interface GrammarSource { doc: string; where: string; page: string }
+/** page は学習指導要領解説の頁（CEFR-J Grammar Profile のように頁のない資料では付けない） */
+export interface GrammarSource { doc: string; where: string; page?: string }
 export interface GrammarPoint { text: string; en?: string[]; check: boolean }
 export interface GrammarExample { en: string; ja?: string; source: 'tatoeba' | 'self'; enId?: number; jaId?: number }
 export type GrammarMistake =
