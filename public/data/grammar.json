@@ -10537,6 +10537,1245 @@
      "What の後は a＋形容詞＋名詞、How の後は形容詞・副詞にした"
     ]
    }
+  },
+  {
+   "id": "h01",
+   "no": 46,
+   "title": "「走ってくる」「驚いた様子だ」（come・look など＋分詞）",
+   "stage": "高校：文の形",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（ア）a（a）主語＋be動詞以外の動詞＋分詞",
+     "page": "35〜36"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｲ）a 主語＋be動詞以外の動詞＋形容詞（You look nice in that jacket.）",
+     "page": "40"
+    }
+   ],
+   "points": [
+    {
+     "text": "come・sit・stand・look・get などの動詞の後ろに分詞を置くと、主語がどんな様子かを表せます。",
+     "check": false
+    },
+    {
+     "text": "-ing（現在分詞）は「〜しながら」「〜している状態で」の意味です。",
+     "en": [
+      "He came running.",
+      "He sat reading a book."
+     ],
+     "check": false
+    },
+    {
+     "text": "過去分詞は「〜された状態」や気持ちを表します。",
+     "en": [
+      "He looked surprised.",
+      "I got lost."
+     ],
+     "check": false
+    },
+    {
+     "text": "気持ちを表す語は、人が主語なら -ed（surprised・tired・bored）を使います。-ing（surprising・boring）は「人をそういう気持ちにさせる」の意味です（修行場40）。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "The boy came running.",
+     "ja": "その少年は走ってやってきた。",
+     "source": "tatoeba",
+     "enId": 46318,
+     "jaId": 209057
+    },
+    {
+     "en": "A boy came running towards me.",
+     "ja": "少年が私に向かって駆けてきた。",
+     "source": "tatoeba",
+     "enId": 267930,
+     "jaId": 146550
+    },
+    {
+     "en": "He sat reading a book.",
+     "ja": "彼は座って本を読んでいた。",
+     "source": "tatoeba",
+     "enId": 296692,
+     "jaId": 106994
+    },
+    {
+     "en": "We stood talking for half an hour.",
+     "ja": "私たちは３０分立ち話をした。",
+     "source": "tatoeba",
+     "enId": 247825,
+     "jaId": 166677
+    },
+    {
+     "en": "He looked surprised.",
+     "ja": "彼は驚いた様子だった。",
+     "source": "tatoeba",
+     "enId": 2282917,
+     "jaId": 10495499
+    },
+    {
+     "en": "You look tired.",
+     "ja": "きみは疲れているようだ。",
+     "source": "tatoeba",
+     "enId": 63218,
+     "jaId": 225880
+    },
+    {
+     "en": "I got lost.",
+     "ja": "道に迷ってしまいました。",
+     "source": "tatoeba",
+     "enId": 280394,
+     "jaId": 123603
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "He came run.",
+     "right": "He came running.",
+     "note": "come の後ろで「〜しながら」を表すときは -ing の形にする。",
+     "proof": {
+      "kaisetsu": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編 p.36「The cows came running toward us.」",
+      "dictionary": "Wiktionary：running は run の participle・present",
+      "languageTool": []
+     }
+    },
+    {
+     "kind": "error",
+     "wrong": "She looked surprise.",
+     "right": "She looked surprised.",
+     "note": "「驚いた様子だ」は過去分詞の surprised を使う。",
+     "proof": {
+      "kaisetsu": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編 p.36「Naomi looked surprised to see me.」",
+      "dictionary": "Wiktionary：surprised は surprise の participle・past",
+      "languageTool": []
+     }
+    },
+    {
+     "kind": "meaning",
+     "wrong": "He looked surprising.",
+     "intended": "彼は驚いた様子だった",
+     "right": "He looked surprised.",
+     "note": "surprising は「人を驚かせるような」。He looked surprising. は「彼の見た目が驚くようなものだった」の意味になる。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h01-1",
+     "type": "fill",
+     "ja": "彼は走って部屋に入ってきた。",
+     "text": "He came ___ into the room.",
+     "choices": [
+      "running",
+      "run",
+      "ran"
+     ],
+     "answers": [
+      "running"
+     ]
+    },
+    {
+     "id": "gram-h01-2",
+     "type": "fill",
+     "ja": "彼女は驚いた様子だった。",
+     "text": "She looked ___.",
+     "choices": [
+      "surprised",
+      "surprising",
+      "surprise"
+     ],
+     "answers": [
+      "surprised"
+     ]
+    },
+    {
+     "id": "gram-h01-3",
+     "type": "fill",
+     "ja": "私たちは1時間座っておしゃべりをした。",
+     "text": "We sat ___ for an hour.",
+     "choices": [
+      "talking",
+      "talked",
+      "talk"
+     ],
+     "answers": [
+      "talking"
+     ]
+    },
+    {
+     "id": "gram-h01-4",
+     "type": "order",
+     "ja": "少年が私の方へ走ってきた。",
+     "tokens": [
+      "A",
+      "boy",
+      "came",
+      "running",
+      "toward",
+      "me"
+     ],
+     "answers": [
+      "A boy came running toward me."
+     ]
+    },
+    {
+     "id": "gram-h01-5",
+     "type": "order",
+     "ja": "彼はベンチに座って本を読んでいた。",
+     "tokens": [
+      "He",
+      "sat",
+      "on",
+      "the",
+      "bench",
+      "reading",
+      "a",
+      "book"
+     ],
+     "answers": [
+      "He sat on the bench reading a book.",
+      "He sat reading a book on the bench."
+     ]
+    },
+    {
+     "id": "gram-h01-6",
+     "type": "rewrite",
+     "ja": "came running を使って1文にする。",
+     "from": "The dog ran. It came to me.",
+     "answers": [
+      "The dog came running to me."
+     ]
+    },
+    {
+     "id": "gram-h01-7",
+     "type": "rewrite",
+     "ja": "looked を使って「疲れているように見えた」にする。",
+     "from": "He was tired.",
+     "answers": [
+      "He looked tired."
+     ]
+    },
+    {
+     "id": "gram-h01-8",
+     "type": "oral",
+     "ja": "みんな疲れているようです。",
+     "answers": [
+      "Everyone looks tired."
+     ]
+    },
+    {
+     "id": "gram-h01-9",
+     "type": "oral",
+     "ja": "彼はその知らせに驚いた様子でした。",
+     "answers": [
+      "He looked surprised at the news."
+     ]
+    },
+    {
+     "id": "gram-h01-10",
+     "type": "oral",
+     "ja": "子どもたちが走ってきた。",
+     "answers": [
+      "The children came running."
+     ]
+    },
+    {
+     "id": "gram-h01-11",
+     "type": "oral",
+     "ja": "会議の間、彼は退屈そうだった。",
+     "answers": [
+      "He looked bored during the meeting."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "look＋-ed の形で、最近の自分か周りの人の様子を1文で言ってみましょう。",
+    "samples": [
+     "My boss looked tired this morning.",
+     "I got lost on my way to the office."
+    ],
+    "checks": [
+     "人の気持ちや状態を表す語は -ed の形にした（tired・surprised など）"
+    ]
+   }
+  },
+  {
+   "id": "h02",
+   "no": 47,
+   "title": "「〜かどうか」（I wonder if 〜・ask 人 if 〜）",
+   "stage": "高校：文の形",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（ア）b（a）主語＋動詞＋if で始まる節、c（a）主語＋動詞＋間接目的語＋if で始まる節",
+     "page": "36"
+    }
+   ],
+   "points": [
+    {
+     "text": "「〜かどうか」は if（または whether）＋主語＋動詞。疑問文の語順にはしません。",
+     "en": [
+      "I don't know if he's a doctor."
+     ],
+     "check": false
+    },
+    {
+     "text": "I wonder if 〜 は「〜かな」「〜だろうか」。I don’t know if 〜 は「〜かどうか分からない」。",
+     "en": [
+      "I wonder if dinner is ready."
+     ],
+     "check": false
+    },
+    {
+     "text": "「人に〜かどうか聞く」は ask＋人＋if 〜。",
+     "en": [
+      "He asked me if I was busy."
+     ],
+     "check": false
+    },
+    {
+     "text": "asked のような過去の文では、if の中の動詞も過去形にそろえるのがふつうです（asked me if I was busy）。",
+     "check": false
+    },
+    {
+     "text": "この if は「もし〜なら」ではないので、先のことは if の中でも will を使います。",
+     "en": [
+      "I don't know if she will come."
+     ],
+     "check": false
+    },
+    {
+     "text": "仕事で丁寧に頼むときは I was wondering if you could 〜（〜していただけないでしょうか）をよく使います。",
+     "en": [
+      "I was wondering if you could help me."
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I wonder if it's true.",
+     "ja": "そうなのかな？",
+     "source": "tatoeba",
+     "enId": 3733583,
+     "jaId": 9865704
+    },
+    {
+     "en": "I wonder if dinner is ready.",
+     "ja": "夕食の準備はできてるかな。",
+     "source": "tatoeba",
+     "enId": 324621,
+     "jaId": 79096
+    },
+    {
+     "en": "I wonder if he's at home.",
+     "ja": "彼は在宅だろうか。",
+     "source": "tatoeba",
+     "enId": 296829,
+     "jaId": 106854
+    },
+    {
+     "en": "I don't know if she will come.",
+     "ja": "彼女が来るかどうかわからない。",
+     "source": "tatoeba",
+     "enId": 308536,
+     "jaId": 95170
+    },
+    {
+     "en": "I don't know if he's a doctor.",
+     "ja": "私は彼が医者であるかどうかわからない。",
+     "source": "tatoeba",
+     "enId": 1344202,
+     "jaId": 154527
+    },
+    {
+     "en": "He asked me if I was busy.",
+     "ja": "彼は私に忙しいかどうか尋ねた。",
+     "source": "tatoeba",
+     "enId": 297717,
+     "jaId": 105969
+    },
+    {
+     "en": "I asked Tom if we could meet.",
+     "ja": "会えるかどうかトムに聞いてみた。",
+     "source": "tatoeba",
+     "enId": 4599800,
+     "jaId": 11101227
+    }
+   ],
+   "mistakes": [],
+   "exercises": [
+    {
+     "id": "gram-h02-1",
+     "type": "fill",
+     "ja": "彼が来るかどうか分からない。",
+     "text": "I don't know ___ he will come.",
+     "choices": [
+      "if",
+      "that",
+      "what"
+     ],
+     "answers": [
+      "if"
+     ]
+    },
+    {
+     "id": "gram-h02-2",
+     "type": "fill",
+     "ja": "それは本当かな。",
+     "text": "I wonder ___ it is true.",
+     "choices": [
+      "if",
+      "that",
+      "so"
+     ],
+     "answers": [
+      "if"
+     ]
+    },
+    {
+     "id": "gram-h02-3",
+     "type": "order",
+     "ja": "彼は私に忙しいかどうか尋ねた。",
+     "tokens": [
+      "He",
+      "asked",
+      "me",
+      "if",
+      "I",
+      "was",
+      "busy"
+     ],
+     "answers": [
+      "He asked me if I was busy."
+     ]
+    },
+    {
+     "id": "gram-h02-4",
+     "type": "order",
+     "ja": "時間があるかどうか分からない。",
+     "tokens": [
+      "I",
+      "don't",
+      "know",
+      "if",
+      "I",
+      "will",
+      "have",
+      "time"
+     ],
+     "answers": [
+      "I don't know if I will have time."
+     ]
+    },
+    {
+     "id": "gram-h02-5",
+     "type": "rewrite",
+     "ja": "I wonder if で始めて書き直す。",
+     "from": "Is dinner ready?",
+     "answers": [
+      "I wonder if dinner is ready.",
+      "I wonder if dinner's ready."
+     ]
+    },
+    {
+     "id": "gram-h02-6",
+     "type": "rewrite",
+     "ja": "I asked her if で始めて書き直す。",
+     "from": "I said to her, \"Are you free?\"",
+     "answers": [
+      "I asked her if she was free."
+     ]
+    },
+    {
+     "id": "gram-h02-7",
+     "type": "oral",
+     "ja": "明日は雨が降るかな。",
+     "answers": [
+      "I wonder if it will rain tomorrow.",
+      "I wonder if it'll rain tomorrow."
+     ]
+    },
+    {
+     "id": "gram-h02-8",
+     "type": "oral",
+     "ja": "それが本当かどうか分かりません。",
+     "answers": [
+      "I don't know if it's true.",
+      "I don't know if it is true.",
+      "I don't know whether it's true."
+     ]
+    },
+    {
+     "id": "gram-h02-9",
+     "type": "oral",
+     "ja": "会議に出られるかどうか、彼に聞いてみます。",
+     "answers": [
+      "I'll ask him if he can come to the meeting.",
+      "I'll ask him if he can attend the meeting."
+     ]
+    },
+    {
+     "id": "gram-h02-10",
+     "type": "oral",
+     "ja": "手伝っていただけないでしょうか。（丁寧に）",
+     "answers": [
+      "I was wondering if you could help me."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "I wonder if 〜 か I don’t know if 〜 で、今気になっていることを1文で言ってみましょう。",
+    "samples": [
+     "I wonder if I can finish this report today.",
+     "I don't know if I'll have time this weekend."
+    ],
+    "checks": [
+     "if の後ろは「主語＋動詞」の順にした（疑問文の語順にしない）"
+    ]
+   }
+  },
+  {
+   "id": "h03",
+   "no": 48,
+   "title": "「〜しているのを見る」「〜してもらう」（動詞＋人・物＋分詞）",
+   "stage": "高校：文の形",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（ア）d（a）主語＋動詞＋目的語＋分詞",
+     "page": "36"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｳ）i 現在分詞や過去分詞の形容詞としての用法",
+     "page": "50"
+    }
+   ],
+   "points": [
+    {
+     "text": "主語＋動詞＋目的語＋分詞で、「目的語が〜している」「目的語が〜される」様子を表します。",
+     "check": false
+    },
+    {
+     "text": "see・hear・feel＋人・物＋-ing は「〜しているのを見る・聞く・感じる」。",
+     "en": [
+      "I saw him running.",
+      "I heard someone knocking."
+     ],
+     "check": false
+    },
+    {
+     "text": "keep＋人＋-ing は「〜させたままにする」。",
+     "en": [
+      "I'm sorry I kept you waiting."
+     ],
+     "check": false
+    },
+    {
+     "text": "have / get＋物＋過去分詞は「〜してもらう」。よくないことなら「〜される」。",
+     "en": [
+      "I had my watch fixed.",
+      "I had my wallet stolen."
+     ],
+     "check": false
+    },
+    {
+     "text": "目的語が「する」側なら -ing、「される」側なら過去分詞にします（時計は直される側なので fixed）。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I saw him running.",
+     "ja": "彼が走っているのを見た。",
+     "source": "tatoeba",
+     "enId": 283975,
+     "jaId": 119687
+    },
+    {
+     "en": "I heard someone knocking.",
+     "ja": "誰かがノックしているのが聞こえた。",
+     "source": "tatoeba",
+     "enId": 276124,
+     "jaId": 137112
+    },
+    {
+     "en": "I heard the telephone ringing.",
+     "ja": "電話がなっているのが聞こえた。",
+     "source": "tatoeba",
+     "enId": 279243,
+     "jaId": 124751
+    },
+    {
+     "en": "I'm sorry I kept you waiting.",
+     "ja": "待たせてごめん。",
+     "source": "tatoeba",
+     "enId": 3175056,
+     "jaId": 137945
+    },
+    {
+     "en": "I had my watch fixed.",
+     "ja": "時計を修理してもらった。",
+     "source": "tatoeba",
+     "enId": 258131,
+     "jaId": 150483
+    },
+    {
+     "en": "I got my hair cut.",
+     "ja": "髪を切ってもらったんだ。",
+     "source": "tatoeba",
+     "enId": 257883,
+     "jaId": 154611
+    },
+    {
+     "en": "I had my wallet stolen.",
+     "ja": "私はサイフを盗まれた。",
+     "source": "tatoeba",
+     "enId": 253854,
+     "jaId": 160666
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "I saw him ran.",
+     "right": "I saw him running.",
+     "note": "「〜しているのを見た」は see＋人＋-ing。過去形の ran は使わない。",
+     "proof": {
+      "kaisetsu": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編 p.36「I saw two men carrying a piano.」",
+      "dictionary": "Wiktionary：running は run の participle・present",
+      "languageTool": []
+     }
+    },
+    {
+     "kind": "meaning",
+     "wrong": "I fixed my watch.",
+     "intended": "（店で）時計を修理してもらった",
+     "right": "I had my watch fixed.",
+     "note": "I fixed my watch. は「自分で時計を直した」。人に頼んでしてもらったことは have＋物＋過去分詞で言う。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h03-1",
+     "type": "fill",
+     "ja": "誰かがドアをノックしているのが聞こえた。",
+     "text": "I heard someone ___ on the door.",
+     "choices": [
+      "knocking",
+      "knocked",
+      "to knock"
+     ],
+     "answers": [
+      "knocking"
+     ]
+    },
+    {
+     "id": "gram-h03-2",
+     "type": "fill",
+     "ja": "時計を修理してもらった。",
+     "text": "I had my watch ___.",
+     "choices": [
+      "fixed",
+      "fixing",
+      "fix"
+     ],
+     "answers": [
+      "fixed"
+     ]
+    },
+    {
+     "id": "gram-h03-3",
+     "type": "fill",
+     "ja": "お待たせしてすみません。",
+     "text": "I'm sorry I kept you ___.",
+     "choices": [
+      "waiting",
+      "waited",
+      "wait"
+     ],
+     "answers": [
+      "waiting"
+     ]
+    },
+    {
+     "id": "gram-h03-4",
+     "type": "order",
+     "ja": "彼が走っているのを見た。",
+     "tokens": [
+      "I",
+      "saw",
+      "him",
+      "running"
+     ],
+     "answers": [
+      "I saw him running."
+     ]
+    },
+    {
+     "id": "gram-h03-5",
+     "type": "order",
+     "ja": "私は髪を切ってもらった。",
+     "tokens": [
+      "I",
+      "got",
+      "my",
+      "hair",
+      "cut"
+     ],
+     "answers": [
+      "I got my hair cut."
+     ]
+    },
+    {
+     "id": "gram-h03-6",
+     "type": "rewrite",
+     "ja": "I saw で始めて1文にする。",
+     "from": "Tom was crying. I saw him.",
+     "answers": [
+      "I saw Tom crying.",
+      "I saw him crying."
+     ]
+    },
+    {
+     "id": "gram-h03-7",
+     "type": "rewrite",
+     "ja": "I had my wallet で始めて「財布を盗まれた」にする。",
+     "from": "Someone stole my wallet.",
+     "answers": [
+      "I had my wallet stolen."
+     ]
+    },
+    {
+     "id": "gram-h03-8",
+     "type": "oral",
+     "ja": "電話が鳴っているのが聞こえた。",
+     "answers": [
+      "I heard the phone ringing.",
+      "I heard the telephone ringing."
+     ]
+    },
+    {
+     "id": "gram-h03-9",
+     "type": "oral",
+     "ja": "お待たせしてすみません。",
+     "answers": [
+      "I'm sorry I kept you waiting.",
+      "Sorry I kept you waiting.",
+      "Sorry to keep you waiting."
+     ]
+    },
+    {
+     "id": "gram-h03-10",
+     "type": "oral",
+     "ja": "パソコンを修理してもらう必要がある。",
+     "answers": [
+      "I need to have my computer fixed.",
+      "I need to get my computer fixed.",
+      "I need to have my computer repaired.",
+      "I need to get my computer repaired."
+     ]
+    },
+    {
+     "id": "gram-h03-11",
+     "type": "oral",
+     "ja": "誰かが叫んでいるのが聞こえた。",
+     "answers": [
+      "I heard someone screaming.",
+      "I heard someone shouting."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "have / get＋物＋過去分詞で、最近してもらったこと（してもらいたいこと）を1文で言ってみましょう。",
+    "samples": [
+     "I had my hair cut last weekend.",
+     "I need to get my laptop repaired."
+    ],
+    "checks": [
+     "人にしてもらうことは過去分詞（cut・repaired など）にした"
+    ]
+   }
+  },
+  {
+   "id": "h04",
+   "no": 49,
+   "title": "「〜のようだ」（seem to 〜・It seems that 〜）",
+   "stage": "高校：文の形",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（ア）e（a）主語＋seem など＋to 不定詞、（b）It＋seem など＋that で始まる節",
+     "page": "36"
+    }
+   ],
+   "points": [
+    {
+     "text": "主語＋seem＋to＋動詞の原形で「〜するようだ」「〜らしい」。",
+     "en": [
+      "He seems to know us."
+     ],
+     "check": false
+    },
+    {
+     "text": "状態は seem to be＋形容詞・名詞。to be を省いて seem＋形容詞とも言えます。",
+     "en": [
+      "He seems to be happy.",
+      "It seems simple."
+     ],
+     "check": false
+    },
+    {
+     "text": "It seems that＋主語＋動詞でも、同じことを言えます。",
+     "en": [
+      "It seems that he's fine."
+     ],
+     "check": false
+    },
+    {
+     "text": "主語が he・she など1人・1つの現在の文は seems、過去の文は seemed です。",
+     "check": false
+    },
+    {
+     "text": "「〜があるようだ」は There seems to be 〜。仕事でよく使います。",
+     "en": [
+      "There seems to be a problem."
+     ],
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "He seems to know us.",
+     "ja": "彼は私たちを知っているようだ。",
+     "source": "tatoeba",
+     "enId": 297417,
+     "jaId": 237404
+    },
+    {
+     "en": "You seem to like fruit.",
+     "ja": "果物がお好きのようですね。",
+     "source": "tatoeba",
+     "enId": 23942,
+     "jaId": 186805
+    },
+    {
+     "en": "I seem to be lost.",
+     "ja": "道に迷ったようだ。",
+     "source": "tatoeba",
+     "enId": 280382,
+     "jaId": 123615
+    },
+    {
+     "en": "He seems to be happy.",
+     "ja": "彼は幸福であるようだ。",
+     "source": "tatoeba",
+     "enId": 296311,
+     "jaId": 107375
+    },
+    {
+     "en": "It seems simple.",
+     "ja": "簡単そうね。",
+     "source": "tatoeba",
+     "enId": 11121970,
+     "jaId": 11561244
+    },
+    {
+     "en": "It seems that he's fine.",
+     "ja": "彼は元気らしい。",
+     "source": "tatoeba",
+     "enId": 296049,
+     "jaId": 107636
+    },
+    {
+     "en": "It seems that she's happy.",
+     "ja": "彼女は幸せらしい。",
+     "source": "tatoeba",
+     "enId": 313581,
+     "jaId": 90133
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "error",
+     "wrong": "He seem to know us.",
+     "right": "He seems to know us.",
+     "note": "he の現在の文では seems。",
+     "proof": {
+      "kaisetsu": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編 p.36「John seems to know a lot about movies.」",
+      "dictionary": "Wiktionary：seems は seem の third-person・singular・present",
+      "languageTool": [
+       "HE_VERB_AGR：The pronoun 'He' is usually used with a third-person or a past tense verb."
+      ]
+     }
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h04-1",
+     "type": "fill",
+     "ja": "彼は私たちを知っているようだ。",
+     "text": "He ___ to know us.",
+     "choices": [
+      "seems",
+      "seem",
+      "seeming"
+     ],
+     "answers": [
+      "seems"
+     ]
+    },
+    {
+     "id": "gram-h04-2",
+     "type": "fill",
+     "ja": "彼女は幸せそうだ。",
+     "text": "It seems ___ she is happy.",
+     "choices": [
+      "that",
+      "to",
+      "if"
+     ],
+     "answers": [
+      "that"
+     ]
+    },
+    {
+     "id": "gram-h04-3",
+     "type": "order",
+     "ja": "道に迷ったようだ。",
+     "tokens": [
+      "I",
+      "seem",
+      "to",
+      "be",
+      "lost"
+     ],
+     "answers": [
+      "I seem to be lost."
+     ]
+    },
+    {
+     "id": "gram-h04-4",
+     "type": "order",
+     "ja": "彼は元気らしい。",
+     "tokens": [
+      "It",
+      "seems",
+      "that",
+      "he",
+      "is",
+      "fine"
+     ],
+     "answers": [
+      "It seems that he is fine."
+     ]
+    },
+    {
+     "id": "gram-h04-5",
+     "type": "rewrite",
+     "ja": "It seems that で始めて書き直す。",
+     "from": "He seems to be sick.",
+     "answers": [
+      "It seems that he is sick.",
+      "It seems that he's sick."
+     ]
+    },
+    {
+     "id": "gram-h04-6",
+     "type": "rewrite",
+     "ja": "He seems to で始めて書き直す。",
+     "from": "It seems that he knows the answer.",
+     "answers": [
+      "He seems to know the answer."
+     ]
+    },
+    {
+     "id": "gram-h04-7",
+     "type": "oral",
+     "ja": "彼は忙しいようです。",
+     "answers": [
+      "He seems to be busy.",
+      "He seems busy.",
+      "It seems that he is busy.",
+      "It seems that he's busy."
+     ]
+    },
+    {
+     "id": "gram-h04-8",
+     "type": "oral",
+     "ja": "その計画はうまくいっているようだ。",
+     "answers": [
+      "The plan seems to be working.",
+      "It seems that the plan is working."
+     ]
+    },
+    {
+     "id": "gram-h04-9",
+     "type": "oral",
+     "ja": "何か問題があるようです。",
+     "answers": [
+      "There seems to be a problem.",
+      "It seems that there is a problem."
+     ]
+    },
+    {
+     "id": "gram-h04-10",
+     "type": "oral",
+     "ja": "彼女はその仕事が好きなようだ。",
+     "answers": [
+      "She seems to like the job.",
+      "She seems to like her job."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "seem to 〜 で、職場や周りの人の様子を1文で言ってみましょう。",
+    "samples": [
+     "My manager seems to be very busy this week.",
+     "There seems to be a problem with the printer."
+    ],
+    "checks": [
+     "seem の後ろに動詞を続けるときは to＋動詞の原形にした",
+     "主語が1人・1つの現在の文は seems にした"
+    ]
+   }
+  },
+  {
+   "id": "h05",
+   "no": 50,
+   "title": "「〜するのを見る・聞く」（see・hear＋人・物＋動詞の原形）",
+   "stage": "高校：文の形",
+   "sources": [
+    {
+     "doc": "高等学校学習指導要領（平成30年告示）解説 外国語編 英語編",
+     "where": "第2章第1節 英語コミュニケーションⅠ 2(1)エ（イ）a 不定詞の用法（高等学校では新たに知覚動詞と共に用いる原形不定詞を扱う）",
+     "page": "38"
+    },
+    {
+     "doc": "中学校学習指導要領（平成29年告示）解説 外国語編",
+     "where": "第2章第2節 2(1)エ（ｲ）d（b）主語＋動詞＋目的語＋原形不定詞（I helped my father wash the car.）",
+     "page": "43"
+    }
+   ],
+   "points": [
+    {
+     "text": "see・watch・hear・feel＋人・物＋動詞の原形で「〜が…するのを見る・聞く・感じる」。to は付けません。",
+     "en": [
+      "I saw him go out.",
+      "I heard the door open."
+     ],
+     "check": false
+    },
+    {
+     "text": "動詞の原形は「始めから終わりまで全部」、-ing（修行場48）は「している途中」を表すことが多いです。",
+     "en": [
+      "I saw Tom play tennis.",
+      "I saw him running."
+     ],
+     "check": false
+    },
+    {
+     "text": "受け身の文にすると to が付きます（He was seen to enter the building.）。かたい言い方です。",
+     "check": false
+    }
+   ],
+   "examples": [
+    {
+     "en": "I saw him go out.",
+     "ja": "私は彼が出て行くのを見た。",
+     "source": "tatoeba",
+     "enId": 260083,
+     "jaId": 154458
+    },
+    {
+     "en": "I heard the door open.",
+     "ja": "戸が開く音が聞こえた。",
+     "source": "tatoeba",
+     "enId": 239918,
+     "jaId": 174551
+    },
+    {
+     "en": "I heard the bell ring.",
+     "ja": "私はベルが鳴るのを聞いた。",
+     "source": "tatoeba",
+     "enId": 255560,
+     "jaId": 158966
+    },
+    {
+     "en": "She heard him sing.",
+     "ja": "彼女は彼が歌うのを聞いた。",
+     "source": "tatoeba",
+     "enId": 887198,
+     "jaId": 1100774
+    },
+    {
+     "en": "I saw Tom play tennis.",
+     "ja": "私はトムがテニスをするのを見た。",
+     "source": "tatoeba",
+     "enId": 255277,
+     "jaId": 159247
+    },
+    {
+     "en": "We saw her dance.",
+     "ja": "私達は彼女のダンスを見た。",
+     "source": "tatoeba",
+     "enId": 249287,
+     "jaId": 151308
+    },
+    {
+     "en": "He was seen to enter the building.",
+     "ja": "彼が建物にはいるのが見られた。",
+     "source": "tatoeba",
+     "enId": 283578,
+     "jaId": 120430
+    }
+   ],
+   "mistakes": [
+    {
+     "kind": "meaning",
+     "wrong": "I saw him cross the street.",
+     "intended": "彼が通りを渡っている（途中の）ところを見た",
+     "right": "I saw him crossing the street.",
+     "note": "原形の cross は「渡り始めから渡り終わるまで見た」。途中の様子を言うときは -ing にする。"
+    }
+   ],
+   "exercises": [
+    {
+     "id": "gram-h05-1",
+     "type": "fill",
+     "ja": "彼が出て行くのを見た。",
+     "text": "I saw him ___ out.",
+     "choices": [
+      "go",
+      "to go",
+      "went"
+     ],
+     "answers": [
+      "go"
+     ]
+    },
+    {
+     "id": "gram-h05-2",
+     "type": "fill",
+     "ja": "ドアが開く音が聞こえた。",
+     "text": "I heard the door ___.",
+     "choices": [
+      "open",
+      "to open",
+      "opens"
+     ],
+     "answers": [
+      "open"
+     ]
+    },
+    {
+     "id": "gram-h05-3",
+     "type": "fill",
+     "ja": "彼女は彼が歌うのを聞いた。",
+     "text": "She heard him ___.",
+     "choices": [
+      "sing",
+      "to sing",
+      "sings"
+     ],
+     "answers": [
+      "sing"
+     ]
+    },
+    {
+     "id": "gram-h05-4",
+     "type": "order",
+     "ja": "私はトムがテニスをするのを見た。",
+     "tokens": [
+      "I",
+      "saw",
+      "Tom",
+      "play",
+      "tennis"
+     ],
+     "answers": [
+      "I saw Tom play tennis."
+     ]
+    },
+    {
+     "id": "gram-h05-5",
+     "type": "order",
+     "ja": "地面が揺れるのを感じた。",
+     "tokens": [
+      "I",
+      "felt",
+      "the",
+      "ground",
+      "shake"
+     ],
+     "answers": [
+      "I felt the ground shake."
+     ]
+    },
+    {
+     "id": "gram-h05-6",
+     "type": "rewrite",
+     "ja": "I heard で始め、動詞の原形を使って1文にする。",
+     "from": "The bell rang. I heard it.",
+     "answers": [
+      "I heard the bell ring."
+     ]
+    },
+    {
+     "id": "gram-h05-7",
+     "type": "rewrite",
+     "ja": "「渡っている途中」を表す -ing の形に書き直す。",
+     "from": "I saw him cross the street.",
+     "answers": [
+      "I saw him crossing the street."
+     ]
+    },
+    {
+     "id": "gram-h05-8",
+     "type": "oral",
+     "ja": "誰かが叫ぶのが聞こえた。",
+     "answers": [
+      "I heard someone shout.",
+      "I heard someone scream.",
+      "I heard someone shouting.",
+      "I heard someone screaming."
+     ]
+    },
+    {
+     "id": "gram-h05-9",
+     "type": "oral",
+     "ja": "彼が部屋に入るのを見ました。",
+     "answers": [
+      "I saw him enter the room.",
+      "I saw him come into the room.",
+      "I saw him go into the room."
+     ]
+    },
+    {
+     "id": "gram-h05-10",
+     "type": "oral",
+     "ja": "彼女がプレゼンをするのを聞いた。",
+     "answers": [
+      "I heard her give a presentation.",
+      "I heard her give the presentation."
+     ]
+    }
+   ],
+   "myself": {
+    "task": "見たり聞いたりしたことを、see / hear＋人＋動詞の原形で1文言ってみましょう。",
+    "samples": [
+     "I saw my colleague leave the office early.",
+     "I heard my neighbor play the piano last night."
+    ],
+    "checks": [
+     "to を付けずに動詞の原形にした"
+    ]
+   }
   }
  ]
 }

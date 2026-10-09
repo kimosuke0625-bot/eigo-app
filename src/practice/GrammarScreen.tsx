@@ -54,8 +54,8 @@ function GrammarMap({ data, onOpen, onReview, onExit }: { data: GrammarData; onO
   return (
     <div className="stack gram-map">
       <section className="card">
-        <h2 className="win-title"><PixelIcon name="scroll" size={20} /> 修行の地図（中学レベル）</h2>
-        <p className="muted">項目の並びは学習指導要領（小学校・中学校の外国語）の文法事項に沿っています。中学レベルの{data.items.length}項目です。</p>
+        <h2 className="win-title"><PixelIcon name="scroll" size={20} /> 修行の地図（中学・高校）</h2>
+        <p className="muted">項目の並びは学習指導要領（小学校・中学校・高等学校の外国語）の文法事項に沿っています。全部で{data.items.length}項目です。</p>
         <button className="btn block" disabled={due === 0} onClick={onReview}>文法の復習 {due > 0 ? `（${due}問）` : '（今日の分はありません）'}</button>
       </section>
       {stages.map((st) => (

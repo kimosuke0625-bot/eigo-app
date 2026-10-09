@@ -47,10 +47,12 @@ const squeeze = (s) => s.replace(/[\s　]+/g, '')
 const kaisetsu = {
   中: readFileSync(join(DATA, 'ref', 'mext', 'chu.txt'), 'utf8').split('\f'),
   小: readFileSync(join(DATA, 'ref', 'mext', 'sho.txt'), 'utf8').split('\f'),
+  // 高等学校学習指導要領（平成30年告示）解説 外国語編 英語編（文部科学省 https://www.mext.go.jp/content/1407073_09_1_2.pdf を pdftotext -enc UTF-8 -layout）
+  高: readFileSync(join(DATA, 'ref', 'mext', 'kou.txt'), 'utf8').split('\f'),
 }
 // basis の語句が、印刷された頁番号 page の頁にあるか（頁の中に、その番号が数字だけで書かれている）
 function findInKaisetsu(b) {
-  const pages = kaisetsu[b.doc.includes('中学校') ? '中' : '小']
+  const pages = kaisetsu[b.doc.includes('高等学校') ? '高' : b.doc.includes('中学校') ? '中' : '小']
   const want = squeeze(b.find)
   return pages.some((p) => squeeze(p).includes(want) && new RegExp(`(^|[^0-9０-９])${b.page}([^0-9０-９]|$)`).test(p.replace(/[\s　]+/g, ' ')))
 }
