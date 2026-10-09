@@ -152,10 +152,11 @@ function Lesson({ item, settings, onBack, onExercise }: { item: GrammarItem; set
   )
 }
 
-/** 解説：ポイント・例文・まちがいの例（✕ 文法の誤り／△ 意味が違う）・出典・疑問の記録 */
+/** 解説：ポイント・例文・まちがいの例（✕ 文法の誤り／△ 正式な場面では避ける／△ 意味が違う）・出典・疑問の記録 */
 function Explanation({ item, settings }: { item: GrammarItem; settings: Settings }) {
   const points = item.points.filter((p) => settings.grammarShowUnverified || !p.check)
   const errors = item.mistakes.filter((m) => m.kind === 'error')
+  const informals = item.mistakes.filter((m) => m.kind === 'informal')
   const meanings = item.mistakes.filter((m) => m.kind === 'meaning')
   return (
     <>
@@ -188,15 +189,33 @@ function Explanation({ item, settings }: { item: GrammarItem; settings: Settings
       {errors.length > 0 && (
         <section className="card gram-mistakes">
           <h3><span className="mark-x">✕</span> 文法の誤り</h3>
-          <p className="muted">英語として誤りの文です。どれも LanguageTool（文法チェック）が誤りと判定し、正しい形を辞書（Wiktionary）で確かめました。</p>
+          <p className="muted">英語として誤りの文です。どれも、正しい形を学習指導要領解説（文部科学省）の例文・説明と辞書（Wiktionary）の両方で確かめました。</p>
           {errors.map((m) => m.kind === 'error' && (
             <div className="gram-mistake" key={m.wrong}>
               <p><span className="mark-x">✕</span> <s lang="en">{m.wrong}</s></p>
               <p><span className="mark-o">○</span> <span lang="en">{m.right}</span></p>
               <p className="muted">{m.note}</p>
               <details><summary>確かめた方法</summary>
-                <p className="muted">LanguageTool：{m.proof.languageTool.join(' ／ ')}</p>
+                <p className="muted">解説：{m.proof.kaisetsu}</p>
                 <p className="muted">{m.proof.dictionary}</p>
+                <p className="muted">文法チェック（LanguageTool、参考）：{m.proof.languageTool.length ? m.proof.languageTool.join(' ／ ') : '検出なし'}</p>
+              </details>
+            </div>
+          ))}
+        </section>
+      )}
+      {informals.length > 0 && (
+        <section className="card gram-mistakes">
+          <h3><span className="mark-tri">△</span> 正式な場面では避ける</h3>
+          <p className="muted">くだけた会話では母語話者も言うことがありますが、標準的な英語ではありません。自分で話すとき・書くときは ○ の形を使いましょう。</p>
+          {informals.map((m) => m.kind === 'informal' && (
+            <div className="gram-mistake" key={m.wrong}>
+              <p><span className="mark-tri">△</span> <span lang="en">{m.wrong}</span></p>
+              <p><span className="mark-o">○</span> <span lang="en">{m.right}</span></p>
+              <p className="muted">{m.note}</p>
+              <details><summary>確かめた方法</summary>
+                <p className="muted">{m.proof.dictionary}</p>
+                <p className="muted">{m.proof.spoken}</p>
               </details>
             </div>
           ))}

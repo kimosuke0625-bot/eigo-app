@@ -23,8 +23,8 @@ export default [
       { tatoeba: 2248503, en: 'Is there time?' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'There is two books on the desk.', right: 'There are two books on the desk.', note: '2つ以上なら are。', dict: { lemma: 'be', pos: 'verb', form: 'are', tags: ['plural', 'present'] } },
-      { kind: 'error', wrong: 'There are a cat under the table.', right: 'There is a cat under the table.', note: '1つなら is。', dict: { lemma: 'be', pos: 'verb', form: 'is', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'informal', wrong: "There's two books on the desk.", right: 'There are two books on the desk.', note: '会話では、後ろが複数でも There’s と言うことがとても多い（短い形のときだけ。There is two … とはあまり言わない）。正式な場面や書くときは There are を使う。', dict: { lemma: 'is', pos: 'verb', label: 'colloquial', gloss: 'existential there' }, spoken: { wrong: "there's two", wrongCount: 15383, right: 'there are two', rightCount: 24029 } },
+      { kind: 'error', wrong: 'There are a cat under the table.', right: 'There is a cat under the table.', note: '1つなら is。', basis: { doc: 中, page: '43', find: "There is an old tree in front of my house." }, dict: { lemma: 'be', pos: 'verb', form: 'is', tags: ['third-person', 'singular', 'present'] } },
       { kind: 'meaning', wrong: 'There is my bag on the desk.', intended: '私のかばんは机の上にあります', right: 'My bag is on the desk.', note: 'There is my bag は「ほら、私のかばんがあった」のような言い方になる。分かっているものの場所は 主語＋be動詞＋場所。' },
     ],
     exercises: [
@@ -180,7 +180,7 @@ export default [
       { tatoeba: 2549460, en: 'Tom made me cry.' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'Let me to try.', right: 'Let me try.', note: 'let の後ろの動詞には to を付けない。', dict: { lemma: 'let', pos: 'verb', gloss: 'usually without to' } },
+      { kind: 'error', wrong: 'Let me to try.', right: 'Let me try.', note: 'let の後ろの動詞には to を付けない。', basis: { doc: 中, page: '43', find: "Will you let me try?" }, dict: { lemma: 'let', pos: 'verb', gloss: 'usually without to' } },
       { kind: 'meaning', wrong: 'I made him go home early.', intended: '（彼が帰りたがっていたので）早く帰らせてあげた', right: 'I let him go home early.', note: 'make は「（いやでも）させる」、let は「（したいように）させてあげる」。' },
     ],
     exercises: [
@@ -223,7 +223,7 @@ export default [
       { tatoeba: 33579, en: 'We went to the park, and we played there.' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'I like coffee but she like tea.', right: 'I like coffee but she likes tea.', note: 'つないだ後の文も、主語に合わせて動詞の形を決める。', dict: { lemma: 'like', pos: 'verb', form: 'likes', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'error', wrong: 'I like coffee but she like tea.', right: 'I like coffee but she likes tea.', note: 'つないだ後の文も、主語に合わせて動詞の形を決める。', basis: { doc: 中, page: '38', find: "She likes Chinese food." }, dict: { lemma: 'like', pos: 'verb', form: 'likes', tags: ['third-person', 'singular', 'present'] } },
       { kind: 'meaning', wrong: "I'm busy, but I can't go.", intended: '忙しいので行けません', right: "I'm busy, so I can't go.", note: 'but は反対の内容をつなぐ。理由と結果は so でつなぐ。' },
     ],
     exercises: [
@@ -266,7 +266,7 @@ export default [
       { tatoeba: 26859, en: 'When it rains, she feels blue.' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'If it will rain tomorrow, I will stay home.', right: 'If it rains tomorrow, I will stay home.', note: 'if のまとまりの中は、これからのことでも現在形。', dict: { lemma: 'rain', pos: 'verb', form: 'rains', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'error', wrong: 'If it will rain tomorrow, I will stay home.', right: 'If it rains tomorrow, I will stay home.', note: 'if のまとまりの中は、これからのことでも現在形。', basis: { doc: 中, page: '42', find: "If you want water, I will give you some." }, dict: { lemma: 'rain', pos: 'verb', form: 'rains', tags: ['third-person', 'singular', 'present'] } },
       { kind: 'meaning', wrong: "If I get home, I'll call you.", intended: '家に着いたら電話するね', right: "When I get home, I'll call you.", note: 'if だと「もし家に着けたら」のように、着くかどうか分からない感じになる。' },
     ],
     exercises: [
@@ -310,7 +310,7 @@ export default [
       { tatoeba: 25162, en: 'I wonder what happened.' },
     ],
     mistakes: [
-      { kind: 'error', wrong: "I think he don't know.", right: "I think he doesn't know.", note: 'that のまとまりの中も、主語に合わせて形を決める。', dict: { lemma: 'do', pos: 'verb', form: 'does', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'informal', wrong: "I think he don't know.", right: "I think he doesn't know.", note: '主語が he・she などのとき、くだけた会話で don’t と言う母語話者もいるが、標準的な英語では doesn’t。正式な場面や書くときは doesn’t を使う。', dict: { lemma: "don't", pos: 'verb', label: 'nonstandard', gloss: 'Does not.' }, spoken: { wrong: "he don't", wrongCount: 27341, right: "he doesn't", rightCount: 257198 } },
     ],
     exercises: [
       { type: 'fill', ja: '彼の言うとおりだと思います。', text: 'I think ___ he is right.', choices: ['that', 'what', 'it'], answers: ['that'] },
@@ -383,7 +383,7 @@ export default [
       { tatoeba: 28662, en: "I'm sorry I can't go." },
     ],
     mistakes: [
-      { kind: 'error', wrong: "I'm sure he come.", right: "I'm sure he comes.", note: 'that のまとまりの中も、主語に合わせて形を決める。', dict: { lemma: 'come', pos: 'verb', form: 'comes', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'error', wrong: "I'm sure he come.", right: "I'm sure he comes.", note: 'that のまとまりの中も、主語に合わせて形を決める。', basis: { doc: 中, page: '37', find: "Mary will have lunch before she comes." }, dict: { lemma: 'come', pos: 'verb', form: 'comes', tags: ['third-person', 'singular', 'present'] } },
     ],
     exercises: [
       { type: 'fill', ja: '気に入ってもらえてうれしいです。', text: "I'm ___ you like it.", choices: ['glad', 'sad', 'angry'], answers: ['glad'] },

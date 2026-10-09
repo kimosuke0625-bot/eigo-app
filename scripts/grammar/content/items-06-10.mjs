@@ -27,8 +27,8 @@ export default [
       { tatoeba: 26170, en: 'Can you speak English?' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'She can swims.', right: 'She can swim.', note: 'can の後ろは動詞の原形（swims は -s の付いた形）。', dict: { lemma: 'swim', pos: 'verb', form: 'swims', tags: ['third-person', 'singular', 'present'] } },
-      { kind: 'error', wrong: 'He can speaks English.', right: 'He can speak English.', note: 'can の後ろは動詞の原形。', dict: { lemma: 'speak', pos: 'verb', form: 'speaks', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'error', wrong: 'She can swims.', right: 'She can swim.', note: 'can の後ろは動詞の原形（swims は -s の付いた形）。', basis: { doc: 中, page: '39', find: "She can swim fast." }, dict: { lemma: 'swim', pos: 'verb', form: 'swims', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'error', wrong: 'He can speaks English.', right: 'He can speak English.', note: 'can の後ろは動詞の原形。', basis: { doc: 中, page: '37', find: "She can play baseball well." }, dict: { lemma: 'speak', pos: 'verb', form: 'speaks', tags: ['third-person', 'singular', 'present'] } },
       { kind: 'meaning', wrong: "I can't speak English.", intended: '英語はあまり上手ではありません', right: "I can't speak English very well.", note: 'I can’t speak English. は「英語がまったく話せない」と聞こえる。少しは話せるなら very well を付ける。' },
     ],
     exercises: [
@@ -119,9 +119,9 @@ export default [
       { tatoeba: 2302, en: 'Whose is this?' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'Him is my brother.', right: 'He is my brother.', note: '主語（〜は）には he を使う。him は「彼を・彼に」。', dict: { lemma: 'him', pos: 'pron', gloss: 'he as a grammatical object' } },
-      { kind: 'error', wrong: 'Its my car.', right: "It's my car.", note: '「それは〜です」は it’s（it is）。its は「それの」。', dict: { lemma: 'its', pos: 'det', gloss: 'Belonging to it.' } },
-      { kind: 'error', wrong: 'These is my books.', right: 'These are my books.', note: 'these（複数）には are を使う。', dict: { lemma: 'be', pos: 'verb', form: 'are', tags: ['plural', 'present'] } },
+      { kind: 'error', wrong: 'Him is my brother.', right: 'He is my brother.', note: '主語（〜は）には he を使う。him は「彼を・彼に」。', basis: { doc: 中, page: '44', find: "She is cool." }, dict: { lemma: 'him', pos: 'pron', gloss: 'he as a grammatical object' } },
+      { kind: 'error', wrong: 'Its my car.', right: "It's my car.", note: '「それは〜です」は it’s（it is）。its は「それの」。', basis: { doc: 中, page: '38', find: "Itʼs my idea." }, dict: { lemma: 'its', pos: 'det', gloss: 'Belonging to it.' } },
+      { kind: 'error', wrong: 'These is my books.', right: 'These are my books.', note: 'these（複数）には are を使う。', basis: { doc: 中, page: '45', find: "These are the pictures that Masaki painted in the country." }, dict: { lemma: 'be', pos: 'verb', form: 'are', tags: ['plural', 'present'] } },
     ],
     exercises: [
       { type: 'fill', ja: 'これは彼女のかばんです。', text: 'This is ___ bag.', choices: ['her', 'she', 'hers'], answers: ['her'] },
@@ -167,9 +167,9 @@ export default [
       { tatoeba: 26044, en: 'The station is nearby.' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'I have two brother.', right: 'I have two brothers.', note: '2人以上は複数形にする。', dict: { lemma: 'brother', pos: 'noun', form: 'brothers', tags: ['plural'] } },
-      { kind: 'error', wrong: 'I want an book.', right: 'I want a book.', note: 'an は母音の音で始まる語の前だけ。', dict: { lemma: 'an', pos: 'article', gloss: 'Used before a vowel sound.' } },
-      { kind: 'error', wrong: 'I have a apple.', right: 'I have an apple.', note: 'apple は母音の音で始まるので an。', dict: { lemma: 'an', pos: 'article', gloss: 'Used before a vowel sound.' } },
+      { kind: 'error', wrong: 'I have two brother.', right: 'I have two brothers.', note: '2人以上は複数形にする。', basis: { doc: 中, page: '46', find: "There are seven days in a week." }, dict: { lemma: 'brother', pos: 'noun', form: 'brothers', tags: ['plural'] } },
+      { kind: 'error', wrong: 'I want an book.', right: 'I want a book.', note: 'an は母音の音で始まる語の前だけ。', basis: { doc: 中, page: '37', find: "I want a new ball." }, dict: { lemma: 'an', pos: 'article', gloss: 'Used before a vowel sound.' } },
+      { kind: 'error', wrong: 'I have a apple.', right: 'I have an apple.', note: 'apple は母音の音で始まるので an。', basis: { doc: 中, page: '43', find: "There is an old tree in front of my house." }, dict: { lemma: 'an', pos: 'article', gloss: 'Used before a vowel sound.' } },
     ],
     exercises: [
       { type: 'fill', ja: '私には子どもが3人います。', text: 'I have three ___.', choices: ['children', 'childs', 'child'], answers: ['children'] },
@@ -213,8 +213,8 @@ export default [
       { tatoeba: 253217, en: "I'm from Australia." },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'See you in Monday.', right: 'See you on Monday.', note: '曜日には on を使う。', dict: { lemma: 'on', pos: 'prep', gloss: 'At or during the date or day of.' } },
-      { kind: 'error', wrong: 'We met in Monday.', right: 'We met on Monday.', note: '曜日には on を使う。', dict: { lemma: 'on', pos: 'prep', gloss: 'At or during the date or day of.' } },
+      { kind: 'error', wrong: 'See you in Monday.', right: 'See you on Monday.', note: '曜日には on を使う。', basis: { doc: 中, page: '46', find: "On Tuesdays he goes to a swimming club." }, dict: { lemma: 'on', pos: 'prep', gloss: 'At or during the date or day of.' } },
+      { kind: 'error', wrong: 'We met in Monday.', right: 'We met on Monday.', note: '曜日には on を使う。', basis: { doc: 中, page: '46', find: "On Tuesdays he goes to a swimming club." }, dict: { lemma: 'on', pos: 'prep', gloss: 'At or during the date or day of.' } },
       { kind: 'meaning', wrong: "I'll finish it in two hours.", intended: '2時間以内に終えます', right: "I'll finish it within two hours.", note: 'in two hours は「2時間後に」の意味でも使われる。「以内」をはっきり言うなら within。' },
     ],
     exercises: [

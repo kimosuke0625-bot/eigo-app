@@ -23,7 +23,7 @@ export default [
       { tatoeba: 61716, en: 'How long have you been here?' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'I have lived here since ten years.', right: 'I have lived here for ten years.', note: '期間には for を使う。since は始まった時。', dict: { lemma: 'for', pos: 'prep', gloss: 'Over (a period of time).' } },
+      { kind: 'error', wrong: 'I have lived here since ten years.', right: 'I have lived here for ten years.', note: '期間には for を使う。since は始まった時。', basis: { doc: 中, page: '47', find: "He has lived in London for two years." }, dict: { lemma: 'for', pos: 'prep', gloss: 'Over (a period of time).' } },
       { kind: 'meaning', wrong: 'I lived here for ten years.', intended: '（今も）ここに10年住んでいます', right: 'I have lived here for ten years.', note: '過去形の lived だと「10年住んでいた（今は住んでいない）」の意味になる。' },
     ],
     exercises: [
@@ -63,8 +63,8 @@ export default [
       { tatoeba: 69241, en: 'Have you ever eaten turkey?' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'I have saw that movie.', right: 'I have seen that movie.', note: 'have の後ろは過去分詞（saw は過去形）。', dict: { lemma: 'see', pos: 'verb', form: 'seen', tags: ['participle', 'past'] } },
-      { kind: 'error', wrong: 'Have you ever eat sushi?', right: 'Have you ever eaten sushi?', note: 'have の後ろは過去分詞。', dict: { lemma: 'eat', pos: 'verb', form: 'eaten', tags: ['participle', 'past'] } },
+      { kind: 'error', wrong: 'I have saw that movie.', right: 'I have seen that movie.', note: 'have の後ろは過去分詞（saw は過去形）。', basis: { doc: 中, page: '47', find: "I have played this game more than twenty times." }, dict: { lemma: 'see', pos: 'verb', form: 'seen', tags: ['participle', 'past'] } },
+      { kind: 'error', wrong: 'Have you ever eat sushi?', right: 'Have you ever eaten sushi?', note: 'have の後ろは過去分詞。', basis: { doc: 中, page: '47', find: "I have played this game more than twenty times." }, dict: { lemma: 'eat', pos: 'verb', form: 'eaten', tags: ['participle', 'past'] } },
       { kind: 'meaning', wrong: 'I have gone to Kyoto.', intended: '京都に行ったことがあります', right: 'I have been to Kyoto.', note: 'have gone to は「行ってしまった（今ここにいない）」の意味でよく使われる。経験は have been to がふつう。' },
     ],
     exercises: [
@@ -104,7 +104,7 @@ export default [
       { tatoeba: 32719, en: "I haven't decided yet." },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'He has went home.', right: 'He has gone home.', note: 'have / has の後ろは過去分詞（went は過去形）。', dict: { lemma: 'go', pos: 'verb', form: 'gone', tags: ['participle', 'past'] } },
+      { kind: 'error', wrong: 'He has went home.', right: 'He has gone home.', note: 'have / has の後ろは過去分詞（went は過去形）。', basis: { doc: 中, page: '47', find: "He has lived in London for two years." }, dict: { lemma: 'go', pos: 'verb', form: 'gone', tags: ['participle', 'past'] } },
       { kind: 'meaning', wrong: 'I lost my key.', intended: '鍵をなくしてしまった（今も見つからなくて困っている）', right: "I've lost my key.", note: '過去形の lost だけでは、今も見つかっていないのかは分からない。今の状態まで伝えるなら現在完了。' },
     ],
     exercises: [
@@ -217,7 +217,9 @@ export default [
       { tatoeba: 11015473, en: "That's the bus that goes to the station." },
       { tatoeba: 322912, en: 'Nagoya is a city which is famous for its castle.' },
     ],
-    mistakes: [],
+    mistakes: [
+      { kind: 'error', wrong: 'I have a friend who live in Osaka.', right: 'I have a friend who lives in Osaka.', note: 'who の後ろの動詞は、前の名詞（a friend＝1人）に合わせる。現在の文なので lives。', basis: { doc: 中, page: '45', find: "The animal which runs the fastest is the cheetah." }, dict: { lemma: 'live', pos: 'verb', form: 'lives', tags: ['third-person', 'singular', 'present'] } },
+    ],
     exercises: [
       { type: 'fill', ja: '私には銀行で働いている友人がいます。', text: 'I have a friend ___ works at a bank.', choices: ['who', 'which', 'he'], answers: ['who'] },
       { type: 'fill', ja: 'これは京都へ行く電車です。', text: 'This is the train ___ goes to Kyoto.', choices: ['that', 'who', 'where'], answers: ['that'] },
@@ -292,8 +294,6 @@ export default [
       { tatoeba: 72810, en: 'Both are alive.' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'I have a few money.', right: 'I have a little money.', note: 'money は数えない名詞なので a little。', dict: { lemma: 'little', pos: 'det', gloss: 'only a small amount (of)' } },
-      { kind: 'error', wrong: 'Every students has a computer.', right: 'Every student has a computer.', note: 'every の後ろは単数形。', dict: { lemma: 'every', pos: 'det', gloss: 'All of a countable group (considered individually)' } },
       { kind: 'meaning', wrong: 'I have little time.', intended: '少しは時間があります', right: 'I have a little time.', note: 'little だけだと「時間がほとんどない」の意味になる。' },
     ],
     exercises: [

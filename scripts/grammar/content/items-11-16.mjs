@@ -26,7 +26,7 @@ export default [
       { tatoeba: 16492, en: 'What are you doing?' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'I am study English.', right: 'I am studying English.', note: 'be動詞の後ろは -ing 形にする。', dict: { lemma: 'study', pos: 'verb', form: 'studying', tags: ['participle', 'present'] } },
+      { kind: 'error', wrong: 'I am study English.', right: 'I am studying English.', note: 'be動詞の後ろは -ing 形にする。', basis: { doc: 中, page: '47', find: "My mother is talking on the phone." }, dict: { lemma: 'study', pos: 'verb', form: 'studying', tags: ['participle', 'present'] } },
       { kind: 'meaning', wrong: "I'm working at a bank.", intended: '（ずっと）銀行に勤めています', right: 'I work at a bank.', note: '進行形にすると「今のところ・一時的に」の感じが出ることがある。勤め先をふつうに言うなら現在形。' },
     ],
     exercises: [
@@ -71,10 +71,10 @@ export default [
       { tatoeba: 2245260, en: 'Did you win?' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'I goed to Tokyo.', right: 'I went to Tokyo.', note: 'go の過去形は went（不規則）。', dict: { lemma: 'go', pos: 'verb', form: 'went', tags: ['past'] } },
-      { kind: 'error', wrong: 'He buyed a car.', right: 'He bought a car.', note: 'buy の過去形は bought（不規則）。', dict: { lemma: 'buy', pos: 'verb', form: 'bought', tags: ['past'] } },
-      { kind: 'error', wrong: "I didn't went there.", right: "I didn't go there.", note: 'didn’t の後ろは原形（went は過去形）。', dict: { lemma: 'go', pos: 'verb', form: 'went', tags: ['past'] } },
-      { kind: 'error', wrong: 'Did you saw him?', right: 'Did you see him?', note: 'Did の文では動詞は原形（saw は過去形）。', dict: { lemma: 'see', pos: 'verb', form: 'saw', tags: ['past'] } },
+      { kind: 'error', wrong: 'I goed to Tokyo.', right: 'I went to Tokyo.', note: 'go の過去形は went（不規則）。', basis: { doc: 中, page: '39', find: "I went to Okinawa." }, dict: { lemma: 'go', pos: 'verb', form: 'went', tags: ['past'] } },
+      { kind: 'error', wrong: 'He buyed a car.', right: 'He bought a car.', note: 'buy の過去形は bought（不規則）。', basis: { doc: 中, page: '44', find: "Yuki bought a doll that had large beautiful eyes." }, dict: { lemma: 'buy', pos: 'verb', form: 'bought', tags: ['past'] } },
+      { kind: 'error', wrong: "I didn't went there.", right: "I didn't go there.", note: 'didn’t の後ろは原形（went は過去形）。', basis: { doc: 中, page: '37', find: "I didnʼt go out because it was raining." }, dict: { lemma: 'go', pos: 'verb', form: 'went', tags: ['past'] } },
+      { kind: 'error', wrong: 'Did you saw him?', right: 'Did you see him?', note: 'Did の文では動詞は原形（saw は過去形）。', basis: { doc: 中, page: '37', find: "I didnʼt go out because it was raining." }, dict: { lemma: 'see', pos: 'verb', form: 'saw', tags: ['past'] } },
       { kind: 'meaning', wrong: 'I lived in Osaka.', intended: '（今も）大阪に住んでいます', right: 'I live in Osaka.', note: '過去形にすると「前は住んでいた（今は住んでいない）」と受け取られる。' },
     ],
     exercises: [
@@ -115,7 +115,7 @@ export default [
       { tatoeba: 2247533, en: 'I was working.' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'They was working.', right: 'They were working.', note: 'they（複数）には were を使う。', dict: { lemma: 'be', pos: 'verb', form: 'were', tags: ['past', 'plural'] } },
+      { kind: 'informal', wrong: 'They was working.', right: 'They were working.', note: '地域によっては、くだけた会話で they was と言う母語話者もいるが、標準的な英語では were。正式な場面や書くときは were を使う。', dict: { lemma: 'be', pos: 'verb', form: 'was', tags: ['dialectal', 'past', 'plural'] }, spoken: { wrong: 'they was', wrongCount: 10431, right: 'they were', rightCount: 497822 } },
       { kind: 'meaning', wrong: 'I watched TV when you called.', intended: '電話をもらったとき、（ちょうど）テレビを見ていました', right: 'I was watching TV when you called.', note: '過去形の watched だと「電話をもらってから見た」とも受け取られる。途中だった動作は過去進行形。' },
     ],
     exercises: [
@@ -156,8 +156,8 @@ export default [
       { tatoeba: 25927, en: "We're going to the theater." },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'It will rains tomorrow.', right: 'It will rain tomorrow.', note: 'will の後ろは動詞の原形。', dict: { lemma: 'rain', pos: 'verb', form: 'rains', tags: ['third-person', 'singular', 'present'] } },
-      { kind: 'error', wrong: "I'm going to went.", right: "I'm going to go.", note: 'going to の後ろは原形（went は過去形）。', dict: { lemma: 'go', pos: 'verb', form: 'went', tags: ['past'] } },
+      { kind: 'error', wrong: 'It will rains tomorrow.', right: 'It will rain tomorrow.', note: 'will の後ろは動詞の原形。', basis: { doc: 中, page: '47', find: "I will take that yellow shirt." }, dict: { lemma: 'rain', pos: 'verb', form: 'rains', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'error', wrong: "I'm going to went.", right: "I'm going to go.", note: 'going to の後ろは原形（went は過去形）。', basis: { doc: 中, page: '47', find: "We are going to play basketball after school." }, dict: { lemma: 'go', pos: 'verb', form: 'went', tags: ['past'] } },
     ],
     exercises: [
       { type: 'fill', ja: '明日は雨が降るでしょう。', text: 'It ___ rain tomorrow.', choices: ['will', 'is', 'does'], answers: ['will'] },
@@ -203,9 +203,9 @@ export default [
       { tatoeba: 40654, en: 'You must not smoke.' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'You should went.', right: 'You should go.', note: '助動詞の後ろは動詞の原形（went は過去形）。', dict: { lemma: 'go', pos: 'verb', form: 'went', tags: ['past'] } },
-      { kind: 'error', wrong: 'He have to work.', right: 'He has to work.', note: 'he には has to を使う。', dict: { lemma: 'have', pos: 'verb', form: 'has', tags: ['third-person', 'singular', 'present'] } },
-      { kind: 'error', wrong: "She don't have to go.", right: "She doesn't have to go.", note: 'she には doesn’t を使う。', dict: { lemma: 'do', pos: 'verb', form: 'does', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'error', wrong: 'You should went.', right: 'You should go.', note: '助動詞の後ろは動詞の原形（went は過去形）。', basis: { doc: 中, page: '43', find: "You should keep this room clean." }, dict: { lemma: 'go', pos: 'verb', form: 'went', tags: ['past'] } },
+      { kind: 'error', wrong: 'He have to work.', right: 'He has to work.', note: 'he には has to を使う。', basis: { doc: 中, page: '37', find: "Bill has a lot of CDs" }, dict: { lemma: 'have', pos: 'verb', form: 'has', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'informal', wrong: "She don't have to go.", right: "She doesn't have to go.", note: '主語が he・she などのとき、くだけた会話で don’t と言う母語話者もいるが、標準的な英語では doesn’t。正式な場面や書くときは doesn’t を使う。', dict: { lemma: "don't", pos: 'verb', label: 'nonstandard', gloss: 'Does not.' }, spoken: { wrong: "she don't", wrongCount: 14045, right: "she doesn't", rightCount: 138595 } },
       { kind: 'meaning', wrong: 'You must not come tomorrow.', intended: '明日は来なくてもいいですよ', right: "You don't have to come tomorrow.", note: 'must not は「来てはいけない」（禁止）。「しなくてよい」は don’t have to。' },
     ],
     exercises: [
@@ -251,7 +251,7 @@ export default [
       { tatoeba: 1080170, en: 'Coffee or tea?' },
     ],
     mistakes: [
-      { kind: 'error', wrong: "Who's bag is this?", right: 'Whose bag is this?', note: '「誰の」は whose。who’s は who is。', dict: { lemma: 'whose', pos: 'det', gloss: 'Of whom, belonging to whom' } },
+      { kind: 'error', wrong: "Who's bag is this?", right: 'Whose bag is this?', note: '「誰の」は whose。who’s は who is。', basis: { doc: 中, page: '38', find: "Whose idea is this?" }, dict: { lemma: 'whose', pos: 'det', gloss: 'Of whom, belonging to whom' } },
       { kind: 'meaning', wrong: '"Would you like tea or coffee?" "Yes."', intended: '紅茶をお願いします', right: '"Would you like tea or coffee?" "Tea, please."', note: 'どちらかを選ぶ疑問文に Yes と答えても、どちらがほしいか伝わらない。' },
     ],
     exercises: [

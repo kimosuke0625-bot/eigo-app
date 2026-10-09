@@ -260,9 +260,9 @@ export default [
       { tatoeba: 268199, en: 'Laughter is the best medicine.' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'He is more taller than his brother.', right: 'He is taller than his brother.', note: 'taller だけで比較級。more は付けない。', dict: { lemma: 'tall', pos: 'adj', form: 'taller', tags: ['comparative'] } },
-      { kind: 'error', wrong: 'This is the most biggest.', right: 'This is the biggest.', note: 'biggest だけで最上級。most は付けない。', dict: { lemma: 'big', pos: 'adj', form: 'biggest', tags: ['superlative'] } },
-      { kind: 'error', wrong: 'She is tall than her sister.', right: 'She is taller than her sister.', note: 'than の前は比較級にする。', dict: { lemma: 'tall', pos: 'adj', form: 'taller', tags: ['comparative'] } },
+      { kind: 'error', wrong: 'He is more taller than his brother.', right: 'He is taller than his brother.', note: 'taller だけで比較級。more は付けない。', basis: { doc: 中, page: '48', find: "tall - taller - tallest" }, dict: { lemma: 'tall', pos: 'adj', form: 'taller', tags: ['comparative'] } },
+      { kind: 'error', wrong: 'This is the most biggest.', right: 'This is the biggest.', note: 'biggest だけで最上級。most は付けない。', basis: { doc: 中, page: '48', find: "Satoshi is the fastest runner in his class." }, dict: { lemma: 'big', pos: 'adj', form: 'biggest', tags: ['superlative'] } },
+      { kind: 'error', wrong: 'She is tall than her sister.', right: 'She is taller than her sister.', note: 'than の前は比較級にする。', basis: { doc: 中, page: '48', find: "Masashi is two years younger than David." }, dict: { lemma: 'tall', pos: 'adj', form: 'taller', tags: ['comparative'] } },
     ],
     exercises: [
       { type: 'fill', ja: 'この案はあの案より安い。', text: 'This plan is ___ than that one.', choices: ['cheaper', 'cheap', 'cheapest'], answers: ['cheaper'] },
@@ -340,10 +340,10 @@ export default [
       { tatoeba: 252429, en: 'I was born in 1960.' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'English is speak in Canada.', right: 'English is spoken in Canada.', note: '受け身は be動詞＋過去分詞。', dict: { lemma: 'speak', pos: 'verb', form: 'spoken', tags: ['participle', 'past'] } },
-      { kind: 'error', wrong: 'The book was wrote by him.', right: 'The book was written by him.', note: 'write の過去分詞は written（wrote は過去形）。', dict: { lemma: 'write', pos: 'verb', form: 'written', tags: ['participle', 'past'] } },
-      { kind: 'error', wrong: 'He was invite to the party.', right: 'He was invited to the party.', note: 'be動詞の後ろは過去分詞。', dict: { lemma: 'invite', pos: 'verb', form: 'invited', tags: ['participle', 'past'] } },
-      { kind: 'error', wrong: "I'm interesting in music.", right: "I'm interested in music.", note: '「（人が）興味がある」は interested。interesting は「（物事が）おもしろい」。', dict: { lemma: 'interest', pos: 'verb', form: 'interested', tags: ['participle', 'past'] } },
+      { kind: 'error', wrong: 'English is speak in Canada.', right: 'English is spoken in Canada.', note: '受け身は be動詞＋過去分詞。', basis: { doc: 中, page: '51', find: "Judo is enjoyed by many people in the world." }, dict: { lemma: 'speak', pos: 'verb', form: 'spoken', tags: ['participle', 'past'] } },
+      { kind: 'error', wrong: 'The book was wrote by him.', right: 'The book was written by him.', note: 'write の過去分詞は written（wrote は過去形）。', basis: { doc: 中, page: '50', find: "This is a book written by Soseki." }, dict: { lemma: 'write', pos: 'verb', form: 'written', tags: ['participle', 'past'] } },
+      { kind: 'error', wrong: 'He was invite to the party.', right: 'He was invited to the party.', note: 'be動詞の後ろは過去分詞。', basis: { doc: 中, page: '51', find: "This machine was made in France." }, dict: { lemma: 'invite', pos: 'verb', form: 'invited', tags: ['participle', 'past'] } },
+      { kind: 'error', wrong: "I'm interesting in music.", right: "I'm interested in music.", note: '「（人が）興味がある」は interested。interesting は「（物事が）おもしろい」。', basis: { doc: 中, page: '49', find: "We are excited to meet you again." }, dict: { lemma: 'interest', pos: 'verb', form: 'interested', tags: ['participle', 'past'] } },
     ],
     exercises: [
       { type: 'fill', ja: 'この車はドイツで作られました。', text: 'This car was ___ in Germany.', choices: ['made', 'make', 'making'], answers: ['made'] },

@@ -3,7 +3,11 @@
 // 確かめること（1つでも通らなければ書き出さずに止まる）：
 // - Tatoeba の例文：番号の文が実在し、英文が一致し、英語を母語とする投稿者の文で、日本語訳があること
 // - 正しい英文（自作の例文、解説の英文、○の文、△の文、問題の答え・手本、自分のことの見本）：LanguageTool（PC の中で動かす）で指摘がないこと
-// - ✕ の文：LanguageTool が誤りと判定し、かつ dict の形が Wiktionary の活用形にあること（判定の記録をデータに残す）
+// - ✕ の文（2026-10-09 から利用者の決めた基準）：学習指導要領解説と辞書の両方で確かめられる典型的な誤りだけ。
+//   basis の語句（正しい形を示す解説の例文・説明）が解説の本文（eigo-data/ref/mext の chu.txt・sho.txt）のその頁にあること、
+//   かつ dict の形・語義が Wiktionary にあること。LanguageTool の判定は参考として記録する（検出しなくてもよい）
+// - △（正式な場面では避ける）の文：くだけた会話では母語話者も使う言い方。Wiktionary が口語・非標準・方言などの札を付けて載せていること。
+//   映画字幕での回数（spoken）も記録する
 // - 並べ替え：認める答えがすべて、示す語をちょうど1回ずつ使っていること
 // - 穴埋め：答えが選択肢にあること。各項目の最後の問題が「口頭で即答」であること
 // 必要なもの：eigo-data/work/tatoeba-en.tsv、eigo-data/work/grammar-forms.json（scripts/grammar/forms.mjs）、
@@ -38,6 +42,19 @@ for (const l of readFileSync(join(DATA, 'work', 'tatoeba-en.tsv'), 'utf8').split
 // Wiktionary の活用形
 const forms = JSON.parse(readFileSync(join(DATA, 'work', 'grammar-forms.json'), 'utf8'))
 
+// 学習指導要領解説の本文（頁は改頁文字で区切られている。空白・改行を除いて照らし合わせる）
+const squeeze = (s) => s.replace(/[\s　]+/g, '')
+const kaisetsu = {
+  中: readFileSync(join(DATA, 'ref', 'mext', 'chu.txt'), 'utf8').split('\f'),
+  小: readFileSync(join(DATA, 'ref', 'mext', 'sho.txt'), 'utf8').split('\f'),
+}
+// basis の語句が、印刷された頁番号 page の頁にあるか（頁の中に、その番号が数字だけで書かれている）
+function findInKaisetsu(b) {
+  const pages = kaisetsu[b.doc.includes('中学校') ? '中' : '小']
+  const want = squeeze(b.find)
+  return pages.some((p) => squeeze(p).includes(want) && new RegExp(`(^|[^0-9０-９])${b.page}([^0-9０-９]|$)`).test(p.replace(/[\s　]+/g, ' ')))
+}
+
 // 文の正規化（並べ替えの語の比べ方。大文字小文字・文末の記号は問わない）
 const words = (s) => s.toLowerCase().replace(/[’‘]/g, "'").replace(/[.?!,]/g, ' ').split(/\s+/).filter(Boolean)
 
@@ -50,7 +67,7 @@ for (const it of items) {
   for (const e of it.examples) if (!e.tatoeba) addGood(e.en, `${it.id} 例文`)
   for (const m of it.mistakes) {
     if (m.kind === 'error') bad.set(m.wrong, `${it.id} ✕`)
-    else addGood(m.wrong, `${it.id} △`)
+    else if (m.kind === 'meaning') addGood(m.wrong, `${it.id} △`)
     addGood(m.right, `${it.id} ○`)
   }
   it.exercises.forEach((x, i) => {
@@ -93,11 +110,8 @@ goodList.forEach((s, i) => {
   // 人名などのつづりの指摘（Ziri など）は Tatoeba の例文では起きないので、自作の文では誤りとして扱う
   if (checked[i].length) fail(good.get(s).join('・'), `LanguageTool の指摘「${s}」：${checked[i].map((m) => `${m.rule} ${m.message}`).join(' / ')}`)
 })
-badList.forEach((s, i) => {
-  const r = checked[goodList.length + i]
-  if (!r.length) fail(bad.get(s), `✕ の文を LanguageTool が誤りと判定しない「${s}」（✕ にできない）`)
-  ltBad.set(s, r)
-})
+// ✕ の文の LanguageTool の判定は参考として残す（検出しない典型的な誤りがあるため、✕ にする条件にはしない）
+badList.forEach((s, i) => ltBad.set(s, checked[goodList.length + i]))
 
 // 項目ごとに確かめて、アプリのデータにする
 const outItems = items.map((it, n) => {
@@ -112,7 +126,29 @@ const outItems = items.map((it, n) => {
   }).filter(Boolean)
 
   const mistakes = it.mistakes.map((m) => {
-    if (m.kind !== 'error') return m
+    if (m.kind === 'meaning') return m
+    if (m.kind === 'informal') {
+      // 口語・非標準などの札：活用形の札（form と tags）か、札の付いた語義（label と gloss）
+      const d = m.dict
+      const entry = forms[`${d.lemma}|${d.pos}`] ?? { forms: [], labeled: [] }
+      let dictionary
+      if (d.gloss) {
+        const hit = (entry.labeled ?? []).find((s) => s.tags.includes(d.label) && s.gloss.includes(d.gloss))
+        if (!hit) fail(it.id, `辞書で確かめられない：${d.lemma}（${d.pos}）に札 ${d.label} の語義「${d.gloss}」がない`)
+        dictionary = `Wiktionary：${d.lemma}（${d.pos}）の語義「${d.gloss}」に札「${d.label}」`
+      } else {
+        if (!entry.forms.some((f) => f.form === d.form && d.tags.every((t) => f.tags.includes(t)))) fail(it.id, `辞書で確かめられない：${d.lemma} の ${d.tags.join(' ')} が ${d.form}`)
+        dictionary = `Wiktionary：${d.form} は ${d.lemma} の ${d.tags.join('・')}`
+      }
+      const s = m.spoken
+      if (!(s?.wrongCount > 0 && s?.rightCount > 0)) fail(it.id, `△（正式な場面では避ける）に字幕の回数がない「${m.wrong}」`)
+      return { kind: 'informal', wrong: m.wrong, right: m.right, note: m.note, proof: { dictionary, spoken: `映画字幕（OpenSubtitles 英語）：「${s.wrong}」${s.wrongCount.toLocaleString()}回、「${s.right}」${s.rightCount.toLocaleString()}回` } }
+    }
+    if (m.kind !== 'error') { fail(it.id, `まちがいの種類が不明：${m.kind}`); return m }
+    // 解説の該当箇所（正しい形を示す例文・説明）
+    const b = m.basis
+    if (!b || !findInKaisetsu(b)) fail(it.id, `解説で確かめられない「${m.wrong}」：${b ? `p.${b.page}に「${b.find}」がない` : 'basis がない'}`)
+    const kaisetsuNote = b ? `${b.doc} p.${b.page}「${b.find}」` : ''
     // 辞書の確かめ方は2つ：活用形（form と tags）か、語義の説明（gloss の文字列がその見出しの説明にある）
     const d = m.dict
     const entry = forms[`${d.lemma}|${d.pos}`] ?? { forms: [], glosses: [] }
@@ -125,7 +161,7 @@ const outItems = items.map((it, n) => {
       dictionary = `Wiktionary：${d.form} は ${d.lemma} の ${d.tags.join('・')}`
     }
     const lt = ltBad.get(m.wrong) ?? []
-    return { ...m, proof: { languageTool: lt.map((x) => `${x.rule}：${x.message}`), dictionary } }
+    return { kind: 'error', wrong: m.wrong, right: m.right, note: m.note, proof: { kaisetsu: kaisetsuNote, dictionary, languageTool: lt.map((x) => `${x.rule}：${x.message}`) } }
   })
 
   const exercises = it.exercises.map((x, i) => {

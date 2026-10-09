@@ -241,7 +241,11 @@ SPEC（設計図）第11章の開発フェーズを、決まったことに合�
 
 ### フェーズ9の進め方の決定（利用者 2026-10-09）
 - 最初の5項目（be動詞〜疑問詞）だけを作って公開し、止まる。利用者が中身と使い心地を確かめてから残りを作る。
-- まちがいの例は2種類に分けて表示する：✕＝文法として誤り（LanguageTool が誤りと判定し、かつ正しい形を Wiktionary で確かめたものだけ）、△＝文法的には正しいが、言いたいことと意味が違う。
+- まちがいの例は3種類に分けて表示する（2026-10-09 利用者が基準を決定。案1＋条件）：
+  - ✕＝文法として誤り。学習指導要領解説と辞書の両方で確かめられる典型的な誤りだけ。解説は、正しい形を示す例文・説明の頁と語句を記録し、build.mjs が解説の本文（eigo-data/ref/mext）のその頁にあるかを照らし合わせる。辞書は Wiktionary の活用形か語義。LanguageTool の判定は参考として記録する（検出しない典型的な誤りがあるため、条件にはしない）。
+  - △「正式な場面では避ける」＝くだけた会話では母語話者も実際に使う言い方。✕ にはしない。Wiktionary が口語・非標準・方言などの札を付けて載せ、かつ映画字幕（OpenSubtitles 英語）で正しい形の1%以上の回数があるもの。回数を記録して表示する。
+  - △「意味が違う」＝文法的には正しいが、言いたいことと意味が違う。
+  - 判断に迷う文は使わない。LanguageTool は自作の正しい文の確認に引き続き使う。
 - 解説は学習指導要領解説の該当箇所と照らし、項目ごとに出典（解説の章・節・頁）を記録して表示する。確信が持てない説明は書かない。書く場合は「要確認」の印を付け、初期設定では表示しない。
 - 例文は Tatoeba の実在の文（英語を母語とする投稿者・日本語訳つき）を優先し、自作の文は LanguageTool に通す。
 - 並べ替えと言い換えは、認める答えをすべて用意し、根拠のない答えは正解にしない。「自分の答えも正しいと思う」で記録できる。
@@ -270,7 +274,17 @@ SPEC（設計図）第11章の開発フェーズを、決まったことに合�
 - 確かめた数：自作の文・答え・手本など983文は LanguageTool の指摘なし。✕の文53文は、すべて LanguageTool が誤りと判定し、正しい形または語義を Wiktionary で確かめた。
 - 辞書の確かめ方は2通り：活用形（plays は play の三人称単数現在 など）と語義の説明（an は「Used before a vowel sound.」など）。
 - 名詞の複数形と冠詞（修行場9）は、指導要領の文法事項に独立の項目がない（例文の中で使われている）。その旨を出典欄に書いた。
-- LanguageTool が誤りと判定しない典型的な誤り（Are you like coffee? / I don't know what is his name. / I have finished it yesterday. / I have a friend who live in Osaka. など）と、LanguageTool は判定するが辞書で確かめられないもの（I enjoy to swim. / I want go home. など）は ✕ として載せていない。扱いは利用者に質問中。
+- LanguageTool が誤りと判定しない典型的な誤り（Are you like coffee? / I don't know what is his name. / I have finished it yesterday. / I have a friend who live in Osaka. など）と、LanguageTool は判定するが辞書で確かめられないもの（I enjoy to swim. / I want go home. など）は、いったん ✕ として載せなかった。
+
+### ✕ の基準の見直し（2026-10-09。利用者の決定：案1＋条件1〜5）
+- 問題420問（穴埋め・並べ替え・言い換え・口頭）には ✕ の文は使っていない。✕ が出るのは各項目の「まちがいの例」だけなので、そこの ✕ 53文を見直した。
+- ✕ のまま（解説の頁・語句と辞書で確認）：45文。
+- △「正式な場面では避ける」へ：5文。He don't like fish.／She don't have to go.／I think he don't know.（字幕で he don't は he doesn't の約11%）、They was working.（約2%、方言）、There is two books … は会話でよく使う There's two books … に替えて △（there are two の約64%）。
+- 外した：3文。He watchs TV every night.（-es の付け方を示す例が解説にない）、I have a few money.／Every students has a computer.（few・every の使い方を示す例が解説にない）。
+- ✕ に加えた（LanguageTool は検出しないが、解説と辞書で確かめられる）：4文。My father go to work by train.（修行場3）、Where you live?／What time you get up?（修行場5。辞書の do の語義「疑問文で使う」）、I have a friend who live in Osaka.（修行場41）。
+- △「意味が違う」に加えた：Are you like coffee?（文法上は「コーヒーに似ていますか」になるので ✕ ではなく △。修行場4）。
+- 載せないまま：I have finished it yesterday.（現在完了と過去の時を表す語を一緒に使わないことを示す箇所が解説にない）、I don't know what is his name.（辞書で語順を確かめられない）、I enjoy to swim.／I want go home.（辞書の語義に後ろの形の説明がない）、I am live in Tokyo.（辞書で確かめる方法がない）。
+- 字幕で ✕ のままにしたもの（正しい形の1%未満）：has went 0.2%、have saw 0.3%、we is 0.1%、goed・buyed・more taller・most biggest はほぼ0。
 
 ### フェーズ10以降：文法（高校・大学・ビジネス）
 - 高校は高等学校学習指導要領（外国語）の文法事項に沿わせる。

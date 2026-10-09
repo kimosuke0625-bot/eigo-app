@@ -3,7 +3,8 @@
 // - sources：学習指導要領解説の該当箇所（印刷された頁）
 // - points：解説。check: true は確信が持てない説明（要確認。初期設定では表示しない）
 // - examples：tatoeba は Tatoeba の文の番号と英文（番号と英文が一致するか確かめる）。self は自作（LanguageTool に通す）
-// - mistakes：error は文法として誤り（✕。LanguageTool が誤りと判定し、かつ dict の形が Wiktionary にあることを確かめる）、
+// - mistakes：error は文法として誤り（✕。basis＝正しい形を示す解説の頁と語句、dict＝Wiktionary の形・語義の両方で確かめる）、
+//             informal はくだけた会話では母語話者も使う言い方（△ 正式な場面では避ける。dict＝Wiktionary の札、spoken＝映画字幕の回数）、
 //             meaning は文法的には正しいが言いたいことと意味が違う（△）
 // - exercises：fill（穴埋め。choices から選ぶ）、order（並べ替え。answers は認める語順をすべて）、
 //              rewrite（言い換え。answers は認める答えをすべて）、oral（口頭で即答。answers は手本）。各項目の最後は oral
@@ -40,8 +41,8 @@ export default [
       { tatoeba: 26044, en: 'The station is nearby.' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'She are a teacher.', right: 'She is a teacher.', note: 'she（1人）には is を使う。', dict: { lemma: 'be', pos: 'verb', form: 'is', tags: ['third-person', 'singular', 'present'] } },
-      { kind: 'error', wrong: 'We is hungry.', right: 'We are hungry.', note: 'we（複数）には are を使う。', dict: { lemma: 'be', pos: 'verb', form: 'are', tags: ['plural', 'present'] } },
+      { kind: 'error', wrong: 'She are a teacher.', right: 'She is a teacher.', note: 'she（1人）には is を使う。', basis: { doc: 中, page: '44', find: "She is cool." }, dict: { lemma: 'be', pos: 'verb', form: 'is', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'error', wrong: 'We is hungry.', right: 'We are hungry.', note: 'we（複数）には are を使う。', basis: { doc: 中, page: '46', find: "We are tired and sleepy." }, dict: { lemma: 'be', pos: 'verb', form: 'are', tags: ['plural', 'present'] } },
       { kind: 'meaning', wrong: "I'm in Tokyo.", intended: '東京に住んでいます', right: 'I live in Tokyo.', note: 'I’m in Tokyo. は「今、東京にいます」。住んでいることは一般動詞 live で言う。' },
     ],
     exercises: [
@@ -137,10 +138,10 @@ export default [
       { tatoeba: 37185, en: 'Tom likes swimming.' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'He play tennis.', right: 'He plays tennis.', note: 'he の現在の文では -s を付ける。', dict: { lemma: 'play', pos: 'verb', form: 'plays', tags: ['third-person', 'singular', 'present'] } },
-      { kind: 'error', wrong: 'She have a car.', right: 'She has a car.', note: 'have は has になる。', dict: { lemma: 'have', pos: 'verb', form: 'has', tags: ['third-person', 'singular', 'present'] } },
-      { kind: 'error', wrong: 'He studys English.', right: 'He studies English.', note: '「子音字＋y」は y を i に変えて -es。', dict: { lemma: 'study', pos: 'verb', form: 'studies', tags: ['third-person', 'singular', 'present'] } },
-      { kind: 'error', wrong: 'He watchs TV every night.', right: 'He watches TV every night.', note: 'ch で終わる語は -es。', dict: { lemma: 'watch', pos: 'verb', form: 'watches', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'error', wrong: 'He play tennis.', right: 'He plays tennis.', note: 'he の現在の文では -s を付ける。', basis: { doc: 中, page: '46', find: "On Tuesdays he goes to a swimming club." }, dict: { lemma: 'play', pos: 'verb', form: 'plays', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'error', wrong: 'She have a car.', right: 'She has a car.', note: 'have は has になる。', basis: { doc: 中, page: '37', find: "Bill has a lot of CDs" }, dict: { lemma: 'have', pos: 'verb', form: 'has', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'error', wrong: 'He studys English.', right: 'He studies English.', note: '「子音字＋y」は y を i に変えて -es。', basis: { doc: 中, page: '49', find: "My sister studies hard to enter college." }, dict: { lemma: 'study', pos: 'verb', form: 'studies', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'error', wrong: 'My father go to work by train.', right: 'My father goes to work by train.', note: 'my father（1人）の現在の文では、go に -es を付けて goes。', basis: { doc: 中, page: '46', find: "On Tuesdays he goes to a swimming club." }, dict: { lemma: 'go', pos: 'verb', form: 'goes', tags: ['third-person', 'singular', 'present'] } },
     ],
     exercises: [
       { type: 'fill', ja: '父は電車で通勤しています。', text: 'My father ___ to work by train.', choices: ['go', 'goes', 'gos'], answers: ['goes'] },
@@ -189,9 +190,10 @@ export default [
       { tatoeba: 40662, en: "I don't smoke." },
     ],
     mistakes: [
-      { kind: 'error', wrong: "He don't like fish.", right: "He doesn't like fish.", note: 'he には doesn’t を使う。', dict: { lemma: 'do', pos: 'verb', form: 'does', tags: ['third-person', 'singular', 'present'] } },
-      { kind: 'error', wrong: 'Does she likes tea?', right: 'Does she like tea?', note: 'Does の文では動詞は原形（likes は -s の付いた形）。', dict: { lemma: 'like', pos: 'verb', form: 'likes', tags: ['third-person', 'singular', 'present'] } },
-      { kind: 'error', wrong: 'Is you a student?', right: 'Are you a student?', note: 'you には are を使う。', dict: { lemma: 'be', pos: 'verb', form: 'are', tags: ['second-person', 'present'] } },
+      { kind: 'informal', wrong: "He don't like fish.", right: "He doesn't like fish.", note: '主語が he・she などのとき、くだけた会話で don’t と言う母語話者もいるが、標準的な英語では doesn’t。正式な場面や書くときは doesn’t を使う。', dict: { lemma: "don't", pos: 'verb', label: 'nonstandard', gloss: 'Does not.' }, spoken: { wrong: "he don't", wrongCount: 27341, right: "he doesn't", rightCount: 257198 } },
+      { kind: 'error', wrong: 'Does she likes tea?', right: 'Does she like tea?', note: 'Does の文では動詞は原形（likes は -s の付いた形）。', basis: { doc: 中, page: '38', find: "Does she like Japanese food or Chinese food?" }, dict: { lemma: 'like', pos: 'verb', form: 'likes', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'error', wrong: 'Is you a student?', right: 'Are you a student?', note: 'you には are を使う。', basis: { doc: 中, page: '38', find: "Are you from Canada?" }, dict: { lemma: 'be', pos: 'verb', form: 'are', tags: ['second-person', 'present'] } },
+      { kind: 'meaning', wrong: 'Are you like coffee?', intended: 'コーヒーは好きですか', right: 'Do you like coffee?', note: 'Are you like 〜? は「あなたは〜に似ていますか」という意味になる（この like は「〜のような」）。「好き」の like は一般動詞なので Do you like 〜? と聞く。' },
       { kind: 'meaning', wrong: '"Don\'t you like coffee?" "Yes."', intended: '（いいえ、）好きではありません', right: '"Don\'t you like coffee?" "No, I don\'t."', note: 'Yes と答えると「好きです」の意味になる。好きでないなら No。' },
     ],
     exercises: [
@@ -242,8 +244,10 @@ export default [
       { tatoeba: 1368, en: 'Why do you ask?' },
     ],
     mistakes: [
-      { kind: 'error', wrong: 'Where does he lives?', right: 'Where does he live?', note: 'does の後ろの動詞は原形。', dict: { lemma: 'live', pos: 'verb', form: 'lives', tags: ['third-person', 'singular', 'present'] } },
-      { kind: 'error', wrong: 'Where is you from?', right: 'Where are you from?', note: 'you には are を使う。', dict: { lemma: 'be', pos: 'verb', form: 'are', tags: ['second-person', 'present'] } },
+      { kind: 'error', wrong: 'Where does he lives?', right: 'Where does he live?', note: 'does の後ろの動詞は原形。', basis: { doc: 中, page: '38', find: "Does she like Japanese food or Chinese food?" }, dict: { lemma: 'live', pos: 'verb', form: 'lives', tags: ['third-person', 'singular', 'present'] } },
+      { kind: 'error', wrong: 'Where is you from?', right: 'Where are you from?', note: 'you には are を使う。', basis: { doc: 中, page: '38', find: "Are you from Canada?" }, dict: { lemma: 'be', pos: 'verb', form: 'are', tags: ['second-person', 'present'] } },
+      { kind: 'error', wrong: 'Where you live?', right: 'Where do you live?', note: '一般動詞の疑問文は、疑問詞の後ろに do / does を置く。', basis: { doc: 中, page: '44', find: "Where do you want to go?" }, dict: { lemma: 'do', pos: 'verb', gloss: 'A syntactic marker in a question whose main verb is not another auxiliary verb or be.' } },
+      { kind: 'error', wrong: 'What time you get up?', right: 'What time do you get up?', note: 'What time の後ろも、do を置いて疑問文の語順にする。', basis: { doc: 中, page: '38', find: "What time do you get up?" }, dict: { lemma: 'do', pos: 'verb', gloss: 'A syntactic marker in a question whose main verb is not another auxiliary verb or be.' } },
       { kind: 'meaning', wrong: 'What are you doing?', intended: 'お仕事は何ですか', right: 'What do you do?', note: 'What are you doing? は「今、何をしているの？」。仕事は現在形の What do you do? で聞く。' },
     ],
     exercises: [

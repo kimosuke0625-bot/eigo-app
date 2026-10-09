@@ -52,11 +52,14 @@ describe('文法のデータ（public/data/grammar.json）', () => {
     }
   })
 
-  it('✕ には LanguageTool と辞書の確かめた記録があり、△ と分けてある', () => {
+  it('✕ には解説と辞書の確かめた記録があり、△（正式な場面では避ける・意味が違う）と分けてある', () => {
     for (const it of data.items) for (const m of it.mistakes) {
       if (m.kind === 'error') {
-        expect(m.proof.languageTool.length).toBeGreaterThan(0)
+        expect(m.proof.kaisetsu).toMatch(/学習指導要領.*解説 .*p\.\d+「.+」/)
         expect(m.proof.dictionary).toMatch(/^Wiktionary/)
+      } else if (m.kind === 'informal') {
+        expect(m.proof.dictionary).toMatch(/^Wiktionary/)
+        expect(m.proof.spoken).toMatch(/^映画字幕/)
       } else {
         expect(m.kind).toBe('meaning')
         expect(m.intended).not.toBe('')
