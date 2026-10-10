@@ -199,7 +199,7 @@ function SayPair({ group, audio, mic, correct, total, onDone }: {
         )
       ) : (
         <>
-          <p className="muted">録音できない端末なので、手本をまねて声に出してから自己評価しましょう。</p>
+          <p className="muted">録音を使えない状態なので、手本をまねて声に出してから自己評価しましょう。</p>
           <SelfRating question="2つの音を言い分けられましたか？" onRate={onDone} />
         </>
       )}

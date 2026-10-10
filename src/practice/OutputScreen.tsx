@@ -267,7 +267,7 @@ function Diary({ settings, level, prompt, targets, need, mic, phrases, focus, on
           onToggle={status === 'done' || saved ? undefined : (id) => setCheckedP(checkedP.includes(id) ? checkedP.filter((x) => x !== id) : [...checkedP, id])} />
         {!blob && (mic
           ? <RecordButton maxSeconds={180} label="🎙 話し始める（最大3分）" onDone={(b, s) => void onRecorded(b, s)} />
-          : <p className="muted">録音できない端末です。声に出して話してから、使った語にチェックを付けて保存しましょう。</p>)}
+          : <p className="muted">録音を使えない状態です。声に出して話してから、使った語にチェックを付けて保存しましょう。</p>)}
         {blob && blob.size > 0 && <PlayBlobButton blob={blob} />}
         {status === 'running' && <p className="banner info">計算中：録音を文字にしています…</p>}
         {status === 'error' && <p className="banner warn">文字にできませんでした：{error}</p>}

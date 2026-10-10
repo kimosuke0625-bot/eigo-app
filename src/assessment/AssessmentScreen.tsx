@@ -220,7 +220,7 @@ function SpeechPart({ topic, mic, settings, onDone }: { topic: string; mic: bool
       <p className="topic-en">{topic}</p>
       {state === 'ready' && (mic
         ? <RecordButton maxSeconds={60} label="🎙 話し始める（1分で自動で止まる）" onDone={(b, s) => void done(b, s)} />
-        : <><p className="muted">録音できない端末です。1分話してから次へ進みましょう。</p><button className="btn" onClick={() => onDone()}>次へ</button></>)}
+        : <><p className="muted">録音を使えない状態です。1分話してから次へ進みましょう。</p><button className="btn" onClick={() => onDone()}>次へ</button></>)}
       {state === 'running' && <p className="banner info">計算中：録音を文字にしています…</p>}
       {state === 'done' && (
         <>

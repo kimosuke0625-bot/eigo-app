@@ -45,7 +45,19 @@ export async function startRecording(): Promise<Recording> {
  * 練習の開始ボタンで、マイクと音声の再生を一度に許可してもらう。
  * iPhone では画面をタップした直後でないと録音も再生も始められないため、最初のタップで両方を準備する。
  */
-export async function unlockAudioAndMic(): Promise<{ mic: boolean }> {
+export type MicProblem = 'unsupported' | 'denied' | 'notfound' | 'busy' | 'insecure' | 'other'
+export interface MicResult { mic: boolean; problem?: MicProblem; detail?: string }
+
+/** getUserMedia の失敗の理由を分ける（画面に正しい案内を出すため） */
+export function micProblemOf(e: unknown): MicProblem {
+  const name = (e as { name?: string } | null)?.name ?? ''
+  if (name === 'NotAllowedError' || name === 'PermissionDeniedError' || name === 'SecurityError') return 'denied'
+  if (name === 'NotFoundError' || name === 'DevicesNotFoundError' || name === 'OverconstrainedError') return 'notfound'
+  if (name === 'NotReadableError' || name === 'TrackStartError' || name === 'AbortError') return 'busy'
+  return 'other'
+}
+
+export async function unlockAudioAndMic(): Promise<MicResult> {
   try {
     // 読み上げを一度だけ無音で鳴らして、以後の自動再生を許可させる
     if ('speechSynthesis' in window) {
@@ -54,13 +66,15 @@ export async function unlockAudioAndMic(): Promise<{ mic: boolean }> {
       speechSynthesis.speak(u)
     }
   } catch { /* 読み上げがなくても続ける */ }
-  if (!micSupported()) return { mic: false }
+  if (typeof window !== 'undefined' && window.isSecureContext === false) return { mic: false, problem: 'insecure' }
+  if (!micSupported()) return { mic: false, problem: 'unsupported' }
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
     stream.getTracks().forEach((t) => t.stop())
     return { mic: true }
-  } catch {
-    return { mic: false }
+  } catch (e) {
+    const err = e as { name?: string; message?: string }
+    return { mic: false, problem: micProblemOf(e), detail: [err?.name, err?.message].filter(Boolean).join('：') }
   }
 }
 
