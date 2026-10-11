@@ -11,7 +11,7 @@ import { Steps } from '../ui/Steps'
 import { ClaudePromptBox } from './ClaudePromptBox'
 import { summaryPrompt, type Level } from './claudePrompts'
 import { currentLevel } from './output'
-import { mmss, useMaterialAudio, useWholeAudio, VoiceNote, type MaterialAudio } from './AudioParts'
+import { mmss, RepeatSwitch, useMaterialAudio, useRepeatMode, useWholeAudio, VoiceNote, type MaterialAudio } from './AudioParts'
 
 const RATES = [0.8, 1, 1.2]
 
@@ -132,6 +132,12 @@ function InputSessionBody({ material, settings, index, ratio, onExit, onBack, on
   const [heard, setHeard] = useState(false)
   const [showQuestions, setShowQuestions] = useState(false)
   const stop = useRef<() => void>(() => {})
+  // くり返し（なし・全体・1文）。1文は文ごとの音声のときだけ。再生中に切り替えてもすぐ効くよう ref でも持つ
+  const [repeatMode, setRepeatMode] = useRepeatMode()
+  const repeat = whole && repeatMode === 'one' ? 'none' : repeatMode
+  const repeatRef = useRef(repeat)
+  useEffect(() => { repeatRef.current = repeat }, [repeat])
+  useEffect(() => { whole?.setLoop(repeat === 'all') }, [whole, repeat])
 
   useEffect(() => () => stop.current(), [])
 
@@ -149,9 +155,28 @@ function InputSessionBody({ material, settings, index, ratio, onExit, onBack, on
       sentences, from, rate, voiceURI: settings.voiceURI,
       onIndex: setCurrent,
       onEnd: () => { setPlaying(false); setCurrent(-1); setHeard(true) },
+      repeat: () => repeatRef.current,
+      onLoop: () => setHeard(true),
     })
   }
   const pause = () => { whole?.pause(); stop.current(); setPlaying(false) }
+  // 文ごとの音声で、前の文・次の文へ（止まっているときは、最後に聞いた文の前後から）
+  const jump = (d: number) => play(Math.min(sentences.length - 1, Math.max(0, (current >= 0 ? current : 0) + d)))
+  const repeatControls = whole ? (
+    <>
+      <RepeatSwitch mode={repeat} onChange={setRepeatMode} allowOne={false} />
+      <button className="btn secondary" onClick={() => whole.back(5)}>⏪ 5秒戻る</button>
+    </>
+  ) : (
+    <>
+      <RepeatSwitch mode={repeat} onChange={setRepeatMode} allowOne />
+      <div className="row">
+        <button className="btn secondary" style={{ flex: 1 }} disabled={current <= 0} onClick={() => jump(-1)}>⏪ 前の文</button>
+        <button className="btn secondary" style={{ flex: 1 }} disabled={current < 0 || current >= sentences.length - 1} onClick={() => jump(1)}>次の文 ⏩</button>
+      </div>
+      {repeat === 'one' && <p className="muted">いまの文を止めるまでくり返します。文の間は少しあけます。</p>}
+    </>
+  )
   const next = () => {
     pause()
     const i = stages.indexOf(stage as Exclude<Stage, 'done'>)
@@ -217,6 +242,7 @@ function InputSessionBody({ material, settings, index, ratio, onExit, onBack, on
                 <button key={r} aria-pressed={rate === r} onClick={() => { setRate(r); whole.setRate(r) }}>{r}倍</button>
               ))}
             </div>
+            {repeatControls}
             <p className="muted">{mmss(whole.time.now)}{whole.time.total ? ` / ${mmss(whole.time.total)}` : ''}・{material.wordCount}語</p>
             <p className="muted voice-note">🔈 声：{material.narrator ? `${material.narrator}（人の朗読）` : '取り込んだ音声'}</p>
             {questionsPeek}
@@ -239,6 +265,7 @@ function InputSessionBody({ material, settings, index, ratio, onExit, onBack, on
                 <button key={r} aria-pressed={rate === r} onClick={() => { setRate(r); if (playing) pause() }}>{r}倍</button>
               ))}
             </div>
+            {repeatControls}
             <p className="muted">{current >= 0 ? `${current + 1} / ${sentences.length} 文目` : `${sentences.length}文・${material.wordCount}語`}</p>
             <VoiceNote audio={audio} />
             {questionsPeek}
@@ -256,6 +283,7 @@ function InputSessionBody({ material, settings, index, ratio, onExit, onBack, on
                 {!whole && <span className="muted">文をダブルタップするとそこから再生</span>}
               </div>
             )}
+            {tts && repeatControls}
             <MaterialText sentences={sentences} breaks={breaks} current={current} index={index} settings={settings}
               onSentence={tts && !whole ? (i) => play(i) : undefined} />
             {material.moral && <p className="moral">Moral: {material.moral}</p>}

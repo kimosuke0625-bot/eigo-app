@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { materialClips } from '../speech/clips'
+import { materialClips, type RepeatMode } from '../speech/clips'
 
 export type MaterialAudio = NonNullable<Awaited<ReturnType<typeof materialClips>>>
 
@@ -34,7 +34,12 @@ export function useWholeAudio(src: string | Blob | undefined) {
     const url = typeof src === 'string' ? `${import.meta.env.BASE_URL}audio/${src}` : URL.createObjectURL(src)
     el.src = url
     el.preload = 'metadata'
-    const onTime = () => setTime({ now: el.currentTime, total: Number.isFinite(el.duration) ? el.duration : 0 })
+    const onTime = () => {
+      const total = Number.isFinite(el.duration) ? el.duration : 0
+      setTime({ now: el.currentTime, total })
+      // 全体をくり返している（loop）ときは ended が来ないので、終わりの近くまで聞いたら「聞き終えた」にする
+      if (total && el.currentTime >= total - 1) setEnded(true)
+    }
     const onEnd = () => { setPlaying(false); setEnded(true) }
     el.addEventListener('timeupdate', onTime)
     el.addEventListener('loadedmetadata', onTime)
@@ -59,7 +64,43 @@ export function useWholeAudio(src: string | Blob | undefined) {
     pause: () => { el.pause(); setPlaying(false) },
     restart: (rate: number) => { el.currentTime = 0; el.playbackRate = rate; void el.play().then(() => setPlaying(true), () => {}) },
     setRate: (rate: number) => { el.playbackRate = rate },
+    /** 全体をくり返すか */
+    setLoop: (on: boolean) => { el.loop = on },
+    /** 少し戻る（秒） */
+    back: (sec: number) => { el.currentTime = Math.max(0, el.currentTime - sec) },
   }
+}
+
+/**
+ * くり返しの設定（なし・全体・1文）。次に開いたときも同じにする（端末の中だけ。保存できなくても動く）。
+ * 1文のくり返しは文ごとの音声のときだけ選べる。
+ */
+const REPEAT_KEY = 'eigo.listenRepeat'
+export function useRepeatMode(): [RepeatMode, (m: RepeatMode) => void] {
+  const [mode, setMode] = useState<RepeatMode>(() => {
+    try {
+      const v = localStorage.getItem(REPEAT_KEY)
+      return v === 'all' || v === 'one' ? v : 'none'
+    } catch { return 'none' }
+  })
+  const set = (m: RepeatMode) => {
+    setMode(m)
+    try { localStorage.setItem(REPEAT_KEY, m) } catch { /* 保存できなくても続ける */ }
+  }
+  return [mode, set]
+}
+
+/** くり返しの切り替え（なし・全体・1文） */
+export function RepeatSwitch({ mode, onChange, allowOne }: { mode: RepeatMode; onChange: (m: RepeatMode) => void; allowOne: boolean }) {
+  const options: [RepeatMode, string][] = [['none', 'なし'], ['all', '全体'], ...(allowOne ? [['one', '1文'] as [RepeatMode, string]] : [])]
+  return (
+    <div className="row" style={{ alignItems: 'center', gap: 8 }}>
+      <span className="muted">🔁 くり返し</span>
+      <div className="seg" aria-label="くり返し" style={{ flex: 1 }}>
+        {options.map(([m, label]) => <button key={m} aria-pressed={mode === m} onClick={() => onChange(m)}>{label}</button>)}
+      </div>
+    </div>
+  )
 }
 
 export const mmss = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`

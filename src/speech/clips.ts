@@ -91,29 +91,57 @@ export function playSentences(opts: {
   voiceURI: string
   onIndex: (i: number) => void
   onEnd: () => void
+  /** くり返し（none：1回だけ、all：全体を最初から、one：いまの1文）。再生中に変えてもすぐ効くよう、その都度読む */
+  repeat?: () => RepeatMode
+  /** 全体をくり返すとき、最後の文まで聞き終えるたびに呼ぶ */
+  onLoop?: () => void
 }): () => void {
   let stopped = false
   let stopCurrent = () => {}
+  let timer: ReturnType<typeof setTimeout> | undefined
+  let startedAt = 0
   const play = (i: number) => {
     if (stopped) return
     if (i >= opts.sentences.length) { opts.onEnd(); return }
     opts.onIndex(i)
+    startedAt = Date.now()
     const file = opts.clips?.[opts.sentences[i]]
     if (file) {
-      stopCurrent = playFile(file, opts.rate, () => play(i + 1))
+      stopCurrent = playFile(file, opts.rate, () => after(i))
     } else {
-      const ok = speak(opts.sentences[i], opts.voiceURI, opts.rate, () => play(i + 1))
+      const ok = speak(opts.sentences[i], opts.voiceURI, opts.rate, () => after(i))
       if (!ok) { stopped = true; opts.onEnd() }
     }
+  }
+  // 1文を読み終えた後：くり返しの設定で、同じ文・最初の文・次の文を選ぶ。
+  // すぐに終わった（再生できなかった）ときは、くり返さずに先へ進む（無音のまま回り続けないように）
+  const after = (i: number) => {
+    if (stopped) return
+    const mode = opts.repeat?.() ?? 'none'
+    const played = Date.now() - startedAt > REPEAT_MIN_MS
+    if (mode === 'one' && played) { timer = setTimeout(() => play(i), REPEAT_GAP_MS); return }
+    if (i + 1 >= opts.sentences.length && mode === 'all' && played) {
+      opts.onLoop?.()
+      timer = setTimeout(() => play(0), REPEAT_GAP_MS * 2)
+      return
+    }
+    play(i + 1)
   }
   stopAudio()
   play(opts.from)
   return () => {
     stopped = true
+    clearTimeout(timer)
     stopCurrent()
     stopAudio()
   }
 }
+
+export type RepeatMode = 'none' | 'all' | 'one'
+/** くり返すときの間（ミリ秒）。全体のくり返しはこの2倍あける */
+export const REPEAT_GAP_MS = 700
+/** これより短く終わった文は「再生できなかった」とみなす */
+const REPEAT_MIN_MS = 300
 
 /** 素材の音声（なければ undefined）。声の説明も返す */
 export async function materialClips(materialId: string): Promise<MaterialAudio | undefined> {
