@@ -35,9 +35,9 @@ describe('聞き分けドリルの出題順', () => {
     }
   })
 
-  it('速さを変えて出題する（変動練習）', () => {
+  it('速さは変えない（1語の音声を速さだけ変えると子音がにじむため。話者は毎回変わる）', () => {
     const rates = new Set(buildTrials('r-l', 30, seeded(9)).map((x) => x.rate))
-    expect(rates).toEqual(new Set([0.8, 1, 1.2]))
+    expect(rates).toEqual(new Set([1]))
   })
 
   it('いちばん正答率の低いグループを選ぶ', () => {

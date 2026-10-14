@@ -56,7 +56,8 @@ export interface Trial {
  */
 export function buildTrials(focus: string, total: number, rand: () => number = Math.random, blocked = 4): Trial[] {
   const pick = <T,>(xs: T[]) => xs[Math.floor(rand() * xs.length)]
-  const rates = [0.8, 1, 1.2]
+  // 速さは変えない（2026-10-14：1語の短い音声を速さだけ変えると子音がにじみ、聞き分けに不利なため。話者は毎回変わる）
+  const rates = [1]
   const trialFrom = (g: PairGroup): Trial => ({ group: g.key, pair: pick(g.pairs), answer: rand() < 0.5 ? 0 : 1, rate: pick(rates) })
   const first = PAIR_GROUPS.find((g) => g.key === focus) ?? PAIR_GROUPS[0]
   const out: Trial[] = []

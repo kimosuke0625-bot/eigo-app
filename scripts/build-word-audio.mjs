@@ -1,7 +1,7 @@
 // 聞き分けドリルの単語の音声をそろえる。
 // 人の録音（fetch-word-audio.mjs で取得）を第一候補にし、1語につき3つの声になるまで Kokoro の合成音声で補う。
 // 出力：public/audio/words/*.mp3 と public/data/word-audio.json
-// 実行: node scripts/fetch-word-audio.mjs && node scripts/build-word-audio.mjs
+// 実行: node scripts/fetch-word-audio.mjs && node scripts/build-word-audio.mjs && node scripts/normalize-word-audio.mjs（音量をそろえて words-v2/ に）
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { VOICES, synthToMp3 } from './tts.mjs'
 

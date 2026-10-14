@@ -118,7 +118,7 @@ function Drill({ mic, focus, audio, onExit }: { mic: boolean; focus: string; aud
             <span className="tag">{groupOf(trial.group).label}</span>
           </div>
           <button className="btn block big-play" onClick={() => playTrial(trial, !clip)}>🔊 聞く</button>
-          <p className="muted">話者と速さは毎回変わります（{trial.rate}倍）{clip !== undefined || answered ? `・声：${speakerLabel(clip)}` : ''}</p>
+          <p className="muted">話者は毎回変わります{clip !== undefined || answered ? `・声：${speakerLabel(clip)}` : ''}</p>
           <div className="pair-choices">
             {trial.pair.map((w, k) => {
               const state = !answered ? '' : k === trial.answer ? 'right' : answers[i] === k ? 'wrong' : ''
@@ -130,7 +130,7 @@ function Drill({ mic, focus, audio, onExit }: { mic: boolean; focus: string; aud
               <p>{answers[i] === trial.answer ? '正解！' : `正解は「${trial.pair[trial.answer]}」`}</p>
               <p className="muted">{groupOf(trial.group).hint}</p>
               <div className="row" style={{ justifyContent: 'center' }}>
-                {trial.pair.map((w) => <button key={w} className="btn secondary" onClick={() => playWord(audio, w, clipIndex, 0.9)}>🔊 {w}</button>)}
+                {trial.pair.map((w) => <button key={w} className="btn secondary" onClick={() => playWord(audio, w, clipIndex, 1)}>🔊 {w}</button>)}
               </div>
               <button className="btn block" onClick={() => {
                 if (i + 1 < trials.length) { setI(i + 1); playTrial(trials[i + 1], true) } else setStage('say')
@@ -173,7 +173,7 @@ function SayPair({ group, audio, mic, correct, total, onDone }: {
       <h2>言ってみる：{g.label}</h2>
       <p>{g.hint}</p>
       <div className="row" style={{ justifyContent: 'center' }}>
-        {pair.map((w) => <button key={w} className="btn secondary" onClick={() => playWord(audio, w, 0, 0.9)}>🔊 {w}</button>)}
+        {pair.map((w) => <button key={w} className="btn secondary" onClick={() => playWord(audio, w, 0, 1)}>🔊 {w}</button>)}
       </div>
       <p className="center"><strong>{pair[0]}</strong> → <strong>{pair[1]}</strong> の順に、はっきり言いましょう。</p>
       {mic ? (
@@ -187,7 +187,7 @@ function SayPair({ group, audio, mic, correct, total, onDone }: {
         ) : (
           <div className="stack">
             <div className="row">
-              <button className="btn secondary" onClick={() => { playWord(audio, pair[0], 0, 0.9); window.setTimeout(() => playWord(audio, pair[1], 0, 0.9), 1300) }}>▶ 手本</button>
+              <button className="btn secondary" onClick={() => { playWord(audio, pair[0], 0, 1); window.setTimeout(() => playWord(audio, pair[1], 0, 1), 1300) }}>▶ 手本</button>
               <PlayBlobButton blob={blob} />
             </div>
             <p className="muted">手本と自分の声を聞き比べて、口の形や舌の位置の違いを確かめましょう。</p>
