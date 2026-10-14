@@ -7,7 +7,7 @@ import { playSentences } from '../speech/clips'
 import { speechSupported } from '../speech/voices'
 import { startRecording, type Recording } from '../speech/recorder'
 import { ratioOf, useKnowledge } from './ReadingParts'
-import { MicGate, PlayBlobButton, SelfRating, useTranscriber } from './SpeakParts'
+import { MicGate, PlayBlobButton, SelfRating, micErrorText, useTranscriber } from './SpeakParts'
 import { matchScore, shouldShowScore } from './speaking'
 import { useSessionTimer } from './useSessionTimer'
 import { Steps } from '../ui/Steps'
@@ -96,6 +96,8 @@ function ShadowSession({ material, settings, mic, onExit }: { material: Mat; set
   const [self, setSelf] = useState<number | null>(null)
   const [match, setMatch] = useState<number | null | 'skip' | 'wait'>(null)
   const [asrError, setAsrError] = useState('')
+  const [opening, setOpening] = useState(false)
+  const [micError, setMicError] = useState('')
   const transcriber = useTranscriber(settings)
 
   useEffect(() => () => { stopTts.current(); rec.current?.cancel() }, [])
@@ -120,13 +122,18 @@ function ShadowSession({ material, settings, mic, onExit }: { material: Mat; set
   }
 
   const recordWithModel = async () => {
-    setBlob(null); setSelf(null); setMatch(null)
+    setBlob(null); setSelf(null); setMatch(null); setMicError('')
     if (mic) {
+      setOpening(true)
       try {
         rec.current = await startRecording()
         setRecording(true)
-      } catch {
+      } catch (e) {
+        // 録音できなくても手本は流す（重ねて言う練習はできる）。理由は画面に出す
         rec.current = null
+        setMicError(micErrorText(e))
+      } finally {
+        setOpening(false)
       }
     }
     play(() => {
@@ -203,10 +210,11 @@ function ShadowSession({ material, settings, mic, onExit }: { material: Mat; set
             {!blob && (
               recording || playing
                 ? <button className="btn danger block recording" onClick={() => void finishRecording()}>⏹ 止める</button>
-                : <button className="btn block" disabled={!tts} onClick={() => void recordWithModel()}>
-                    {mic ? '🎙 録音しながら再生する' : '▶ 再生して重ねて言う（録音なし）'}
+                : <button className="btn block" disabled={!tts || opening} onClick={() => void recordWithModel()}>
+                    {opening ? 'マイクを準備しています…' : mic ? '🎙 録音しながら再生する' : '▶ 再生して重ねて言う（録音なし）'}
                   </button>
             )}
+            {micError && <p className="banner warn">録音できませんでした（手本だけ流します）。{micError}</p>}
             {blob && self === null && (
               <SelfRating question="先に自分で評価：手本にどのくらい重ねて言えましたか？" onRate={(v) => void rate1(v)} />
             )}

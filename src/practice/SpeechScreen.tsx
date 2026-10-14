@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { db, type Settings } from '../db/schema'
 import { startRecording, type Recording } from '../speech/recorder'
 import { speak } from '../speech/voices'
-import { MicGate, PlayBlobButton, SelfRating, useTranscriber } from './SpeakParts'
+import { MicGate, PlayBlobButton, SelfRating, micErrorText, useTranscriber } from './SpeakParts'
 import { SPEECH_ROUNDS, TOPICS, wordsPerMinute, type Topic } from './speaking'
 import { useSessionTimer } from './useSessionTimer'
 import { Steps } from '../ui/Steps'
@@ -204,6 +204,8 @@ function Round({ seconds, mic, topic, onDone }: { seconds: number; mic: boolean;
   const [now, setNow] = useState(0)
   const rec = useRef<Recording | null>(null)
   const done = useRef(false)
+  const [opening, setOpening] = useState(false)
+  const [micError, setMicError] = useState('')
 
   const finish = async () => {
     if (done.current) return
@@ -230,17 +232,28 @@ function Round({ seconds, mic, topic, onDone }: { seconds: number; mic: boolean;
       <p className="topic-en">{topic.en}</p>
       <div className={`timer${left < 15 && startedAt ? ' ending' : ''}`}>{fmt(left)}</div>
       {!startedAt ? (
-        <button className="btn block" onClick={async () => {
+        <button className="btn block" disabled={opening} onClick={async () => {
+          setMicError('')
           if (mic) {
-            try { rec.current = await startRecording() } catch { rec.current = null }
+            setOpening(true)
+            try {
+              rec.current = await startRecording()
+            } catch (e) {
+              // 録音できなくても話す練習は続ける。理由は画面に出す
+              rec.current = null
+              setMicError(micErrorText(e))
+            } finally {
+              setOpening(false)
+            }
           }
           const t = Date.now()
           setStartedAt(t)
           setNow(t)
-        }}>{mic ? '🎙 話し始める（録音）' : '▶ 話し始める（録音なし）'}</button>
+        }}>{opening ? 'マイクを準備しています…' : mic ? '🎙 話し始める（録音）' : '▶ 話し始める（録音なし）'}</button>
       ) : (
         <>
           {rec.current && <p className="muted rec-dot">● 録音中</p>}
+          {micError && <p className="banner warn">録音できませんでした（話す練習はそのまま続けられます）。{micError}</p>}
           <button className="btn secondary block" onClick={() => void finish()}>早めに終える</button>
         </>
       )}

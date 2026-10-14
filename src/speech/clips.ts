@@ -75,8 +75,9 @@ export function playUrl(url: string, rate = 1, onEnd?: () => void, onError?: () 
 }
 
 export function stopAudio() {
-  el?.pause()
-  if ('speechSynthesis' in window) speechSynthesis.cancel()
+  if (el && !el.paused) el.pause()
+  // 鳴っていないときは cancel しない（iPhone で、cancel の直後にマイクを開くと止まることがあるため）
+  if ('speechSynthesis' in window && (speechSynthesis.speaking || speechSynthesis.pending)) speechSynthesis.cancel()
 }
 
 /**

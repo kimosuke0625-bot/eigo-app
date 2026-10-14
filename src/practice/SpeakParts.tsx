@@ -35,6 +35,7 @@ const MIC_PROBLEM_TEXT: Record<MicProblem, string> = {
   denied: 'マイクの使用が許可されていません。',
   notfound: 'マイクが見つかりませんでした。',
   busy: 'ほかのアプリ（通話・録音・ビデオ会議など）がマイクを使っているため、使えませんでした。',
+  stuck: 'マイクの準備が終わりませんでした。',
   insecure: '安全な接続（https）で開いていないため、マイクを使えません。',
   unsupported: 'この端末・ブラウザは録音に対応していません。',
   other: 'マイクを使い始められませんでした。',
@@ -57,12 +58,22 @@ function MicTrouble({ result, busy, onRetry, onSkip }: { result: MicResult; busy
         </div>
       )}
       {p === 'busy' && <p className="muted">電話・ほかの録音アプリを終えてから、もう一度試してください。</p>}
-      {p === 'other' && <p className="muted">アプリを一度完全に閉じて開き直してから、もう一度試してください。</p>}
+      {(p === 'other' || p === 'stuck') && <p className="muted">アプリを一度完全に閉じて開き直してから、もう一度試してください。</p>}
       {result.detail && <p className="muted" style={{ fontSize: '0.85em' }}>詳しい理由（不具合の報告用）：{result.detail}</p>}
       {p !== 'unsupported' && p !== 'insecure' && <button className="btn block" disabled={busy} onClick={onRetry}>🎙 もう一度試す</button>}
       <button className="btn secondary block" disabled={busy} onClick={onSkip}>録音なし（自己評価）で続ける</button>
     </div>
   )
+}
+
+/** 録音を始められなかったときに画面に出す文（理由・iPhone での直し方・詳しい理由） */
+export function micErrorText(e: unknown): string {
+  const err = e as { name?: string; message?: string }
+  const p = micProblemOf(e)
+  const fix = p === 'denied'
+    ? 'iPhone の「設定」→「アプリ」→「Safari」→「マイク」を「確認」か「許可」にしてから、アプリを開き直してください。'
+    : p === 'stuck' || p === 'other' ? 'アプリを一度完全に閉じて（下から上へはらって消す）開き直してから、もう一度試してください。' : ''
+  return `${MIC_PROBLEM_TEXT[p]}${fix}（詳しい理由：${[err?.name, err?.message].filter(Boolean).join('：') || '不明'}）`
 }
 
 /** 録音ボタン。録音中は経過時間を表示する。maxSeconds を過ぎると自動で止める */
@@ -76,6 +87,8 @@ export function RecordButton({ onDone, maxSeconds, label = '🎙 録音する', 
   const rec = useRef<Recording | null>(null)
   const [elapsed, setElapsed] = useState<number | null>(null)
   const [error, setError] = useState('')
+  // マイクを開いている途中（押しても何も起きないように見えないよう、表示を変えて二度押しを防ぐ）
+  const [opening, setOpening] = useState(false)
 
   useEffect(() => () => rec.current?.cancel(), [])
   useEffect(() => {
@@ -106,18 +119,19 @@ export function RecordButton({ onDone, maxSeconds, label = '🎙 録音する', 
   }
   return (
     <>
-      <button className="btn block" disabled={disabled} onClick={async () => {
+      <button className="btn block" disabled={disabled || opening} onClick={async () => {
         setError('')
+        setOpening(true)
         try {
           rec.current = await startRecording()
           setElapsed(0)
           onStart?.()
         } catch (e) {
-          const err = e as { name?: string; message?: string }
-          const p = micProblemOf(e)
-          setError(`${MIC_PROBLEM_TEXT[p]}${p === 'denied' ? 'iPhone の「設定」→「アプリ」→「Safari」→「マイク」を「確認」か「許可」にしてから、アプリを開き直してください。' : ''}（詳しい理由：${[err?.name, err?.message].filter(Boolean).join('：') || '不明'}）`)
+          setError(micErrorText(e))
+        } finally {
+          setOpening(false)
         }
-      }}>{label}</button>
+      }}>{opening ? 'マイクを準備しています…' : label}</button>
       {error && <p className="banner warn">{error}</p>}
     </>
   )

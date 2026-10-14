@@ -26,30 +26,73 @@ export interface Recording {
   startedAt: number
 }
 
+// 2026-10-14（2回目）：「どの練習でも、何も出ずに録音が始まらない」への対応。
+// - 上の変更の後、録音ボタンを押すと getUserMedia が成功も失敗も返さず止まるようになった（iPhone）。
+//   変えたのは「開始ボタンでマイクを開かない」と「録音の直前に読み上げを cancel する」の2つ。
+//   → 開始ボタンでマイクを一度開いて閉じる形に戻す。ただし断られても、許可しない・マイクがないとき以外は練習を止めない。
+//   → 読み上げの cancel は、読み上げ中のときだけにする（clips.ts の stopAudio）。
+//   → マイクを開くのに時間がかかりすぎたら（8秒）、あきらめて理由と直し方を出す（ボタンが無反応のままにならないように）。
+const MIC_TIMEOUT_MS = 8000
+
+/** マイクを開く。時間内に返事がなければ TimeoutError で失敗にする（遅れて開いたマイクはすぐ閉じる） */
+function getMic(constraints: MediaStreamConstraints): Promise<MediaStream> {
+  return new Promise((resolve, reject) => {
+    let settled = false
+    const timer = setTimeout(() => {
+      settled = true
+      reject(Object.assign(new Error('マイクの準備が時間内に終わりませんでした'), { name: 'TimeoutError' }))
+    }, MIC_TIMEOUT_MS)
+    navigator.mediaDevices.getUserMedia(constraints).then(
+      (s) => {
+        if (settled) { s.getTracks().forEach((t) => t.stop()); return }
+        settled = true; clearTimeout(timer); resolve(s)
+      },
+      (e) => { if (!settled) { settled = true; clearTimeout(timer); reject(e) } },
+    )
+  })
+}
+
 async function openMic(): Promise<MediaStream> {
   const constraints = { audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } }
   try {
-    return await navigator.mediaDevices.getUserMedia(constraints)
+    return await getMic(constraints)
   } catch (e) {
     // 使用中で断られたとき（音の再生の切り替えが終わっていない）は、少し待って1回だけやり直す
     if (micProblemOf(e) !== 'busy') throw e
     await new Promise((r) => setTimeout(r, 400))
-    return navigator.mediaDevices.getUserMedia(constraints)
+    return getMic(constraints)
   }
+}
+
+/** 録音機を作る。形式の指定で断られたら、指定なしでもう一度作る */
+function makeRecorder(stream: MediaStream): MediaRecorder {
+  const mimeType = pickMime()
+  if (mimeType) {
+    try { return new MediaRecorder(stream, { mimeType }) } catch { /* 指定なしで作り直す */ }
+  }
+  return new MediaRecorder(stream)
 }
 
 export async function startRecording(): Promise<Recording> {
   // 鳴っている手本の音を止めてからマイクを開く
   try { stopAudio() } catch { /* 止められなくても続ける */ }
   let stream: MediaStream
+  let rec: MediaRecorder
   try {
     stream = await openMic()
   } catch (e) {
     logMicFailure(e)
     throw e
   }
-  const mimeType = pickMime()
-  const rec = new MediaRecorder(stream, mimeType ? { mimeType } : undefined)
+  try {
+    rec = makeRecorder(stream)
+  } catch (e) {
+    // 録音機を作れなかったときは、開いたマイクを閉じる（開いたままだと次から「使用中」になる）
+    stream.getTracks().forEach((t) => t.stop())
+    logMicFailure(e)
+    throw e
+  }
+  const mimeType = rec.mimeType
   const chunks: Blob[] = []
   rec.ondataavailable = (e) => { if (e.data.size) chunks.push(e.data) }
   const done = new Promise<Blob>((resolve) => {
@@ -58,7 +101,13 @@ export async function startRecording(): Promise<Recording> {
       resolve(new Blob(chunks, { type: rec.mimeType || mimeType || 'audio/webm' }))
     }
   })
-  rec.start(1000)
+  try {
+    rec.start(1000)
+  } catch (e) {
+    stream.getTracks().forEach((t) => t.stop())
+    logMicFailure(e)
+    throw e
+  }
   return {
     startedAt: Date.now(),
     stop: () => { if (rec.state !== 'inactive') rec.stop(); return done },
@@ -66,7 +115,7 @@ export async function startRecording(): Promise<Recording> {
   }
 }
 
-export type MicProblem = 'unsupported' | 'denied' | 'notfound' | 'busy' | 'insecure' | 'other'
+export type MicProblem = 'unsupported' | 'denied' | 'notfound' | 'busy' | 'stuck' | 'insecure' | 'other'
 export interface MicResult { mic: boolean; problem?: MicProblem; detail?: string }
 
 /** getUserMedia の失敗の理由を分ける（画面に正しい案内を出すため） */
@@ -75,6 +124,7 @@ export function micProblemOf(e: unknown): MicProblem {
   if (name === 'NotAllowedError' || name === 'PermissionDeniedError' || name === 'SecurityError') return 'denied'
   if (name === 'NotFoundError' || name === 'DevicesNotFoundError' || name === 'OverconstrainedError') return 'notfound'
   if (name === 'NotReadableError' || name === 'TrackStartError' || name === 'AbortError') return 'busy'
+  if (name === 'TimeoutError') return 'stuck'
   return 'other'
 }
 
@@ -100,13 +150,14 @@ export function logMicFailure(e: unknown) {
 }
 
 /**
- * 練習の開始ボタン：音声の再生を許可してもらい、マイクが使えそうかを調べる。
+ * 練習の開始ボタン：マイクと音声の再生を準備する。
  * iPhone では画面をタップした直後でないと再生を始められないため、最初のタップで準備する。
- * マイクはここでは開かない（開くのは録音を始めるときだけ）。許可しないと決まっているときだけ、理由と直し方を出す。
+ * マイクは読み上げより先に一度だけ開いて閉じる（読み上げの後に初めて開くと、iPhone で止まることがあるため）。
+ * 許可しない・マイクがないと決まったときだけ、理由と直し方を出す。使用中などは練習を止めず、録音ボタンでもう一度試す。
  */
 export async function unlockAudioAndMic(): Promise<MicResult> {
   try {
-    // 読み上げを一度だけ無音で鳴らして、以後の自動再生を許可させる
+    // 読み上げを一度だけ無音で鳴らして、以後の自動再生を許可させる（タップの直後でないと効かないので最初に）
     if ('speechSynthesis' in window) {
       const u = new SpeechSynthesisUtterance(' ')
       u.volume = 0
@@ -116,6 +167,18 @@ export async function unlockAudioAndMic(): Promise<MicResult> {
   if (typeof window !== 'undefined' && window.isSecureContext === false) return { mic: false, problem: 'insecure' }
   if (!micSupported()) return { mic: false, problem: 'unsupported' }
   if ((await micPermission()) === 'denied') return { mic: false, problem: 'denied', detail: 'マイクの許可：許可しない' }
+  try {
+    const stream = await getMic({ audio: true })
+    stream.getTracks().forEach((t) => t.stop())
+  } catch (e) {
+    logMicFailure(e)
+    const problem = micProblemOf(e)
+    // 許可しない・マイクがないときだけ止める。使用中・時間切れなどは、録音ボタンでもう一度試す
+    if (problem === 'denied' || problem === 'notfound') {
+      const err = e as { name?: string; message?: string }
+      return { mic: false, problem, detail: [err?.name, err?.message].filter(Boolean).join('：') }
+    }
+  }
   return { mic: true }
 }
 
