@@ -58,6 +58,8 @@ describe('文に分ける', () => {
 describe('ディクテーションの採点', () => {
   it('大文字小文字・句読点・数字の書き方の違いは問わない', () => {
     expect(normalizeWords('I have Two cats!')).toEqual(['i', 'have', '2', 'cats'])
+    // 全角の英数字・全角スペース・見えない文字も、半角で打ったのと同じに（2026-10-14）
+    expect(normalizeWords('Ｉ　ｈａｖｅ two​ cats！')).toEqual(['i', 'have', '2', 'cats'])
     expect(diffWords('I have two cats.', 'i have 2 cats').score).toBe(1)
   })
 

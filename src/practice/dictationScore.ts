@@ -1,3 +1,5 @@
+import { unifyText } from '../content/unifyText'
+
 /** ディクテーションの自動採点。語の単位で手本と答えを比べ、差分を色分けできる形で返す */
 
 export type DiffKind = 'ok' | 'missing' | 'extra'
@@ -10,11 +12,10 @@ const NUMBERS: Record<string, string> = {
   zero: '0', one: '1', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7', eight: '8', nine: '9', ten: '10',
 }
 
-/** 比較用に語を正規化する（大文字小文字・句読点などの記号・数字の書き方・アポストロフィの種類の違いは問わない） */
+/** 比較用に語を正規化する（大文字小文字・句読点などの記号・数字の書き方・アポストロフィの種類・全角と半角・見えない文字の違いは問わない） */
 export function normalizeWords(text: string): string[] {
-  return text
+  return unifyText(text)
     .toLowerCase()
-    .replace(/[’‘ʼ`´′]/g, "'")
     .replace(/[^a-z0-9' ]+/g, ' ')
     .split(/\s+/)
     .map((w) => w.replace(/^'+|'+$/g, ''))

@@ -17,6 +17,7 @@ import { readdirSync, readFileSync, writeFileSync, mkdtempSync } from 'node:fs'
 import { homedir, tmpdir } from 'node:os'
 import { join, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
+import { contractionVariants } from './contractions.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const DATA = join(homedir(), 'eigo-data')
@@ -77,6 +78,9 @@ const words = (s) => s.toLowerCase().replace(/[’‘]/g, "'").replace(/[.?!,]/g
 const good = new Map() // 文 → どこで使うか
 const bad = new Map()
 const addGood = (s, where) => good.set(s, [...(good.get(s) ?? []), where])
+// 言い換え問題に自動で加える答え（短縮形と元の形の入れ替え）。LanguageTool の指摘があれば加えない
+const autoList = new Set()
+const norm = (s) => s.toLowerCase().replace(/[’‘]/g, "'").replace(/[.,!?;:"]/g, ' ').replace(/s+/g, ' ').trim()
 for (const it of items) {
   for (const p of it.points) for (const s of p.en ?? []) addGood(s.replace(/’/g, "'"), `${it.id} 解説`)
   for (const e of it.examples) if (!e.tatoeba) addGood(e.en, `${it.id} 例文`)
@@ -89,7 +93,13 @@ for (const it of items) {
     const w = `${it.id} 問題${i + 1}`
     if (x.type === 'fill') for (const a of x.answers) addGood(x.text.replace(/___/, a), w)
     else for (const a of x.answers) addGood(a, w)
-    if (x.type === 'rewrite') addGood(x.from, w)
+    if (x.type === 'rewrite') {
+      addGood(x.from, w)
+      // 手で打つ問題なので、短縮形と元の形のどちらでも正解にする（作った答えは LanguageTool に通し、指摘のないものだけ加える）
+      const have = new Set(x.answers.map(norm))
+      x.autoAnswers = [...new Set(x.answers.flatMap(contractionVariants))].filter((v) => !have.has(norm(v)))
+      for (const v of x.autoAnswers) autoList.add(v)
+    }
   })
   for (const s of it.myself.samples) for (const part of s.split(' — ')) addGood(part, `${it.id} 自分のこと`)
 }
@@ -119,7 +129,10 @@ function languageTool(list) {
 
 const goodList = [...good.keys()]
 const badList = [...bad.keys()]
-const checked = languageTool([...goodList, ...badList])
+const autoArr = [...autoList].filter((s) => !good.has(s))
+const checked = languageTool([...goodList, ...badList, ...autoArr])
+const autoOk = new Set(autoArr.filter((_, i) => !checked[goodList.length + badList.length + i].length))
+const autoDropped = autoArr.filter((s) => !autoOk.has(s))
 const ltBad = new Map()
 goodList.forEach((s, i) => {
   // 人名などのつづりの指摘（Ziri など）は Tatoeba の例文では起きないので、自作の文では誤りとして扱う
@@ -129,6 +142,7 @@ goodList.forEach((s, i) => {
 badList.forEach((s, i) => ltBad.set(s, checked[goodList.length + i]))
 
 // 項目ごとに確かめて、アプリのデータにする
+let autoAdded = 0
 const outItems = items.map((it, n) => {
   const examples = it.examples.map((e) => {
     if (!e.tatoeba) return { en: e.en, ja: e.ja, source: 'self' }
@@ -197,7 +211,10 @@ const outItems = items.map((it, n) => {
       for (const a of x.answers) if (words(a).sort().join(' ') !== want) fail(id, `並べ替えの答え「${a}」が示す語と合わない`)
     }
     if (x.type === 'fill') for (const a of x.answers) if (!x.choices.includes(a)) fail(id, `穴埋めの答え「${a}」が選択肢にない`)
-    return { id, ...x }
+    const { autoAnswers, ...rest } = x
+    const extra = (autoAnswers ?? []).filter((v) => autoOk.has(v) || good.has(v))
+    autoAdded += extra.length
+    return { id, ...rest, answers: [...x.answers, ...extra] }
   })
   if (exercises.at(-1)?.type !== 'oral') fail(it.id, '最後の問題が「口頭で即答」ではない')
   for (const t of ['fill', 'order', 'rewrite', 'oral']) if (!exercises.some((x) => x.type === t)) fail(it.id, `「${t}」の問題がない`)
@@ -211,4 +228,4 @@ if (problems.length) {
 }
 const version = Number(new Date().toISOString().slice(0, 10).replace(/-/g, '') + '1')
 writeFileSync(OUT, JSON.stringify({ version, license: '解説・問題：自作。例文：Tatoeba（CC BY 2.0 FR）', items: outItems }, null, 1))
-console.log({ 項目: outItems.length, 問題: outItems.reduce((s, x) => s + x.exercises.length, 0), LanguageToolに通した正しい文: goodList.length, '✕の文': badList.length })
+console.log({ 項目: outItems.length, 問題: outItems.reduce((s, x) => s + x.exercises.length, 0), LanguageToolに通した正しい文: goodList.length, '✕の文': badList.length, '言い換えに加えた答え（短縮形・元の形）': autoAdded, 'LanguageToolの指摘で加えなかった答え': autoDropped })

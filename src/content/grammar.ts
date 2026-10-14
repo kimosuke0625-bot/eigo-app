@@ -1,5 +1,6 @@
 import { db, type EigoDB } from '../db/schema'
 import { GRAM_PREFIX } from '../srs/deck'
+import { unifyText } from './unifyText'
 
 /**
  * 文法の修行（フェーズ9）。public/data/grammar.json（scripts/grammar/build.mjs が作る）。
@@ -59,11 +60,13 @@ export function loadGrammar(): Promise<GrammarData> {
   return cache
 }
 
-/** 答えを比べる形にする（大文字小文字、文末などの記号、アポストロフィの種類、空白の違いは問わない。語や短縮形の違いは区別する） */
+/**
+ * 答えを比べる形にする（大文字小文字、文末などの記号、アポストロフィ・ハイフンの種類、空白の違い、
+ * 全角と半角、見えない文字は問わない。語や短縮形の違いは区別する）
+ */
 export function normalizeAnswer(s: string): string {
-  return s
+  return unifyText(s)
     .toLowerCase()
-    .replace(/[’‘ʼ`´]/g, "'")
     .replace(/[.,!?;:"“”]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim()

@@ -11,6 +11,16 @@ describe('文法の答え合わせ', () => {
     expect(isAccepted('WE’RE FROM JAPAN', ['We are from Japan.', "We're from Japan."])).toBe(true)
   })
 
+  it('見た目が同じなら正解（全角の英数字・記号・空白、見えない文字、記号の種類の違いは問わない）', () => {
+    expect(isAccepted('Ｉ　ａｍ　ｂｕｓｙ．', ['I am busy.'])).toBe(true)
+    expect(isAccepted('I​ am busy', ['I am busy.'])).toBe(true)
+    expect(isAccepted('I am busy', ['I am busy.'])).toBe(true)
+    expect(isAccepted('I′m busy', ["I'm busy."])).toBe(true)
+    expect(isAccepted('I＇m busy？', ["I'm busy."])).toBe(true)
+    expect(isAccepted('a well‐known writer', ['a well-known writer'])).toBe(true)
+    expect(isAccepted('“Hi.” she said', ['"Hi," she said.'])).toBe(true)
+  })
+
   it('用意していない答えは正解にしない（語や短縮形の違いは区別する）', () => {
     expect(isAccepted("He's busy.", ['He is busy.'])).toBe(false)
     expect(isAccepted('Where he lives?', ['Where does he live?'])).toBe(false)
