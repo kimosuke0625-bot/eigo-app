@@ -53,6 +53,16 @@ export function PracticeHub({ onStart, dueCount }: { onStart: (k: PracticeKind) 
         <span className="min">▶</span>
       </button>
 
+      <h2 className="quest-board-title"><PixelIcon name="sword" size={22} /> 自分の単語</h2>
+      <button className="menu-item as-button" onClick={() => onStart('myWords')}>
+        <PixelIcon name="sword" size={28} className="quest-icon" />
+        <div className="body">
+          <div className="name">自分の単語を追加</div>
+          <div className="muted">仕事や読み物で出会った語のリストを貼り付けて、単語の復習に加える（単語集にない語は自分の訳で）</div>
+        </div>
+        <span className="min">▶</span>
+      </button>
+
       <h2 className="quest-board-title"><PixelIcon name="book" size={22} /> 添削を生かす</h2>
       <button className="menu-item as-button" onClick={() => onStart('importFeedback')}>
         <PixelIcon name="scroll" size={28} className="quest-icon" />

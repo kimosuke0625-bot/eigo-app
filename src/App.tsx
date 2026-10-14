@@ -37,6 +37,8 @@ import { RetellScreen } from './notes/RetellScreen'
 import { BagScreen, type BagSection } from './notes/BagScreen'
 import { BossScreen } from './rewards/BossScreen'
 import { syncPhraseItems } from './notes/store'
+import { syncMyWordItems } from './content/myWords'
+import { MyWordsScreen } from './practice/MyWordsScreen'
 import { ExprReviewScreen } from './practice/ExprReviewScreen'
 import { GrammarScreen } from './practice/GrammarScreen'
 import { prefetchUpcoming } from './speech/audioBank'
@@ -106,6 +108,7 @@ export default function App() {
     loadNgsl().then(() => loadBsl()).catch((e: Error) => setContentError(e.message))
     // 旅の手帳の表現を復習カードの語として用意する（バックアップから戻したときも）
     void syncPhraseItems()
+    void syncMyWordItems()
     // これから3日のうちに復習する単語の音声を、通信できるうちに端末へ保存しておく（オフラインでも鳴るように）
     void checkPhase()
     const t = window.setTimeout(() => { void prefetchDueAudio() }, 5000)
@@ -186,6 +189,8 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
     body = <SpeechScreen settings={settings} onExit={close} onImport={importFeedback} />
   } else if (overlay?.practice === 'importFeedback') {
     body = <ImportScreen link={overlay.link} onExit={close} onNotebook={() => openBag('notebook')} />
+  } else if (overlay?.practice === 'myWords') {
+    body = <MyWordsScreen onExit={close} onReview={() => start('review')} />
   } else if (overlay?.practice === 'retell') {
     body = <RetellScreen settings={settings} onExit={close} />
   } else if (overlay?.practice === 'boss') {

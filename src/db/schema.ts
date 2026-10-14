@@ -311,6 +311,20 @@ export interface HiddenItem {
   at: number
 }
 
+/**
+ * 自分で貼り付けて単語の復習に加えた語（2026-10-14 利用者の依頼）。バックアップに含める。
+ * 単語集（NGSL・ビジネス語彙）にある語は itemId がその語の id、ない語は my:<小文字の英語> で、items にも作る。
+ */
+export interface MyWord {
+  itemId: string
+  english: string
+  /** 自分で付けた訳（単語集にない語は必ずある。単語集の語では、付けたときだけ訳の書き直しにも使う） */
+  japanese: string
+  /** 単語集にない、自分で作った語か */
+  custom: boolean
+  addedAt: number
+}
+
 export interface MyAudio {
   key: string
   text: string
@@ -448,6 +462,7 @@ export class EigoDB extends Dexie {
   myAudio!: EntityTable<MyAudio, 'key'>
   reports!: EntityTable<ContentReport, 'id'>
   hiddenItems!: EntityTable<HiddenItem, 'itemId'>
+  myWords!: EntityTable<MyWord, 'itemId'>
 
   constructor(name = 'eigo') {
     super(name)
@@ -512,6 +527,10 @@ export class EigoDB extends Dexie {
     this.version(12).stores({
       hiddenItems: 'itemId, at',
     })
+    // 自分で貼り付けて加えた語（2026-10-14）
+    this.version(13).stores({
+      myWords: 'itemId, addedAt',
+    })
   }
 }
 
@@ -519,7 +538,7 @@ export class EigoDB extends Dexie {
 export const TABLE_NAMES = [
   'cards', 'reviews', 'knownWords', 'edits', 'snapshots', 'journal', 'materials', 'sessions',
   'recordings', 'assessments', 'facts', 'rewards', 'settings', 'xpDays', 'packs',
-  'feedback', 'fixes', 'phrases', 'bosses', 'reports', 'hiddenItems',
+  'feedback', 'fixes', 'phrases', 'bosses', 'reports', 'hiddenItems', 'myWords',
 ] as const
 
 export const db = new EigoDB()

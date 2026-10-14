@@ -289,3 +289,8 @@ input[type="checkbox"] { width: 22px; height: 22px; vertical-align: middle; }
 .plan-up { color: var(--success); font-weight: 700; }
 .plan-down { color: var(--muted); }
 .forecast { display: block; margin-top: 4px; }
+
+/* 自分の単語を追加（2026-10-14） */
+.mywords-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.mywords-list > li { border-top: 1px dashed var(--border); padding-top: 8px; }
+.tag.warn { background: var(--warn-bg, #fdecc8); }

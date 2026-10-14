@@ -18,6 +18,7 @@ export type PracticeKind =
   | 'importFeedback'
   | 'boss'
   | 'grammar'
+  | 'myWords'
 
 export interface MenuItem {
   kind: PracticeKind
