@@ -190,7 +190,7 @@ function Main({ settings, tab, setTab, overlay, setOverlay, contentError, dueCou
   } else if (overlay?.practice === 'importFeedback') {
     body = <ImportScreen link={overlay.link} onExit={close} onNotebook={() => openBag('notebook')} />
   } else if (overlay?.practice === 'myWords') {
-    body = <MyWordsScreen onExit={close} onReview={() => start('review')} />
+    body = <MyWordsScreen onExit={close} onReview={() => start('review')} onExprReview={() => start('exprReview')} />
   } else if (overlay?.practice === 'retell') {
     body = <RetellScreen settings={settings} onExit={close} />
   } else if (overlay?.practice === 'boss') {

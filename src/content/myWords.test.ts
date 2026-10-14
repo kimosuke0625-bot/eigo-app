@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto'
 import { describe, expect, it } from 'vitest'
 import { EigoDB } from '../db/schema'
-import { addWords, parseWordList, planWords, removeMyWord, syncMyWordItems } from './myWords'
+import { addWords, idiomKey, parseWordList, planWords, removeMyWord, switchDeck, syncMyWordItems } from './myWords'
 
 describe('貼り付けた単語リストの読み取り', () => {
   it('1行に1語。訳はいろいろな区切りで付けられる', () => {
@@ -22,6 +22,12 @@ describe('貼り付けた単語リストの読み取り', () => {
       { english: 'negotiate', japanese: '' },
       { english: 'follow up', japanese: '追って連絡する' },
     ])
+  })
+
+  it('熟語の「〜」の印や（ ）の書き方も読み取る', () => {
+    const { words, skipped } = parseWordList('look forward to ~ - 楽しみにする\ntake care of 〜\nget used to (doing)')
+    expect(words.map((w) => w.english)).toEqual(['look forward to', 'take care of', 'get used to (doing)'])
+    expect(skipped).toEqual([])
   })
 
   it('訳のない行はコンマ区切りで1語ずつ。英語として読めない行は外して知らせる', () => {
@@ -57,7 +63,7 @@ describe('単語の復習に加える', () => {
       { english: 'synergy', japanese: '' },
       { english: 'deadline', japanese: '' },
     ], d)
-    expect(await addWords(rows, 1000, d)).toBe(2)
+    expect(await addWords(rows, 1000, d)).toEqual({ word: 2, expr: 0 })
     expect((await d.cards.toArray()).map((c) => c.itemId).sort()).toEqual(['my:resilient', 'n1', 'n2'])
     expect(await d.knownWords.get('n1')).toBeUndefined()
     expect((await d.edits.get('n1'))?.ja).toBe('学ぶ')
@@ -74,5 +80,65 @@ describe('単語の復習に加える', () => {
     await removeMyWord('my:resilient', d)
     expect(await d.cards.where('itemId').equals('my:resilient').count()).toBe(0)
     expect(await d.myWords.get('my:resilient')).toBeUndefined()
+  })
+})
+
+describe('熟語・表現を見分けて分ける', () => {
+  const setup = async () => {
+    const d = new EigoDB(`mywords-idiom-${Math.random()}`)
+    await d.items.bulkPut([
+      { id: 'n1', kind: 'word', english: 'deadline', japanese: '締め切り', forms: ['deadline'], examples: [], ngslRank: 2000 },
+      { id: 'idiom-look-forward-to', kind: 'chunk', english: 'look forward to', japanese: '楽しみにする', forms: ['look forward to'], examples: [] },
+      { id: 'idiom-change-ones-mind', kind: 'chunk', english: "change one's mind", japanese: '気が変わる', forms: [], examples: [] },
+      { id: 'idiom-all-right', kind: 'chunk', english: 'all right', japanese: '大丈夫', forms: [], examples: [] },
+      { id: 'idiom-all-right--2', kind: 'chunk', english: 'all right', japanese: '申し分ない', forms: [], examples: [] },
+    ])
+    return d
+  }
+
+  it('熟語の見出しは ~ や（ ）・sb・my などの書き方の違いを問わずに比べる', () => {
+    expect(idiomKey('Look forward to ~')).toBe('look forward to')
+    expect(idiomKey('look forward to (doing)')).toBe('look forward to')
+    expect(idiomKey('change my mind')).toBe("change one's mind")
+    expect(idiomKey('take care of sb')).toBe('take care of')
+  })
+
+  it('熟語集・単語集・2語以上の新しい表現・1語の新しい単語に分ける', async () => {
+    const d = await setup()
+    const rows = await planWords([
+      { english: 'look forward to ~', japanese: '' },
+      { english: 'change my mind', japanese: '' },
+      { english: 'all right', japanese: '' },
+      { english: 'deadline', japanese: '' },
+      { english: 'touch base', japanese: '連絡を取る' },
+      { english: 'synergy', japanese: '相乗効果' },
+    ], d)
+    expect(rows.map((r) => [r.kind, r.deck, r.itemId])).toEqual([
+      ['idiom', 'expr', 'idiom-look-forward-to'],
+      ['idiom', 'expr', 'idiom-change-ones-mind'],
+      ['idiom', 'expr', 'idiom-all-right'],
+      ['listed', 'word', 'n1'],
+      ['phrase', 'expr', ''],
+      ['custom', 'word', 'my:synergy'],
+    ])
+    // 新しく作るものは、単語と表現を入れ替えられる
+    expect(switchDeck(rows[5]).deck).toBe('expr')
+    expect(switchDeck(rows[4])).toMatchObject({ kind: 'custom', deck: 'word', itemId: 'my:touch base' })
+    expect(switchDeck(rows[0])).toBe(rows[0])
+  })
+
+  it('熟語はそのカードを、新しい表現は旅の手帳に入れてカードを作る。「もう知っている」にした熟語も戻す', async () => {
+    const d = await setup()
+    await d.hiddenItems.put({ itemId: 'idiom-look-forward-to', reason: 'known', at: 0 })
+    const rows = await planWords([{ english: 'look forward to', japanese: '' }, { english: 'touch base', japanese: '連絡を取る' }, { english: 'circle back', japanese: '' }], d)
+    expect(await addWords(rows, 1000, d)).toEqual({ word: 0, expr: 2 })
+    expect(await d.hiddenItems.get('idiom-look-forward-to')).toBeUndefined()
+    const p = (await d.phrases.toArray())[0]
+    expect(p).toMatchObject({ expression: 'touch base', meaning: '連絡を取る', scene: '自分のリスト' })
+    const ids = (await d.cards.toArray()).map((c) => c.itemId).sort()
+    expect(ids).toEqual(['idiom-look-forward-to', `phrase-${p.id}`])
+    // 外すと、このリストから入れた表現は旅の手帳からも消える
+    await removeMyWord(`phrase-${p.id}`, d)
+    expect(await d.phrases.count()).toBe(0)
   })
 })

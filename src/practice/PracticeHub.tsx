@@ -57,8 +57,8 @@ export function PracticeHub({ onStart, dueCount }: { onStart: (k: PracticeKind) 
       <button className="menu-item as-button" onClick={() => onStart('myWords')}>
         <PixelIcon name="sword" size={28} className="quest-icon" />
         <div className="body">
-          <div className="name">自分の単語を追加</div>
-          <div className="muted">仕事や読み物で出会った語のリストを貼り付けて、単語の復習に加える（単語集にない語は自分の訳で）</div>
+          <div className="name">自分の単語・熟語を追加</div>
+          <div className="muted">仕事や読み物で出会った語のリストを貼り付けて復習に加える。単語と熟語・表現は自動で分ける</div>
         </div>
         <span className="min">▶</span>
       </button>
