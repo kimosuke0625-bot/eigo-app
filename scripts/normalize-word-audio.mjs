@@ -3,7 +3,7 @@
 // 312ファイルのうち85ファイルが平均 -30dB より小さかった。話者は問題ごとに変わるので、急に小さい音になる問題で聞き取りにくい。
 // 処理：前後の余分な無音を削る（出だしが切れないよう 0.1秒の間は残す）→ 70Hz 未満の低い雑音を削る →
 //       音量を EBU R128 の方法で -16 LUFS（最大 -1.5 dBTP）にそろえる（2回測って一定の倍率で上げ下げするので、音の形は変えない）。
-// 端末に保存された古い音声と入れ替わるよう、新しいフォルダ words-v2/ に書き、public/data/word-audio.json の場所を書き換える。
+// 端末に保存された古い音声と入れ替わるよう、新しいフォルダ words-v3/ に書き、public/data/word-audio.json の場所を書き換える。
 // 実行：node scripts/fetch-word-audio.mjs → node scripts/build-word-audio.mjs → node scripts/normalize-word-audio.mjs
 import { execFileSync, spawnSync } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url'
 import ffmpeg from 'ffmpeg-static'
 
 const here = (p) => fileURLToPath(new URL(p, import.meta.url))
-const DIR = 'words-v2'
+const DIR = 'words-v3'
 const TARGET = { I: -16, TP: -1.5, LRA: 11 }
 const jsonPath = here('../public/data/word-audio.json')
 const data = JSON.parse(readFileSync(jsonPath, 'utf8'))
@@ -19,6 +19,8 @@ mkdirSync(here(`../public/audio/${DIR}/`), { recursive: true })
 
 // 前後の無音を削り、低い雑音を削り、出だしと終わりに短い間を付ける
 const trim = [
+  // 最初に1チャンネルにまとめる（ステレオのまま adelay を通すと片方だけ遅れ、同じ声が0.1秒ずれて重なる。2026-10-14 の words-v2 の不具合）
+  'aformat=channel_layouts=mono',
   'highpass=f=70',
   'silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.03',
   'areverse', 'silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.08', 'areverse',
@@ -28,7 +30,7 @@ const trim = [
 let n = 0
 for (const clips of Object.values(data.words)) {
   for (const c of clips) {
-    const src = c.file.startsWith(`${DIR}/`) ? c.file.replace(`${DIR}/`, 'words/') : c.file
+    const src = 'words/' + c.file.split('/').pop()
     const name = src.split('/').pop()
     const out = `${DIR}/${name}`
     const dest = here(`../public/audio/${out}`)
