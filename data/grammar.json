@@ -1,5 +1,5 @@
 {
- "version": 202610091,
+ "version": 202610141,
  "license": "解説・問題：自作。例文：Tatoeba（CC BY 2.0 FR）",
  "items": [
   {
@@ -1912,7 +1912,8 @@
      "ja": "「〜しないで」の命令文にする。",
      "from": "You run here.",
      "answers": [
-      "Don't run here."
+      "Don't run here.",
+      "Do not run here."
      ]
     },
     {
@@ -2723,7 +2724,8 @@
      "ja": "at seven を on Friday に変えて書き直す。",
      "from": "I'll call you at seven.",
      "answers": [
-      "I'll call you on Friday."
+      "I'll call you on Friday.",
+      "I will call you on Friday."
      ]
     },
     {
@@ -4456,7 +4458,8 @@
       "There isn't a problem.",
       "There is not a problem.",
       "There is no problem.",
-      "There's no problem."
+      "There's no problem.",
+      "There's not a problem."
      ]
     },
     {
@@ -5771,7 +5774,9 @@
      "from": "I was busy. I didn't go.",
      "answers": [
       "I didn't go because I was busy.",
-      "Because I was busy, I didn't go."
+      "Because I was busy, I didn't go.",
+      "I did not go because I was busy.",
+      "Because I was busy, I did not go."
      ]
     },
     {
@@ -5989,7 +5994,8 @@
      "ja": "I don’t know で始めて書き直す。",
      "from": "Where does she work?",
      "answers": [
-      "I don't know where she works."
+      "I don't know where she works.",
+      "I do not know where she works."
      ]
     },
     {
@@ -6374,7 +6380,9 @@
      "from": "You passed the exam. I'm happy.",
      "answers": [
       "I'm happy you passed the exam.",
-      "I'm happy that you passed the exam."
+      "I'm happy that you passed the exam.",
+      "I am happy you passed the exam.",
+      "I am happy that you passed the exam."
      ]
     },
     {
@@ -6384,7 +6392,13 @@
      "from": "I can't help you. I'm sorry.",
      "answers": [
       "I'm sorry I can't help you.",
-      "I'm sorry that I can't help you."
+      "I'm sorry that I can't help you.",
+      "I am sorry I can't help you.",
+      "I'm sorry I cannot help you.",
+      "I am sorry I cannot help you.",
+      "I am sorry that I can't help you.",
+      "I'm sorry that I cannot help you.",
+      "I am sorry that I cannot help you."
      ]
     },
     {
@@ -7202,7 +7216,8 @@
      "ja": "I don’t know what to で始めて書き直す。",
      "from": "What should I do?",
      "answers": [
-      "I don't know what to do."
+      "I don't know what to do.",
+      "I do not know what to do."
      ]
     },
     {
@@ -7414,7 +7429,8 @@
      "ja": "It is fun for me to で始めて書き直す。",
      "from": "Learning English is fun for me.",
      "answers": [
-      "It is fun for me to learn English."
+      "It is fun for me to learn English.",
+      "It's fun for me to learn English."
      ]
     },
     {
@@ -9655,7 +9671,8 @@
      "from": "This is a book. It is popular in Japan.",
      "answers": [
       "This is a book which is popular in Japan.",
-      "This is a book that is popular in Japan."
+      "This is a book that is popular in Japan.",
+      "This is a book that's popular in Japan."
      ]
     },
     {
@@ -11934,7 +11951,8 @@
      "ja": "the thing that を what 1語にして書き直す。",
      "from": "The thing that he said was not true.",
      "answers": [
-      "What he said was not true."
+      "What he said was not true.",
+      "What he said wasn't true."
      ]
     },
     {
@@ -12677,7 +12695,8 @@
      "answers": [
       "Although he is rich, he is not happy.",
       "Although he's rich, he's not happy.",
-      "Although he is rich, he isn't happy."
+      "Although he is rich, he isn't happy.",
+      "Although he's rich, he isn't happy."
      ]
     },
     {
@@ -12687,7 +12706,9 @@
      "from": "If you don't try, you'll never know.",
      "answers": [
       "You'll never know unless you try.",
-      "Unless you try, you'll never know."
+      "Unless you try, you'll never know.",
+      "You will never know unless you try.",
+      "Unless you try, you will never know."
      ]
     },
     {
@@ -13689,7 +13710,8 @@
      "from": "I can't wait to see you.",
      "answers": [
       "I look forward to seeing you.",
-      "I'm looking forward to seeing you."
+      "I'm looking forward to seeing you.",
+      "I am looking forward to seeing you."
      ]
     },
     {
@@ -14378,7 +14400,9 @@
      "from": "It rained, so we didn't go out.",
      "answers": [
       "If it hadn't rained, we would have gone out.",
-      "If it had not rained, we would have gone out."
+      "If it had not rained, we would have gone out.",
+      "If it hadn't rained, we'd have gone out.",
+      "If it had not rained, we'd have gone out."
      ]
     },
     {
@@ -14848,7 +14872,8 @@
      "answers": [
       "It is true that he is ill.",
       "It's true that he is ill.",
-      "It's true that he's ill."
+      "It's true that he's ill.",
+      "It is true that he's ill."
      ]
     },
     {
@@ -15338,7 +15363,8 @@
      "ja": "付加疑問を付けて「〜ですよね？」にする。",
      "from": "She can't come.",
      "answers": [
-      "She can't come, can she?"
+      "She can't come, can she?",
+      "She cannot come, can she?"
      ]
     },
     {
@@ -16569,7 +16595,9 @@
      "from": "Some students like math. Some students don't.",
      "answers": [
       "Some students like math, and others don't.",
-      "Some students like math, others don't."
+      "Some students like math, others don't.",
+      "Some students like math, and others do not.",
+      "Some students like math, others do not."
      ]
     },
     {
@@ -17942,7 +17970,8 @@
      "ja": "will have を使って「〜までに着いているだろう」にする。",
      "from": "They will arrive there before you start.",
      "answers": [
-      "They will have arrived there before you start."
+      "They will have arrived there before you start.",
+      "They'll have arrived there before you start."
      ]
     },
     {
@@ -19246,7 +19275,8 @@
      "from": "If you practice more, you will improve more.",
      "answers": [
       "The more you practice, the more you will improve.",
-      "The more you practice, the more you improve."
+      "The more you practice, the more you improve.",
+      "The more you practice, the more you'll improve."
      ]
     },
     {
@@ -19258,7 +19288,9 @@
       "The earlier we start, the earlier we will finish.",
       "The earlier we start, the earlier we finish.",
       "The sooner we start, the sooner we will finish.",
-      "The sooner we start, the sooner we finish."
+      "The sooner we start, the sooner we finish.",
+      "The earlier we start, the earlier we'll finish.",
+      "The sooner we start, the sooner we'll finish."
      ]
     },
     {
@@ -19484,7 +19516,8 @@
      "ja": "to be＋過去分詞を使って書き直す。",
      "from": "I don't want people to see me with him.",
      "answers": [
-      "I don't want to be seen with him."
+      "I don't want to be seen with him.",
+      "I do not want to be seen with him."
      ]
     },
     {
@@ -19697,7 +19730,8 @@
      "ja": "If 〜 should を使って「万一〜なら」にする。",
      "from": "If it rains tomorrow, we will cancel the event.",
      "answers": [
-      "If it should rain tomorrow, we will cancel the event."
+      "If it should rain tomorrow, we will cancel the event.",
+      "If it should rain tomorrow, we'll cancel the event."
      ]
     },
     {
@@ -19903,7 +19937,9 @@
      "from": "If it had not been for your support, I would have given up.",
      "answers": [
       "Without your support, I would have given up.",
-      "I would have given up without your support."
+      "I would have given up without your support.",
+      "Without your support, I'd have given up.",
+      "I'd have given up without your support."
      ]
     },
     {
@@ -19912,7 +19948,8 @@
      "ja": "If it were not for で始めて書き直す。",
      "from": "Without the internet, our work would be difficult.",
      "answers": [
-      "If it were not for the internet, our work would be difficult."
+      "If it were not for the internet, our work would be difficult.",
+      "If it weren't for the internet, our work would be difficult."
      ]
     },
     {
